@@ -1,0 +1,3142 @@
+{
+ "sources": [
+  {
+   "url": "https://hearthstone.wiki.gg/wiki/Template:The_Dalaran_Heist",
+   "quote": "Navigation template: \"! Chapter 1: Dalaran Bank ... ! Level 1 ... {{TableItem|Alchemist Wendy}} {{TableItem|Kizi Copperclip}} {{TableItem|Linzi Redgrin}} {{TableItem|Marei Loom}}\" (per-chapter, per-level boss lists; base of every pool here; the |gold flag only picks the golden card image)"
+  },
+  {
+   "url": "https://hearthstone.wiki.gg/wiki/The_Dalaran_Heist",
+   "quote": "\"The objective of the Dalaran Heist is to defeat eight bosses of increasing difficulty\"; \"Between rounds 3-4 and 5-6, the player will enter a Friendly Encounter\"; \"There are four additional bosses in the fifth chapter ... The last four bosses are always the same for every run.\""
+  },
+  {
+   "url": "https://www.icy-veins.com/hearthstone/the-dalaran-heist-guide",
+   "quote": "\"There is a specific pool of bosses that can appear on each level ... However, no boss will appear more than once in a single play through.\" / \"The lists below show the known bosses that can appear on each level.\" (section 7, per chapter, Level One..Twelve)"
+  },
+  {
+   "url": "https://outof.games/news/149-bosses-of-dalaran/",
+   "quote": "\"Some of this data may be incomplete\" - per-boss chapter + level ranges, e.g. Sky Captain Smiggs (all chapters, levels 6-7), Dagg Cruelmight (all chapters, levels 3-5), Kazamon Steelskin (levels 6-8)"
+  },
+  {
+   "url": "https://us.millenium.gg/guide/1011.html",
+   "quote": "\"Only a handful of them is specific to one chapter (as Gallywix or Queen Wagtoggle, for Dalaran Bank)\" (no level data)"
+  },
+  {
+   "url": "https://www.hearthstonetopdecks.com/guides/the-dalaran-heist-guide-heroic-bosses-hero-powers-strategy/",
+   "quote": "\"While some bosses are chapter-specific ... majority of them can appear any time.\" (no per-level lists; same boss roster for Heroic with different Hero Powers)"
+  },
+  {
+   "url": "https://hearthstone.wiki.gg/wiki/Sky_Captain_Smiggs",
+   "quote": "Boss pages list one hero card (dbfId=54364) with a \"Normal !! Heroic\" Hero Power table: Heroic reuses the same DALA_BOSS_xxh hero card"
+  },
+  {
+   "url": "local: HsRecorder live session dumps (scratchpad heist-util/session-*.txt -> heist_states.json), ADVENTURE_DATA_SERVER_DALARAN(_HEROIC) game-save keys",
+   "quote": "24 distinct live runs (Normal ch1, ch5; Heroic ch1, ch4, ch5): BOSSES_FOUGHT_LIST + NEXT_BOSS_FIGHT + NEXT_BOSS_HEALTH; no boss repeated within a run"
+  }
+ ],
+ "chapters": [
+  {
+   "chapter": 1,
+   "name": "Dalaran Bank",
+   "normalScenario": 3005,
+   "heroicScenario": 3328,
+   "levels": [
+    {
+     "level": 1,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_16h",
+       "dbf": 53568,
+       "name": "Alchemist Wendy",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_32h",
+       "dbf": 53624,
+       "name": "Kizi Copperclip",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_19h",
+       "dbf": 53776,
+       "name": "Linzi Redgrin",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_66h",
+       "dbf": 54360,
+       "name": "Marei Loom",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 4/4. Recorded here: Alchemist Wendy (H/N), Kizi Copperclip (H/N), Linzi Redgrin (H/N), Marei Loom (H/N).",
+     "recorded": true
+    },
+    {
+     "level": 2,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_16h",
+       "dbf": 53568,
+       "name": "Alchemist Wendy",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_34h",
+       "dbf": 53802,
+       "name": "Carousel Gryphon",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_73h",
+       "dbf": 54445,
+       "name": "Hesutu Stonewind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_32h",
+       "dbf": 53624,
+       "name": "Kizi Copperclip",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_19h",
+       "dbf": 53776,
+       "name": "Linzi Redgrin",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_66h",
+       "dbf": 54360,
+       "name": "Marei Loom",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_15h",
+       "dbf": 53567,
+       "name": "Moon Priestess Nici",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_35h",
+       "dbf": 53622,
+       "name": "Soothsayer Zoie",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_03h",
+       "dbf": 53667,
+       "name": "The Great Akazamzarak",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 6/10. Recorded here: Linzi Redgrin (H), Marei Loom (N), Moon Priestess Nici (H).",
+     "recorded": true
+    },
+    {
+     "level": 3,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_22h",
+       "dbf": 53538,
+       "name": "Bookmaster Bae Chao",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_34h",
+       "dbf": 53802,
+       "name": "Carousel Gryphon",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_73h",
+       "dbf": 54445,
+       "name": "Hesutu Stonewind",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_15h",
+       "dbf": 53567,
+       "name": "Moon Priestess Nici",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_35h",
+       "dbf": 53622,
+       "name": "Soothsayer Zoie",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_05h",
+       "dbf": 53572,
+       "name": "The Amazing \"Bonepaw\"",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_03h",
+       "dbf": 53667,
+       "name": "The Great Akazamzarak",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_38h",
+       "dbf": 53815,
+       "name": "Tipsi Wobblerune",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 4/10. Recorded here: Carousel Gryphon (H), Dagg Cruelmight (H), Hesutu Stonewind (N).",
+     "recorded": true
+    },
+    {
+     "level": 4,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_22h",
+       "dbf": 53538,
+       "name": "Bookmaster Bae Chao",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_26h",
+       "dbf": 53566,
+       "name": "Dalaran Fountain Golem",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_18h",
+       "dbf": 53528,
+       "name": "Disidra Stormglory",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_07h",
+       "dbf": 53607,
+       "name": "Flight Master Belnaara",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_33h",
+       "dbf": 53564,
+       "name": "Gold Elemental",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_04h",
+       "dbf": 53558,
+       "name": "Kaye Toogie",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_10h",
+       "dbf": 53483,
+       "name": "Mo Eniwhiskers",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_42h",
+       "dbf": 53903,
+       "name": "P.O.G.O.",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_17h",
+       "dbf": 53571,
+       "name": "Tala Stonerage",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_05h",
+       "dbf": 53572,
+       "name": "The Amazing \"Bonepaw\"",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_38h",
+       "dbf": 53815,
+       "name": "Tipsi Wobblerune",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_21h",
+       "dbf": 53560,
+       "name": "Whirt the All-Knowing",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_28h",
+       "dbf": 53880,
+       "name": "Xur'ios",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 8/16. Recorded here: Gold Elemental (H), Kaye Toogie (N), P.O.G.O. (H).",
+     "recorded": true
+    },
+    {
+     "level": 5,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_64h",
+       "dbf": 54356,
+       "name": "Banker Biggs",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_26h",
+       "dbf": 53566,
+       "name": "Dalaran Fountain Golem",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_18h",
+       "dbf": 53528,
+       "name": "Disidra Stormglory",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_36h",
+       "dbf": 53629,
+       "name": "Draemus",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_07h",
+       "dbf": 53607,
+       "name": "Flight Master Belnaara",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_33h",
+       "dbf": 53564,
+       "name": "Gold Elemental",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_10h",
+       "dbf": 53483,
+       "name": "Mo Eniwhiskers",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_42h",
+       "dbf": 53903,
+       "name": "P.O.G.O.",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_17h",
+       "dbf": 53571,
+       "name": "Tala Stonerage",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_41h",
+       "dbf": 53870,
+       "name": "Ungan Oddkind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_21h",
+       "dbf": 53560,
+       "name": "Whirt the All-Knowing",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_28h",
+       "dbf": 53880,
+       "name": "Xur'ios",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 8/15. Recorded here: Gold Elemental (H), Mo Eniwhiskers (H).",
+     "recorded": true
+    },
+    {
+     "level": 6,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_39h",
+       "dbf": 53817,
+       "name": "Aki the Brilliant",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_71h",
+       "dbf": 54441,
+       "name": "Anarii Duskgrove",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_64h",
+       "dbf": 54356,
+       "name": "Banker Biggs",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_36h",
+       "dbf": 53629,
+       "name": "Draemus",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_62h",
+       "dbf": 54352,
+       "name": "Haro Setting-Sun",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_74h",
+       "dbf": 54447,
+       "name": "Kara Stamper",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_11h",
+       "dbf": 53714,
+       "name": "Noz Timbertail",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_50h",
+       "dbf": 54299,
+       "name": "Nozari",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_70h",
+       "dbf": 54364,
+       "name": "Sky Captain Smiggs",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_41h",
+       "dbf": 53870,
+       "name": "Ungan Oddkind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_65h",
+       "dbf": 54358,
+       "name": "Valdera Highborne",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_20h",
+       "dbf": 53521,
+       "name": "Vas'no",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template; added: Sky Captain Smiggs (Icy Veins lists him at Dalaran Bank Level Six; outof.games: all chapters, levels 6-7; recorded at ch1 level 7 (Heroic). Missing from the wiki template.). Icy Veins agrees on 6/14. Recorded here: Banker Biggs (H), Noz Timbertail (H).",
+     "recorded": true
+    },
+    {
+     "level": 7,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_39h",
+       "dbf": 53817,
+       "name": "Aki the Brilliant",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_71h",
+       "dbf": 54441,
+       "name": "Anarii Duskgrove",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_62h",
+       "dbf": 54352,
+       "name": "Haro Setting-Sun",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_74h",
+       "dbf": 54447,
+       "name": "Kara Stamper",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_11h",
+       "dbf": 53714,
+       "name": "Noz Timbertail",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_50h",
+       "dbf": 54299,
+       "name": "Nozari",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_37h",
+       "dbf": 53810,
+       "name": "Ol' Toomba",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_70h",
+       "dbf": 54364,
+       "name": "Sky Captain Smiggs",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_65h",
+       "dbf": 54358,
+       "name": "Valdera Highborne",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_20h",
+       "dbf": 53521,
+       "name": "Vas'no",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template; added: Sky Captain Smiggs (Recorded at ch1 level 7 (Heroic, boss health 60 = level-7 rung); outof.games: all chapters, levels 6-7. Missing from the wiki template.). Icy Veins agrees on 3/12. Recorded here: Sky Captain Smiggs (H), Valdera Highborne (H).",
+     "recorded": true
+    },
+    {
+     "level": 8,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_56h",
+       "dbf": 54340,
+       "name": "Queen Wagtoggle",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_57h",
+       "dbf": 54342,
+       "name": "Trade Prince Gallywix",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 2/2. Recorded here: Trade Prince Gallywix (H).",
+     "recorded": true
+    }
+   ]
+  },
+  {
+   "chapter": 2,
+   "name": "The Violet Hold",
+   "normalScenario": 3188,
+   "heroicScenario": 3329,
+   "levels": [
+    {
+     "level": 1,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_16h",
+       "dbf": 53568,
+       "name": "Alchemist Wendy",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_32h",
+       "dbf": 53624,
+       "name": "Kizi Copperclip",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_19h",
+       "dbf": 53776,
+       "name": "Linzi Redgrin",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/3. Recorded here: Alchemist Wendy (H/N), Kizi Copperclip (H/N), Linzi Redgrin (H/N).",
+     "recorded": true,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_66h",
+       "dbf": 54360,
+       "name": "Marei Loom",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Icy Veins only; 27 recorded level-1 rolls for chapter 2 never showed her (only the wiki pool). Treated as an Icy Veins copy error.",
+       "refuted": true
+      }
+     ]
+    },
+    {
+     "level": 2,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_16h",
+       "dbf": 53568,
+       "name": "Alchemist Wendy",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_73h",
+       "dbf": 54445,
+       "name": "Hesutu Stonewind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_32h",
+       "dbf": 53624,
+       "name": "Kizi Copperclip",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_19h",
+       "dbf": 53776,
+       "name": "Linzi Redgrin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_15h",
+       "dbf": 53567,
+       "name": "Moon Priestess Nici",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_35h",
+       "dbf": 53622,
+       "name": "Soothsayer Zoie",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_03h",
+       "dbf": 53667,
+       "name": "The Great Akazamzarak",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 4/8.",
+     "recorded": false,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_34h",
+       "dbf": 53802,
+       "name": "Carousel Gryphon",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 3,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_22h",
+       "dbf": 53538,
+       "name": "Bookmaster Bae Chao",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_73h",
+       "dbf": 54445,
+       "name": "Hesutu Stonewind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_15h",
+       "dbf": 53567,
+       "name": "Moon Priestess Nici",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_35h",
+       "dbf": 53622,
+       "name": "Soothsayer Zoie",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_05h",
+       "dbf": 53572,
+       "name": "The Amazing \"Bonepaw\"",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_03h",
+       "dbf": 53667,
+       "name": "The Great Akazamzarak",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_38h",
+       "dbf": 53815,
+       "name": "Tipsi Wobblerune",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/9.",
+     "recorded": false
+    },
+    {
+     "level": 4,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_22h",
+       "dbf": 53538,
+       "name": "Bookmaster Bae Chao",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_26h",
+       "dbf": 53566,
+       "name": "Dalaran Fountain Golem",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_18h",
+       "dbf": 53528,
+       "name": "Disidra Stormglory",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_07h",
+       "dbf": 53607,
+       "name": "Flight Master Belnaara",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_04h",
+       "dbf": 53558,
+       "name": "Kaye Toogie",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_42h",
+       "dbf": 53903,
+       "name": "P.O.G.O.",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_17h",
+       "dbf": 53571,
+       "name": "Tala Stonerage",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_05h",
+       "dbf": 53572,
+       "name": "The Amazing \"Bonepaw\"",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_38h",
+       "dbf": 53815,
+       "name": "Tipsi Wobblerune",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_21h",
+       "dbf": 53560,
+       "name": "Whirt the All-Knowing",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_28h",
+       "dbf": 53880,
+       "name": "Xur'ios",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 5/14.",
+     "recorded": false
+    },
+    {
+     "level": 5,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_26h",
+       "dbf": 53566,
+       "name": "Dalaran Fountain Golem",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_18h",
+       "dbf": 53528,
+       "name": "Disidra Stormglory",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_36h",
+       "dbf": 53629,
+       "name": "Draemus",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_07h",
+       "dbf": 53607,
+       "name": "Flight Master Belnaara",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_42h",
+       "dbf": 53903,
+       "name": "P.O.G.O.",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_17h",
+       "dbf": 53571,
+       "name": "Tala Stonerage",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_41h",
+       "dbf": 53870,
+       "name": "Ungan Oddkind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_21h",
+       "dbf": 53560,
+       "name": "Whirt the All-Knowing",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_28h",
+       "dbf": 53880,
+       "name": "Xur'ios",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/12.",
+     "recorded": false
+    },
+    {
+     "level": 6,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_39h",
+       "dbf": 53817,
+       "name": "Aki the Brilliant",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_71h",
+       "dbf": 54441,
+       "name": "Anarii Duskgrove",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_36h",
+       "dbf": 53629,
+       "name": "Draemus",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_44h",
+       "dbf": 54303,
+       "name": "Erekem",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_62h",
+       "dbf": 54352,
+       "name": "Haro Setting-Sun",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_46h",
+       "dbf": 53604,
+       "name": "Ichoron",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_74h",
+       "dbf": 54447,
+       "name": "Kara Stamper",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_52h",
+       "dbf": 54334,
+       "name": "Lieutenant Sinclari",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_37h",
+       "dbf": 53810,
+       "name": "Ol' Toomba",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_70h",
+       "dbf": 54364,
+       "name": "Sky Captain Smiggs",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_41h",
+       "dbf": 53870,
+       "name": "Ungan Oddkind",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/13.",
+     "recorded": false,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_50h",
+       "dbf": 54299,
+       "name": "Nozari",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 7,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_39h",
+       "dbf": 53817,
+       "name": "Aki the Brilliant",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_71h",
+       "dbf": 54441,
+       "name": "Anarii Duskgrove",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_44h",
+       "dbf": 54303,
+       "name": "Erekem",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_62h",
+       "dbf": 54352,
+       "name": "Haro Setting-Sun",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_46h",
+       "dbf": 53604,
+       "name": "Ichoron",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_74h",
+       "dbf": 54447,
+       "name": "Kara Stamper",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_47h",
+       "dbf": 53597,
+       "name": "Lavanthor",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_51h",
+       "dbf": 54306,
+       "name": "Millificent Manastorm",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_37h",
+       "dbf": 53810,
+       "name": "Ol' Toomba",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_61h",
+       "dbf": 54350,
+       "name": "Sael'orn",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 6/12.",
+     "recorded": false
+    },
+    {
+     "level": 8,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_49h",
+       "dbf": 53592,
+       "name": "Cyanigosa",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_47h",
+       "dbf": 53597,
+       "name": "Lavanthor",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_51h",
+       "dbf": 54306,
+       "name": "Millificent Manastorm",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_45h",
+       "dbf": 54293,
+       "name": "Moragg",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_48h",
+       "dbf": 53594,
+       "name": "Zuramat the Obliterator",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/5.",
+     "recorded": false
+    }
+   ]
+  },
+  {
+   "chapter": 3,
+   "name": "Streets of Dalaran",
+   "normalScenario": 3189,
+   "heroicScenario": 3330,
+   "levels": [
+    {
+     "level": 1,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_16h",
+       "dbf": 53568,
+       "name": "Alchemist Wendy",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_32h",
+       "dbf": 53624,
+       "name": "Kizi Copperclip",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_19h",
+       "dbf": 53776,
+       "name": "Linzi Redgrin",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/3. Recorded here: Alchemist Wendy (H/N), Kizi Copperclip (H/N), Linzi Redgrin (H/N).",
+     "recorded": true,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_66h",
+       "dbf": 54360,
+       "name": "Marei Loom",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Icy Veins only; 27 recorded level-1 rolls for chapter 3 never showed her (only the wiki pool). Treated as an Icy Veins copy error.",
+       "refuted": true
+      }
+     ]
+    },
+    {
+     "level": 2,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_16h",
+       "dbf": 53568,
+       "name": "Alchemist Wendy",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_08h",
+       "dbf": 53309,
+       "name": "Applebough",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_73h",
+       "dbf": 54445,
+       "name": "Hesutu Stonewind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_32h",
+       "dbf": 53624,
+       "name": "Kizi Copperclip",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_19h",
+       "dbf": 53776,
+       "name": "Linzi Redgrin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_15h",
+       "dbf": 53567,
+       "name": "Moon Priestess Nici",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_35h",
+       "dbf": 53622,
+       "name": "Soothsayer Zoie",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_03h",
+       "dbf": 53667,
+       "name": "The Great Akazamzarak",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_14h",
+       "dbf": 53637,
+       "name": "Tierra Blythe",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 6/10.",
+     "recorded": false,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_34h",
+       "dbf": 53802,
+       "name": "Carousel Gryphon",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 3,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_08h",
+       "dbf": 53309,
+       "name": "Applebough",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_22h",
+       "dbf": 53538,
+       "name": "Bookmaster Bae Chao",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_73h",
+       "dbf": 54445,
+       "name": "Hesutu Stonewind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_15h",
+       "dbf": 53567,
+       "name": "Moon Priestess Nici",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_35h",
+       "dbf": 53622,
+       "name": "Soothsayer Zoie",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_05h",
+       "dbf": 53572,
+       "name": "The Amazing \"Bonepaw\"",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_03h",
+       "dbf": 53667,
+       "name": "The Great Akazamzarak",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_14h",
+       "dbf": 53637,
+       "name": "Tierra Blythe",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_38h",
+       "dbf": 53815,
+       "name": "Tipsi Wobblerune",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 4/11.",
+     "recorded": false
+    },
+    {
+     "level": 4,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_22h",
+       "dbf": 53538,
+       "name": "Bookmaster Bae Chao",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_26h",
+       "dbf": 53566,
+       "name": "Dalaran Fountain Golem",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_18h",
+       "dbf": 53528,
+       "name": "Disidra Stormglory",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_07h",
+       "dbf": 53607,
+       "name": "Flight Master Belnaara",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_04h",
+       "dbf": 53558,
+       "name": "Kaye Toogie",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_54h",
+       "dbf": 54336,
+       "name": "Locksmith Zibb",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_42h",
+       "dbf": 53903,
+       "name": "P.O.G.O.",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_17h",
+       "dbf": 53571,
+       "name": "Tala Stonerage",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_05h",
+       "dbf": 53572,
+       "name": "The Amazing \"Bonepaw\"",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_31h",
+       "dbf": 53587,
+       "name": "Timothy Jones",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_21h",
+       "dbf": 53560,
+       "name": "Whirt the All-Knowing",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_28h",
+       "dbf": 53880,
+       "name": "Xur'ios",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 5/14.",
+     "recorded": false
+    },
+    {
+     "level": 5,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_13h",
+       "dbf": 53734,
+       "name": "Albin Eastoft",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_26h",
+       "dbf": 53566,
+       "name": "Dalaran Fountain Golem",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_18h",
+       "dbf": 53528,
+       "name": "Disidra Stormglory",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_36h",
+       "dbf": 53629,
+       "name": "Draemus",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_07h",
+       "dbf": 53607,
+       "name": "Flight Master Belnaara",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_54h",
+       "dbf": 54336,
+       "name": "Locksmith Zibb",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_42h",
+       "dbf": 53903,
+       "name": "P.O.G.O.",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_17h",
+       "dbf": 53571,
+       "name": "Tala Stonerage",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_31h",
+       "dbf": 53587,
+       "name": "Timothy Jones",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_41h",
+       "dbf": 53870,
+       "name": "Ungan Oddkind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_21h",
+       "dbf": 53560,
+       "name": "Whirt the All-Knowing",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_28h",
+       "dbf": 53880,
+       "name": "Xur'ios",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/15.",
+     "recorded": false,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_53h",
+       "dbf": 53556,
+       "name": "Dancin' Deryl",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 6,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_39h",
+       "dbf": 53817,
+       "name": "Aki the Brilliant",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_13h",
+       "dbf": 53734,
+       "name": "Albin Eastoft",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_71h",
+       "dbf": 54441,
+       "name": "Anarii Duskgrove",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_36h",
+       "dbf": 53629,
+       "name": "Draemus",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_62h",
+       "dbf": 54352,
+       "name": "Haro Setting-Sun",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_74h",
+       "dbf": 54447,
+       "name": "Kara Stamper",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_50h",
+       "dbf": 54299,
+       "name": "Nozari",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_37h",
+       "dbf": 53810,
+       "name": "Ol' Toomba",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_27h",
+       "dbf": 53599,
+       "name": "Rasil Fireborne",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_70h",
+       "dbf": 54364,
+       "name": "Sky Captain Smiggs",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_41h",
+       "dbf": 53870,
+       "name": "Ungan Oddkind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_20h",
+       "dbf": 53521,
+       "name": "Vas'no",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/14.",
+     "recorded": false,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "claimedBy": [
+        "Icy Veins",
+        "outof.games (level range)"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 7,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_39h",
+       "dbf": 53817,
+       "name": "Aki the Brilliant",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_71h",
+       "dbf": 54441,
+       "name": "Anarii Duskgrove",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_62h",
+       "dbf": 54352,
+       "name": "Haro Setting-Sun",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_74h",
+       "dbf": 54447,
+       "name": "Kara Stamper",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_50h",
+       "dbf": 54299,
+       "name": "Nozari",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_37h",
+       "dbf": 53810,
+       "name": "Ol' Toomba",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_27h",
+       "dbf": 53599,
+       "name": "Rasil Fireborne",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_70h",
+       "dbf": 54364,
+       "name": "Sky Captain Smiggs",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_20h",
+       "dbf": 53521,
+       "name": "Vas'no",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 4/11.",
+     "recorded": false,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_61h",
+       "dbf": 54350,
+       "name": "Sael'orn",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 8,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_55h",
+       "dbf": 54338,
+       "name": "Captain Hannigan",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_25h",
+       "dbf": 53541,
+       "name": "Jepetto Joybuzz",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 1/2.",
+     "recorded": false
+    }
+   ]
+  },
+  {
+   "chapter": 4,
+   "name": "The Underbelly",
+   "normalScenario": 3190,
+   "heroicScenario": 3331,
+   "levels": [
+    {
+     "level": 1,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_16h",
+       "dbf": 53568,
+       "name": "Alchemist Wendy",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_01h",
+       "dbf": 53750,
+       "name": "Chomper",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_32h",
+       "dbf": 53624,
+       "name": "Kizi Copperclip",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_19h",
+       "dbf": 53776,
+       "name": "Linzi Redgrin",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/4. Recorded here: Alchemist Wendy (H/N), Chomper (H), Kizi Copperclip (H/N), Linzi Redgrin (H/N).",
+     "recorded": true,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_66h",
+       "dbf": 54360,
+       "name": "Marei Loom",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Icy Veins only; 27 recorded level-1 rolls for chapter 4 never showed her (only the wiki pool). Treated as an Icy Veins copy error.",
+       "refuted": true
+      }
+     ]
+    },
+    {
+     "level": 2,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_16h",
+       "dbf": 53568,
+       "name": "Alchemist Wendy",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_34h",
+       "dbf": 53802,
+       "name": "Carousel Gryphon",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_01h",
+       "dbf": 53750,
+       "name": "Chomper",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_73h",
+       "dbf": 54445,
+       "name": "Hesutu Stonewind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_32h",
+       "dbf": 53624,
+       "name": "Kizi Copperclip",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_19h",
+       "dbf": 53776,
+       "name": "Linzi Redgrin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_15h",
+       "dbf": 53567,
+       "name": "Moon Priestess Nici",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_35h",
+       "dbf": 53622,
+       "name": "Soothsayer Zoie",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_03h",
+       "dbf": 53667,
+       "name": "The Great Akazamzarak",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 7/10. Recorded here: Chomper (H).",
+     "recorded": true
+    },
+    {
+     "level": 3,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_22h",
+       "dbf": 53538,
+       "name": "Bookmaster Bae Chao",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_73h",
+       "dbf": 54445,
+       "name": "Hesutu Stonewind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_29h",
+       "dbf": 53584,
+       "name": "Mama Diggs",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_15h",
+       "dbf": 53567,
+       "name": "Moon Priestess Nici",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_35h",
+       "dbf": 53622,
+       "name": "Soothsayer Zoie",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_05h",
+       "dbf": 53572,
+       "name": "The Amazing \"Bonepaw\"",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_03h",
+       "dbf": 53667,
+       "name": "The Great Akazamzarak",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_38h",
+       "dbf": 53815,
+       "name": "Tipsi Wobblerune",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/10. Recorded here: Mama Diggs (H).",
+     "recorded": true,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_14h",
+       "dbf": 53637,
+       "name": "Tierra Blythe",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 4,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_22h",
+       "dbf": 53538,
+       "name": "Bookmaster Bae Chao",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_12h",
+       "dbf": 53783,
+       "name": "Cravitz Lorent",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_26h",
+       "dbf": 53566,
+       "name": "Dalaran Fountain Golem",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_53h",
+       "dbf": 53556,
+       "name": "Dancin' Deryl",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_06h",
+       "dbf": 53636,
+       "name": "Dazzik \"Hellscream\"",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_18h",
+       "dbf": 53528,
+       "name": "Disidra Stormglory",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_07h",
+       "dbf": 53607,
+       "name": "Flight Master Belnaara",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_04h",
+       "dbf": 53558,
+       "name": "Kaye Toogie",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_29h",
+       "dbf": 53584,
+       "name": "Mama Diggs",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_42h",
+       "dbf": 53903,
+       "name": "P.O.G.O.",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_23h",
+       "dbf": 53673,
+       "name": "Sharky McFin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_17h",
+       "dbf": 53571,
+       "name": "Tala Stonerage",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_05h",
+       "dbf": 53572,
+       "name": "The Amazing \"Bonepaw\"",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_38h",
+       "dbf": 53815,
+       "name": "Tipsi Wobblerune",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_21h",
+       "dbf": 53560,
+       "name": "Whirt the All-Knowing",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_28h",
+       "dbf": 53880,
+       "name": "Xur'ios",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/19. Recorded here: Tala Stonerage (H).",
+     "recorded": true
+    },
+    {
+     "level": 5,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_12h",
+       "dbf": 53783,
+       "name": "Cravitz Lorent",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_26h",
+       "dbf": 53566,
+       "name": "Dalaran Fountain Golem",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_53h",
+       "dbf": 53556,
+       "name": "Dancin' Deryl",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_06h",
+       "dbf": 53636,
+       "name": "Dazzik \"Hellscream\"",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_18h",
+       "dbf": 53528,
+       "name": "Disidra Stormglory",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_36h",
+       "dbf": 53629,
+       "name": "Draemus",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_07h",
+       "dbf": 53607,
+       "name": "Flight Master Belnaara",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_42h",
+       "dbf": 53903,
+       "name": "P.O.G.O.",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_23h",
+       "dbf": 53673,
+       "name": "Sharky McFin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_17h",
+       "dbf": 53571,
+       "name": "Tala Stonerage",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_41h",
+       "dbf": 53870,
+       "name": "Ungan Oddkind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_21h",
+       "dbf": 53560,
+       "name": "Whirt the All-Knowing",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_28h",
+       "dbf": 53880,
+       "name": "Xur'ios",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 4/16.",
+     "recorded": false,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_13h",
+       "dbf": 53734,
+       "name": "Albin Eastoft",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 6,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_39h",
+       "dbf": 53817,
+       "name": "Aki the Brilliant",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_71h",
+       "dbf": 54441,
+       "name": "Anarii Duskgrove",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_36h",
+       "dbf": 53629,
+       "name": "Draemus",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_62h",
+       "dbf": 54352,
+       "name": "Haro Setting-Sun",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_74h",
+       "dbf": 54447,
+       "name": "Kara Stamper",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_50h",
+       "dbf": 54299,
+       "name": "Nozari",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_70h",
+       "dbf": 54364,
+       "name": "Sky Captain Smiggs",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_30h",
+       "dbf": 53601,
+       "name": "The Rat King",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_41h",
+       "dbf": 53870,
+       "name": "Ungan Oddkind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_20h",
+       "dbf": 53521,
+       "name": "Vas'no",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 4/12.",
+     "recorded": false,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "claimedBy": [
+        "Icy Veins",
+        "outof.games (level range)"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 7,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_39h",
+       "dbf": 53817,
+       "name": "Aki the Brilliant",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_71h",
+       "dbf": 54441,
+       "name": "Anarii Duskgrove",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_62h",
+       "dbf": 54352,
+       "name": "Haro Setting-Sun",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_74h",
+       "dbf": 54447,
+       "name": "Kara Stamper",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_50h",
+       "dbf": 54299,
+       "name": "Nozari",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_37h",
+       "dbf": 53810,
+       "name": "Ol' Toomba",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_70h",
+       "dbf": 54364,
+       "name": "Sky Captain Smiggs",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_30h",
+       "dbf": 53601,
+       "name": "The Rat King",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_20h",
+       "dbf": 53521,
+       "name": "Vas'no",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/11.",
+     "recorded": false,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_61h",
+       "dbf": 54350,
+       "name": "Sael'orn",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 8,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_58h",
+       "dbf": 54344,
+       "name": "Boommaster Flark",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_59h",
+       "dbf": 54346,
+       "name": "Madam Goya",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 2/2.",
+     "recorded": false
+    }
+   ]
+  },
+  {
+   "chapter": 5,
+   "name": "Kirin Tor Citadel",
+   "normalScenario": 3191,
+   "heroicScenario": 3332,
+   "levels": [
+    {
+     "level": 1,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_16h",
+       "dbf": 53568,
+       "name": "Alchemist Wendy",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_32h",
+       "dbf": 53624,
+       "name": "Kizi Copperclip",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_19h",
+       "dbf": 53776,
+       "name": "Linzi Redgrin",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 2/3. Recorded here: Alchemist Wendy (H/N), Kizi Copperclip (H/N), Linzi Redgrin (H/N).",
+     "recorded": true,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_66h",
+       "dbf": 54360,
+       "name": "Marei Loom",
+       "claimedBy": [
+        "wiki template",
+        "Icy Veins"
+       ],
+       "reason": "Wiki + Icy Veins list her at ch5 level 1, but 27 recorded ch5 level-1 rolls (20 Heroic, 7 Normal pre-rolls + run starts) were only Wendy/Kizi/Linzi."
+      },
+      {
+       "cardId": "DALA_BOSS_03h",
+       "dbf": 53667,
+       "name": "The Great Akazamzarak",
+       "claimedBy": [
+        "wiki template",
+        "Icy Veins"
+       ],
+       "reason": "Wiki + Icy Veins list him at ch5 level 1, but 27 recorded ch5 level-1 rolls were only Wendy/Kizi/Linzi. He is level 2-3 everywhere else."
+      }
+     ]
+    },
+    {
+     "level": 2,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_16h",
+       "dbf": 53568,
+       "name": "Alchemist Wendy",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_34h",
+       "dbf": 53802,
+       "name": "Carousel Gryphon",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_73h",
+       "dbf": 54445,
+       "name": "Hesutu Stonewind",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_32h",
+       "dbf": 53624,
+       "name": "Kizi Copperclip",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_19h",
+       "dbf": 53776,
+       "name": "Linzi Redgrin",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_66h",
+       "dbf": 54360,
+       "name": "Marei Loom",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_15h",
+       "dbf": 53567,
+       "name": "Moon Priestess Nici",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_35h",
+       "dbf": 53622,
+       "name": "Soothsayer Zoie",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_03h",
+       "dbf": 53667,
+       "name": "The Great Akazamzarak",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 6/10. Recorded here: Awilo, Cooking Trainer (H), Hesutu Stonewind (N), Kizi Copperclip (H/N), Linzi Redgrin (H), Moon Priestess Nici (H), Soothsayer Zoie (H/N), The Great Akazamzarak (H/N).",
+     "recorded": true
+    },
+    {
+     "level": 3,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_22h",
+       "dbf": 53538,
+       "name": "Bookmaster Bae Chao",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_34h",
+       "dbf": 53802,
+       "name": "Carousel Gryphon",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_73h",
+       "dbf": 54445,
+       "name": "Hesutu Stonewind",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_15h",
+       "dbf": 53567,
+       "name": "Moon Priestess Nici",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_35h",
+       "dbf": 53622,
+       "name": "Soothsayer Zoie",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_05h",
+       "dbf": 53572,
+       "name": "The Amazing \"Bonepaw\"",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_03h",
+       "dbf": 53667,
+       "name": "The Great Akazamzarak",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_38h",
+       "dbf": 53815,
+       "name": "Tipsi Wobblerune",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template; added: Dagg Cruelmight (Recorded at ch5 level 3 (Normal, boss health 20); wiki has him at level 3 in chapters 1-4; outof.games: all chapters, levels 3-5. Missing from the wiki ch5 list.). Icy Veins agrees on 3/10. Recorded here: Awilo, Cooking Trainer (N), Bookmaster Bae Chao (H), Dagg Cruelmight (N), Hesutu Stonewind (N), Soothsayer Zoie (N), The Amazing \"Bonepaw\" (H/N), The Great Akazamzarak (H), Tipsi Wobblerune (H).",
+     "recorded": true,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_14h",
+       "dbf": 53637,
+       "name": "Tierra Blythe",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 4,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_09h",
+       "dbf": 53562,
+       "name": "Archivist Oshi",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_02h",
+       "dbf": 53779,
+       "name": "Awilo, Cooking Trainer",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_22h",
+       "dbf": 53538,
+       "name": "Bookmaster Bae Chao",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_26h",
+       "dbf": 53566,
+       "name": "Dalaran Fountain Golem",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_18h",
+       "dbf": 53528,
+       "name": "Disidra Stormglory",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_04h",
+       "dbf": 53558,
+       "name": "Kaye Toogie",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_42h",
+       "dbf": 53903,
+       "name": "P.O.G.O.",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_17h",
+       "dbf": 53571,
+       "name": "Tala Stonerage",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_05h",
+       "dbf": 53572,
+       "name": "The Amazing \"Bonepaw\"",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_38h",
+       "dbf": 53815,
+       "name": "Tipsi Wobblerune",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_21h",
+       "dbf": 53560,
+       "name": "Whirt the All-Knowing",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_28h",
+       "dbf": 53880,
+       "name": "Xur'ios",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 5/14. Recorded here: Archivist Oshi (H), Awilo, Cooking Trainer (N), Bookmaster Bae Chao (H), Dalaran Fountain Golem (H/N), Disidra Stormglory (H), Kazamon Steelskin (H/N), P.O.G.O. (H), Whirt the All-Knowing (H).",
+     "recorded": true
+    },
+    {
+     "level": 5,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_09h",
+       "dbf": 53562,
+       "name": "Archivist Oshi",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_75h",
+       "dbf": 54449,
+       "name": "Commander Bolan",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_63h",
+       "dbf": 54354,
+       "name": "Dagg Cruelmight",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_26h",
+       "dbf": 53566,
+       "name": "Dalaran Fountain Golem",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_18h",
+       "dbf": 53528,
+       "name": "Disidra Stormglory",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_36h",
+       "dbf": 53629,
+       "name": "Draemus",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_07h",
+       "dbf": 53607,
+       "name": "Flight Master Belnaara",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_42h",
+       "dbf": 53903,
+       "name": "P.O.G.O.",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_17h",
+       "dbf": 53571,
+       "name": "Tala Stonerage",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_41h",
+       "dbf": 53870,
+       "name": "Ungan Oddkind",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_21h",
+       "dbf": 53560,
+       "name": "Whirt the All-Knowing",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_28h",
+       "dbf": 53880,
+       "name": "Xur'ios",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 4/15. Recorded here: Archivist Oshi (H/N), Commander Bolan (H), Disidra Stormglory (H), Draemus (H), P.O.G.O. (N), Ranger Ar'ha (N), Tala Stonerage (H), Ungan Oddkind (H), Whirt the All-Knowing (H).",
+     "recorded": true,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_13h",
+       "dbf": 53734,
+       "name": "Albin Eastoft",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      },
+      {
+       "cardId": "DALA_BOSS_53h",
+       "dbf": 53556,
+       "name": "Dancin' Deryl",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 6,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_39h",
+       "dbf": 53817,
+       "name": "Aki the Brilliant",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_71h",
+       "dbf": 54441,
+       "name": "Anarii Duskgrove",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_09h",
+       "dbf": 53562,
+       "name": "Archivist Oshi",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_75h",
+       "dbf": 54449,
+       "name": "Commander Bolan",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_26h",
+       "dbf": 53566,
+       "name": "Dalaran Fountain Golem",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_18h",
+       "dbf": 53528,
+       "name": "Disidra Stormglory",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_36h",
+       "dbf": 53629,
+       "name": "Draemus",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_07h",
+       "dbf": 53607,
+       "name": "Flight Master Belnaara",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_62h",
+       "dbf": 54352,
+       "name": "Haro Setting-Sun",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_74h",
+       "dbf": 54447,
+       "name": "Kara Stamper",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_72h",
+       "dbf": 54443,
+       "name": "Kazamon Steelskin",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_68h",
+       "dbf": 54439,
+       "name": "Lilayell Suntear",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_42h",
+       "dbf": 53903,
+       "name": "P.O.G.O.",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_17h",
+       "dbf": 53571,
+       "name": "Tala Stonerage",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_41h",
+       "dbf": 53870,
+       "name": "Ungan Oddkind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_21h",
+       "dbf": 53560,
+       "name": "Whirt the All-Knowing",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_28h",
+       "dbf": 53880,
+       "name": "Xur'ios",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 3/19. Recorded here: Archivist Oshi (H), Commander Bolan (H), Dalaran Fountain Golem (N), Disidra Stormglory (N), Draemus (H), Whirt the All-Knowing (H).",
+     "recorded": true,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_70h",
+       "dbf": 54364,
+       "name": "Sky Captain Smiggs",
+       "claimedBy": [
+        "Icy Veins",
+        "outof.games (level range)"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 7,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_39h",
+       "dbf": 53817,
+       "name": "Aki the Brilliant",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_71h",
+       "dbf": 54441,
+       "name": "Anarii Duskgrove",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_36h",
+       "dbf": 53629,
+       "name": "Draemus",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_62h",
+       "dbf": 54352,
+       "name": "Haro Setting-Sun",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_74h",
+       "dbf": 54447,
+       "name": "Kara Stamper",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_68h",
+       "dbf": 54439,
+       "name": "Lilayell Suntear",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_50h",
+       "dbf": 54299,
+       "name": "Nozari",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_37h",
+       "dbf": 53810,
+       "name": "Ol' Toomba",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_24h",
+       "dbf": 53583,
+       "name": "Ranger Ar'ha",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_70h",
+       "dbf": 54364,
+       "name": "Sky Captain Smiggs",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_41h",
+       "dbf": 53870,
+       "name": "Ungan Oddkind",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_20h",
+       "dbf": 53521,
+       "name": "Vas'no",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 5/13. Recorded here: Aki the Brilliant (H), Haro Setting-Sun (H), Ol' Toomba (N), Sky Captain Smiggs (H), Vas'no (H).",
+     "recorded": true,
+     "unconfirmed": [
+      {
+       "cardId": "DALA_BOSS_61h",
+       "dbf": 54350,
+       "name": "Sael'orn",
+       "claimedBy": [
+        "Icy Veins"
+       ],
+       "reason": "Listed only by Icy Veins (May 2019 \"known bosses\" list) for this chapter/level; not in the wiki template; never recorded here."
+      }
+     ]
+    },
+    {
+     "level": 8,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_39h",
+       "dbf": 53817,
+       "name": "Aki the Brilliant",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_71h",
+       "dbf": 54441,
+       "name": "Anarii Duskgrove",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_62h",
+       "dbf": 54352,
+       "name": "Haro Setting-Sun",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_74h",
+       "dbf": 54447,
+       "name": "Kara Stamper",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_68h",
+       "dbf": 54439,
+       "name": "Lilayell Suntear",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_50h",
+       "dbf": 54299,
+       "name": "Nozari",
+       "recorded": true
+      },
+      {
+       "cardId": "DALA_BOSS_37h",
+       "dbf": 53810,
+       "name": "Ol' Toomba",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_40h",
+       "dbf": 53820,
+       "name": "Oxana Demonslay",
+       "recorded": false
+      },
+      {
+       "cardId": "DALA_BOSS_70h",
+       "dbf": 54364,
+       "name": "Sky Captain Smiggs",
+       "recorded": false
+      }
+     ],
+     "source": "wiki template; added: Aki the Brilliant (Recorded at ch5 level 8 (Normal, boss health 70, then Magistrix Norroa at level 9). Missing from the wiki and Icy Veins ch5 level 8 lists.). Icy Veins agrees on 2/9. Recorded here: Aki the Brilliant (N), Haro Setting-Sun (H), Lilayell Suntear (H), Nozari (H).",
+     "recorded": true
+    },
+    {
+     "level": 9,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_43h",
+       "dbf": 54155,
+       "name": "Magistrix Norroa",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 1/1. Recorded here: Magistrix Norroa (H/N).",
+     "recorded": true
+    },
+    {
+     "level": 10,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_67h",
+       "dbf": 54437,
+       "name": "Archmage Vargoth",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 1/1. Recorded here: Archmage Vargoth (H).",
+     "recorded": true
+    },
+    {
+     "level": 11,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_69h",
+       "dbf": 54362,
+       "name": "Archmage Kalec",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 1/1. Recorded here: Archmage Kalec (H).",
+     "recorded": true
+    },
+    {
+     "level": 12,
+     "bosses": [
+      {
+       "cardId": "DALA_BOSS_60h",
+       "dbf": 54348,
+       "name": "Archmage Khadgar",
+       "recorded": true
+      }
+     ],
+     "source": "wiki template. Icy Veins agrees on 1/1. Recorded here: Archmage Khadgar (H).",
+     "recorded": true
+    }
+   ]
+  }
+ ],
+ "notes": [
+  "Pools = wiki template (most complete source) + 4 additions from our live recordings (Smiggs ch1 L6/L7, Dagg ch5 L3, Aki ch5 L8) - 2 removals (Marei Loom and The Great Akazamzarak at ch5 L1, kept under \"unconfirmed\").",
+  "Heroic uses the same pools: no source gives separate Heroic pools, every Heroic recording fits the Normal pools, and Heroic reuses the same DALA_BOSS_xxh hero cards (Heroic differs by Hero Power / deck, see each boss page).",
+  "Level, not encounter: level = non-tavern bosses already fought + 1. Bartender Bob (DALA_BOSS_99h 52913; rarely Bartendotron DALA_BOSS_98h 56479) comes after levels 3 and 5. The Normal ch1 run (20261001-162435) has Bob twice in BOSSES_FOUGHT_LIST, so the positions file put Kaye Toogie at \"encounter 6\"; her NEXT_BOSS_HEALTH 30 = level 4, which the wiki agrees with.",
+  "Recorded NEXT_BOSS_HEALTH ladder (same in Normal and Heroic): L1 10, L2 15, L3 20, L4 30, L5 40, L6 50, L7 60, L8 70, L9 75, L10 80, L11 90, L12 100 (it is the value the level was matched against).",
+  "Save-data mechanic: while no run is active, NEXT_BOSS_FIGHT holds 5 dbf ids = one pre-rolled level-1 boss per chapter (index = chapter - 1; matched the first boss in 22/22 recorded run starts). During a run all 5 entries = the next boss.",
+  "No boss repeats within a run (Icy Veins quote; 0 repeats in 24 recorded runs). Pools overlap between levels, so the picker must skip bosses already fought this run.",
+  "Chapter 5 levels 9-12 are fixed: Magistrix Norroa, Archmage Vargoth, Archmage Kalec, Archmage Khadgar (wiki: \"The last four bosses are always the same for every run\"; recorded in Heroic).",
+  "\"unconfirmed\" entries: claimed by a source but contradicted by recordings or only from Icy Veins (early, incomplete \"known bosses\" list that also wrongly puts Marei Loom at L1 of chapters 2-4). The server should not pick them unless a recording confirms one.",
+  "No client data holds the pools (Scenario.json only has Player2HeroCardId = the chapter cover boss); pools are server-side.",
+  "Reddit (r/hearthstone) could not be fetched (old.reddit JSON blocked, search engines returned no boss-pool post); HSTopDecks chapter guides and Neoseeker FAQ are 403 to curl and the fetched HSTopDecks pages have no per-level lists."
+ ]
+}

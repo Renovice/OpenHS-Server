@@ -1,0 +1,17 @@
+# your private copy of the game (setup.bat makes it) and everything built or generated locally
+/Hearthstone main game/
+bin/
+obj/
+.vs/
+*.user
+TestResults/
+/Server/run/
+/Server/run2/
+/Server/logs/
+/Server/state/
+# the card database is exported from your own game (setup.bat / update.bat): never commit it
+/Server/data/dbf-*/
+/Server/data/hsjson/
+# recordings stay private
+/RESEARCH/
+*.jsonl

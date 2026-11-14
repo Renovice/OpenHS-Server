@@ -1,0 +1,60 @@
+# C4 quests: what each quest counts. The client data has only each quest's text and quota (live keeps the conditions
+# server-side), so a quest's Description is matched against these patterns, first match wins (Lobby/QuestConditions.cs).
+# Columns: regex on the Description (tags stripped, whitespace collapsed; $q = the quota) <TAB> event <TAB> filter.
+# Events (Game/GameTally.cs): GAME_PLAYED (wiki: an early concede doesn't count), GAME_WON, CARD_PLAYED, MINION_SUMMONED,
+#   DEATHRATTLE, MANA_SPENT, HERO_POWER, DAMAGE_ENEMY_HERO, LOCATION, CARD_FORGED.
+# Filter terms (all must hold; a|b = either): class= (hero class), deck= (a card name in the starting deck), mode=,
+#   type=, race= (the client's races: CARDRACE + CardRace tags), school=, tag= (a GAME_TAG the card has), rarity=,
+#   cost<=N, cost>=N, cost=N, cost=odd|even (the cost when played), set= (a card set: TAG_CARD_SET name or an @set alias
+#   below; membership from CardSetTiming), bonus=N with bonusrace= / bonustag= / bonusany= (race, keyword or rarity:
+#   those cards count N times, "(2x - Beast, Dragon, and Undead)"), trait= (what the engine knows that the client data
+#   doesn't tag: DRINK). ${name} = the pattern's named group; a list like
+#   "Mage, Warlock, or Warrior" or "Dragons and/or Naga" becomes a|b|c.
+# @set lines: a set's name in quest texts <TAB> its TAG_CARD_SET name.
+@set	Lost City	THE_LOST_CITY
+@set	Timeways	TIME_TRAVEL
+@set	Cataclysm	CATACLYSM
+@set	Violet Hold	ESCAPEFROM_VIOLET_HOLD
+# Not counted yet (no match on purpose): other modes (Battlegrounds, Arena, Duels, Tavern Brawl, Spectator), damage by
+#   school, golden cards, Taunt minions taking damage.
+^Play \$q games as (?<classes>.+)\.$	GAME_PLAYED	class=${classes}
+^Play \$q games with (?<card>.+) in your starting deck\.$	GAME_PLAYED	deck=${card}
+^Play \$q games\.$	GAME_PLAYED
+^Win \$q games\.$	GAME_WON
+^Win \$q games of Hearthstone's Ranked Mode\.$	GAME_WON	mode=RANKED
+^Deal \$q damage to enemy heroes\.$	DAMAGE_ENEMY_HERO
+^Use your Hero Power \$q times\.$	HERO_POWER
+^Spend \$q mana\.$	MANA_SPENT
+^Activate a Location \$q times\.$	LOCATION
+^Trigger your Deathrattle effects \$q times\.$	DEATHRATTLE
+^Play \$q cards\.$	CARD_PLAYED
+^Play \$q minions\.?$	CARD_PLAYED	type=MINION
+^Play \$q spells\.$	CARD_PLAYED	type=SPELL
+^Play \$q weapons\.$	CARD_PLAYED	type=WEAPON
+^Play \$q cards? that costs? (?<n>\d+) or less\.$	CARD_PLAYED	cost<=${n}
+^Play \$q cards? that costs? (?<n>\d+) or more\.$	CARD_PLAYED	cost>=${n}
+^Play \$q cards? that costs? (?<n>\d+)\.$	CARD_PLAYED	cost=${n}
+^Play \$q minions that costs? (?<n>\d+)\.$	CARD_PLAYED	type=MINION cost=${n}
+^Play \$q odd-cost cards\.$	CARD_PLAYED	cost=odd
+^Play \$q even-cost cards\.$	CARD_PLAYED	cost=even
+^Play \$q Battlecry cards\.$	CARD_PLAYED	tag=BATTLECRY
+^Play \$q Frenzy minions\.$	CARD_PLAYED	tag=FRENZY
+^Play \$q Infuse cards\.$	CARD_PLAYED	tag=INFUSE
+^Play \$q Manathirst cards\.$	CARD_PLAYED	tag=MANATHIRST
+^Play \$q Finale cards\.$	CARD_PLAYED	tag=FINALE
+^Play \$q Quickdraw cards\.$	CARD_PLAYED	tag=QUICKDRAW
+^Play \$q Excavate cards\.$	CARD_PLAYED	tag=EXCAVATE
+^Play \$q Titans\.$	CARD_PLAYED	tag=TITAN
+^Play \$q Miniaturize or Mini cards\.?$	CARD_PLAYED	tag=MINIATURIZE|MINI
+^Play or Trade \$q Tradeable cards\.$	CARD_PLAYED	tag=TRADEABLE
+^Play \$q minions that have or give Dark Gift\.$	CARD_PLAYED	type=MINION tag=DARK_GIFT
+^Cast \$q (?<schools>\w+ or \w+) spells\.$	CARD_PLAYED	type=SPELL school=${schools}
+^Play \$q (?<races>[A-Z][a-z]+(?: and/or [A-Z][a-z]+)*)\.$	CARD_PLAYED	race=${races}
+^Imbue \$q times\.$	CARD_PLAYED	tag=IMBUE
+^Forge \$q cards\.$	CARD_FORGED
+^Play \$q Drink spells\.$	CARD_PLAYED	type=SPELL trait=DRINK
+^Play \$q Starship Pieces\.$	CARD_PLAYED	tag=STARSHIP_PIECE
+^Summon \$q (?<set>[A-Z][\w ]+?) minions\. \((?<what>.+) count (?<n>\d+)x!\)$	MINION_SUMMONED	set=${set} bonus=${n} bonusany=${what}
+^Play \$q (?<set>[A-Z][\w ]+?) cards\. \((?<what>.+) cards count (?<n>\d+)x!\)$	CARD_PLAYED	set=${set} bonus=${n} bonusany=${what}
+^Summon \$q (?<set>[A-Z][\w ]+?) minions\. \((?<n>\d+)x - (?<what>.+)\)$	MINION_SUMMONED	set=${set} bonus=${n} bonusany=${what}
+^Play \$q (?<set>[A-Z][\w ]+?) cards\. \((?<n>\d+)x - (?<what>.+)\)$	CARD_PLAYED	set=${set} bonus=${n} bonusany=${what}

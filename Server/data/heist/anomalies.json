@@ -1,0 +1,125 @@
+{
+ "generated": "2026-10-09 (heist anomalies)",
+ "note": "The Dalaran Heist Anomaly Mode pool: one anomaly per run. Live save data (the live install's 105 HsRecorder sessions, key 55 / 344): between runs DUNGEON_CRAWL_ANOMALY_MODE_CARD_PREVIEW (392) holds the pre-rolled anomaly the client shows; when a run starts DUNGEON_CRAWL_CURRENT_ANOMALY_MODE_CARD (243) becomes it (whether the run is in anomaly mode or not) and DUNGEON_CRAWL_IS_ANOMALY_MODE (377) the player's pick (246); when the run ends a new preview is rolled (22 of 22 re-rolls differed from the anomaly just used) and 243 / 377 keep the last run's. Every boss game of an anomaly-mode run plays the same anomaly (8 sessions; never Bob's Tavern). Seen as previews: 15 of the 18 (not Fishy, Explosive, Rejuvenating). The client's default (AdventureData.AnomalyModeDefaultCardId) is 55878, Arcane.",
+ "sources": [
+  {
+   "url": "https://hearthstone.wiki.gg/wiki/The_Dalaran_Heist",
+   "quote": "Anomaly Mode adds an additional Twist to the selected chapter. The Twist is rolled before chapter selection and can be seen when selecting it.",
+   "what": "the 18 anomalies by dbfId (its Card query)"
+  },
+  {
+   "url": "https://www.hearthstonetopdecks.com/the-dalaran-heist-guide/",
+   "quote": "start one of the chapters with a certain, random effect that persists through an entire run"
+  }
+ ],
+ "anomalies": [
+  {
+   "dbfId": 55878,
+   "cardId": "DALA_850",
+   "name": "Anomaly - Arcane",
+   "text": "All spells cost (2) less."
+  },
+  {
+   "dbfId": 55881,
+   "cardId": "DALA_851",
+   "name": "Anomaly - Summons",
+   "text": "After a spell is played, a minion of the same cost is summoned."
+  },
+  {
+   "dbfId": 55884,
+   "cardId": "DALA_852",
+   "name": "Anomaly - Crying",
+   "text": "All Battlecries trigger twice."
+  },
+  {
+   "dbfId": 55888,
+   "cardId": "DALA_853",
+   "name": "Anomaly - Rattling",
+   "text": "All Deathrattles trigger twice."
+  },
+  {
+   "dbfId": 55912,
+   "cardId": "DALA_854",
+   "name": "Anomaly - Nesting",
+   "text": "After a minion is played, it gains \"Deathrattle: Summon a 1/1 copy of this minion.\""
+  },
+  {
+   "dbfId": 55889,
+   "cardId": "DALA_855",
+   "name": "Anomaly - Refreshing",
+   "text": "At the end of each player's turn, that player draws until they have 5 cards."
+  },
+  {
+   "dbfId": 55891,
+   "cardId": "DALA_856",
+   "name": "Anomaly - Wild Magic",
+   "text": "All spells cast an additional time. (targets chosen randomly)"
+  },
+  {
+   "dbfId": 55916,
+   "cardId": "DALA_857",
+   "name": "Anomaly - Glittering",
+   "text": "After a player plays a card that costs (8) or more, that player adds a Treasure to their hand."
+  },
+  {
+   "dbfId": 55893,
+   "cardId": "DALA_858",
+   "name": "Anomaly - Fishy",
+   "text": "Murlocs occasionally join the battle."
+  },
+  {
+   "dbfId": 55895,
+   "cardId": "DALA_859",
+   "name": "Anomaly - Gorged",
+   "text": "Both players start the game with two extra cards and Mana Crystals."
+  },
+  {
+   "dbfId": 55896,
+   "cardId": "DALA_860",
+   "name": "Anomaly - Dragon Soul",
+   "text": "After a player casts 3 spells in a turn, that player summons a 5/5 Dragon."
+  },
+  {
+   "dbfId": 55897,
+   "cardId": "DALA_861",
+   "name": "Anomaly - Ogreish",
+   "text": "All minions have a 50% chance to attack the wrong enemy."
+  },
+  {
+   "dbfId": 56473,
+   "cardId": "DALA_862",
+   "name": "Anomaly - Reductive",
+   "text": "At the end of each player's turn, reduce the cost of cards in their hand by (1)."
+  },
+  {
+   "dbfId": 56475,
+   "cardId": "DALA_863",
+   "name": "Anomaly - Hallucinating",
+   "text": "Both players start the game with 10 'Hallucinations' in their deck."
+  },
+  {
+   "dbfId": 55899,
+   "cardId": "DALA_864",
+   "name": "Anomaly - Growing",
+   "text": "Minions gain +1/+1 at the end of their owner's turn."
+  },
+  {
+   "dbfId": 56477,
+   "cardId": "DALA_865",
+   "name": "Anomaly - Explosive",
+   "text": "After a minion is summoned, it gains \"Deathrattle: Deal 1 damage to all minions.\""
+  },
+  {
+   "dbfId": 56476,
+   "cardId": "DALA_866",
+   "name": "Anomaly - Rejuvenating",
+   "text": "At the start of each\nplayer's turn, that\nplayer restores 2 Health\nto their hero."
+  },
+  {
+   "dbfId": 55923,
+   "cardId": "DALA_867",
+   "name": "Anomaly - Infused",
+   "text": "After a minion is summoned, it gains Taunt, Divine Shield, Rush, or Windfury at random."
+  }
+ ]
+}

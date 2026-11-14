@@ -1,0 +1,1113 @@
+{
+ "generated": "2026-10-09 (heist group 4)",
+ "note": "The complete Dalaran Heist treasure / passive pool. kind passive = client tag DUNGEON_PASSIVE_BUFF (starts the game set aside, acts at its start: Generic.PlayDungeonPassives); treasure = a deck card. offeredAfterBosses per the wiki: passives after rounds 1 and 5, treasures after rounds 3 and 7, each offer three random options from the pool. No source names Normal/Heroic-only or class-only entries (Out of Games lists them all without restrictions), so modes is both. seenOfferedLiveAfter: the boss count after which our recorded runs offered it (loot-pools.json treasureOffers).",
+ "sources": [
+  {
+   "url": "https://hearthstone.wiki.gg/wiki/The_Dalaran_Heist",
+   "quote": "\"selected from one of three random passive buffs from the pool of Passives\" (after rounds 1 and 5); treasures \"selected from one of three random cards from the pool of Treasure cards\" (after rounds 3 and 7); both lists by card database id"
+  },
+  {
+   "url": "https://outof.games/news/131-dalaran-heist-visual-guide/",
+   "quote": "single-use and passive treasure lists, no class restrictions noted"
+  },
+  {
+   "url": "https://www.icy-veins.com/hearthstone/dalaran-heist-hunter-guide",
+   "quote": "(web search summary of the page) passive treasures are chosen after the first and fifth wins, single-use treasures after the third and seventh"
+  }
+ ],
+ "counts": {
+  "passivesNew": 16,
+  "passivesReturning": 13,
+  "treasures": 29
+ },
+ "cards": [
+  {
+   "cardId": "DALA_738",
+   "dbfId": 54468,
+   "name": "A Prince's Ring",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive Replace your starting Hero Power with a random Death Knight one.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ]
+  },
+  {
+   "cardId": "DALA_739",
+   "dbfId": 54469,
+   "name": "Book of Wonders",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive At the start of the game, shuffle 10 'Scrolls of Wonder' into your deck.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "DALA_743",
+   "dbfId": 54474,
+   "name": "Dr. Boom's Remote",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive At the start of the game, summon three 1/1 Boom Bots.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "DALA_746",
+   "dbfId": 54479,
+   "name": "Elixir of Vigor",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive After you play a minion, shuffle two copies of it into your deck. They cost (1).",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    5
+   ]
+  },
+  {
+   "cardId": "DALA_748",
+   "dbfId": 54483,
+   "name": "Elixir of Vile",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive Your spells cost Health instead of Mana.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "DALA_747",
+   "dbfId": 54481,
+   "name": "Elixir of Vim",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive You draw an additional two cards each turn. You are Immune to Fatigue.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "DALA_733",
+   "dbfId": 54460,
+   "name": "Emerald Goggles",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive The left-most card in your hand costs (2) less.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1,
+    5
+   ]
+  },
+  {
+   "cardId": "DALA_744",
+   "dbfId": 54485,
+   "name": "Hagatha's Embrace",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive At the start of your turn, give a random minion in your hand +1/+1.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ]
+  },
+  {
+   "cardId": "DALA_728",
+   "dbfId": 55871,
+   "name": "Recycling",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive After a friendly minion dies, gain 2 armor.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ]
+  },
+  {
+   "cardId": "DALA_737",
+   "dbfId": 54467,
+   "name": "Resourcefulness",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive At the start of the game, equip a random weapon. Give it +1/+1.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ]
+  },
+  {
+   "cardId": "DALA_735",
+   "dbfId": 54464,
+   "name": "Robes of Gaudiness",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive Your cards cost half, but you can only play two cards each turn.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "DALA_731",
+   "dbfId": 54457,
+   "name": "Rocket Backpacks",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive Your minions have Rush.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "DALA_736",
+   "dbfId": 55869,
+   "name": "Stargazing",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive You can use your Hero Power twice each turn. It costs (1) less.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1,
+    5
+   ]
+  },
+  {
+   "cardId": "DALA_745",
+   "dbfId": 54476,
+   "name": "The Hand of Rafaam",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive At the start of the game, give your opponent two 'Cursed!' cards.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1,
+    5
+   ]
+  },
+  {
+   "cardId": "DALA_741",
+   "dbfId": 54470,
+   "name": "Togwaggle's Dice",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive At the end of your turn, randomize the cost of all cards in your hand.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1,
+    5
+   ]
+  },
+  {
+   "cardId": "DALA_740",
+   "dbfId": 55500,
+   "name": "Wondrous Wisdomball",
+   "kind": "passive",
+   "origin": "new",
+   "text": "Passive Occasionally gives helpful advice.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "LOOTA_846",
+   "dbfId": 47300,
+   "name": "Battle Totem",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive Your Battlecries trigger_twice.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "LOOTA_828",
+   "dbfId": 46439,
+   "name": "Captured Flag",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive Your minions have_+1/+1.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "LOOTA_832",
+   "dbfId": 47020,
+   "name": "Cloak of Invisibility",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive Your minions have permanent Stealth.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "LOOTA_801",
+   "dbfId": 46407,
+   "name": "Crystal Gem",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive Start with an extra Mana Crystal.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1,
+    5
+   ]
+  },
+  {
+   "cardId": "GILA_813",
+   "dbfId": 48372,
+   "name": "Expedite",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive Your minions cost (1) less.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    5
+   ]
+  },
+  {
+   "cardId": "GILA_506",
+   "dbfId": 48495,
+   "name": "First Aid Kit",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive At the end of your turn, restore 2_Health to all friendly characters.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "LOOTA_831",
+   "dbfId": 46925,
+   "name": "Glyph of Warding",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive Enemy minions cost (1)_more.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1,
+    5
+   ]
+  },
+  {
+   "cardId": "LOOTA_833",
+   "dbfId": 47021,
+   "name": "Mysterious Tome",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive At the start of the game, play 3 random Secrets.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "LOOTA_825",
+   "dbfId": 46430,
+   "name": "Robe of the Magi",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive Spell Damage +3",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "LOOTA_800",
+   "dbfId": 46405,
+   "name": "Potion of Vitality",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive Double your starting Health.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ]
+  },
+  {
+   "cardId": "LOOTA_803",
+   "dbfId": 46410,
+   "name": "Scepter of Summoning",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive Your minions that cost (5) or more cost (5).",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ]
+  },
+  {
+   "cardId": "LOOTA_804",
+   "dbfId": 46411,
+   "name": "Small Backpacks",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive At the start of the game, draw 2 cards.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1,
+    5
+   ]
+  },
+  {
+   "cardId": "LOOTA_845",
+   "dbfId": 47299,
+   "name": "Totem of the Dead",
+   "kind": "passive",
+   "origin": "returning",
+   "text": "Passive Your Deathrattles trigger twice.",
+   "offeredAfterBosses": [
+    1,
+    5
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "seenOfferedLiveAfter": [
+    1
+   ]
+  },
+  {
+   "cardId": "DALA_701",
+   "dbfId": 53950,
+   "name": "The Box",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Each turn this is in your hand, transform it into a random treasure.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ]
+  },
+  {
+   "cardId": "DALA_715",
+   "dbfId": 55852,
+   "name": "Overpowered",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "After you play a card this turn, replay it (targets chosen randomly).",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ]
+  },
+  {
+   "cardId": "DALA_717",
+   "dbfId": 54005,
+   "name": "Case Study",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Discover a Quest Reward.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 1
+  },
+  {
+   "cardId": "DALA_707",
+   "dbfId": 53992,
+   "name": "Loyal Henchman",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Start of Game: Draw this. Taunt. Each turn this is in your hand, gain +1/+1.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 1,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_708",
+   "dbfId": 53994,
+   "name": "Untold Splendor",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Shuffle 5 random treasures into your deck.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 1,
+   "seenOfferedLiveAfter": [
+    7
+   ]
+  },
+  {
+   "cardId": "DALA_725",
+   "dbfId": 54403,
+   "name": "Banana Split",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Give a friendly minion +2/+2. Summon two copies of it.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 2,
+   "seenOfferedLiveAfter": [
+    7
+   ]
+  },
+  {
+   "cardId": "DALA_724",
+   "dbfId": 55349,
+   "name": "Big Boomba",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Destroy ALL minions. Do it again at the start of your next turn.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 2,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_720",
+   "dbfId": 54400,
+   "name": "Swampqueen's Call",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Transform your minions into random Legendary minions. Repeatable this turn.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 2,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_729",
+   "dbfId": 54407,
+   "name": "Dagwik Stickytoe",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Stealth After this minion attacks a hero, steal a card from    your opponent's hand.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 3,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_713",
+   "dbfId": 54025,
+   "name": "Elder Taggawag",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Battlecry: Deal 4 damage to all enemy minions. Deathrattle: Shuffle this into your deck.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 3,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_718",
+   "dbfId": 55481,
+   "name": "Elistra the Immortal",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Battlecry: Recast all spells you've cast on this minion this run.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 3
+  },
+  {
+   "cardId": "DALA_705",
+   "dbfId": 53961,
+   "name": "Grimmer Patron",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "At the end of your turn, summon a copy of this minion.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 3
+  },
+  {
+   "cardId": "DALA_723",
+   "dbfId": 54402,
+   "name": "Hyperblaster",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Poisonous. Your hero is Immune while attacking.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 3,
+   "seenOfferedLiveAfter": [
+    7
+   ]
+  },
+  {
+   "cardId": "DALA_726",
+   "dbfId": 55348,
+   "name": "Master Scheme",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Deal $@ damage. Draw @ |4(card, cards). Gain @ Armor. Summon @ Boom |4(Bot, Bots). (Upgrades each turn!)",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 3,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_730",
+   "dbfId": 55482,
+   "name": "Murgatha",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Whenever you play a card, Overload one of your opponent's Mana Crystals.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 3,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_714",
+   "dbfId": 55858,
+   "name": "THE... Candles?",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Twinspell. Twinspell. Twinspell. Deal $3 damage to all enemy minions.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 3,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_700",
+   "dbfId": 53949,
+   "name": "Continuum Collider",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Take an extra turn. Your opponent takes an extra turn after.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 4,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_721",
+   "dbfId": 55351,
+   "name": "Duplatransmogrifier",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Choose a friendly minion. Replace all minions in your Adventure deck with copies of it.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 4,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_709",
+   "dbfId": 53997,
+   "name": "Golden Candle",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Taunt. Battlecry: Replace ALL other cards with random Legendary minions.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 4,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_712",
+   "dbfId": 54004,
+   "name": "Orb of the Untold",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Deal $20 damage split between all enemies.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 4,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_703",
+   "dbfId": 53957,
+   "name": "The Muscle",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Battlecry: Add three random cards to your hand. They cost (0).",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 4
+  },
+  {
+   "cardId": "DALA_716",
+   "dbfId": 54021,
+   "name": "Fly-By",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Shuffle a Kadoom Bot into your opponent's deck. When drawn, it explodes for 50 damage.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 5
+  },
+  {
+   "cardId": "DALA_702",
+   "dbfId": 53952,
+   "name": "Gnomish Army Knife",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Give a minion Charge, Windfury, Divine Shield, Lifesteal, Poisonous, Taunt, and Stealth.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 5,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_719",
+   "dbfId": 55615,
+   "name": "Soulreaper's Scythe",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Deathrattle: Summon all minions killed by this weapon this run.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 5
+  },
+  {
+   "cardId": "DALA_727",
+   "dbfId": 54405,
+   "name": "Sow the Seeds",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Give all minions in your deck +3/+3.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 5,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_704",
+   "dbfId": 53958,
+   "name": "Super Simian Sphere",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Summon King Mukla with Immune and Elusive.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 5
+  },
+  {
+   "cardId": "DALA_722",
+   "dbfId": 54401,
+   "name": "Annoy-o Horn",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Fill your board with annoying minions.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 7,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_711",
+   "dbfId": 54001,
+   "name": "Dreamgrove Ring",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Discover a Legendary minion. Summon five copies of it.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 9,
+   "seenOfferedLiveAfter": [
+    3
+   ]
+  },
+  {
+   "cardId": "DALA_706",
+   "dbfId": 53962,
+   "name": "EVIL Propaganda",
+   "kind": "treasure",
+   "origin": "new",
+   "text": "Take control of all enemy minions.",
+   "offeredAfterBosses": [
+    3,
+    7
+   ],
+   "modes": [
+    "Normal",
+    "Heroic"
+   ],
+   "cost": 10
+  }
+ ]
+}

@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <!--
+    Rules engine: SabberStone core (HearthSim/SabberStone @ 1db6e27, 2021-01-15, AGPL-3.0-or-later, see
+    LICENSE-SabberStone.txt), vendored so the server can adapt it: current client card data, live-accurate history.
+    Namespaces are kept as SabberStoneCore.* to make upstream comparison easy.
+  -->
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>SabberStoneCore</RootNamespace>
+    <AssemblyName>HsServer.Rules</AssemblyName>
+    <LangVersion>latest</LangVersion>
+    <ImplicitUsings>disable</ImplicitUsings>
+    <Nullable>disable</Nullable>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
+    <GenerateDocumentationFile>false</GenerateDocumentationFile>
+    <NoWarn>$(NoWarn);1701;1702;0008;0049;CS1591;CS0618;CS0162;CS0168;CS0169;CS0219;CS0414;CS0649;CS8632;SYSLIB0050</NoWarn>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="resources\Data\CardDefs.xml" LogicalName="SabberStoneCore.Resources.CardDefs.xml" />
+    <EmbeddedResource Include="resources\Data\PlayErrors.xml" LogicalName="SabberStoneCore.Resources.PlayErrors.xml" />
+    <EmbeddedResource Include="resources\Data\SubSpells.tsv" LogicalName="SabberStoneCore.Resources.SubSpells.tsv" />
+    <EmbeddedResource Include="resources\Data\RecordedSubSpells.tsv" LogicalName="SabberStoneCore.Resources.RecordedSubSpells.tsv" />
+    <EmbeddedResource Include="resources\Data\RecordedBlockMeta.tsv" LogicalName="SabberStoneCore.Resources.RecordedBlockMeta.tsv" />
+    <EmbeddedResource Include="resources\Data\ClientImpactFx.tsv" LogicalName="SabberStoneCore.Resources.ClientImpactFx.tsv" />
+    <EmbeddedResource Include="resources\Data\ClientOwnFx.tsv" LogicalName="SabberStoneCore.Resources.ClientOwnFx.tsv" />
+    <EmbeddedResource Include="resources\Data\RecordedNoFlight.tsv" LogicalName="SabberStoneCore.Resources.RecordedNoFlight.tsv" />
+    <EmbeddedResource Include="resources\Data\ClientSelectFx.tsv" LogicalName="SabberStoneCore.Resources.ClientSelectFx.tsv" />
+    <EmbeddedResource Include="resources\Data\DormantCards.tsv" LogicalName="SabberStoneCore.Resources.DormantCards.tsv" />
+    <EmbeddedResource Include="resources\Data\HallOfFame.tsv" LogicalName="SabberStoneCore.Resources.HallOfFame.tsv" />
+    <EmbeddedResource Include="resources\Data\WishNotForLethal.tsv" LogicalName="SabberStoneCore.Resources.WishNotForLethal.tsv" />
+    <EmbeddedResource Include="resources\Data\RecordedSubSpellSources.tsv" LogicalName="SabberStoneCore.Resources.RecordedSubSpellSources.tsv" />
+    <EmbeddedResource Include="resources\Data\RecordedSubSpellBlocks.tsv" LogicalName="SabberStoneCore.Resources.RecordedSubSpellBlocks.tsv" />
+    <EmbeddedResource Include="resources\Data\RecordedSubSpellAnchors.tsv" LogicalName="SabberStoneCore.Resources.RecordedSubSpellAnchors.tsv" />
+  </ItemGroup>
+</Project>

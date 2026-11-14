@@ -1,0 +1,6005 @@
+{
+ "source_summary": "hearthstone.wiki.gg boss pages (?action=raw wikitext, '==Decks==' tables), fetched 2026-10-09. Card ids from Server/data/dbf-36.6.0.0-20261004 (original collectible id preferred; CORE_/VAN_/HERO_ skins skipped). Cross-checked: Icy Veins / Out of Games / HearthPwn / Fandom (Cloudflare-blocked) list no full boss decks; Out of Games tuning article only says some boss decks were weakened.",
+ "bosses": [
+  {
+   "cardId": "DALA_BOSS_25h",
+   "name": "Jepetto Joybuzz",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "DALA_BOSS_25t",
+     "dbf": 53873,
+     "name": "Hoard of Toys",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_093",
+     "dbf": 2061,
+     "name": "Target Dummy",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_031",
+     "dbf": 47837,
+     "name": "Goblin Bomb",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_085",
+     "dbf": 2053,
+     "name": "Annoy-o-Tron",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_006",
+     "dbf": 1940,
+     "name": "Mechwarper",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_006",
+     "dbf": 1658,
+     "name": "Alarm-o-Bot",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_102",
+     "dbf": 979,
+     "name": "Demolisher",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_812",
+     "dbf": 43051,
+     "name": "Meat Wagon",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_267",
+     "dbf": 48223,
+     "name": "Piloted Reaper",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_096",
+     "dbf": 2064,
+     "name": "Piloted Shredder",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_111",
+     "dbf": 2079,
+     "name": "Mimiron's Head",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_548",
+     "dbf": 49184,
+     "name": "Zilliax",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_066",
+     "dbf": 47924,
+     "name": "Mechanical Whelp",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_107",
+     "dbf": 48552,
+     "name": "Missile Launcher",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_105",
+     "dbf": 2073,
+     "name": "Piloted Sky Golem",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_113",
+     "dbf": 2081,
+     "name": "Foe Reaper 4000",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_114",
+     "dbf": 2082,
+     "name": "Sneed's Old Shredder",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "DALA_BOSS_25t",
+     "dbf": 53873,
+     "name": "Hoard of Toys",
+     "count": 2
+    },
+    {
+     "cardId": "KAR_005",
+     "dbf": 39481,
+     "name": "Kindly Grandmother",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_251",
+     "dbf": 48185,
+     "name": "Spider Bomb",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_021",
+     "dbf": 42320,
+     "name": "Exploding Bloatbat",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_650",
+     "dbf": 47488,
+     "name": "Houndmaster Shaw",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_562",
+     "dbf": 47078,
+     "name": "Vilebrood Skitterer",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_534",
+     "dbf": 1261,
+     "name": "Savannah Highmane",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_522",
+     "dbf": 46450,
+     "name": "Crushing Walls",
+     "count": 1
+    },
+    {
+     "cardId": "DS1_188",
+     "dbf": 311,
+     "name": "Gladiator's Longbow",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_096",
+     "dbf": 251,
+     "name": "Loot Hoarder",
+     "count": 2
+    },
+    {
+     "cardId": "NEW1_037",
+     "dbf": 351,
+     "name": "Master Swordsmith",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_702",
+     "dbf": 42785,
+     "name": "Shallow Gravedigger",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_394",
+     "dbf": 46118,
+     "name": "Shrieking Shroom",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_233",
+     "dbf": 45594,
+     "name": "Cursed Disciple",
+     "count": 1
+    },
+    {
+     "cardId": "OG_249",
+     "dbf": 38784,
+     "name": "Infested Tauren",
+     "count": 1
+    },
+    {
+     "cardId": "OG_272",
+     "dbf": 38833,
+     "name": "Twilight Summoner",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_401",
+     "dbf": 48518,
+     "name": "Weaponized Piñata",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_097",
+     "dbf": 440,
+     "name": "Abomination",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_061",
+     "dbf": 2933,
+     "name": "Anubisath Sentinel",
+     "count": 1
+    },
+    {
+     "cardId": "FP1_015",
+     "dbf": 1797,
+     "name": "Feugen",
+     "count": 1
+    },
+    {
+     "cardId": "FP1_012",
+     "dbf": 1793,
+     "name": "Sludge Belcher",
+     "count": 1
+    },
+    {
+     "cardId": "FP1_014",
+     "dbf": 1796,
+     "name": "Stalagg",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_016",
+     "dbf": 1721,
+     "name": "Sylvanas Windrunner",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_222",
+     "dbf": 753,
+     "name": "Stormwind Champion",
+     "count": 1
+    },
+    {
+     "cardId": "NEW1_038",
+     "dbf": 526,
+     "name": "Gruul",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_298",
+     "dbf": 374,
+     "name": "Ragnaros the Firelord",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_114",
+     "dbf": 2082,
+     "name": "Sneed's Old Shredder",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_314",
+     "dbf": 42818,
+     "name": "The Lich King",
+     "count": 1
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Jepetto_Joybuzz_%28boss%29",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "Out of Games 'Great Dalaran Heist Tuning Update' lists this boss among those whose decks were weakened; the wiki list is presumably the post-tuning deck.",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_26h",
+   "name": "Dalaran Fountain Golem",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "DAL_433",
+     "dbf": 52422,
+     "name": "Sludge Slurper",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_058",
+     "dbf": 42678,
+     "name": "Brrrloc",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_678",
+     "dbf": 47600,
+     "name": "Ghost Light Angler",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_710",
+     "dbf": 52468,
+     "name": "Soul of the Murloc",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_049",
+     "dbf": 51724,
+     "name": "Underbelly Angler",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_236",
+     "dbf": 42808,
+     "name": "Ice Breaker",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_291",
+     "dbf": 48490,
+     "name": "Storm Chaser",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_817",
+     "dbf": 41521,
+     "name": "Tidal Surge",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_088",
+     "dbf": 42762,
+     "name": "Voodoo Hexxer",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_289",
+     "dbf": 43072,
+     "name": "Moorabi",
+     "count": 1
+    },
+    {
+     "cardId": "AT_054",
+     "dbf": 2618,
+     "name": "The Mistcaller",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_245",
+     "dbf": 48161,
+     "name": "The Storm Bringer",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_113",
+     "dbf": 3007,
+     "name": "Everyfin is Awesome",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_042",
+     "dbf": 2010,
+     "name": "Neptulon",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_047",
+     "dbf": 51722,
+     "name": "Walking Fountain",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_937",
+     "dbf": 41478,
+     "name": "Primalfin Lookout",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_520",
+     "dbf": 50402,
+     "name": "Murloc Tastyfin",
+     "count": 2
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "CS2_031",
+     "dbf": 172,
+     "name": "Ice Lance",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_801",
+     "dbf": 47821,
+     "name": "Snap Freeze",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_002",
+     "dbf": 1928,
+     "name": "Snowchugger",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_252",
+     "dbf": 42836,
+     "name": "Coldwraith",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_033",
+     "dbf": 395,
+     "name": "Water Elemental",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_671",
+     "dbf": 40988,
+     "name": "Cryomancer",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_028",
+     "dbf": 457,
+     "name": "Blizzard",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_058",
+     "dbf": 42678,
+     "name": "Brrrloc",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_696",
+     "dbf": 40694,
+     "name": "Devolve",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_089",
+     "dbf": 42763,
+     "name": "Ice Fishing",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_049",
+     "dbf": 51724,
+     "name": "Underbelly Angler",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_040",
+     "dbf": 2008,
+     "name": "Siltfin Spiritwalker",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_088",
+     "dbf": 42762,
+     "name": "Voodoo Hexxer",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_289",
+     "dbf": 43072,
+     "name": "Moorabi",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_042",
+     "dbf": 2010,
+     "name": "Neptulon",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_508",
+     "dbf": 510,
+     "name": "Grimscale Oracle",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_509",
+     "dbf": 475,
+     "name": "Murloc Tidecaller",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_077",
+     "dbf": 52277,
+     "name": "Toxfin",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_173",
+     "dbf": 739,
+     "name": "Bluegill Warrior",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_073",
+     "dbf": 41245,
+     "name": "Rockpool Hunter",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_050",
+     "dbf": 1016,
+     "name": "Coldlight Oracle",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_507",
+     "dbf": 1063,
+     "name": "Murloc Warleader",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_937",
+     "dbf": 41478,
+     "name": "Primalfin Lookout",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_520",
+     "dbf": 50402,
+     "name": "Murloc Tastyfin",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_283",
+     "dbf": 512,
+     "name": "Frost Elemental",
+     "count": 1
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 29,
+   "source": "https://hearthstone.wiki.gg/wiki/Dalaran_Fountain_Golem",
+   "quote": "These decks correspond only to level 6 in Chapter 5. If this boss is encountered on levels 4-5, his deck will be missing 5 random cards.",
+   "notes": "These decks correspond only to level 6 in Chapter 5. If this boss is encountered on levels 4-5, his deck will be missing 5 random cards. Wiki Heroic table sums to 29 cards (25 rows) - likely a wiki omission of one card/copy; Normal = 30.",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_27h",
+   "name": "Rasil Fireborne",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "CS2_003",
+     "dbf": 1099,
+     "name": "Mind Vision",
+     "count": 1
+    },
+    {
+     "cardId": "AT_033",
+     "dbf": 2770,
+     "name": "Burgle",
+     "count": 1
+    },
+    {
+     "cardId": "LOEA10_3",
+     "dbf": 13879,
+     "name": "Murloc Tinyfin",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_023",
+     "dbf": 42338,
+     "name": "Snowflipper Penguin",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_093",
+     "dbf": 2061,
+     "name": "Target Dummy",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_231",
+     "dbf": 179,
+     "name": "Wisp",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_009",
+     "dbf": 1688,
+     "name": "Angry Chicken",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_085",
+     "dbf": 41261,
+     "name": "Emerald Hive Queen",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_001",
+     "dbf": 1753,
+     "name": "Zombie Chow",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_045",
+     "dbf": 605,
+     "name": "Ancient Watcher",
+     "count": 2
+    },
+    {
+     "cardId": "NEW1_029",
+     "dbf": 855,
+     "name": "Millhouse Manastorm",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_790",
+     "dbf": 41567,
+     "name": "Dirty Rat",
+     "count": 2
+    },
+    {
+     "cardId": "NEW1_021",
+     "dbf": 138,
+     "name": "Doomsayer",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_006",
+     "dbf": 1658,
+     "name": "Alarm-o-Bot",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_009",
+     "dbf": 1790,
+     "name": "Deathlord",
+     "count": 2
+    },
+    {
+     "cardId": "AT_085",
+     "dbf": 2488,
+     "name": "Maiden of the Lake",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_099",
+     "dbf": 42782,
+     "name": "Ticking Abomination",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_564",
+     "dbf": 51136,
+     "name": "Mojomaster Zihi",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "EX1_382",
+     "dbf": 1167,
+     "name": "Aldor Peacekeeper",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_092",
+     "dbf": 943,
+     "name": "Blessing of Kings",
+     "count": 2
+    },
+    {
+     "cardId": "LOE_017",
+     "dbf": 2889,
+     "name": "Keeper of Uldaman",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_097",
+     "dbf": 847,
+     "name": "Truesilver Champion",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_384",
+     "dbf": 1174,
+     "name": "Avenging Wrath",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_015",
+     "dbf": 41145,
+     "name": "Sunkeeper Tarim",
+     "count": 1
+    },
+    {
+     "cardId": "AT_081",
+     "dbf": 2727,
+     "name": "Eadric the Pure",
+     "count": 1
+    },
+    {
+     "cardId": "OG_229",
+     "dbf": 38758,
+     "name": "Ragnaros, Lightlord",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_383",
+     "dbf": 890,
+     "name": "Tirion Fordring",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_616",
+     "dbf": 715,
+     "name": "Mana Wraith",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_048",
+     "dbf": 754,
+     "name": "Spellbreaker",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_043",
+     "dbf": 1037,
+     "name": "Twilight Drake",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_116",
+     "dbf": 559,
+     "name": "Leeroy Jenkins",
+     "count": 1
+    },
+    {
+     "cardId": "FP1_030",
+     "dbf": 1914,
+     "name": "Loatheb",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_227",
+     "dbf": 1122,
+     "name": "Venture Co. Mercenary",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_016",
+     "dbf": 1721,
+     "name": "Sylvanas Windrunner",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_572",
+     "dbf": 1186,
+     "name": "Ysera",
+     "count": 1
+    },
+    {
+     "cardId": "AT_120",
+     "dbf": 2512,
+     "name": "Frost Giant",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_105",
+     "dbf": 993,
+     "name": "Mountain Giant",
+     "count": 2
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Rasil_Fireborne",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_28h",
+   "name": "Xur'ios",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "FP1_018",
+     "dbf": 1801,
+     "name": "Duplicate",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_024",
+     "dbf": 41158,
+     "name": "Mana Bind",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_823",
+     "dbf": 43193,
+     "name": "Simulacrum",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_594",
+     "dbf": 286,
+     "name": "Vaporize",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_065",
+     "dbf": 40297,
+     "name": "Volcanic Potion",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_576",
+     "dbf": 52638,
+     "name": "Kirin Tor Tricaster",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_122",
+     "dbf": 2234,
+     "name": "Wee Spellstopper",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_640",
+     "dbf": 47429,
+     "name": "Curio Collector",
+     "count": 1
+    },
+    {
+     "cardId": "AT_001",
+     "dbf": 2539,
+     "name": "Flame Lance",
+     "count": 1
+    },
+    {
+     "cardId": "OG_120",
+     "dbf": 38463,
+     "name": "Anomalus",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_086",
+     "dbf": 42760,
+     "name": "Glacial Mysteries",
+     "count": 1
+    },
+    {
+     "cardId": "KAR_036",
+     "dbf": 39215,
+     "name": "Arcane Anomaly",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_076",
+     "dbf": 2044,
+     "name": "Explosive Sheep",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_096",
+     "dbf": 251,
+     "name": "Loot Hoarder",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_015",
+     "dbf": 284,
+     "name": "Novice Engineer",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_007",
+     "dbf": 1659,
+     "name": "Acolyte of Pain",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_193",
+     "dbf": 46892,
+     "name": "Shimmering Courser",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_130",
+     "dbf": 43483,
+     "name": "Arcane Tyrant",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_060",
+     "dbf": 40281,
+     "name": "Red Mana Wyrm",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "EX1_277",
+     "dbf": 564,
+     "name": "Arcane Missiles",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_608",
+     "dbf": 52991,
+     "name": "Magic Trick",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_180",
+     "dbf": 52262,
+     "name": "Tome of Intellect",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_101",
+     "dbf": 47978,
+     "name": "Astral Rift",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_001",
+     "dbf": 1927,
+     "name": "Flamecannon",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_941",
+     "dbf": 41496,
+     "name": "Primordial Glyph",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_600",
+     "dbf": 48692,
+     "name": "Research Project",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_608",
+     "dbf": 614,
+     "name": "Sorcerer's Apprentice",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_003",
+     "dbf": 1929,
+     "name": "Unstable Portal",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_023",
+     "dbf": 555,
+     "name": "Arcane Intellect",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_002",
+     "dbf": 2874,
+     "name": "Forgotten Torch",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_823",
+     "dbf": 43193,
+     "name": "Simulacrum",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_103",
+     "dbf": 47982,
+     "name": "Stargazer Luna",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_254",
+     "dbf": 48803,
+     "name": "Unexpected Results",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_005",
+     "dbf": 1941,
+     "name": "Echo of Medivh",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_022",
+     "dbf": 77,
+     "name": "Polymorph",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_317",
+     "dbf": 50086,
+     "name": "Blast Wave",
+     "count": 1
+    },
+    {
+     "cardId": "OG_090",
+     "dbf": 38418,
+     "name": "Cabalist's Tome",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_106",
+     "dbf": 43424,
+     "name": "Deck of Wonders",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_955",
+     "dbf": 41878,
+     "name": "Meteor",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_559",
+     "dbf": 1080,
+     "name": "Archmage Antonidas",
+     "count": 1
+    },
+    {
+     "cardId": "KAR_076",
+     "dbf": 39715,
+     "name": "Firelands Portal",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_578",
+     "dbf": 52640,
+     "name": "Power of Creation",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_012",
+     "dbf": 749,
+     "name": "Bloodmage Thalnos",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_015",
+     "dbf": 284,
+     "name": "Novice Engineer",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_284",
+     "dbf": 825,
+     "name": "Azure Drake",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_095",
+     "dbf": 932,
+     "name": "Gadgetzan Auctioneer",
+     "count": 1
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Xur%27ios",
+   "quote": "These decks correspond only to level 6 in Chapter 5. If this boss is encountered on levels 4-5, his deck will be missing 5 random cards.",
+   "notes": "These decks correspond only to level 6 in Chapter 5. If this boss is encountered on levels 4-5, his deck will be missing 5 random cards. Out of Games 'Great Dalaran Heist Tuning Update' lists this boss among those whose decks were weakened; the wiki list is presumably the post-tuning deck.",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_29h",
+   "name": "Mama Diggs",
+   "deckType": "pool",
+   "normal": [
+    {
+     "cardId": "TRL_310",
+     "dbf": 50120,
+     "name": "Elemental Evocation",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_018",
+     "dbf": 41151,
+     "name": "Flame Geyser",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_032",
+     "dbf": 41173,
+     "name": "Crystalline Oracle",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_606",
+     "dbf": 40381,
+     "name": "Mana Geode",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_156",
+     "dbf": 46737,
+     "name": "Quartz Elemental",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_586",
+     "dbf": 47152,
+     "name": "Earthen Might",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_093",
+     "dbf": 48051,
+     "name": "Elementary Reaction",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_241",
+     "dbf": 864,
+     "name": "Lava Burst",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_258",
+     "dbf": 774,
+     "name": "Unbound Elemental",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_016",
+     "dbf": 2888,
+     "name": "Rumbling Elemental",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_250",
+     "dbf": 1141,
+     "name": "Earth Elemental",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_025",
+     "dbf": 41159,
+     "name": "Volcano",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_208",
+     "dbf": 41116,
+     "name": "Stone Sentinel",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_118",
+     "dbf": 1653,
+     "name": "Magma Rager",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_907",
+     "dbf": 41294,
+     "name": "Ozruk",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_105",
+     "dbf": 993,
+     "name": "Mountain Giant",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "GVG_038",
+     "dbf": 2006,
+     "name": "Crackle",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_202",
+     "dbf": 41107,
+     "name": "Fire Plume Harbinger",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_411",
+     "dbf": 48537,
+     "name": "Electra Stormsurge",
+     "count": 1
+    },
+    {
+     "cardId": "AT_051",
+     "dbf": 2620,
+     "name": "Elemental Destruction",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_246",
+     "dbf": 766,
+     "name": "Hex",
+     "count": 1
+    },
+    {
+     "cardId": "OG_209",
+     "dbf": 38722,
+     "name": "Hallazeal the Ascended",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_042",
+     "dbf": 189,
+     "name": "Fire Elemental",
+     "count": 1
+    },
+    {
+     "cardId": "NEW1_010",
+     "dbf": 32,
+     "name": "Al'Akir the Windlord",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_211",
+     "dbf": 41331,
+     "name": "Kalimos, Primal Lord",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_047",
+     "dbf": 51722,
+     "name": "Walking Fountain",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_820",
+     "dbf": 48111,
+     "name": "Shudderwock",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_205",
+     "dbf": 41111,
+     "name": "Glacial Shard",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_077",
+     "dbf": 2949,
+     "name": "Brann Bronzebeard",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_928",
+     "dbf": 41418,
+     "name": "Tar Creeper",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_816",
+     "dbf": 41410,
+     "name": "Servant of Kalimos",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_249",
+     "dbf": 336,
+     "name": "Baron Geddon",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_847",
+     "dbf": 41928,
+     "name": "Blazecaller",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_298",
+     "dbf": 374,
+     "name": "Ragnaros the Firelord",
+     "count": 1
+    }
+   ],
+   "normalCount": 16,
+   "heroicCount": 18,
+   "source": "https://hearthstone.wiki.gg/wiki/Mama_Diggs",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "Wiki gives a POOL of 'Possible cards' (no quantities; count=1 = listed once) and 'Total cards' 20; 25 = deck size per level the boss appears at (ch4L3,ch4L4). The game builds the deck from this pool; duplicates must occur when the size exceeds the pool.",
+   "ambiguous": [],
+   "deckSizePerLevel": "20; 25"
+  },
+  {
+   "cardId": "DALA_BOSS_30h",
+   "name": "The Rat King",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "CS2_005",
+     "dbf": 1050,
+     "name": "Claw",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_570",
+     "dbf": 577,
+     "name": "Bite",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_026",
+     "dbf": 40339,
+     "name": "Hidden Cache",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_577",
+     "dbf": 47128,
+     "name": "Rat Trap",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_316",
+     "dbf": 40428,
+     "name": "Rat Pack",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_520",
+     "dbf": 46445,
+     "name": "Seeping Oozeling",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_558",
+     "dbf": 47072,
+     "name": "Swamp Leech",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_066",
+     "dbf": 906,
+     "name": "Acidic Swamp Ooze",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_790",
+     "dbf": 41567,
+     "name": "Dirty Rat",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_003",
+     "dbf": 1858,
+     "name": "Echoing Ooze",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_400",
+     "dbf": 51380,
+     "name": "EVIL Cable Rat",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_814",
+     "dbf": 41328,
+     "name": "Giant Wasp",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_069",
+     "dbf": 43345,
+     "name": "Sewer Crawler",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_655",
+     "dbf": 40921,
+     "name": "Toxic Sewer Ooze",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_099",
+     "dbf": 42782,
+     "name": "Ticking Abomination",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_124",
+     "dbf": 46667,
+     "name": "Mossy Horror",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_775",
+     "dbf": 53249,
+     "name": "Tunnel Blaster",
+     "count": 2
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "CFM_614",
+     "dbf": 40397,
+     "name": "Mark of the Lotus",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_009",
+     "dbf": 213,
+     "name": "Mark of the Wild",
+     "count": 2
+    },
+    {
+     "cardId": "OG_048",
+     "dbf": 38337,
+     "name": "Mark of Y'Shaarj",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_160",
+     "dbf": 503,
+     "name": "Power of the Wild",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_351",
+     "dbf": 51779,
+     "name": "Blessing of the Ancients",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_012",
+     "dbf": 64,
+     "name": "Swipe",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_573",
+     "dbf": 36,
+     "name": "Cenarius",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_085",
+     "dbf": 42759,
+     "name": "Ultimate Infestation",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_316",
+     "dbf": 40428,
+     "name": "Rat Pack",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_400",
+     "dbf": 51380,
+     "name": "EVIL Cable Rat",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_069",
+     "dbf": 43345,
+     "name": "Sewer Crawler",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_093",
+     "dbf": 763,
+     "name": "Defender of Argus",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_029",
+     "dbf": 42442,
+     "name": "Cobalt Scalebane",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_167",
+     "dbf": 45265,
+     "name": "Fungalmancer",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_705",
+     "dbf": 42790,
+     "name": "Bonemare",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_586",
+     "dbf": 211,
+     "name": "Sea Giant",
+     "count": 2
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/The_Rat_King_%28boss%29",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_31h",
+   "name": "Timothy Jones",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "CFM_815",
+     "dbf": 40636,
+     "name": "Wickerflame Burnbristle",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_092",
+     "dbf": 943,
+     "name": "Blessing of Kings",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_500",
+     "dbf": 46263,
+     "name": "Val'anyr",
+     "count": 1
+    },
+    {
+     "cardId": "OG_229",
+     "dbf": 38758,
+     "name": "Ragnaros, Lightlord",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_383",
+     "dbf": 890,
+     "name": "Tirion Fordring",
+     "count": 1
+    },
+    {
+     "cardId": "OG_123",
+     "dbf": 38475,
+     "name": "Shifter Zerus",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_012",
+     "dbf": 749,
+     "name": "Bloodmage Thalnos",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_100",
+     "dbf": 1135,
+     "name": "Lorewalker Cho",
+     "count": 1
+    },
+    {
+     "cardId": "NEW1_029",
+     "dbf": 855,
+     "name": "Millhouse Manastorm",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_557",
+     "dbf": 1147,
+     "name": "Nat Pagle",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_083",
+     "dbf": 570,
+     "name": "Tinkmaster Overspark",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_516",
+     "dbf": 46403,
+     "name": "Zola the Gorgon",
+     "count": 1
+    },
+    {
+     "cardId": "KAR_114",
+     "dbf": 39941,
+     "name": "Barnes",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_096",
+     "dbf": 50009,
+     "name": "Griftah",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_401",
+     "dbf": 48518,
+     "name": "Weaponized Piñata",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_119",
+     "dbf": 2087,
+     "name": "Blingtron 3000",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_620",
+     "dbf": 47298,
+     "name": "Dollmaster Dorian",
+     "count": 1
+    },
+    {
+     "cardId": "PRO_001",
+     "dbf": 1754,
+     "name": "Elite Tauren Chieftain",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_558",
+     "dbf": 912,
+     "name": "Harrison Jones",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_116",
+     "dbf": 559,
+     "name": "Leeroy Jenkins",
+     "count": 1
+    },
+    {
+     "cardId": "FP1_030",
+     "dbf": 1914,
+     "name": "Loatheb",
+     "count": 1
+    },
+    {
+     "cardId": "KAR_096",
+     "dbf": 39840,
+     "name": "Prince Malchezaar",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_110",
+     "dbf": 420,
+     "name": "Cairne Bloodhoof",
+     "count": 1
+    },
+    {
+     "cardId": "BRM_028",
+     "dbf": 2262,
+     "name": "Emperor Thaurissan",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_357",
+     "dbf": 45988,
+     "name": "Marin the Fox",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "BOT_909",
+     "dbf": 48985,
+     "name": "Crystology",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_800",
+     "dbf": 40587,
+     "name": "Getaway Kodo",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_570",
+     "dbf": 52494,
+     "name": "Never Surrender!",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_130",
+     "dbf": 584,
+     "name": "Noble Sacrifice",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_038",
+     "dbf": 42467,
+     "name": "Righteous Protector",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_236",
+     "dbf": 48637,
+     "name": "Crystalsmith Kangor",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_815",
+     "dbf": 40636,
+     "name": "Wickerflame Burnbristle",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_092",
+     "dbf": 943,
+     "name": "Blessing of Kings",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_008",
+     "dbf": 757,
+     "name": "Argent Squire",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_085",
+     "dbf": 2053,
+     "name": "Annoy-o-Tron",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_414",
+     "dbf": 48566,
+     "name": "Cloakscale Chemist",
+     "count": 2
+    },
+    {
+     "cardId": "AT_095",
+     "dbf": 2579,
+     "name": "Silent Knight",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_928",
+     "dbf": 41418,
+     "name": "Tar Creeper",
+     "count": 2
+    },
+    {
+     "cardId": "OG_145",
+     "dbf": 38526,
+     "name": "Psych-o-Tron",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_548",
+     "dbf": 49184,
+     "name": "Zilliax",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_016",
+     "dbf": 1721,
+     "name": "Sylvanas Windrunner",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_513",
+     "dbf": 50392,
+     "name": "Mosh'Ogg Enforcer",
+     "count": 1
+    }
+   ],
+   "normalCount": 25,
+   "heroicCount": 25,
+   "source": "https://hearthstone.wiki.gg/wiki/Timothy_Jones",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "Both decks total 25 cards on the wiki (Normal: 25 different legendaries x1). Boss appears at ch3 L4-L5 only; no level note on the page.",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_32h",
+   "name": "Kizi Copperclip",
+   "deckType": "pool",
+   "normal": [
+    {
+     "cardId": "CFM_753",
+     "dbf": 40567,
+     "name": "Grimestreet Outfitter",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_023",
+     "dbf": 1988,
+     "name": "Goblin Auto-Barber",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_129",
+     "dbf": 667,
+     "name": "Fan of Knives",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_400",
+     "dbf": 636,
+     "name": "Whirlwind",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_050",
+     "dbf": 2018,
+     "name": "Bouncing Blade",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_064",
+     "dbf": 42700,
+     "name": "Blood Razor",
+     "count": 1
+    },
+    {
+     "cardId": "KAR_011",
+     "dbf": 39476,
+     "name": "Pompous Thespian",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_807",
+     "dbf": 40605,
+     "name": "Auctionmaster Beardo",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_125",
+     "dbf": 46674,
+     "name": "Mad Hatter",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_521",
+     "dbf": 50403,
+     "name": "Arena Patron",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_213",
+     "dbf": 445,
+     "name": "Reckless Rocketeer",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "GVG_023",
+     "dbf": 1988,
+     "name": "Goblin Auto-Barber",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_607",
+     "dbf": 22,
+     "name": "Inner Rage",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_238",
+     "dbf": 42810,
+     "name": "Animated Berserker",
+     "count": 1
+    },
+    {
+     "cardId": "OG_312",
+     "dbf": 38914,
+     "name": "N'Zoth's First Mate",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_051",
+     "dbf": 2019,
+     "name": "Warbot",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_114",
+     "dbf": 940,
+     "name": "Cleave",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_155",
+     "dbf": 46725,
+     "name": "Redband Wasp",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_391",
+     "dbf": 1074,
+     "name": "Slam",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_604",
+     "dbf": 654,
+     "name": "Frothing Berserker",
+     "count": 1
+    },
+    {
+     "cardId": "BRM_016",
+     "dbf": 2297,
+     "name": "Axe Flinger",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_547",
+     "dbf": 47053,
+     "name": "Darius Crowley",
+     "count": 1
+    },
+    {
+     "cardId": "AT_082",
+     "dbf": 2486,
+     "name": "Lowly Squire",
+     "count": 1
+    }
+   ],
+   "normalCount": 11,
+   "heroicCount": 12,
+   "source": "https://hearthstone.wiki.gg/wiki/Kizi_Copperclip",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "Wiki gives a POOL of 'Possible cards' (no quantities; count=1 = listed once) and 'Total cards' 10; 15 = deck size per level the boss appears at (ch1L1,ch1L2,ch2L1,ch2L2,ch3L1,ch3L2,ch4L1,ch4L2,ch5L1,ch5L2). The game builds the deck from this pool; duplicates must occur when the size exceeds the pool.",
+   "ambiguous": [],
+   "deckSizePerLevel": "10; 15"
+  },
+  {
+   "cardId": "DALA_BOSS_33h",
+   "name": "Gold Elemental",
+   "deckType": "pool",
+   "normal": [
+    {
+     "cardId": "DAL_092",
+     "dbf": 52292,
+     "name": "Arcane Servant",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_815",
+     "dbf": 48039,
+     "name": "Baleful Banker",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_187",
+     "dbf": 1140,
+     "name": "Booty Bay Bodyguard",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_098",
+     "dbf": 48060,
+     "name": "Unpowered Mauler",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_089",
+     "dbf": 466,
+     "name": "Arcane Golem",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_807",
+     "dbf": 40605,
+     "name": "Auctionmaster Beardo",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_064",
+     "dbf": 40294,
+     "name": "Blubber Baron",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_081",
+     "dbf": 52281,
+     "name": "Spellward Jeweler",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_516",
+     "dbf": 46403,
+     "name": "Zola the Gorgon",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_525",
+     "dbf": 50411,
+     "name": "Arena Treasure Chest",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_119",
+     "dbf": 2087,
+     "name": "Blingtron 3000",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_187",
+     "dbf": 1140,
+     "name": "Booty Bay Bodyguard",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_669",
+     "dbf": 40954,
+     "name": "Burgly Bully",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_283",
+     "dbf": 512,
+     "name": "Frost Elemental",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_095",
+     "dbf": 932,
+     "name": "Gadgetzan Auctioneer",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_088",
+     "dbf": 52288,
+     "name": "Safeguard",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_670",
+     "dbf": 40955,
+     "name": "Mayor Noggenfogger",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "DALA_502",
+     "dbf": 53574,
+     "name": "Infuriated Banker",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_319",
+     "dbf": 1090,
+     "name": "Flame Imp",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_014",
+     "dbf": 43122,
+     "name": "Kobold Librarian",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_013",
+     "dbf": 43121,
+     "name": "Vulgar Homunculus",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_043",
+     "dbf": 43272,
+     "name": "Lesser Amethyst Spellstone",
+     "count": 1
+    },
+    {
+     "cardId": "KAR_036",
+     "dbf": 39215,
+     "name": "Arcane Anomaly",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_120",
+     "dbf": 41566,
+     "name": "Mistress of Mixtures",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_055",
+     "dbf": 12,
+     "name": "Mana Addict",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_044",
+     "dbf": 791,
+     "name": "Questing Adventurer",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_771",
+     "dbf": 53171,
+     "name": "Soldier of Fortune",
+     "count": 1
+    },
+    {
+     "cardId": "NEW1_026",
+     "dbf": 1029,
+     "name": "Violet Teacher",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_069",
+     "dbf": 2037,
+     "name": "Antique Healbot",
+     "count": 1
+    },
+    {
+     "cardId": "FP1_030",
+     "dbf": 1914,
+     "name": "Loatheb",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_548",
+     "dbf": 49184,
+     "name": "Zilliax",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_095",
+     "dbf": 932,
+     "name": "Gadgetzan Auctioneer",
+     "count": 1
+    }
+   ],
+   "normalCount": 17,
+   "heroicCount": 15,
+   "source": "https://hearthstone.wiki.gg/wiki/Gold_Elemental",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "Wiki gives a POOL of 'Possible cards' (no quantities; count=1 = listed once) and 'Total cards' 25 = deck size per level the boss appears at (ch1L4,ch1L5). The game builds the deck from this pool; duplicates must occur when the size exceeds the pool. Heroic pool contains Infuriated Banker (DALA_502, non-collectible Heist card).",
+   "ambiguous": [],
+   "deckSizePerLevel": "25"
+  },
+  {
+   "cardId": "DALA_BOSS_34h",
+   "name": "Carousel Gryphon",
+   "deckType": "pool",
+   "normal": [
+    {
+     "cardId": "OG_313",
+     "dbf": 38916,
+     "name": "Addled Grizzly",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_050",
+     "dbf": 2922,
+     "name": "Mounted Raptor",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_130",
+     "dbf": 46680,
+     "name": "Gloom Stag",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_086",
+     "dbf": 41262,
+     "name": "Giant Anaconda",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_232",
+     "dbf": 49973,
+     "name": "Ironhide Direhorn",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_314",
+     "dbf": 45835,
+     "name": "Grizzled Guardian",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_835",
+     "dbf": 43439,
+     "name": "Hadronox",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_315",
+     "dbf": 40426,
+     "name": "Alleycat",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_348",
+     "dbf": 49824,
+     "name": "Springpaw",
+     "count": 1
+    },
+    {
+     "cardId": "FP1_011",
+     "dbf": 1860,
+     "name": "Webspinner",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_017",
+     "dbf": 2094,
+     "name": "Call Pet",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_534t",
+     "dbf": 1624,
+     "name": "Hyena",
+     "count": 1
+    },
+    {
+     "cardId": "AT_058",
+     "dbf": 2635,
+     "name": "King's Elekk",
+     "count": 1
+    },
+    {
+     "cardId": "NEW1_031",
+     "dbf": 437,
+     "name": "Animal Companion",
+     "count": 1
+    },
+    {
+     "cardId": "OG_045",
+     "dbf": 38329,
+     "name": "Infest",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_335",
+     "dbf": 41126,
+     "name": "Dispatch Kodo",
+     "count": 1
+    },
+    {
+     "cardId": "DS1_178",
+     "dbf": 699,
+     "name": "Tundra Rhino",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_534",
+     "dbf": 1261,
+     "name": "Savannah Highmane",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_049",
+     "dbf": 2017,
+     "name": "Gahz'rilla",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_543",
+     "dbf": 1144,
+     "name": "King Krush",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_952",
+     "dbf": 41864,
+     "name": "Spikeridged Steed",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_925",
+     "dbf": 41404,
+     "name": "Ornery Direhorn",
+     "count": 1
+    },
+    {
+     "cardId": "FP1_002",
+     "dbf": 1781,
+     "name": "Haunted Creeper",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_193",
+     "dbf": 46892,
+     "name": "Shimmering Courser",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_087",
+     "dbf": 41263,
+     "name": "Bittertide Hydra",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "CFM_315",
+     "dbf": 40426,
+     "name": "Alleycat",
+     "count": 1
+    },
+    {
+     "cardId": "OG_179",
+     "dbf": 38584,
+     "name": "Fiery Bat",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_912",
+     "dbf": 41353,
+     "name": "Jeweled Macaw",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_914",
+     "dbf": 41357,
+     "name": "Raptor Hatchling",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_348",
+     "dbf": 49824,
+     "name": "Springpaw",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_611",
+     "dbf": 519,
+     "name": "Freezing Trap",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_021",
+     "dbf": 2893,
+     "name": "Dart Trap",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_610",
+     "dbf": 585,
+     "name": "Explosive Trap",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_609",
+     "dbf": 814,
+     "name": "Snipe",
+     "count": 1
+    },
+    {
+     "cardId": "OG_325",
+     "dbf": 38985,
+     "name": "Carrion Grub",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_020",
+     "dbf": 2892,
+     "name": "Desert Camel",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_539",
+     "dbf": 296,
+     "name": "Kill Command",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_900",
+     "dbf": 50659,
+     "name": "Halazzi, the Lynx",
+     "count": 1
+    },
+    {
+     "cardId": "AT_010",
+     "dbf": 2552,
+     "name": "Ram Wrangler",
+     "count": 1
+    },
+    {
+     "cardId": "AT_062",
+     "dbf": 2483,
+     "name": "Ball of Spiders",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_400",
+     "dbf": 51380,
+     "name": "EVIL Cable Rat",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_076",
+     "dbf": 2044,
+     "name": "Explosive Sheep",
+     "count": 1
+    },
+    {
+     "cardId": "FP1_004",
+     "dbf": 1783,
+     "name": "Mad Scientist",
+     "count": 1
+    },
+    {
+     "cardId": "FP1_009",
+     "dbf": 1790,
+     "name": "Deathlord",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_151",
+     "dbf": 50731,
+     "name": "Former Champ",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_648",
+     "dbf": 40494,
+     "name": "Big-Time Racketeer",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_562",
+     "dbf": 363,
+     "name": "Onyxia",
+     "count": 1
+    }
+   ],
+   "normalCount": 25,
+   "heroicCount": 22,
+   "source": "https://hearthstone.wiki.gg/wiki/Carousel_Gryphon_%28boss%29",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "Wiki gives a POOL of 'Possible cards' (no quantities; count=1 = listed once) and 'Total cards' 15; 20 = deck size per level the boss appears at (ch1L2,ch1L3,ch4L2,ch5L2,ch5L3). The game builds the deck from this pool; duplicates must occur when the size exceeds the pool. Normal pool lists 'Hyena' (a token, non-collectible): mapped to EX1_534t (Savannah Highmane's Hyena, pre-Heist); ULD_154t is Saviors of Uldum (after Heist). Out of Games 'Great Dalaran Heist Tuning Update' lists this boss among those whose decks were weakened; the wiki list is presumably the post-tuning deck.",
+   "ambiguous": [
+    {
+     "name": "Hyena",
+     "ids": [
+      "TB_BaconUps_049t",
+      "EX1_534t",
+      "BG_EX1_534t",
+      "ULD_154t"
+     ],
+     "chosen": "EX1_534t"
+    }
+   ],
+   "deckSizePerLevel": "15; 20"
+  },
+  {
+   "cardId": "DALA_BOSS_35h",
+   "name": "Soothsayer Zoie",
+   "deckType": "pool",
+   "normal": [
+    {
+     "cardId": "EX1_621",
+     "dbf": 1362,
+     "name": "Circle of Healing",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_012",
+     "dbf": 1933,
+     "name": "Light of the Naaru",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_235",
+     "dbf": 1650,
+     "name": "Northshire Cleric",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_072",
+     "dbf": 2040,
+     "name": "Shadowboxer",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_606",
+     "dbf": 40381,
+     "name": "Mana Geode",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_278",
+     "dbf": 45759,
+     "name": "Unidentified Elixir",
+     "count": 1
+    },
+    {
+     "cardId": "AT_011",
+     "dbf": 2555,
+     "name": "Holy Champion",
+     "count": 1
+    },
+    {
+     "cardId": "CS1_112",
+     "dbf": 841,
+     "name": "Holy Nova",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_156",
+     "dbf": 46737,
+     "name": "Quartz Elemental",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_190",
+     "dbf": 46862,
+     "name": "Nightscale Matriarch",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_001",
+     "dbf": 1655,
+     "name": "Lightwarden",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_700",
+     "dbf": 42783,
+     "name": "Happy Ghoul",
+     "count": 1
+    },
+    {
+     "cardId": "DS1_055",
+     "dbf": 582,
+     "name": "Darkscale Healer",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_118",
+     "dbf": 46656,
+     "name": "Deranged Doctor",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "GVG_012",
+     "dbf": 1933,
+     "name": "Light of the Naaru",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_235",
+     "dbf": 1650,
+     "name": "Northshire Cleric",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_034",
+     "dbf": 41176,
+     "name": "Radiant Elemental",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_234",
+     "dbf": 1367,
+     "name": "Shadow Word: Pain",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_802",
+     "dbf": 42992,
+     "name": "Spirit Lash",
+     "count": 1
+    },
+    {
+     "cardId": "FP1_023",
+     "dbf": 1807,
+     "name": "Dark Cultist",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_278",
+     "dbf": 45759,
+     "name": "Unidentified Elixir",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_010",
+     "dbf": 1935,
+     "name": "Velen's Chosen",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_335",
+     "dbf": 886,
+     "name": "Lightspawn",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_156",
+     "dbf": 46737,
+     "name": "Quartz Elemental",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_190",
+     "dbf": 46862,
+     "name": "Nightscale Matriarch",
+     "count": 1
+    },
+    {
+     "cardId": "AT_105",
+     "dbf": 2502,
+     "name": "Injured Kvaldir",
+     "count": 1
+    },
+    {
+     "cardId": "FP1_001",
+     "dbf": 1753,
+     "name": "Zombie Chow",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_790",
+     "dbf": 41567,
+     "name": "Dirty Rat",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_388",
+     "dbf": 46087,
+     "name": "Fungal Enchanter",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_181",
+     "dbf": 1109,
+     "name": "Injured Blademaster",
+     "count": 1
+    }
+   ],
+   "normalCount": 14,
+   "heroicCount": 16,
+   "source": "https://hearthstone.wiki.gg/wiki/Soothsayer_Zoie",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "Wiki gives a POOL of 'Possible cards' (no quantities; count=1 = listed once) and 'Total cards' 15; 20 = deck size per level the boss appears at (ch1L2,ch1L3,ch2L2,ch2L3,ch3L2,ch3L3,ch4L2,ch4L3,ch5L2,ch5L3). The game builds the deck from this pool; duplicates must occur when the size exceeds the pool.",
+   "ambiguous": [],
+   "deckSizePerLevel": "15; 20"
+  },
+  {
+   "cardId": "DALA_BOSS_36h",
+   "name": "Draemus",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "KAR_300",
+     "dbf": 39350,
+     "name": "Enchanted Raven",
+     "count": 1
+    },
+    {
+     "cardId": "OG_313",
+     "dbf": 38916,
+     "name": "Addled Grizzly",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_050",
+     "dbf": 2922,
+     "name": "Mounted Raptor",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_086",
+     "dbf": 41262,
+     "name": "Giant Anaconda",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_232",
+     "dbf": 49973,
+     "name": "Ironhide Direhorn",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_852",
+     "dbf": 41954,
+     "name": "Tyrantus",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_549",
+     "dbf": 903,
+     "name": "Bestial Wrath",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_011",
+     "dbf": 1860,
+     "name": "Webspinner",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_915",
+     "dbf": 41358,
+     "name": "Crackling Razormaw",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_111",
+     "dbf": 50608,
+     "name": "Headhunter's Hatchet",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_566",
+     "dbf": 51159,
+     "name": "Revenge of the Wild",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_531",
+     "dbf": 1281,
+     "name": "Scavenging Hyena",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_419",
+     "dbf": 42711,
+     "name": "Bearshark",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_339",
+     "dbf": 50212,
+     "name": "Master's Call",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_828",
+     "dbf": 48201,
+     "name": "Dire Frenzy",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_170",
+     "dbf": 45269,
+     "name": "Raven Familiar",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_142",
+     "dbf": 46706,
+     "name": "Chameleos",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_010",
+     "dbf": 2882,
+     "name": "Pit Snake",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_827",
+     "dbf": 48199,
+     "name": "Blink Fox",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_047",
+     "dbf": 41191,
+     "name": "Ravenous Pterrordax",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_155",
+     "dbf": 46725,
+     "name": "Redband Wasp",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_022",
+     "dbf": 2894,
+     "name": "Fierce Monkey",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_957",
+     "dbf": 41890,
+     "name": "Direhorn Hatchling",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_933",
+     "dbf": 41425,
+     "name": "King Mosh",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_577",
+     "dbf": 962,
+     "name": "The Beast",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_542",
+     "dbf": 50459,
+     "name": "Oondasta",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "OG_048",
+     "dbf": 38337,
+     "name": "Mark of Y'Shaarj",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_086",
+     "dbf": 41262,
+     "name": "Giant Anaconda",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_232",
+     "dbf": 49973,
+     "name": "Ironhide Direhorn",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_035",
+     "dbf": 2003,
+     "name": "Malorne",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_835",
+     "dbf": 43439,
+     "name": "Hadronox",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_852",
+     "dbf": 41954,
+     "name": "Tyrantus",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_915",
+     "dbf": 41358,
+     "name": "Crackling Razormaw",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_610",
+     "dbf": 585,
+     "name": "Explosive Trap",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_611",
+     "dbf": 519,
+     "name": "Freezing Trap",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_607t",
+     "dbf": 47930,
+     "name": "Hunting Mastiff",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_200",
+     "dbf": 42525,
+     "name": "Venomstrike Trap",
+     "count": 1
+    },
+    {
+     "cardId": "NEW1_031",
+     "dbf": 437,
+     "name": "Animal Companion",
+     "count": 2
+    },
+    {
+     "cardId": "AT_010",
+     "dbf": 2552,
+     "name": "Ram Wrangler",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_825",
+     "dbf": 43245,
+     "name": "Abominable Bowman",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_049",
+     "dbf": 2017,
+     "name": "Gahz'rilla",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_919",
+     "dbf": 41366,
+     "name": "Swamp King Dred",
+     "count": 1
+    },
+    {
+     "cardId": "OG_308",
+     "dbf": 38909,
+     "name": "Giant Sand Worm",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_511",
+     "dbf": 46390,
+     "name": "Kathrena Winterwisp",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_543",
+     "dbf": 1144,
+     "name": "King Krush",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_933",
+     "dbf": 41425,
+     "name": "King Mosh",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_623",
+     "dbf": 47346,
+     "name": "Witchwood Grizzly",
+     "count": 1
+    },
+    {
+     "cardId": "BRM_028",
+     "dbf": 2262,
+     "name": "Emperor Thaurissan",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_099",
+     "dbf": 41286,
+     "name": "Charged Devilsaur",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_542",
+     "dbf": 50459,
+     "name": "Oondasta",
+     "count": 1
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Draemus",
+   "quote": "These decks correspond only to level 6. If this boss is encountered on level 5, his deck will be missing 5 random cards.",
+   "notes": "These decks correspond only to level 6. If this boss is encountered on level 5, his deck will be missing 5 random cards.",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_37h",
+   "name": "Ol' Toomba",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "EX1_145",
+     "dbf": 1158,
+     "name": "Preparation",
+     "count": 2
+    },
+    {
+     "cardId": "KAR_069",
+     "dbf": 39698,
+     "name": "Swashburglar",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_071",
+     "dbf": 49838,
+     "name": "Bloodsail Howler",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_278",
+     "dbf": 573,
+     "name": "Shiv",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_129",
+     "dbf": 667,
+     "name": "Fan of Knives",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_060",
+     "dbf": 41212,
+     "name": "Mimic Pod",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_211",
+     "dbf": 45531,
+     "name": "Elven Minstrel",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_124",
+     "dbf": 50773,
+     "name": "Raiding Party",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_080",
+     "dbf": 421,
+     "name": "Assassin's Blade",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_127",
+     "dbf": 50779,
+     "name": "Cannon Barrage",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_557",
+     "dbf": 47071,
+     "name": "Cursed Castaway",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_077",
+     "dbf": 630,
+     "name": "Sprint",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_126",
+     "dbf": 50774,
+     "name": "Captain Hooktusk",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_637",
+     "dbf": 40465,
+     "name": "Patches the Pirate",
+     "count": 1
+    },
+    {
+     "cardId": "NEW1_016",
+     "dbf": 530,
+     "name": "Captain's Parrot",
+     "count": 2
+    },
+    {
+     "cardId": "LOE_079",
+     "dbf": 2951,
+     "name": "Elise Starseeker",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_015",
+     "dbf": 49066,
+     "name": "Ticket Scalper",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_070",
+     "dbf": 2038,
+     "name": "Salty Dog",
+     "count": 2
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "EX1_144",
+     "dbf": 365,
+     "name": "Shadowstep",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_581",
+     "dbf": 461,
+     "name": "Sap",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_278",
+     "dbf": 573,
+     "name": "Shiv",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_129",
+     "dbf": 667,
+     "name": "Fan of Knives",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_211",
+     "dbf": 45531,
+     "name": "Elven Minstrel",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_242",
+     "dbf": 48487,
+     "name": "Myra's Unstable Element",
+     "count": 1
+    },
+    {
+     "cardId": "NEW1_004",
+     "dbf": 196,
+     "name": "Vanish",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_077",
+     "dbf": 630,
+     "name": "Sprint",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_012",
+     "dbf": 749,
+     "name": "Bloodmage Thalnos",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_096",
+     "dbf": 251,
+     "name": "Loot Hoarder",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_015",
+     "dbf": 284,
+     "name": "Novice Engineer",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_007",
+     "dbf": 1659,
+     "name": "Acolyte of Pain",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_050",
+     "dbf": 1016,
+     "name": "Coldlight Oracle",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_147",
+     "dbf": 308,
+     "name": "Gnomish Inventor",
+     "count": 2
+    },
+    {
+     "cardId": "OG_323",
+     "dbf": 38961,
+     "name": "Polluted Hoarder",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_284",
+     "dbf": 825,
+     "name": "Azure Drake",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_851",
+     "dbf": 41935,
+     "name": "Elise the Trailblazer",
+     "count": 1
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Ol%27_Toomba",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_38h",
+   "name": "Tipsi Wobblerune",
+   "deckType": "pool",
+   "normal": [
+    {
+     "cardId": "DALA_BOSS_38t",
+     "dbf": 55862,
+     "name": "PARTY PORTAL!",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_104",
+     "dbf": 43420,
+     "name": "Shifting Scroll",
+     "count": 1
+    },
+    {
+     "cardId": "KAR_009",
+     "dbf": 39169,
+     "name": "Babbling Book",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_531",
+     "dbf": 49263,
+     "name": "Celestial Emissary",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_941",
+     "dbf": 41496,
+     "name": "Primordial Glyph",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_608",
+     "dbf": 614,
+     "name": "Sorcerer's Apprentice",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_123",
+     "dbf": 2249,
+     "name": "Soot Spewer",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_254",
+     "dbf": 48803,
+     "name": "Unexpected Results",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_604",
+     "dbf": 49045,
+     "name": "Cosmic Anomaly",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_576",
+     "dbf": 52638,
+     "name": "Kirin Tor Tricaster",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_012",
+     "dbf": 749,
+     "name": "Bloodmage Thalnos",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_748",
+     "dbf": 52942,
+     "name": "Mana Reservoir",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_913",
+     "dbf": 46103,
+     "name": "Tainted Zealot",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_093",
+     "dbf": 42775,
+     "name": "Tuskarr Fisherman",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_584",
+     "dbf": 915,
+     "name": "Ancient Mage",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_284",
+     "dbf": 825,
+     "name": "Azure Drake",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_563",
+     "dbf": 436,
+     "name": "Malygos",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "DAL_608",
+     "dbf": 52991,
+     "name": "Magic Trick",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_577",
+     "dbf": 52639,
+     "name": "Ray of Frost",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_180",
+     "dbf": 52262,
+     "name": "Tome of Intellect",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_941",
+     "dbf": 41496,
+     "name": "Primordial Glyph",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_608",
+     "dbf": 614,
+     "name": "Sorcerer's Apprentice",
+     "count": 1
+    },
+    {
+     "cardId": "BRM_002",
+     "dbf": 2275,
+     "name": "Flamewaker",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_002",
+     "dbf": 2874,
+     "name": "Forgotten Torch",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_295",
+     "dbf": 192,
+     "name": "Ice Block",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_537",
+     "dbf": 46541,
+     "name": "Leyline Manipulator",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_664",
+     "dbf": 47554,
+     "name": "Vex Crow",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_106",
+     "dbf": 43424,
+     "name": "Deck of Wonders",
+     "count": 1
+    },
+    {
+     "cardId": "OG_087",
+     "dbf": 38414,
+     "name": "Servant of Yogg-Saron",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_028",
+     "dbf": 457,
+     "name": "Blizzard",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_559",
+     "dbf": 1080,
+     "name": "Archmage Antonidas",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_609",
+     "dbf": 53002,
+     "name": "Kalecgos",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_012",
+     "dbf": 749,
+     "name": "Bloodmage Thalnos",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_284",
+     "dbf": 825,
+     "name": "Azure Drake",
+     "count": 1
+    }
+   ],
+   "normalCount": 17,
+   "heroicCount": 17,
+   "source": "https://hearthstone.wiki.gg/wiki/Tipsi_Wobblerune",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "Wiki gives a POOL of 'Possible cards' (no quantities; count=1 = listed once) and 'Total cards' 20; 25 = deck size per level the boss appears at (ch1L3,ch1L4,ch2L3,ch2L4,ch3L3,ch4L3,ch4L4,ch5L3,ch5L4). The game builds the deck from this pool; duplicates must occur when the size exceeds the pool. Normal pool contains PARTY PORTAL! (wiki link 'PARTY PORTAL! (Dalaran Heist)') -> DALA_BOSS_38t (not TB_KaraPortal_001).",
+   "ambiguous": [],
+   "deckSizePerLevel": "20; 25"
+  },
+  {
+   "cardId": "DALA_BOSS_39h",
+   "name": "Aki the Brilliant",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "TRL_543",
+     "dbf": 50512,
+     "name": "Bloodclaw",
+     "count": 1
+    },
+    {
+     "cardId": "AT_073",
+     "dbf": 2648,
+     "name": "Competitive Spirit",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_800",
+     "dbf": 40587,
+     "name": "Getaway Kodo",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_363",
+     "dbf": 1373,
+     "name": "Blessing of Wisdom",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_759",
+     "dbf": 40577,
+     "name": "Meanstreet Marshal",
+     "count": 2
+    },
+    {
+     "cardId": "OG_221",
+     "dbf": 38740,
+     "name": "Selfless Hero",
+     "count": 2
+    },
+    {
+     "cardId": "OG_311",
+     "dbf": 38913,
+     "name": "A Light in the Darkness",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_089",
+     "dbf": 291,
+     "name": "Holy Light",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_306",
+     "dbf": 50022,
+     "name": "Immortal Prelate",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_727",
+     "dbf": 52660,
+     "name": "Call to Adventure",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_349",
+     "dbf": 679,
+     "name": "Divine Favor",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_685",
+     "dbf": 47614,
+     "name": "Paragon of Light",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_302",
+     "dbf": 49999,
+     "name": "Time Out!",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_815",
+     "dbf": 40636,
+     "name": "Wickerflame Burnbristle",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_094",
+     "dbf": 250,
+     "name": "Hammer of Wrath",
+     "count": 2
+    },
+    {
+     "cardId": "BRM_001",
+     "dbf": 2274,
+     "name": "Solemn Vigil",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_093",
+     "dbf": 2061,
+     "name": "Target Dummy",
+     "count": 2
+    },
+    {
+     "cardId": "BRM_022",
+     "dbf": 2278,
+     "name": "Dragon Egg",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_524",
+     "dbf": 50410,
+     "name": "Shieldbreaker",
+     "count": 2
+    },
+    {
+     "cardId": "AT_106",
+     "dbf": 2259,
+     "name": "Light's Champion",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_134",
+     "dbf": 43489,
+     "name": "Toothy Chest",
+     "count": 2
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "CFM_759",
+     "dbf": 40577,
+     "name": "Meanstreet Marshal",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_038",
+     "dbf": 42467,
+     "name": "Righteous Protector",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_306",
+     "dbf": 50022,
+     "name": "Immortal Prelate",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_382",
+     "dbf": 1167,
+     "name": "Aldor Peacekeeper",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_146",
+     "dbf": 51757,
+     "name": "Bronze Herald",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_349",
+     "dbf": 679,
+     "name": "Divine Favor",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_685",
+     "dbf": 47614,
+     "name": "Paragon of Light",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_092",
+     "dbf": 943,
+     "name": "Blessing of Kings",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_093",
+     "dbf": 476,
+     "name": "Consecration",
+     "count": 2
+    },
+    {
+     "cardId": "KAR_077",
+     "dbf": 39716,
+     "name": "Silvermoon Portal",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_545",
+     "dbf": 47051,
+     "name": "Ghostly Charger",
+     "count": 1
+    },
+    {
+     "cardId": "AT_078",
+     "dbf": 2654,
+     "name": "Enter the Coliseum",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_500",
+     "dbf": 46263,
+     "name": "Val'anyr",
+     "count": 1
+    },
+    {
+     "cardId": "AT_081",
+     "dbf": 2727,
+     "name": "Eadric the Pure",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_383",
+     "dbf": 890,
+     "name": "Tirion Fordring",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_008",
+     "dbf": 757,
+     "name": "Argent Squire",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_085",
+     "dbf": 2053,
+     "name": "Annoy-o-Tron",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_007",
+     "dbf": 1659,
+     "name": "Acolyte of Pain",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_341",
+     "dbf": 41118,
+     "name": "Sergeant Sally",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_668",
+     "dbf": 40953,
+     "name": "Doppelgangster",
+     "count": 1
+    },
+    {
+     "cardId": "BRM_019",
+     "dbf": 2279,
+     "name": "Grim Patron",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_548",
+     "dbf": 49184,
+     "name": "Zilliax",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_113",
+     "dbf": 2081,
+     "name": "Foe Reaper 4000",
+     "count": 1
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Aki_the_Brilliant",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_40h",
+   "name": "Oxana Demonslay",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "EX1_308",
+     "dbf": 974,
+     "name": "Soulfire",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_602",
+     "dbf": 52698,
+     "name": "Plot Twist",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_062",
+     "dbf": 950,
+     "name": "Hellfire",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_018",
+     "dbf": 43133,
+     "name": "Hooked Reaver",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_064",
+     "dbf": 1019,
+     "name": "Dread Infernal",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_663",
+     "dbf": 40940,
+     "name": "Kabal Trafficker",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_321",
+     "dbf": 50040,
+     "name": "Devastate",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_108",
+     "dbf": 785,
+     "name": "Execute",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_104",
+     "dbf": 1108,
+     "name": "Rampage",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_155",
+     "dbf": 46725,
+     "name": "Redband Wasp",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_716",
+     "dbf": 41414,
+     "name": "Sleep with the Fishes",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_604",
+     "dbf": 654,
+     "name": "Frothing Berserker",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_064",
+     "dbf": 42700,
+     "name": "Blood Razor",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_450",
+     "dbf": 42392,
+     "name": "Death Revenant",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_414",
+     "dbf": 338,
+     "name": "Grommash Hellscream",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_405",
+     "dbf": 42630,
+     "name": "Rotface",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_933",
+     "dbf": 41425,
+     "name": "King Mosh",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_007",
+     "dbf": 1659,
+     "name": "Acolyte of Pain",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_814",
+     "dbf": 41328,
+     "name": "Giant Wasp",
+     "count": 1
+    },
+    {
+     "cardId": "BRM_019",
+     "dbf": 2279,
+     "name": "Grim Patron",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_550",
+     "dbf": 52417,
+     "name": "Underbelly Ooze",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_117",
+     "dbf": 46655,
+     "name": "Worgen Abomination",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_592",
+     "dbf": 53251,
+     "name": "Batterhead",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_314",
+     "dbf": 42818,
+     "name": "The Lich King",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "EX1_308",
+     "dbf": 974,
+     "name": "Soulfire",
+     "count": 1
+    },
+    {
+     "cardId": "BRM_006",
+     "dbf": 2288,
+     "name": "Imp Gang Boss",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_062",
+     "dbf": 950,
+     "name": "Hellfire",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_075",
+     "dbf": 42743,
+     "name": "Despicable Dreadlord",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_415",
+     "dbf": 46040,
+     "name": "Rin, the First Disciple",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_751",
+     "dbf": 40541,
+     "name": "Abyssal Enforcer",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_321",
+     "dbf": 50040,
+     "name": "Devastate",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_367",
+     "dbf": 46031,
+     "name": "Drywhisker Armorer",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_108",
+     "dbf": 785,
+     "name": "Execute",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_604",
+     "dbf": 654,
+     "name": "Frothing Berserker",
+     "count": 2
+    },
+    {
+     "cardId": "OG_149",
+     "dbf": 38530,
+     "name": "Ravaging Ghoul",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_021",
+     "dbf": 1805,
+     "name": "Death's Bite",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_756",
+     "dbf": 40574,
+     "name": "Alley Armorsmith",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_407",
+     "dbf": 75,
+     "name": "Brawl",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_411",
+     "dbf": 810,
+     "name": "Gorehowl",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_414",
+     "dbf": 338,
+     "name": "Grommash Hellscream",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_405",
+     "dbf": 42630,
+     "name": "Rotface",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_933",
+     "dbf": 41425,
+     "name": "King Mosh",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_007",
+     "dbf": 1659,
+     "name": "Acolyte of Pain",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_548",
+     "dbf": 49184,
+     "name": "Zilliax",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_314",
+     "dbf": 42818,
+     "name": "The Lich King",
+     "count": 1
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Oxana_Demonslay",
+   "quote": "These decks correspond only to levels 6-8. If this boss is encountered on level 5, her deck will be missing 5 random cards.",
+   "notes": "These decks correspond only to levels 6-8. If this boss is encountered on level 5, her deck will be missing 5 random cards.",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_41h",
+   "name": "Ungan Oddkind",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "OG_061",
+     "dbf": 38377,
+     "name": "On the Hunt",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_373",
+     "dbf": 52076,
+     "name": "Rapid Fire",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_119",
+     "dbf": 50644,
+     "name": "The Beast Within",
+     "count": 2
+    },
+    {
+     "cardId": "DS1_184",
+     "dbf": 1047,
+     "name": "Tracking",
+     "count": 1
+    },
+    {
+     "cardId": "KAR_004",
+     "dbf": 39160,
+     "name": "Cat Trick",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_437",
+     "dbf": 48770,
+     "name": "Goblin Prank",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_084",
+     "dbf": 141,
+     "name": "Hunter's Mark",
+     "count": 2
+    },
+    {
+     "cardId": "AT_061",
+     "dbf": 2484,
+     "name": "Lock and Load",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_554",
+     "dbf": 455,
+     "name": "Snake Trap",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_200",
+     "dbf": 42525,
+     "name": "Venomstrike Trap",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_079",
+     "dbf": 43359,
+     "name": "Wandering Monster",
+     "count": 2
+    },
+    {
+     "cardId": "NEW1_031",
+     "dbf": 437,
+     "name": "Animal Companion",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_617",
+     "dbf": 1093,
+     "name": "Deadly Shot",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_539",
+     "dbf": 296,
+     "name": "Kill Command",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_538",
+     "dbf": 1243,
+     "name": "Unleash the Hounds",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_828",
+     "dbf": 48201,
+     "name": "Dire Frenzy",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_371",
+     "dbf": 52070,
+     "name": "Marked Shot",
+     "count": 2
+    },
+    {
+     "cardId": "DS1_183",
+     "dbf": 292,
+     "name": "Multi-Shot",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_073",
+     "dbf": 2041,
+     "name": "Cobra Shot",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_080",
+     "dbf": 43363,
+     "name": "Lesser Emerald Spellstone",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_378",
+     "dbf": 52089,
+     "name": "Unleash the Beast",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_085",
+     "dbf": 43369,
+     "name": "Rhok'delar",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "DS1_185",
+     "dbf": 877,
+     "name": "Arcane Shot",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_222",
+     "dbf": 45537,
+     "name": "Candleshot",
+     "count": 1
+    },
+    {
+     "cardId": "OG_061",
+     "dbf": 38377,
+     "name": "On the Hunt",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_402",
+     "dbf": 48519,
+     "name": "Secret Plan",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_119",
+     "dbf": 50644,
+     "name": "The Beast Within",
+     "count": 1
+    },
+    {
+     "cardId": "AT_060",
+     "dbf": 2641,
+     "name": "Bear Trap",
+     "count": 1
+    },
+    {
+     "cardId": "KAR_004",
+     "dbf": 39160,
+     "name": "Cat Trick",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_021",
+     "dbf": 2893,
+     "name": "Dart Trap",
+     "count": 1
+    },
+    {
+     "cardId": "LOE_105",
+     "dbf": 3001,
+     "name": "Explorer's Hat",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_610",
+     "dbf": 585,
+     "name": "Explosive Trap",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_611",
+     "dbf": 519,
+     "name": "Freezing Trap",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_084",
+     "dbf": 141,
+     "name": "Hunter's Mark",
+     "count": 1
+    },
+    {
+     "cardId": "BRM_013",
+     "dbf": 2260,
+     "name": "Quick Shot",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_554",
+     "dbf": 455,
+     "name": "Snake Trap",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_079",
+     "dbf": 43359,
+     "name": "Wandering Monster",
+     "count": 1
+    },
+    {
+     "cardId": "NEW1_031",
+     "dbf": 437,
+     "name": "Animal Companion",
+     "count": 1
+    },
+    {
+     "cardId": "OG_045",
+     "dbf": 38329,
+     "name": "Infest",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_539",
+     "dbf": 296,
+     "name": "Kill Command",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_538",
+     "dbf": 1243,
+     "name": "Unleash the Hounds",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_077",
+     "dbf": 43357,
+     "name": "Flanking Strike",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_371",
+     "dbf": 52070,
+     "name": "Marked Shot",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_347",
+     "dbf": 50466,
+     "name": "Baited Arrow",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_073",
+     "dbf": 2041,
+     "name": "Cobra Shot",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_537",
+     "dbf": 394,
+     "name": "Explosive Shot",
+     "count": 1
+    },
+    {
+     "cardId": "AT_062",
+     "dbf": 2483,
+     "name": "Ball of Spiders",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_080",
+     "dbf": 43363,
+     "name": "Lesser Emerald Spellstone",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_217",
+     "dbf": 45546,
+     "name": "To My Side!",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_522",
+     "dbf": 46450,
+     "name": "Crushing Walls",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_085",
+     "dbf": 43369,
+     "name": "Rhok'delar",
+     "count": 1
+    },
+    {
+     "cardId": "OG_211",
+     "dbf": 38727,
+     "name": "Call of the Wild",
+     "count": 1
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Ungan_Oddkind",
+   "quote": "These decks correspond only to level 6. If this boss is encountered on level 5, his deck will be missing 5 random cards.",
+   "notes": "These decks correspond only to level 6. If this boss is encountered on level 5, his deck will be missing 5 random cards.",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_42h",
+   "name": "P.O.G.O.",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "BOT_283",
+     "dbf": 48471,
+     "name": "Pogo-Hopper",
+     "count": 4
+    },
+    {
+     "cardId": "DAL_010",
+     "dbf": 51375,
+     "name": "Togwaggle's Scheme",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_024",
+     "dbf": 1989,
+     "name": "Cogmaster's Wrench",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_027",
+     "dbf": 1992,
+     "name": "Iron Sensei",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_565",
+     "dbf": 49361,
+     "name": "Blightnozzle Crawler",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_013",
+     "dbf": 1932,
+     "name": "Cogmaster",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_079",
+     "dbf": 48025,
+     "name": "Faithful Lumi",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_103",
+     "dbf": 2071,
+     "name": "Micro Machine",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_556",
+     "dbf": 778,
+     "name": "Harvest Golem",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_044",
+     "dbf": 2012,
+     "name": "Spider Tank",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_094",
+     "dbf": 2062,
+     "name": "Jeeves",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_119",
+     "dbf": 2087,
+     "name": "Blingtron 3000",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_016",
+     "dbf": 1982,
+     "name": "Fel Reaver",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_106",
+     "dbf": 2074,
+     "name": "Junkbot",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_102",
+     "dbf": 47979,
+     "name": "Spark Drill",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_534",
+     "dbf": 49163,
+     "name": "Bull Dozer",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "EX1_144",
+     "dbf": 365,
+     "name": "Shadowstep",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_283",
+     "dbf": 48471,
+     "name": "Pogo-Hopper",
+     "count": 6
+    },
+    {
+     "cardId": "LOOT_204",
+     "dbf": 45520,
+     "name": "Cheat Death",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_214",
+     "dbf": 45535,
+     "name": "Evasion",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_024",
+     "dbf": 1989,
+     "name": "Cogmaster's Wrench",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_129",
+     "dbf": 667,
+     "name": "Fan of Knives",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_719",
+     "dbf": 52616,
+     "name": "Tak Nozwhisker",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_012",
+     "dbf": 749,
+     "name": "Bloodmage Thalnos",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_907",
+     "dbf": 48983,
+     "name": "Galvanizer",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_006",
+     "dbf": 1940,
+     "name": "Mechwarper",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_078",
+     "dbf": 2046,
+     "name": "Mechanical Yeti",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_069",
+     "dbf": 2037,
+     "name": "Antique Healbot",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_016",
+     "dbf": 1982,
+     "name": "Fel Reaver",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_548",
+     "dbf": 49184,
+     "name": "Zilliax",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_752",
+     "dbf": 52954,
+     "name": "Jepetto Joybuzz",
+     "count": 1
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/P.O.G.O.",
+   "quote": "These decks correspond only to level 6 in Chapter 5. If this boss is encountered on levels 4-5, his deck will be missing 5 random cards.",
+   "notes": "These decks correspond only to level 6 in Chapter 5. If this boss is encountered on levels 4-5, his deck will be missing 5 random cards.",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_43h",
+   "name": "Magistrix Norroa",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "CFM_066",
+     "dbf": 40299,
+     "name": "Kabal Lackey",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_020",
+     "dbf": 41153,
+     "name": "Arcanologist",
+     "count": 2
+    },
+    {
+     "cardId": "KAR_092",
+     "dbf": 39767,
+     "name": "Medivh's Valet",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_600",
+     "dbf": 48692,
+     "name": "Research Project",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_287",
+     "dbf": 113,
+     "name": "Counterspell",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_018",
+     "dbf": 1801,
+     "name": "Duplicate",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_101",
+     "dbf": 43407,
+     "name": "Explosive Runes",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_295",
+     "dbf": 192,
+     "name": "Ice Block",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_612",
+     "dbf": 748,
+     "name": "Kirin Tor Mage",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_024",
+     "dbf": 41158,
+     "name": "Mana Bind",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_294",
+     "dbf": 195,
+     "name": "Mirror Entity",
+     "count": 2
+    },
+    {
+     "cardId": "tt_010",
+     "dbf": 366,
+     "name": "Spellbender",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_400",
+     "dbf": 50230,
+     "name": "Splitting Image",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_274",
+     "dbf": 1737,
+     "name": "Ethereal Arcanist",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_760",
+     "dbf": 40583,
+     "name": "Kabal Crystal Runner",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_609",
+     "dbf": 53002,
+     "name": "Kalecgos",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_080",
+     "dbf": 158,
+     "name": "Secretkeeper",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_004",
+     "dbf": 1783,
+     "name": "Mad Scientist",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_086",
+     "dbf": 52286,
+     "name": "Sunreaver Spy",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_530",
+     "dbf": 50421,
+     "name": "Masked Contender",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_573",
+     "dbf": 49447,
+     "name": "Subject 9",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "CFM_066",
+     "dbf": 40299,
+     "name": "Kabal Lackey",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_020",
+     "dbf": 41153,
+     "name": "Arcanologist",
+     "count": 2
+    },
+    {
+     "cardId": "KAR_092",
+     "dbf": 39767,
+     "name": "Medivh's Valet",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_287",
+     "dbf": 113,
+     "name": "Counterspell",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_018",
+     "dbf": 1801,
+     "name": "Duplicate",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_101",
+     "dbf": 43407,
+     "name": "Explosive Runes",
+     "count": 2
+    },
+    {
+     "cardId": "LOE_002",
+     "dbf": 2874,
+     "name": "Forgotten Torch",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_612",
+     "dbf": 748,
+     "name": "Kirin Tor Mage",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_024",
+     "dbf": 41158,
+     "name": "Mana Bind",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_294",
+     "dbf": 195,
+     "name": "Mirror Entity",
+     "count": 2
+    },
+    {
+     "cardId": "tt_010",
+     "dbf": 366,
+     "name": "Spellbender",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_400",
+     "dbf": 50230,
+     "name": "Splitting Image",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_274",
+     "dbf": 1737,
+     "name": "Ethereal Arcanist",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_108",
+     "dbf": 43426,
+     "name": "Aluneth",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_760",
+     "dbf": 40583,
+     "name": "Kabal Crystal Runner",
+     "count": 2
+    },
+    {
+     "cardId": "KAR_076",
+     "dbf": 39715,
+     "name": "Firelands Portal",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_080",
+     "dbf": 158,
+     "name": "Secretkeeper",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_004",
+     "dbf": 1783,
+     "name": "Mad Scientist",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_086",
+     "dbf": 52286,
+     "name": "Sunreaver Spy",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_530",
+     "dbf": 50421,
+     "name": "Masked Contender",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_573",
+     "dbf": 49447,
+     "name": "Subject 9",
+     "count": 1
+    }
+   ],
+   "normalCount": 35,
+   "heroicCount": 35,
+   "source": "https://hearthstone.wiki.gg/wiki/Magistrix_Norroa",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "Both decks total 35 cards on the wiki (final boss ch5 L9).",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_44h",
+   "name": "Erekem",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "CFM_626",
+     "dbf": 40432,
+     "name": "Kabal Talonpriest",
+     "count": 2
+    },
+    {
+     "cardId": "KAR_073",
+     "dbf": 39712,
+     "name": "Maelstrom Portal",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_053",
+     "dbf": 818,
+     "name": "Far Sight",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_938",
+     "dbf": 41479,
+     "name": "Hot Spring Guardian",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_575",
+     "dbf": 513,
+     "name": "Mana Tide Totem",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_088",
+     "dbf": 42762,
+     "name": "Voodoo Hexxer",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_042",
+     "dbf": 189,
+     "name": "Fire Elemental",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_431",
+     "dbf": 52409,
+     "name": "Swampqueen Hagatha",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_047",
+     "dbf": 51722,
+     "name": "Walking Fountain",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_012",
+     "dbf": 749,
+     "name": "Bloodmage Thalnos",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_007",
+     "dbf": 1659,
+     "name": "Acolyte of Pain",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_581",
+     "dbf": 47134,
+     "name": "Sandbinder",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_015",
+     "dbf": 49066,
+     "name": "Ticket Scalper",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_668",
+     "dbf": 40953,
+     "name": "Doppelgangster",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_550",
+     "dbf": 50776,
+     "name": "Amani War Bear",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_578",
+     "dbf": 47131,
+     "name": "Countess Ashmore",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_592",
+     "dbf": 53251,
+     "name": "Batterhead",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_542",
+     "dbf": 50459,
+     "name": "Oondasta",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "CFM_626",
+     "dbf": 40432,
+     "name": "Kabal Talonpriest",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_696",
+     "dbf": 40694,
+     "name": "Devolve",
+     "count": 2
+    },
+    {
+     "cardId": "KAR_073",
+     "dbf": 39712,
+     "name": "Maelstrom Portal",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_575",
+     "dbf": 513,
+     "name": "Mana Tide Totem",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_088",
+     "dbf": 42762,
+     "name": "Voodoo Hexxer",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_042",
+     "dbf": 189,
+     "name": "Fire Elemental",
+     "count": 1
+    },
+    {
+     "cardId": "NEW1_010",
+     "dbf": 32,
+     "name": "Al'Akir the Windlord",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_047",
+     "dbf": 51722,
+     "name": "Walking Fountain",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_085",
+     "dbf": 2053,
+     "name": "Annoy-o-Tron",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_012",
+     "dbf": 749,
+     "name": "Bloodmage Thalnos",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_143",
+     "dbf": 46710,
+     "name": "Vicious Scalehide",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_007",
+     "dbf": 1659,
+     "name": "Acolyte of Pain",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_581",
+     "dbf": 47134,
+     "name": "Sandbinder",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_284",
+     "dbf": 825,
+     "name": "Azure Drake",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_668",
+     "dbf": 40953,
+     "name": "Doppelgangster",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_548",
+     "dbf": 49184,
+     "name": "Zilliax",
+     "count": 1
+    },
+    {
+     "cardId": "GIL_578",
+     "dbf": 47131,
+     "name": "Countess Ashmore",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_592",
+     "dbf": 53251,
+     "name": "Batterhead",
+     "count": 2
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Erekem",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_45h",
+   "name": "Moragg",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "LOOT_014",
+     "dbf": 43122,
+     "name": "Kobold Librarian",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_065",
+     "dbf": 48,
+     "name": "Voidwalker",
+     "count": 2
+    },
+    {
+     "cardId": "GVG_018",
+     "dbf": 2172,
+     "name": "Queen of Pain",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_013",
+     "dbf": 43121,
+     "name": "Vulgar Homunculus",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_224",
+     "dbf": 48116,
+     "name": "Doubling Imp",
+     "count": 2
+    },
+    {
+     "cardId": "BRM_006",
+     "dbf": 2288,
+     "name": "Imp Gang Boss",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_605",
+     "dbf": 52871,
+     "name": "Impferno",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_693",
+     "dbf": 47694,
+     "name": "Blood Witch",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_610",
+     "dbf": 40391,
+     "name": "Crystalweaver",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_563",
+     "dbf": 52482,
+     "name": "Eager Underling",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_062",
+     "dbf": 950,
+     "name": "Hellfire",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_064",
+     "dbf": 1019,
+     "name": "Dread Infernal",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_663",
+     "dbf": 40940,
+     "name": "Kabal Trafficker",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_309",
+     "dbf": 1100,
+     "name": "Siphon Soul",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_555",
+     "dbf": 50991,
+     "name": "Demonbolt",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_312",
+     "dbf": 859,
+     "name": "Twisting Nether",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_368",
+     "dbf": 46056,
+     "name": "Voidlord",
+     "count": 2
+    },
+    {
+     "cardId": "OG_239",
+     "dbf": 38770,
+     "name": "DOOM!",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_094",
+     "dbf": 2062,
+     "name": "Jeeves",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "LOOTA_BOSS_26p3",
+     "dbf": 47411,
+     "name": "Beam of Death",
+     "count": 2
+    },
+    {
+     "cardId": "LOOTA_BOSS_26p5",
+     "dbf": 47413,
+     "name": "Beam of Fear",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_065",
+     "dbf": 48,
+     "name": "Voidwalker",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_013",
+     "dbf": 43121,
+     "name": "Vulgar Homunculus",
+     "count": 2
+    },
+    {
+     "cardId": "BRM_006",
+     "dbf": 2288,
+     "name": "Imp Gang Boss",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_605",
+     "dbf": 52871,
+     "name": "Impferno",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_022",
+     "dbf": 1806,
+     "name": "Voidcaller",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_075",
+     "dbf": 42743,
+     "name": "Despicable Dreadlord",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_420",
+     "dbf": 46299,
+     "name": "Skull of the Man'ari",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_185",
+     "dbf": 52058,
+     "name": "Aranasi Broodmother",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_663",
+     "dbf": 40940,
+     "name": "Kabal Trafficker",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_751",
+     "dbf": 40541,
+     "name": "Abyssal Enforcer",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_555",
+     "dbf": 50991,
+     "name": "Demonbolt",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_607",
+     "dbf": 52873,
+     "name": "Fel Lord Betrug",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_312",
+     "dbf": 859,
+     "name": "Twisting Nether",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_021",
+     "dbf": 1986,
+     "name": "Mal'Ganis",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_368",
+     "dbf": 46056,
+     "name": "Voidlord",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_646",
+     "dbf": 47439,
+     "name": "Clockwork Automaton",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_016",
+     "dbf": 1721,
+     "name": "Sylvanas Windrunner",
+     "count": 1
+    },
+    {
+     "cardId": "OG_133",
+     "dbf": 38496,
+     "name": "N'Zoth, the Corruptor",
+     "count": 1
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Moragg_%28boss%29",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "Heroic deck holds Beam of Death / Beam of Fear: only ids in the client are the Kobolds & Catacombs boss cards LOOTA_BOSS_26p3 / LOOTA_BOSS_26p5.",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_46h",
+   "name": "Ichoron",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "LOOT_231",
+     "dbf": 45590,
+     "name": "Arcane Artificer",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_018",
+     "dbf": 41151,
+     "name": "Flame Geyser",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_103",
+     "dbf": 43414,
+     "name": "Lesser Ruby Spellstone",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_026",
+     "dbf": 587,
+     "name": "Frost Nova",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_400",
+     "dbf": 50230,
+     "name": "Splitting Image",
+     "count": 1
+    },
+    {
+     "cardId": "TRL_313",
+     "dbf": 50122,
+     "name": "Scorch",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_033",
+     "dbf": 395,
+     "name": "Water Elemental",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_645",
+     "dbf": 47438,
+     "name": "Bonfire Elemental",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_311",
+     "dbf": 50121,
+     "name": "Arcanosaur",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_623",
+     "dbf": 40411,
+     "name": "Greater Arcane Missiles",
+     "count": 2
+    },
+    {
+     "cardId": "OG_120",
+     "dbf": 38463,
+     "name": "Anomalus",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_578",
+     "dbf": 52640,
+     "name": "Power of Creation",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_373",
+     "dbf": 46067,
+     "name": "Healing Rain",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_817",
+     "dbf": 41521,
+     "name": "Tidal Surge",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_092",
+     "dbf": 52292,
+     "name": "Arcane Servant",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_928",
+     "dbf": 41418,
+     "name": "Tar Creeper",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_283",
+     "dbf": 512,
+     "name": "Frost Elemental",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_079",
+     "dbf": 41253,
+     "name": "Frozen Crusher",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_249",
+     "dbf": 336,
+     "name": "Baron Geddon",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_847",
+     "dbf": 41928,
+     "name": "Blazecaller",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_298",
+     "dbf": 374,
+     "name": "Ragnaros the Firelord",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_907",
+     "dbf": 41294,
+     "name": "Ozruk",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "CS2_026",
+     "dbf": 587,
+     "name": "Frost Nova",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_033",
+     "dbf": 395,
+     "name": "Water Elemental",
+     "count": 2
+    },
+    {
+     "cardId": "OG_090",
+     "dbf": 38418,
+     "name": "Cabalist's Tome",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_028",
+     "dbf": 457,
+     "name": "Blizzard",
+     "count": 2
+    },
+    {
+     "cardId": "KAR_076",
+     "dbf": 39715,
+     "name": "Firelands Portal",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_318",
+     "dbf": 50095,
+     "name": "Hex Lord Malacrass",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_609",
+     "dbf": 53002,
+     "name": "Kalecgos",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_053",
+     "dbf": 818,
+     "name": "Far Sight",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_373",
+     "dbf": 46067,
+     "name": "Healing Rain",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_817",
+     "dbf": 41521,
+     "name": "Tidal Surge",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_284",
+     "dbf": 825,
+     "name": "Azure Drake",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_012",
+     "dbf": 1793,
+     "name": "Sludge Belcher",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_548",
+     "dbf": 49184,
+     "name": "Zilliax",
+     "count": 1
+    },
+    {
+     "cardId": "BRM_028",
+     "dbf": 2262,
+     "name": "Emperor Thaurissan",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_079",
+     "dbf": 41253,
+     "name": "Frozen Crusher",
+     "count": 2
+    },
+    {
+     "cardId": "NEW1_040",
+     "dbf": 640,
+     "name": "Hogger",
+     "count": 1
+    },
+    {
+     "cardId": "NEW1_038",
+     "dbf": 526,
+     "name": "Gruul",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_298",
+     "dbf": 374,
+     "name": "Ragnaros the Firelord",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_314",
+     "dbf": 42818,
+     "name": "The Lich King",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_563",
+     "dbf": 436,
+     "name": "Malygos",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_572",
+     "dbf": 1186,
+     "name": "Ysera",
+     "count": 1
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Ichoron",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_47h",
+   "name": "Lavanthor",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "GVG_001",
+     "dbf": 1927,
+     "name": "Flamecannon",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_032",
+     "dbf": 1004,
+     "name": "Flamestrike",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_402",
+     "dbf": 596,
+     "name": "Armorsmith",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_392",
+     "dbf": 400,
+     "name": "Battle Rage",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_926",
+     "dbf": 41406,
+     "name": "Cornered Sentry",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_104",
+     "dbf": 1108,
+     "name": "Rampage",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_604",
+     "dbf": 654,
+     "name": "Frothing Berserker",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_408",
+     "dbf": 804,
+     "name": "Mortal Strike",
+     "count": 2
+    },
+    {
+     "cardId": "UNG_927",
+     "dbf": 41407,
+     "name": "Sudden Genesis",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_414",
+     "dbf": 338,
+     "name": "Grommash Hellscream",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_405",
+     "dbf": 42630,
+     "name": "Rotface",
+     "count": 1
+    },
+    {
+     "cardId": "AT_094",
+     "dbf": 2580,
+     "name": "Flame Juggler",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_007",
+     "dbf": 1659,
+     "name": "Acolyte of Pain",
+     "count": 2
+    },
+    {
+     "cardId": "BRM_019",
+     "dbf": 2279,
+     "name": "Grim Patron",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_614",
+     "dbf": 556,
+     "name": "Xavius",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_249",
+     "dbf": 336,
+     "name": "Baron Geddon",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_201",
+     "dbf": 1687,
+     "name": "Core Hound",
+     "count": 2
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "TRL_321",
+     "dbf": 50040,
+     "name": "Devastate",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_402",
+     "dbf": 596,
+     "name": "Armorsmith",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_108",
+     "dbf": 785,
+     "name": "Execute",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_104",
+     "dbf": 1108,
+     "name": "Rampage",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_604",
+     "dbf": 654,
+     "name": "Frothing Berserker",
+     "count": 2
+    },
+    {
+     "cardId": "BRM_016",
+     "dbf": 2297,
+     "name": "Axe Flinger",
+     "count": 2
+    },
+    {
+     "cardId": "OG_218",
+     "dbf": 38738,
+     "name": "Bloodhoof Brave",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_450",
+     "dbf": 42392,
+     "name": "Death Revenant",
+     "count": 2
+    },
+    {
+     "cardId": "BOT_218",
+     "dbf": 48100,
+     "name": "Security Rover",
+     "count": 2
+    },
+    {
+     "cardId": "GIL_152",
+     "dbf": 46721,
+     "name": "Blackhowl Gunspire",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_838",
+     "dbf": 41881,
+     "name": "Tar Lord",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_414",
+     "dbf": 338,
+     "name": "Grommash Hellscream",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_405",
+     "dbf": 42630,
+     "name": "Rotface",
+     "count": 1
+    },
+    {
+     "cardId": "UNG_933",
+     "dbf": 41425,
+     "name": "King Mosh",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_007",
+     "dbf": 1659,
+     "name": "Acolyte of Pain",
+     "count": 2
+    },
+    {
+     "cardId": "BRM_019",
+     "dbf": 2279,
+     "name": "Grim Patron",
+     "count": 2
+    },
+    {
+     "cardId": "OG_318",
+     "dbf": 38944,
+     "name": "Hogger, Doom of Elwynn",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_620",
+     "dbf": 1372,
+     "name": "Molten Giant",
+     "count": 2
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Lavanthor",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "",
+   "ambiguous": []
+  },
+  {
+   "cardId": "DALA_BOSS_48h",
+   "name": "Zuramat the Obliterator",
+   "deckType": "list",
+   "normal": [
+    {
+     "cardId": "DALA_BOSS_48t",
+     "dbf": 54298,
+     "name": "Void Shift",
+     "count": 3
+    },
+    {
+     "cardId": "EX1_181",
+     "dbf": 52263,
+     "name": "Call of the Void",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_065",
+     "dbf": 48,
+     "name": "Voidwalker",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_596",
+     "dbf": 1142,
+     "name": "Demonfire",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_022",
+     "dbf": 1806,
+     "name": "Voidcaller",
+     "count": 2
+    },
+    {
+     "cardId": "ICC_075",
+     "dbf": 42743,
+     "name": "Despicable Dreadlord",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_306",
+     "dbf": 45820,
+     "name": "Possessed Lackey",
+     "count": 2
+    },
+    {
+     "cardId": "AT_023",
+     "dbf": 2537,
+     "name": "Void Crusher",
+     "count": 2
+    },
+    {
+     "cardId": "CFM_751",
+     "dbf": 40541,
+     "name": "Abyssal Enforcer",
+     "count": 2
+    },
+    {
+     "cardId": "AT_020",
+     "dbf": 2624,
+     "name": "Fearsome Doomguard",
+     "count": 2
+    },
+    {
+     "cardId": "TRL_555",
+     "dbf": 50991,
+     "name": "Demonbolt",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_607",
+     "dbf": 52873,
+     "name": "Fel Lord Betrug",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_021",
+     "dbf": 1986,
+     "name": "Mal'Ganis",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_368",
+     "dbf": 46056,
+     "name": "Voidlord",
+     "count": 2
+    },
+    {
+     "cardId": "DAL_561",
+     "dbf": 52480,
+     "name": "Jumbo Imp",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_009",
+     "dbf": 1790,
+     "name": "Deathlord",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_577",
+     "dbf": 962,
+     "name": "The Beast",
+     "count": 1
+    }
+   ],
+   "heroic": [
+    {
+     "cardId": "DALA_BOSS_48t",
+     "dbf": 54298,
+     "name": "Void Shift",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_181",
+     "dbf": 52263,
+     "name": "Call of the Void",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_319",
+     "dbf": 1090,
+     "name": "Flame Imp",
+     "count": 2
+    },
+    {
+     "cardId": "CS2_065",
+     "dbf": 48,
+     "name": "Voidwalker",
+     "count": 1
+    },
+    {
+     "cardId": "BOT_443",
+     "dbf": 48835,
+     "name": "Void Analyst",
+     "count": 2
+    },
+    {
+     "cardId": "BRM_006",
+     "dbf": 2288,
+     "name": "Imp Gang Boss",
+     "count": 2
+    },
+    {
+     "cardId": "EX1_304",
+     "dbf": 1221,
+     "name": "Void Terror",
+     "count": 2
+    },
+    {
+     "cardId": "AT_019",
+     "dbf": 2822,
+     "name": "Dreadsteed",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_045",
+     "dbf": 2013,
+     "name": "Imp-losion",
+     "count": 2
+    },
+    {
+     "cardId": "FP1_022",
+     "dbf": 1806,
+     "name": "Voidcaller",
+     "count": 1
+    },
+    {
+     "cardId": "EX1_320",
+     "dbf": 23,
+     "name": "Bane of Doom",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_019",
+     "dbf": 1985,
+     "name": "Demonheart",
+     "count": 1
+    },
+    {
+     "cardId": "ICC_075",
+     "dbf": 42743,
+     "name": "Despicable Dreadlord",
+     "count": 1
+    },
+    {
+     "cardId": "CS2_064",
+     "dbf": 1019,
+     "name": "Dread Infernal",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_663",
+     "dbf": 40940,
+     "name": "Kabal Trafficker",
+     "count": 2
+    },
+    {
+     "cardId": "LOOT_306",
+     "dbf": 45820,
+     "name": "Possessed Lackey",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_415",
+     "dbf": 46040,
+     "name": "Rin, the First Disciple",
+     "count": 1
+    },
+    {
+     "cardId": "CFM_751",
+     "dbf": 40541,
+     "name": "Abyssal Enforcer",
+     "count": 1
+    },
+    {
+     "cardId": "AT_020",
+     "dbf": 2624,
+     "name": "Fearsome Doomguard",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_607",
+     "dbf": 52873,
+     "name": "Fel Lord Betrug",
+     "count": 1
+    },
+    {
+     "cardId": "GVG_021",
+     "dbf": 1986,
+     "name": "Mal'Ganis",
+     "count": 1
+    },
+    {
+     "cardId": "LOOT_368",
+     "dbf": 46056,
+     "name": "Voidlord",
+     "count": 1
+    },
+    {
+     "cardId": "DAL_561",
+     "dbf": 52480,
+     "name": "Jumbo Imp",
+     "count": 1
+    }
+   ],
+   "normalCount": 30,
+   "heroicCount": 30,
+   "source": "https://hearthstone.wiki.gg/wiki/Zuramat_the_Obliterator_%28boss%29",
+   "quote": "The below classes are listed purely for reference, and have no effect on the boss' use of the cards",
+   "notes": "Wiki Notes: '* The player is given two copies of [[Void Shift]] at Start of Game in Normal mode.' while the Normal table lists Void Shift x3 - kept the table; check live. Out of Games 'Great Dalaran Heist Tuning Update' lists this boss among those whose decks were weakened; the wiki list is presumably the post-tuning deck.",
+   "ambiguous": []
+  }
+ ],
+ "missing": []
+}

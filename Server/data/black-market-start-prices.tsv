@@ -1,0 +1,10 @@
+# D1 Black Market: each item's price on the event's first day (the same for every account), in Bloodstones.
+# Used for a player with no recorded live item list; every daily refresh since the event start is then applied.
+# Source: theclick.gg/hearthstone-black-market ("initial prices observed across accounts"); the client data has none.
+# item (BlackMarketItem ID)	price	name
+73	750	Fireside Card Back
+74	4200	Taelan Fordring
+75	1050	Champion Tyrande Hero Skin
+76	2100	Broxigar Hero Skin and Card Back
+77	1050	Yogg-Ramen Hero Skin
+78	900	Reign of the Black Empire Pack

@@ -1,0 +1,12 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <RootNamespace>HsServer.Protocol</RootNamespace>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Client protocol assemblies: BGS RPC (bgssdk + Google.Protobuf) and Pegasus util/game packets (bgsclient). -->
+    <Reference Include="blizzard.bgssdk"><HintPath>$(HsGameManaged)\blizzard.bgssdk.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="blizzard.bgsclient"><HintPath>$(HsGameManaged)\blizzard.bgsclient.dll</HintPath><Private>false</Private></Reference>
+    <Reference Include="Google.Protobuf"><HintPath>$(HsGameManaged)\Google.Protobuf.dll</HintPath><Private>false</Private></Reference>
+  </ItemGroup>
+</Project>

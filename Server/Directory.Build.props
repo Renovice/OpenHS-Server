@@ -1,0 +1,12 @@
+<Project>
+  <!-- Shared settings for the private server. The client's protocol assemblies are referenced at compile time
+       and resolved from the local game install at runtime (never copied or redistributed). -->
+  <PropertyGroup>
+    <LangVersion>latest</LangVersion>
+    <Nullable>disable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <HsGameManaged Condition="'$(HsGameManaged)' == ''">$(MSBuildThisFileDirectory)..\Hearthstone main game\Hearthstone_Data\Managed</HsGameManaged>
+    <!-- Referencing .NET Framework-targeted client assemblies from net9.0 is intentional. -->
+    <NoWarn>$(NoWarn);MSB3277;NU1701</NoWarn>
+  </PropertyGroup>
+</Project>

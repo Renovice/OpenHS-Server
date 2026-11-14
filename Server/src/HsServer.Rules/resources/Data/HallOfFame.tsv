@@ -1,0 +1,39 @@
+# Card id <TAB> name <TAB> year it went to the Hall of Fame. Every card that was ever in the Hall of Fame
+# (hearthstone.wiki.gg/wiki/Hall_of_Fame). The client keeps a HoF set row (CardSetTiming set 4) for most of them but not all
+# (Shadowform EX1_625 lost it), so this recorded list fills the gap. Used by Zephrys the Great's pool (wiki: "Any card
+# that was ever in the Hall of Fame" is left out).
+EX1_128	Conceal	2017
+CS2_031	Ice Lance	2017
+EX1_316	Power Overwhelming	2017
+EX1_284	Azure Drake	2017
+EX1_298	Ragnaros the Firelord	2017
+EX1_016	Sylvanas Windrunner	2017
+NEW1_016	Captain's Parrot	2017
+EX1_062	Old Murk-Eye	2017
+EX1_112	Gelbin Mekkatorque	2017
+PRO_001	Elite Tauren Chieftain	2017
+EX1_295	Ice Block	2018
+EX1_050	Coldlight Oracle	2018
+EX1_620	Molten Giant	2018
+EX1_161	Naturalize	2019
+EX1_310	Doomguard	2019
+EX1_349	Divine Favor	2019
+GIL_826	Baku the Mooneater	2019
+GIL_692	Genn Greymane	2019
+GIL_130	Gloom Stag	2019
+GIL_838	Black Cat	2019
+GIL_837	Glitter Moth	2019
+GIL_530	Murkspark Eel	2019
+NEW1_004	Vanish	2019
+DS1_233	Mind Blast	2019
+EX1_007	Acolyte of Pain	2020
+EX1_048	Spellbreaker	2020
+EX1_085	Mind Control Tech	2020
+EX1_105	Mountain Giant	2020
+EX1_116	Leeroy Jenkins	2020
+EX1_591	Auchenai Soulpriest	2020
+EX1_624	Holy Fire	2020
+EX1_625	Shadowform	2020
+EX1_350	Prophet Velen	2020
+CS2_236	Divine Spirit	2020
+CS2_235	Northshire Cleric	2020

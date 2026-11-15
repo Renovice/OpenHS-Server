@@ -14,19 +14,21 @@ Goal: every card, mode and adventure working like the live game — starting wit
 
 ## Getting started
 
-Needs Windows, Hearthstone installed through Battle.net, the [.NET 9 SDK](https://dotnet.microsoft.com/download) and ~15 GB of disk.
+Needs Windows, Hearthstone installed through Battle.net and the [.NET 9 SDK](https://dotnet.microsoft.com/download).
 
-```bat
-git clone https://github.com/Renovice/OpenHS-Server
-cd OpenHS-Server\Server
-setup.bat          :: once: private game copy, mod loader, build, card database from your game
-run-local.bat      :: starts the server and the game connected to it
-```
+1. Copy your Hearthstone folder somewhere else, e.g. `D:\PrivateHS` (your real Hearthstone is never changed).
+2. Put this repo inside the copy: `D:\PrivateHS\OpenHS-Server` (`git clone https://github.com/Renovice/OpenHS-Server`, or
+   download the zip from the green Code button).
+3. Run `OpenHS-Server\Server\setup.bat` once: it adds the mod loader and the OpenHS plugin to that copy, builds the server and
+   exports the card database from it. (The copy opens once by itself and closes again.)
+4. Run `OpenHS-Server\Server\run-local.bat`: the server starts and your copy of the game opens, connected to it.
+
+If the repo is *not* inside a Hearthstone folder, `setup.bat` makes the copy itself (`Hearthstone main game` next to `Server`).
 
 A new account starts with every mode and adventure open. Server commands (cards, currencies, events, resets) are in
 [Server/ADMIN.md](Server/ADMIN.md) — type them in the server window or run `Server\admin.bat`.
 
-After a Hearthstone patch: close the game and run `Server\update.bat` (updates the private copy and the card database).
+After a Hearthstone patch: close the game and run `Server\update.bat` (updates the card database; a copy made by setup also gets the new game files).
 
 ## Contributing
 

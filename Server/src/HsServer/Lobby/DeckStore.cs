@@ -36,7 +36,10 @@ internal sealed class DeckStore
     {
         lock (gate)
         {
-            Replace(recorded.Decks, recorded.DeckContents);
+            // (2026-11-15) only decks whose cards the recording has: a live login lists decks the client has cached without their
+            // contents, and such a deck queued here had no cards (the server swapped in its basic deck: user's Shaman got Frostbolts)
+            var known = new HashSet<long>((recorded.DeckContents ?? new List<DeckContents>()).Where(c => c.Cards?.Count > 0).Select(c => c.DeckId));
+            Replace((recorded.Decks ?? new List<DeckInfo>()).Where(d => known.Contains(d.Id)).ToList(), recorded.DeckContents);
             Save();
         }
     }

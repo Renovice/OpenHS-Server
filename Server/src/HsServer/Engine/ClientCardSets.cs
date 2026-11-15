@@ -35,7 +35,7 @@ internal sealed class ClientCardSets
     {
         string root = Program.ProjectRoot();
         string reference = RecordedAccount.FindReferenceSession(
-            Path.Combine(root, "Hearthstone main game", "BepInEx", "HsRecorder"), Path.Combine(root, "RESEARCH", "captures"));
+            Path.Combine(HsServer.Protocol.GameFolder.GameDir(root), "BepInEx", "HsRecorder"), Path.Combine(root, "RESEARCH", "captures"));
         return new EventCalendar(Path.Combine(dbfDir, "EventMap.json"),
             reference == null ? null : EventCalendar.FromRecording(reference), Path.Combine(root, "Server", "state", "events.json"));
     }

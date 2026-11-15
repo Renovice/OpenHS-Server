@@ -50,6 +50,6 @@ internal static class EventList
     {
         string root = Program.ProjectRoot();
         return Lobby.RecordedAccount.FindReferenceSession(
-            Path.Combine(root, "Hearthstone main game", "BepInEx", "HsRecorder"), Path.Combine(root, "RESEARCH", "captures"));
+            Path.Combine(HsServer.Protocol.GameFolder.GameDir(root), "BepInEx", "HsRecorder"), Path.Combine(root, "RESEARCH", "captures"));
     }
 }

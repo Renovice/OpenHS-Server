@@ -24,7 +24,7 @@ internal static class UpdateClient
     public static int Run(string[] args)
     {
         string root = Program.ProjectRoot();
-        string game = Path.Combine(root, "Hearthstone main game");
+        string game = HsServer.Protocol.GameFolder.GameDir(root);
         int liveArg = Array.IndexOf(args, "--live");
         string live = liveArg >= 0 && liveArg + 1 < args.Length ? args[liveArg + 1] : DefaultLive;
         bool yes = args.Contains("--yes");
@@ -35,8 +35,11 @@ internal static class UpdateClient
             return 1;
         }
 
-        // 1. the private client
-        if (!args.Contains("--no-client-sync"))
+        // 1. the private client (none to sync when the game copy is the real install itself: the repo was put inside it)
+        bool sameFolder = File.Exists(Path.Combine(live, "Hearthstone.exe")) &&
+                          string.Equals(Path.GetFullPath(live).TrimEnd('\\'), Path.GetFullPath(game).TrimEnd('\\'), StringComparison.OrdinalIgnoreCase);
+        if (sameFolder) Console.WriteLine($"The game copy is the real install ({live}): Battle.net keeps it up to date, nothing to copy.");
+        if (!args.Contains("--no-client-sync") && !sameFolder)
         {
             if (!File.Exists(Path.Combine(live, "Hearthstone.exe")))
             {

@@ -5,7 +5,13 @@
     <LangVersion>latest</LangVersion>
     <Nullable>disable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
-    <HsGameManaged Condition="'$(HsGameManaged)' == ''">$(MSBuildThisFileDirectory)..\Hearthstone main game\Hearthstone_Data\Managed</HsGameManaged>
+    <!-- The game copy (as HsServer.Protocol.GameFolder): next to Server\ ("Hearthstone main game"), the game folder the repo was
+         cloned into (Server\..\..), or the game folder the repo was unpacked into (Server\..). -->
+    <HsGameDir Condition="'$(HsGameDir)' == '' and Exists('$(MSBuildThisFileDirectory)..\Hearthstone main game\Hearthstone.exe')">$(MSBuildThisFileDirectory)..\Hearthstone main game</HsGameDir>
+    <HsGameDir Condition="'$(HsGameDir)' == '' and Exists('$(MSBuildThisFileDirectory)..\..\Hearthstone.exe')">$(MSBuildThisFileDirectory)..\..</HsGameDir>
+    <HsGameDir Condition="'$(HsGameDir)' == '' and Exists('$(MSBuildThisFileDirectory)..\Hearthstone.exe')">$(MSBuildThisFileDirectory)..</HsGameDir>
+    <HsGameDir Condition="'$(HsGameDir)' == ''">$(MSBuildThisFileDirectory)..\Hearthstone main game</HsGameDir>
+    <HsGameManaged Condition="'$(HsGameManaged)' == ''">$(HsGameDir)\Hearthstone_Data\Managed</HsGameManaged>
     <!-- Referencing .NET Framework-targeted client assemblies from net9.0 is intentional. -->
     <NoWarn>$(NoWarn);MSB3277;NU1701</NoWarn>
   </PropertyGroup>

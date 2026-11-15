@@ -9,9 +9,13 @@ namespace HsServer.Tests;
 /// <summary>Deck builder flow against the server deck store, plus the login deck list rewrite (714).</summary>
 public class DeckStoreTests(ITestOutputHelper output)
 {
-    private static string Reference() => RecordedAccount.FindReferenceSession(
-        Path.Combine(TestEnvironment.ProjectRoot, "Hearthstone main game", "BepInEx", "HsRecorder"),
-        Path.Combine(TestEnvironment.ProjectRoot, "RESEARCH", "captures"));
+    // the newest recorded login whose login state has deck contents (a newer one may list decks the client had cached, with no
+    // cards: Seed keeps only decks with cards)
+    private static string Reference() => Recording.FindSessions(
+            Path.Combine(TestEnvironment.ProjectRoot, "Hearthstone main game", "BepInEx", "HsRecorder"),
+            Path.Combine(TestEnvironment.ProjectRoot, "RESEARCH", "captures"))
+        .Reverse().First(s => Recording.Read(s).LastOrDefault(p => p.Channel == "util" && p.IsIn && p.Type == 714 && p.Body != null) is { } login &&
+                              PegasusPackets.Deserialize<SecondaryClientStateResponse>(login.Body).SecondaryState?.DeckContents?.Any(c => c.Cards.Count > 0) == true);
 
     private static SecondaryClientState RecordedState(string reference) =>
         PegasusPackets.Deserialize<SecondaryClientStateResponse>(

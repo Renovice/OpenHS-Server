@@ -89,6 +89,9 @@ public class ClientSettingsTests
         var decks = new DeckStore(null);
         var state = new SecondaryClientState();
         state.Decks.Add(new DeckInfo { Id = 5, Name = "x", SourceType = DeckSourceType.DECK_SOURCE_TYPE_NORMAL });
+        var contents = new DeckContents { DeckId = 5 }; // (Seed keeps decks with cards)
+        contents.Cards.Add(new DeckCardData { Def = new PegasusShared.CardDef { Asset = 1 }, Qty = 1 });
+        state.DeckContents.Add(contents);
         decks.Seed(state);
         Assert.True(decks.SetTemplateSource(5));
         Assert.Equal(DeckSourceType.DECK_SOURCE_TYPE_TEMPLATE, decks.Get(5).SourceType);

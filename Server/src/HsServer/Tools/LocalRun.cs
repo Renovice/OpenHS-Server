@@ -59,7 +59,7 @@ internal static class LocalRun
     // options.txt (graphics, frame rate; without it the new-player cinematic replays) and log.config (Power.log).
     private static Process StartClient(string root, string clientLogDir, string player = null)
     {
-        string game = Path.Combine(root, "Hearthstone main game");
+        string game = HsServer.Protocol.GameFolder.GameDir(root);
         string profile = Path.Combine(root, "Server", "run", "profile");
         string appData = Path.Combine(profile, "Roaming"), localAppData = Path.Combine(profile, "Local");
         string hsLocal = Path.Combine(localAppData, "Blizzard", "Hearthstone");
@@ -95,7 +95,7 @@ internal static class LocalRun
         try { state = JsonSerializer.Deserialize<State>(File.ReadAllText(stateFile)); }
         catch (JsonException) { File.Delete(stateFile); return; }
         string serverExe = Path.Combine(root, "Server", "run", "HsServer.exe");
-        string clientExe = Path.Combine(root, "Hearthstone main game", "Hearthstone.exe");
+        string clientExe = Path.Combine(HsServer.Protocol.GameFolder.GameDir(root), "Hearthstone.exe");
         if (state.ClientPid is int clientPid && Ours(clientPid, state.ClientStart, clientExe) is { } c)
         {
             c.CloseMainWindow();

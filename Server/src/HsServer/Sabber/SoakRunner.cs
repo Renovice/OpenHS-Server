@@ -429,7 +429,7 @@ internal sealed class SoakRunner(Random rng)
         try
         {
             string root = Program.ProjectRoot();
-            string login = Lobby.RecordedAccount.FindReferenceSession(Path.Combine(root, "Hearthstone main game", "BepInEx", "HsRecorder"),
+            string login = Lobby.RecordedAccount.FindReferenceSession(Path.Combine(HsServer.Protocol.GameFolder.GameDir(root), "BepInEx", "HsRecorder"),
                 Path.Combine(root, "RESEARCH", "captures"));
             return new Lobby.SideboardRules(CardDb.Load(CardDb.FindDefaultDir(root)), login == null ? Array.Empty<string>() : new[] { login });
         }

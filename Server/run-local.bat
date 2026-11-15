@@ -14,7 +14,11 @@ setlocal
 set "SERVER=%~dp0"
 set "SERVER=%SERVER:~0,-1%"
 set "RUN=%SERVER%\run"
-set "PLUGINS=%SERVER%\..\Hearthstone main game\BepInEx\plugins"
+rem the game copy (as the server finds it): next to Server\, or the game folder this repo sits in
+set "GAME=%SERVER%\..\Hearthstone main game"
+if not exist "%GAME%\Hearthstone.exe" if exist "%SERVER%\..\..\Hearthstone.exe" for %%I in ("%SERVER%\..\..") do set "GAME=%%~fI"
+if not exist "%GAME%\Hearthstone.exe" if exist "%SERVER%\..\Hearthstone.exe" for %%I in ("%SERVER%\..") do set "GAME=%%~fI"
+set "PLUGINS=%GAME%\BepInEx\plugins"
 
 set "FLAGS="
 set "RULES=sabber"

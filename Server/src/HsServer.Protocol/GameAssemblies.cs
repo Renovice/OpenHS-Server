@@ -28,14 +28,12 @@ public static class GameAssemblies
         return File.Exists(file) ? context.LoadFromAssemblyPath(file) : null;
     }
 
-    // Walk up from the binary until "Hearthstone main game" (project layout) is found.
+    // The project's game copy (GameFolder: next to Server\, or the game folder the repo sits in).
     private static string FindDefault()
     {
-        for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir != null; dir = dir.Parent)
-        {
-            string candidate = Path.Combine(dir.FullName, "Hearthstone main game", "Hearthstone_Data", "Managed");
-            if (Directory.Exists(candidate)) return candidate;
-        }
-        throw new DirectoryNotFoundException("Could not locate 'Hearthstone main game' above " + AppContext.BaseDirectory + " (set HS_MANAGED)");
+        string game = GameFolder.Find(GameFolder.ProjectRoot());
+        if (game != null) return Path.Combine(game, "Hearthstone_Data", "Managed");
+        throw new DirectoryNotFoundException("Could not find the game copy for " + AppContext.BaseDirectory +
+                                             " (run Server\\setup.bat, or set HS_MANAGED)");
     }
 }

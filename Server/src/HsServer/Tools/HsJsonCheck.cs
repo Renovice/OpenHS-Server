@@ -24,7 +24,7 @@ internal static class HsJsonCheck
     {
         string root = Program.ProjectRoot();
         string dbf = Option(args, "--dbf") ?? CardDb.FindDefaultDir(root);
-        int build = int.TryParse(Option(args, "--build"), out int b) ? b : ClientBuild(Path.Combine(root, "Hearthstone main game"), dbf);
+        int build = int.TryParse(Option(args, "--build"), out int b) ? b : ClientBuild(HsServer.Protocol.GameFolder.GameDir(root), dbf);
         if (build == 0)
         {
             Console.Error.WriteLine("No build number: the private client's version doesn't match the card database. Pass --build N.");

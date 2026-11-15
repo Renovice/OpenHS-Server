@@ -65,7 +65,7 @@ internal static class Program
                            $"{account.Util.Values.Sum(l => l.Count)} exchanges, {defaultPlayer.SaveData.KeyCount} save keys (default player)");
 
         var sessions = noRecording ? Array.Empty<string>() : Recording.FindSessions(
-            Path.Combine(root, "Hearthstone main game", "BepInEx", "HsRecorder"),
+            Path.Combine(GameDir(), "BepInEx", "HsRecorder"),
             Path.Combine(root, "RESEARCH", "captures"));
         var matches = Game.RecordedMatch.LoadAll(sessions);
         Log.Info("server", $"{matches.Count} recorded matches available for replay " +
@@ -107,7 +107,13 @@ internal static class Program
                     .Select(s => (Owner: cards.ByDbf(s.Owner)?.CardId, Card: cards.ByDbf(s.Card)?.CardId))
                     .Where(s => s.Owner != null && s.Card != null).ToList();
                 var sideboard = deck.Count > 0 ? SideboardOf(playerDecks, queued.DeckId) : new List<(string Owner, string Card)>();
-                if (deck.Count == 0) deck = Engine.Decks.BasicDeck(cards);
+                if (deck.Count == 0)
+                {
+                    // never silently: the player picked a deck whose cards the server doesn't have
+                    Log.Warn("deck", $"player {queued.Player?.Name ?? "?"} queued deck {queued.DeckId} but the server has no cards for it " +
+                                     $"({(playerDecks.Get(queued.DeckId) == null ? "unknown deck" : "empty deck")}): playing the basic deck instead");
+                    deck = Engine.Decks.BasicDeck(cards);
+                }
                 // B2: the client only queues decks the player owns; a deck that isn't is played anyway, but logged
                 // (live's refusal can't be recorded: the client never sends one).
                 if (queued.Player?.Collection is { } owned && owned.Missing(playerDecks.CardIds(queued.DeckId)) is { Count: > 0 } missing)
@@ -115,7 +121,10 @@ internal static class Program
                                            string.Join(", ", missing.Select(m => $"{cards.ByDbf(m.Dbf)?.CardId ?? m.Dbf.ToString()} x{m.Missing}")));
                 string heroId = new[] { (int)queued.HeroCardDbId, playerDecks.Get(queued.DeckId)?.Hero ?? 0 }
                     .Select(cards.ByDbf).FirstOrDefault(c => c != null)?.CardId ?? "HERO_01";
-                string opponentHero = scenarioHeroes.TryGetValue(queued.Scenario, out int dbf) && cards.ByDbf(dbf) is { } hero ? hero.CardId : "HERO_08";
+                // a scenario without its own opponent (Ranked, Casual): a random class each game (user 2026-11-15: always a Mage before)
+                var opponentRng = new Random();
+                string opponentHero = scenarioHeroes.TryGetValue(queued.Scenario, out int dbf) && cards.ByDbf(dbf) is { } hero ? hero.CardId
+                    : Sabber.RandomDecks.AnyHero(Sabber.RandomDecks.Classes[opponentRng.Next(Sabber.RandomDecks.Classes.Length)], opponentRng);
                 // Rules engine: the opponent plays a Basic + Classic deck of its hero's class; the basic engine keeps its small deck.
                 // Practice: one of the player's own decks when `admin practice decks <name start>` is set (Game.PracticeDecks).
                 string ClassOf(string cardId) => cardId != null && SabberStoneCore.Model.Cards.TryFromId(cardId) is { } c ? c.Class.ToString() : null;
@@ -275,12 +284,10 @@ internal static class Program
         return map;
     }
 
-    internal static string ProjectRoot()
-    {
-        for (var dir = new DirectoryInfo(AppContext.BaseDirectory); dir != null; dir = dir.Parent)
-            if (Directory.Exists(Path.Combine(dir.FullName, "Hearthstone main game"))) return dir.FullName;
-        return Directory.GetCurrentDirectory();
-    }
+    internal static string ProjectRoot() => HsServer.Protocol.GameFolder.ProjectRoot();
+
+    /// <summary>The game copy the server's client runs from (GameFolder: next to Server\, or the game folder the repo sits in).</summary>
+    internal static string GameDir() => HsServer.Protocol.GameFolder.GameDir(ProjectRoot());
 
     private static string Option(string[] args, string name)
     {

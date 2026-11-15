@@ -47,6 +47,12 @@ internal sealed class ServerData
         foreach (long subkey in new long[] { 1017, 1018, 1019, 1020, 1021, 1022, 1035, 1204 })
             store.SetInts(671, subkey, new long[] { 1 });
         store.SetInts(695, 801, new long[] { 1 });
+        // (user 2026-11-15: a "Skip Apprentice" button) the new-player track is done and Wild is open: PLAYER_FLAGS
+        // HAS_COMPLETED_APPRENTICE 1015, UNLOCKED_WILD 779; FTUE SHOULD_SKIP_RAILROADING 1002 (GameUtils.HasCompletedApprentice /
+        // ShouldSkipRailroading — the client counts a player without them as an Apprentice once its save data arrives)
+        store.SetInts(671, 1015, new long[] { 1 });
+        store.SetInts(671, 779, new long[] { 1 });
+        store.SetInts(695, 1002, new long[] { 1 });
     }
 
     /// <summary>Null when there is no recorded login to start from. <paramref name="noRecording"/> (2026-11-14, the public server's
@@ -54,7 +60,7 @@ internal sealed class ServerData
     /// real accounts untouched); every request the server can't answer itself is logged ("has no recording").</summary>
     public static ServerData Load(string root, string reference = null, bool noRecording = false)
     {
-        string recorder = Path.Combine(root, "Hearthstone main game", "BepInEx", "HsRecorder"), captures = Path.Combine(root, "RESEARCH", "captures");
+        string recorder = Path.Combine(HsServer.Protocol.GameFolder.GameDir(root), "BepInEx", "HsRecorder"), captures = Path.Combine(root, "RESEARCH", "captures");
         if (noRecording)
         {
             reference = null;
@@ -62,7 +68,10 @@ internal sealed class ServerData
         }
         else
         {
-            reference ??= RecordedAccount.FindReferenceSession(recorder, captures);
+            // (2026-11-15) a recorded login is the base only in the development project (RESEARCH\captures) or when asked for
+            // (--account): a player's game copy with the OpenHS Recorder installed holds their own live sessions, and a public
+            // server starts fresh accounts
+            if (reference == null && Directory.Exists(captures)) reference = RecordedAccount.FindReferenceSession(recorder, captures);
             // (2026-11-15, the public server) no recorded login at all: start without one
             if (reference == null)
             {
@@ -127,7 +136,8 @@ internal sealed class ServerData
             Root = root, Reference = reference, Account = account, DbfDir = dbfDir, Cards = cards, GrantedCards = grantedCards,
             Calendar = calendar, Crafting = crafting, Accounts = accounts, Boosters = boosters,
             Shop = shop, Orders = orders, Zilliax = new ZilliaxBuilds(cards, Recording.FindSessions(recorder, captures)),
-            Sideboards = new SideboardRules(cards, reference == null ? null : new[] { reference }),
+            // (2026-11-15) every recording, the newest with the subsets winning: a newer login without them mustn't hide them
+            Sideboards = new SideboardRules(cards, Recording.FindSessions(recorder, captures)),
             RewardTracks = rewardTracks,
             Heist = heist,
             LuckyDraw = new LuckyDraws(new LuckyDrawRules(dbfDir), calendar, rewardTracks),

@@ -36,9 +36,11 @@ public class SideboardTests(ITestOutputHelper output)
 
     private static readonly Lazy<SideboardRules> Rules = new(() =>
     {
-        string login = RecordedAccount.FindReferenceSession(Path.Combine(TestEnvironment.ProjectRoot, "Hearthstone main game", "BepInEx", "HsRecorder"),
+        // every recording (the newest that recorded the subsets wins): a newer login without them (2026-11-15: a Tombs of Terror
+        // session after a clean reinstall) must not hide them
+        var sessions = HsServer.Protocol.Recording.FindSessions(Path.Combine(TestEnvironment.ProjectRoot, "Hearthstone main game", "BepInEx", "HsRecorder"),
             Path.Combine(TestEnvironment.ProjectRoot, "RESEARCH", "captures"));
-        return new SideboardRules(Db.Value, new[] { login });
+        return new SideboardRules(Db.Value, sessions);
     });
 
     private static int Dbf(string id) => Db.Value[id].DbfId;

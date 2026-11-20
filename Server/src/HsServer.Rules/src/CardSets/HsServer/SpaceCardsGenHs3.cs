@@ -53,7 +53,7 @@ namespace SabberStoneCore.CardSets.HsServer
 		{
 			if (t == null || t.Zone?.Type != Zone.HAND) return;
 			IPlayable hataaru = s is Enchantment e ? e.Creator ?? (IPlayable)c.Hero : (IPlayable)s;
-			Give(g, hataaru, t, GenericCostLess(V("GDB_136", "discount", 1)));
+			GiveCostLess(g, hataaru, t, V("GDB_136", "discount", 1));
 			Generic.MarkPlayThisTurn(t, hataaru);
 			Generic.AddEnchantmentBlock(g, Cards.FromId("GDB_136e"), hataaru, c, t.Id, 0, 0);
 		}));
@@ -206,7 +206,7 @@ namespace SabberStoneCore.CardSets.HsServer
 						if (!(RandomCard(g, x => x.Type == CardType.SPELL && x[SPELL_SCHOOL] == FIRE) is Card fire) || c.DeckZone.IsFull) break;
 						IPlayable p = Entity.FromCard(c, fire, new EntityData { [GameTag.CREATOR] = s.Id });
 						Generic.ShuffleIntoDeck.Invoke(c, s, p);
-						Give(g, s, p, GenericCostLess(V("GDB_303", "discount", 2)));
+						GiveCostLess(g, s, p, V("GDB_303", "discount", 2));
 					}
 				})
 			}));
@@ -323,7 +323,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			cards.Add("GDB_844", new CardDef(new Power
 			{
 				PowerTask = DiscoverFromTask.ClassOrNeutral((c, x) => x.Type == CardType.MINION && x.IsRace(Race.BEAST) && x.Cost >= V("GDB_844", "cost", 5),
-					afterPick: new CustomTask((g, c, s, t, stack) => { if (t != null) Give(g, s, t, GenericCostLess(V("GDB_844", "discount", 2))); }))
+					afterPick: new CustomTask((g, c, s, t, stack) => { if (t != null) GiveCostLess(g, s, t, V("GDB_844", "discount", 2)); }))
 			}));
 			// [GDB_845] Laser Barrage (2) — Deal $3 damage to a minion. If you're building a Starship, also damage its neighbors.
 			cards.Add("GDB_845", new CardDef(TargetMinion, new Power
@@ -392,7 +392,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					if (Generic.Draw(c) is Spell drawn && drawn.Zone?.Type == Zone.HAND) Give(g, s, drawn, GenericCostLess(V("GDB_852", "discount", 1)));
+					if (Generic.Draw(c) is Spell drawn && drawn.Zone?.Type == Zone.HAND) GiveCostLess(g, s, drawn, V("GDB_852", "discount", 1));
 				})
 			}));
 			// [GDB_854] Uluu, the Everdrifter (4) — Each turn this is in your hand, gain two random Choose One choices.
@@ -417,7 +417,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				PowerTask = ComplexTask.If((g, c, s) => Generic.IsBuildingStarship(c), new CustomTask((g, c, s, t, stack) =>
 				{
 					foreach (Card spell in Pick(g, Cards.FormatTypeCards(g.FormatType).Where(x => x.Collectible && !x.NeverGenerated && x.Type == CardType.SPELL && x[SPELL_SCHOOL] == ARCANE), V("GDB_856", "spells", 3)))
-						if (IslandToHand(c, s, spell) is IPlayable p) Give(g, s, p, GenericCostLess(V("GDB_856", "discount", 2)));
+						if (IslandToHand(c, s, spell) is IPlayable p) GiveCostLess(g, s, p, V("GDB_856", "discount", 2));
 				}))
 			}));
 			// [GDB_857] Final Frontier (7) — Discover a 10-Cost minion from the past. Set its Cost to (1).

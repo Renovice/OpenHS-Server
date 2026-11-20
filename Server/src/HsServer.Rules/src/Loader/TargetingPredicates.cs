@@ -47,6 +47,9 @@ namespace SabberStoneCore.Loader
 			= t => t.HasDeathrattle;
 		public static readonly TargetingPredicate ReqLegendaryTarget
 			= t => t.Card.Rarity == Rarity.LEGENDARY;
+		/// <summary>HsServer (2026-11-20): client REQ_NOT_LEGENDARY_TARGET (123) — Reincarnate, Bat Mask since the 2026-11-20 patch.</summary>
+		public static readonly TargetingPredicate ReqNotLegendaryTarget
+			= t => t.Card.Rarity != Rarity.LEGENDARY;
 
 		public static TargetingPredicate ReqTargetWithRace(int race)
 		{

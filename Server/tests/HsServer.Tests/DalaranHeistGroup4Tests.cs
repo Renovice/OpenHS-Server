@@ -216,6 +216,25 @@ public class DalaranHeistGroup4Tests
         Assert.Equal(3, raider.Health);
     }
 
+    /// <summary>Crabatoa: "Your Crabatoa Claws have +2 Attack" — the minion Claws it brings and the weapon Claw a dying one equips (live
+    /// session-20261120-132514 36255 / 36655: the Claws 4/1, the hero 4 Attack with the weapon).</summary>
+    [Fact]
+    public void Crabatoa_gives_its_minion_claws_and_the_weapon_claw_two_attack()
+    {
+        var game = Game();
+        var me = game.Player1;
+        var crab = OnBoard(game, me, "TSC_937");
+        var claw = OnBoard(game, me, "TSC_937t");
+        game.DeathProcessingAndAuraUpdate();
+        Assert.Equal(4, claw.AttackDamage);
+        Generic.Destroy(claw, null);
+        game.DeathProcessingAndAuraUpdate();
+        game.AuraUpdate(); // (the next aura update after the Death Phase)
+        Assert.Equal("TSC_937t2", me.Hero.Weapon?.Card.Id);
+        Assert.Equal(4, me.Hero.Weapon.AttackDamage);
+        Assert.Equal(4, me.Hero.AttackDamage);
+    }
+
     [Fact]
     public void The_carts_leave_four_slots_and_the_prisons_open_after_the_minions_cost()
     {
@@ -228,11 +247,13 @@ public class DalaranHeistGroup4Tests
         var me = prisons.Player1;
         var prison = Assert.Single(me.BoardZone.GetSpan().ToArray()); // (a permanent: enumerating the board skips it)
         Assert.Equal("DALA_832t", prison.Card.Id);
-        int turns = prison[GameTag.TAG_SCRIPT_DATA_NUM_2];
-        Card inside = Cards.FromAssetId(prison[GameTag.TAG_SCRIPT_DATA_NUM_1]);
+        int turns = prison[GameTag.ENCHANTMENT_BANNER_TEXT]; // (live: the turns left in its banner, the minion in its mouse-over card)
+        Card inside = Cards.FromAssetId(prison[GameTag.ALTERNATE_MOUSE_OVER_CARD]);
+        int prisonId = prison.Id;
         for (int i = 0; i < turns && me.BoardZone.GetSpan().ToArray().Any(m => m.Card.Id == "DALA_832t"); i++) EndTurns(prisons, 2);
         Assert.DoesNotContain(me.BoardZone.GetSpan().ToArray(), m => m.Card.Id == "DALA_832t");
         Assert.Contains(me.BoardZone, m => m.Card.Id == inside.Id);
+        Assert.Contains(me.BoardZone, m => m.Id == prisonId && m.Card.Id == inside.Id); // (live: the prison itself changes into it)
     }
 
     // ------------------------------------------------------------------------------------------------ Hero Powers

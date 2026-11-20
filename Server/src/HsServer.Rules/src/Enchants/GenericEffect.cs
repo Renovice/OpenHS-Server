@@ -9,12 +9,14 @@ namespace SabberStoneCore.Enchants
 	{
 		GameTag? StatTag { get; }
 		EffectOperator Operator { get; }
+		int StatValue { get; }
 	}
 
 	internal readonly struct GenericEffect<TAttr, T> : IEffect, IStatEffect where TAttr : Attr<T> where T : Playable
 	{
 		public GameTag? StatTag => typeof(TAttr) == typeof(ATK) ? GameTag.ATK : typeof(TAttr) == typeof(Health) ? GameTag.HEALTH : (GameTag?)null;
 		public EffectOperator Operator => _operator;
+		public int StatValue => _value;
 
 		private readonly TAttr _attr;
 		private readonly EffectOperator _operator;

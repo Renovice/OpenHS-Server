@@ -1380,7 +1380,7 @@ namespace SabberStoneCore.CardSets
 						RelaCondition.IsFriendly,
 						RelaCondition.IsOther(SelfCondition.IsRace(Race.DEMON))),
 					new FlagTask(true, new AddEnchantmentTask("GVG_019e", EntityType.TARGET)),
-					new FlagTask(false, new DamageTask(2, EntityType.TARGET)))
+					new FlagTask(false, new DamageTask(SabberStoneCore.Loader.CardValues.Get("GVG_019", "damage", 5), EntityType.TARGET)))
 			}));
 
 			// ---------------------------------------- SPELL - WARLOCK
@@ -2666,7 +2666,8 @@ namespace SabberStoneCore.CardSets
 			// --------------------------------------------------------
 			cards.Add("GVG_110t", new CardDef(new Power
 			{
-				PowerTask = ComplexTask.Create(
+				// (HsServer 2026-11-16: the card's text is a Deathrattle; the 2021 script ran it on play — StaleTriggerAuditTests)
+				DeathrattleTask = ComplexTask.Create(
 					new RandomTask(1, EntityType.ENEMIES, harmful: true),
 					new MathRandTask(1, 4),
 					new DamageNumberTask(EntityType.STACK))

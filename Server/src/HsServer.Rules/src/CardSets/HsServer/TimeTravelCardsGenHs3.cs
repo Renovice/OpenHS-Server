@@ -50,7 +50,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					var auras = c.DeckZone.Where(p => p is Spell && p.Card[HsTag.PALADIN_AURA] > 0).GroupBy(p => p.Card.Id)
+					var auras = c.DeckZone.Where(p => p is Spell && p.Card[HsTag.PALADIN_AURA] > 0).GroupBy(Generic.UniqueCardKey)
 						.Select(x => x.ElementAt(g.Random.Next(x.Count()))).Cast<Spell>().ToList();
 					foreach (Spell aura in auras)
 						if (!Generic.PutDurationSpellIntoPlay(c, aura)) break;

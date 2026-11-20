@@ -509,7 +509,7 @@ namespace SabberStoneCore.CardSets.HsServer
 						IPlayable from = left[g.Random.Next(left.Count)];
 						left.Remove(from);
 						if (Generic.Copy(c, s, from, Zone.HAND) is IPlayable copy && copy.Zone?.Type == Zone.HAND)
-							Give(g, s, copy, GenericCostLess(V("EDR_527", "less", 3)));
+							GiveCostLess(g, s, copy, V("EDR_527", "less", 3));
 					}
 				})
 			}));

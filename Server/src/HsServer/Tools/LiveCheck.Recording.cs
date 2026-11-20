@@ -351,6 +351,11 @@ internal static partial class LiveCheck
             }
             if (d.TagChange is { } tc)
             {
+                // (2026-11-19) an unseen TARGET pick (the opponent's): live notes it on the choice's source as tag 4470 = the target
+                // (20261109-205554 53578: Fetid Devourer's second destroy)
+                if (tc.Tag == 4470 && cur?.Choices.LastOrDefault(x => x.Source == tc.Entity && x.Picked == null && x.Type == 3) is { } aimed &&
+                    aimed.Entities.Contains(tc.Value))
+                    aimed.Picked = new List<int> { tc.Value };
                 if (tc.Entity == gameEntity && tc.Tag == (int)GameTag.STEP && tc.Value == (int)SabberStoneCore.Enums.Step.MAIN_READY) firstTurnStarted = true;
                 if (depth == 0 && tc.Entity == gameEntity && tc.Tag == (int)GameTag.STEP)
                 {
@@ -388,6 +393,7 @@ internal static partial class LiveCheck
             }
             if (d.FullEntity is { } fe)
             {
+                bool knownBefore = state.ContainsKey(fe.Entity);
                 var e = new LiveEntity { Id = fe.Entity, Card = fe.Name ?? "" };
                 foreach (Tag t in fe.Tags) e.Tags[t.Name] = t.Value;
                 if (resetDepth >= 0)
@@ -405,7 +411,9 @@ internal static partial class LiveCheck
                     if (e[GameTag.ZONE] == (int)SabberStoneCore.Enums.Zone.GRAVEYARD && e[GameTag.CARDTYPE] == (int)SabberStoneCore.Enums.CardType.MINION)
                         history.Add(new LiveHistory(HistoryKind.Died, e[GameTag.CONTROLLER], e.Id, 0, 0, 0));
                 }
-                else if (resetDepth < 0 && e[GameTag.ZONE] is int z && z != 0) ZoneMoved(e.Id, 0, z);
+                // HsServer (user, 2026-11-20): a mid-game FullEntity resend of an entity we already know (a reconnect's resync dump)
+                // isn't a new summon — only a genuinely new entity's first FULL counts as one, same as ZoneMoved's own dedup via oldZone.
+                else if (resetDepth < 0 && !knownBefore && e[GameTag.ZONE] is int z && z != 0) ZoneMoved(e.Id, 0, z);
                 continue;
             }
             if (d.ShowEntity is { } se)
@@ -435,6 +443,12 @@ internal static partial class LiveCheck
             {
                 var e = Get(he.Entity);
                 int old = e[GameTag.ZONE];
+                // (2026-11-16) hidden again: the viewer keeps the card id it saw, but no tags beyond a hidden entity's (live: Mug'Zee
+                // revealed at Start of Game, hidden back in the deck, drawn — its Cost changes are never sent to the viewer)
+                // (not an enchantment: one on a hidden card is still the game's — it acts later, on the card shown again)
+                if (e[GameTag.CARDTYPE] != (int)SabberStoneCore.Enums.CardType.ENCHANTMENT)
+                foreach (int k in e.Tags.Keys.ToList())
+                    if (k is not ((int)GameTag.ZONE or (int)GameTag.CONTROLLER or (int)GameTag.ENTITY_ID or (int)GameTag.ZONE_POSITION)) e.Tags.Remove(k);
                 e.Tags[(int)GameTag.ZONE] = he.Zone;
                 ZoneMoved(e.Id, old, he.Zone);
             }

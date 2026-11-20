@@ -158,7 +158,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					var groups = c.DiedThisGameCards.Where(p => p is Minion && p.Card.Cost >= V("EDR_238", "cost", 8)).GroupBy(p => p.Card.Id)
+					var groups = c.DiedThisGameCards.Where(p => p is Minion && p.Card.Cost >= V("EDR_238", "cost", 8)).GroupBy(Generic.UniqueCardKey)
 						.Select(x => x.ToList()).OrderBy(_ => g.Random.Next()).ToList();
 					foreach (var same in groups)
 					{
@@ -180,7 +180,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
 					Generic.Imbue(c, s);
-					if (t != null && t.Zone?.Type == Zone.HAND && t.Controller == c) Give(g, s, t, GenericCostLess(V("EDR_518", "less", 1)));
+					if (t != null && t.Zone?.Type == Zone.HAND && t.Controller == c) GiveCostLess(g, s, t, V("EDR_518", "less", 1));
 				})
 			}));
 			// [EDR_529] Plucky Podling (1) — If this would transform into a minion, it transforms into one that costs (2) more.

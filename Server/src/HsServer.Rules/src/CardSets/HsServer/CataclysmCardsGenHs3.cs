@@ -318,7 +318,7 @@ namespace SabberStoneCore.CardSets.HsServer
 					SingleTask = new CustomTask((g, c, s, t, stack) =>
 					{
 						if (GetCard(c, RandomCard(g, x => x.Type == CardType.SPELL && x[SPELL_SCHOOL] == HOLY), s) is IPlayable holy)
-							Give(g, s, holy, GenericCostLess(V("CATA_474", "less", 3)));
+							GiveCostLess(g, s, holy, V("CATA_474", "less", 3));
 					})
 				}
 			}));

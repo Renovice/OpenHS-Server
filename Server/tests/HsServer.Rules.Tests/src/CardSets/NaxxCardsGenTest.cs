@@ -307,13 +307,20 @@ namespace SabberStoneCoreTest.CardSets
 			game.Player2.BaseMana = 10;
 			//var testCard = game.CurrentPlayer.Draw(Cards.FromName("Reincarnate"));
 
-			Minion target = game.ProcessCard<Minion>("Cairne Bloodhoof");
-			target.Damage = 3;
+			// HsServer (2026-11-20 patch): "Destroy a non-Legendary minion" — Cairne can't be its target any more; Harvest Golem instead
+			Minion legend = game.ProcessCard<Minion>("Cairne Bloodhoof");
+			IPlayable spell = Generic.DrawCard(game.CurrentPlayer, Cards.FromName("Reincarnate"));
+			Assert.False(spell.IsValidPlayTarget(legend));
+			game.CurrentPlayer.HandZone.Remove(spell);
+			game.CurrentPlayer.BoardZone.Remove(legend);
+			Minion target = game.ProcessCard<Minion>("Harvest Golem");
+			target.Damage = 2;
 
+			game.CurrentPlayer.UsedMana = 0;
 			game.ProcessCard("Reincarnate", target);
 			Assert.Equal(2, game.CurrentPlayer.BoardZone.Count);
-			Assert.Equal("Baine Bloodhoof", game.CurrentPlayer.BoardZone[0].Card.Name);
-			Assert.Equal("Cairne Bloodhoof", game.CurrentPlayer.BoardZone[1].Card.Name);
+			Assert.Equal("Damaged Golem", game.CurrentPlayer.BoardZone[0].Card.Name);
+			Assert.Equal("Harvest Golem", game.CurrentPlayer.BoardZone[1].Card.Name);
 			Assert.Equal(0, game.CurrentPlayer.BoardZone[1].Damage);
 		}
 	}

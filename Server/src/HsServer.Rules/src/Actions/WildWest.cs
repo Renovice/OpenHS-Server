@@ -87,6 +87,8 @@ namespace SabberStoneCore.Actions
 				{
 					c[HsTag.DECK_STARTED_NO_DUPLICATES] = c.DeckZone.GroupBy(p => p.Card.Id).All(x => x.Count() == 1) ? 1 : -1;
 					c[HsTag.DECK_STARTED_RUNES] = 8 | RunesOf(c.DeckZone.GetAll().Select(p => p.Card)); // (WHIZBANG: Rainbow Seamstress)
+					c[HsTag.DECK_STARTED_DISTINCT_COSTS] = 1 + c.DeckZone.Select(p => p.Card.Cost).Distinct().Count();
+					c[HsTag.DECK_STARTED_SPELLS] = 1 + c.DeckZone.Count(p => p.Card.Type == CardType.SPELL);
 				}
 		}
 
@@ -100,6 +102,14 @@ namespace SabberStoneCore.Actions
 		/// <summary>HsServer (WHIZBANG): the runes among cards: 1 Blood (COST_BLOOD 2196), 2 Frost (2197), 4 Unholy (2198).</summary>
 		public static int RunesOf(IEnumerable<Card> cards) =>
 			(cards.Any(x => x[(GameTag)2196] > 0) ? 1 : 0) | (cards.Any(x => x[(GameTag)2197] > 0) ? 2 : 0) | (cards.Any(x => x[(GameTag)2198] > 0) ? 4 : 0);
+
+		/// <summary>"If your deck started with N cards of different Costs" (Elise the Navigator): the recorded count, else the current deck.</summary>
+		public static int DeckStartedDistinctCosts(Controller c) =>
+			c[HsTag.DECK_STARTED_DISTINCT_COSTS] is int n && n > 0 ? n - 1 : c.DeckZone.Select(p => p.Card.Cost).Distinct().Count();
+
+		/// <summary>"If your deck started with no spells" (Hexmarshal): the recorded count, else the current deck.</summary>
+		public static int DeckStartedSpells(Controller c) =>
+			c[HsTag.DECK_STARTED_SPELLS] is int n && n > 0 ? n - 1 : c.DeckZone.Count(p => p.Card.Type == CardType.SPELL);
 
 		/// <summary>"If your deck started with a Blood / Frost / Unholy card" (Rainbow Seamstress): the recorded runes, else the current deck.</summary>
 		public static bool DeckStartedWithRune(Controller c, int rune)

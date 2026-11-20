@@ -271,7 +271,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				DeathrattleTask = new CustomTask((g, c, s, t, stack) =>
 				{
 					if (s[HsTag.REMEMBERED_CARD] > 0 && GetCard(c, Cards.FromAssetId(s[HsTag.REMEMBERED_CARD]), s) is IPlayable back)
-						Give(g, s, back, GenericCostLess(V("CATA_897", "less", 1)));
+						GiveCostLess(g, s, back, V("CATA_897", "less", 1));
 				})
 			}));
 			// [CATA_898] Scaled Lancer (4) — All enemy minions have Taunt.

@@ -122,7 +122,7 @@ namespace SabberStoneCore.CardSets.HsServer
 					SingleTask = new CustomTask((g, c, s, t, stack) =>
 					{
 						if (GetCard(c, RandomCard(g, x => x.Type == CardType.MINION && x[GameTag.BATTLECRY] > 0), s) is IPlayable got)
-							Give(g, s, got, GenericCostLess(V("JAIL_407", "less", 2)));
+							GiveCostLess(g, s, got, V("JAIL_407", "less", 2));
 					})
 				}
 			}));

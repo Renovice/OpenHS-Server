@@ -19,11 +19,12 @@ public class DalaranHeistGroup1Tests(Xunit.Abstractions.ITestOutputHelper output
     });
 
     /// <summary>A started game at 10 Mana; <paramref name="p1Power"/> / <paramref name="p2Power"/>: the players' starting Hero Powers.</summary>
-    private static SabberStoneCore.Model.Game Game(string? p1Power = null, string? p2Power = null)
+    private static SabberStoneCore.Model.Game Game(string? p1Power = null, string? p2Power = null, long? seed = null)
     {
         _ = Db.Value;
         var game = new SabberStoneCore.Model.Game(new SabberStoneCore.Config.GameConfig
         {
+            RandomSeed = seed,
             StartPlayer = 1, Player1HeroClass = CardClass.DRUID, Player2HeroClass = CardClass.MAGE,
             Player1HeroPowerCard = p1Power == null ? null : SabberStoneCore.Model.Cards.FromId(p1Power),
             Player2HeroPowerCard = p2Power == null ? null : SabberStoneCore.Model.Cards.FromId(p2Power),
@@ -297,7 +298,7 @@ public class DalaranHeistGroup1Tests(Xunit.Abstractions.ITestOutputHelper output
         int redirected = 0, straight = 0;
         for (int i = 0; i < 40 && (redirected == 0 || straight == 0); i++)
         {
-            var game = Game();
+            var game = Game(seed: i);
             var me = game.CurrentPlayer;
             var waitress = OnBoard(game, me.Opponent, "DALA_BOSS_14t");
             var raptor = OnBoard(game, me, "CS2_172"); // 3/2

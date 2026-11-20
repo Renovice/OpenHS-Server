@@ -268,11 +268,13 @@ namespace SabberStoneCore.CardSets.HsServer
 				// (2026-10-08: the opponent's half sits on the opponent's player — live VAC_524e2 ATTACHED = the enemy player, CONTROLLER = ours)
 				PowerTask = ComplexTask.Create(new AddEnchantmentTask("VAC_524e", EntityType.CONTROLLER), new AddEnchantmentTask("VAC_524e2", EntityType.OP_CONTROLLER))
 			}));
+			// ("your next turn": the King Tide player's turn ends — the enchantment's CONTROLLER on both halves, live)
 			Trigger kingTideEnds = new Trigger(TriggerType.TURN_END)
 			{
+				EitherTurn = true,
 				SingleTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					if (!(s is Enchantment e)) return;
+					if (!(s is Enchantment e) || g.CurrentPlayer != e.Controller) return;
 					e[GameTag.TAG_SCRIPT_DATA_NUM_1] = e[GameTag.TAG_SCRIPT_DATA_NUM_1] + 1;
 					if (e[GameTag.TAG_SCRIPT_DATA_NUM_1] >= 2) e.Remove();
 				})
@@ -440,7 +442,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				PlayableIf = (PlayReq.REQ_FRIENDLY_MINION_DIED_THIS_GAME, ctl => ctl.DiedThisGameCards.Any(p => p is Minion && p.Card[GameTag.TAUNT] > 0)),
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					var dead = c.DiedThisGameCards.Where(p => p is Minion && p.Card[GameTag.TAUNT] > 0).GroupBy(p => p.Card.Id)
+					var dead = c.DiedThisGameCards.Where(p => p is Minion && p.Card[GameTag.TAUNT] > 0).GroupBy(Generic.UniqueCardKey)
 						.Select(grp => grp.First()).OrderByDescending(p => p.Card.Cost).ThenBy(_ => g.Random.Next()).Take(V("VAC_948", "minions", 3)).ToList();
 					foreach (IPlayable p in dead)
 					{
@@ -504,7 +506,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
 					for (int i = 0; i < V("WORK_050t", "spells", 2); i++)
-						if (DrawOne(g, c, p => p is Spell) is IPlayable drawn && drawn.Zone?.Type == Zone.HAND) Give(g, s, drawn, GenericCostLess(V("WORK_050t", "discount", 1)));
+						if (DrawOne(g, c, p => p is Spell) is IPlayable drawn && drawn.Zone?.Type == Zone.HAND) GiveCostLess(g, s, drawn, V("WORK_050t", "discount", 1));
 				})
 			}));
 		}

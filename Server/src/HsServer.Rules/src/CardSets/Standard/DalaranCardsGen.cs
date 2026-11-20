@@ -442,7 +442,7 @@ namespace SabberStoneCore.CardSets.Standard
 			// --------------------------------------------------------
 			cards.Add("DAL_373", new CardDef(new Dictionary<PlayReq, int>() {{PlayReq.REQ_TARGET_TO_PLAY,0}}, new Power
 			{
-				PowerTask = new DamageTask(1, EntityType.TARGET, true)
+				PowerTask = new DamageTask(SabberStoneCore.Loader.CardValues.Get("DAL_373", "damage", 2), EntityType.TARGET, true) // (HsServer 2026-11-16: the card now says $2)
 			}));
 
 			// ----------------------------------------- SPELL - HUNTER
@@ -544,7 +544,7 @@ namespace SabberStoneCore.CardSets.Standard
 			// --------------------------------------------------------
 			cards.Add("DAL_373ts", new CardDef(new Dictionary<PlayReq, int>() {{PlayReq.REQ_TARGET_TO_PLAY,0}}, new Power
 			{
-				PowerTask = new DamageTask(1, EntityType.TARGET, true)
+				PowerTask = new DamageTask(SabberStoneCore.Loader.CardValues.Get("DAL_373", "damage", 2), EntityType.TARGET, true) // (HsServer 2026-11-16: the card now says $2)
 			}));
 
 			// ----------------------------------------- SPELL - HUNTER
@@ -3305,7 +3305,9 @@ namespace SabberStoneCore.CardSets.Standard
 			// --------------------------------------------------------
 			cards.Add("DAL_613", new CardDef(new Power
 			{
-				PowerTask = ComplexTask.SummonRandomMinionNumberTag(GameTag.COST)
+				// (HsServer 2026-11-16: "a random 2-Cost minion" — the number-from-stack task had no number set: nothing was summoned; live
+				// summons one in every recorded play)
+				PowerTask = ComplexTask.SummonRandomMinion(GameTag.COST, SabberStoneCore.Loader.CardValues.Get("DAL_613", "cost", 2))
 			}));
 
 			// --------------------------------------- MINION - NEUTRAL

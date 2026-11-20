@@ -269,11 +269,14 @@ internal static class UpdateClient
                           $"{lines.Count(l => l.StartsWith("reworded"))} reworded, {lines.Count(l => l.StartsWith("tags"))} with other tags, " +
                           $"{lines.Count(l => l.StartsWith("gone"))} gone (all in changes.txt).");
         foreach (string l in lines.Where(l => l.StartsWith("reworded")).Take(25)) Console.WriteLine("    " + l);
+        // (2026-11-20) the scripts to check against the new texts: script-review.md (PatchReview)
+        try { PatchReview.Write(Program.ProjectRoot(), after, File.ReadAllLines(Path.Combine(after, "changes.txt"))); }
+        catch (Exception e) { Console.WriteLine($"Script review failed: {e.Message}"); }
     }
 
-    private sealed record CardInfo(string Name, string Text, string Tags);
+    internal sealed record CardInfo(string Name, string Text, string Tags);
 
-    private static Dictionary<string, CardInfo> Load(string dir)
+    internal static Dictionary<string, CardInfo> Load(string dir)
     {
         var tags = new Dictionary<int, List<string>>();
         using (var doc = JsonDocument.Parse(File.ReadAllBytes(Path.Combine(dir, "CardTag.json"))))

@@ -601,7 +601,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				{
 					if (c.HandZone.IsFull || !(RandomCard(g, x => x.Type == CardType.MINION && x.Rarity == Rarity.LEGENDARY) is Card m)) return;
 					IPlayable got = Entity.FromCard(c, m, new EntityData { [GameTag.CREATOR] = s.Id });
-					if (Generic.AddHandPhase.Invoke(c, got)) Give(g, s, got, GenericCostLess(V("TIME_613", "less", 1)));
+					if (Generic.AddHandPhase.Invoke(c, got)) GiveCostLess(g, s, got, V("TIME_613", "less", 1));
 				})
 			}));
 			// [TIME_614] Liferender (3) — Battlecry: If your hero's Health changed this turn, deal 6 damage to an enemy minion.

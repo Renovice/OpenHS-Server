@@ -1396,10 +1396,14 @@ namespace SabberStoneCore.Model.Entities
 		/// <summary>HsServer: this player's hand when the mulligan ended (Hex Lord Malacrass), or null.</summary>
 		public List<Card> OpeningHand;
 
+		/// <summary>HsServer: during a Death Phase, the Corpse doubling as it stood when those minions died (Game.DeathProcessingAndAuraUpdate):
+		/// live 20261109-174017 17828 — Falric dying in the batch still doubles the Corpses of that batch, his own included.</summary>
+		internal int? CorpseDoublingInDeaths;
+
 		/// <summary>HsServer: gain Corpses, doubled once per CORPSE_GAINS_DOUBLED (each Falric's aura adds one).</summary>
 		public void GainCorpses(int amount)
 		{
-			amount <<= System.Math.Min(ControllerAuraEffects[HsTag.CORPSE_GAINS_DOUBLED], 16);
+			amount <<= System.Math.Min(CorpseDoublingInDeaths ?? ControllerAuraEffects[HsTag.CORPSE_GAINS_DOUBLED], 16);
 			Corpses += amount;
 		}
 

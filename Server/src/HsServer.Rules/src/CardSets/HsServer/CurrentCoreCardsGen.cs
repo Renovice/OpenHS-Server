@@ -1439,7 +1439,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			{
 				("GBL_001e", '=', 1), ("GBL_002e", '-', 2), ("GBL_003e", '-', 1), ("GBL_004e", '-', 3), ("GBL_005e", '+', 2),
 				("GBL_006e", '=', 2), ("GBL_007e", '=', 10), ("GBL_008e", '-', 4), ("GBL_009e", '=', 0), ("GBL_010e", '=', 3),
-				("GBL_011e", '-', 5), ("GBL_012e", '-', 6), ("GBL_013e", '-', 7),
+				("GBL_011e", '-', 5), ("GBL_012e", '-', 6), ("GBL_013e", '-', 7), ("GBL_016e", '+', 1),
 			};
 			foreach ((string id, char op, int n) in costs)
 				cards.Add(id, new CardDef(new Power
@@ -1483,7 +1483,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			NathriaClasses(cards);
 			EmeraldDream(cards);
 			LostCity(cards); // HsServer: The Lost City of Un'Goro (LostCityCardsGenHs*.cs)
-			TimeTravel(cards); Cataclysm(cards); VioletHold(cards); Whizbang(cards); Vanilla(cards); PathOfArthas(cards); Events(cards); // HsServer: Across the Timeways (TimeTravelCardsGenHs*.cs)
+			TimeTravel(cards); Cataclysm(cards); VioletHold(cards); Whizbang(cards); Vanilla(cards); PathOfArthas(cards); Events(cards); Be(cards); // HsServer: Across the Timeways (TimeTravelCardsGenHs*.cs)
 			Locations(cards);
 			BadlandsTitans(cards);
 			Legacy(cards); // HsServer: the Legacy set's cards that had no script (LEG_ reprints share them)

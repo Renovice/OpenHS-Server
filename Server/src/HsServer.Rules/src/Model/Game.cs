@@ -105,6 +105,9 @@ namespace SabberStoneCore.Model
 		/// List of entity ids of 'Ghostly' entities created by Echo ability.
 		/// </summary>
 		public readonly List<int> GhostlyCards = new List<int>();
+		/// <summary>HsServer (2026-11-20): "… at the end of this turn" effects waiting for this turn's end (Generic.AtEndOfThisTurn): the source's
+		/// id (it may have left play since), its player and the task. Run after the turn's end triggers, then cleared.</summary>
+		public readonly List<(int Source, int Player, Tasks.ISimpleTask Task)> EndOfThisTurn = new List<(int, int, Tasks.ISimpleTask)>();
 
 		/// <summary>
 		/// Gets or sets the index value for identifying the N-th clone of a game. (0-indexed)
@@ -117,7 +120,12 @@ namespace SabberStoneCore.Model
 		/// </summary>
 		/// <value>The index of the next clone.</value>
 		public int NextCloneIndex { get; set; } = 1;
-		internal Util.DeepCloneableRandom Random { get; set; }
+		internal Util.DeepCloneableRandom Random
+		{
+			get => _random;
+			set { _random = value; if (value != null) value.Rolled = () => OnRandomHappened(true); } // HsServer: every roll is known as random
+		}
+		private Util.DeepCloneableRandom _random;
 
 		public void SetRandomSeed(long seed) => Random.SetSeed(seed);
 
@@ -297,9 +305,11 @@ namespace SabberStoneCore.Model
 				[GameTag.CARDTYPE] = (int)CardType.GAME
 			})
 		{
-			Random = gameConfig.RandomSeed is null ?
+			// HsServer (2026-11-20): no seed given: GameConfig.DefaultRandomSeed (the test projects set one, so a test is the same every run)
+			long? seed = gameConfig.RandomSeed ?? GameConfig.DefaultRandomSeed;
+			Random = seed is null ?
 				new Util.DeepCloneableRandom() :
-				new Util.DeepCloneableRandom(gameConfig.RandomSeed.Value);
+				new Util.DeepCloneableRandom(seed.Value);
 			IdEntityDic = new EntityList(75);
 			_gameConfig = gameConfig;
 			Game = this;
@@ -475,6 +485,7 @@ namespace SabberStoneCore.Model
 			OneTurnEffectEnchantments = new List<Enchantment>(game.OneTurnEffectEnchantments.Count);
 			RushMinions.AddRange(game.RushMinions);
 			GhostlyCards.AddRange(game.GhostlyCards);
+			EndOfThisTurn.AddRange(game.EndOfThisTurn);
 			
 			GamesEventManager = new GameEventManager(this);
 
@@ -1098,6 +1109,8 @@ namespace SabberStoneCore.Model
 				{
 					//p.NumTurnsInPlay++;
 					p.NumAttacksThisTurn = 0;
+					// (2026-11-19, live: an Old God's extra action shown last turn goes back to 0 right after its attacks count)
+					if (c == CurrentPlayer && p[GameTag.EXTRA_ATTACKS_THIS_TURN] != 0) p[GameTag.EXTRA_ATTACKS_THIS_TURN] = 0;
 				});
 
 				//c.Hero.NumTurnsInPlay++;
@@ -1218,7 +1231,7 @@ namespace SabberStoneCore.Model
 		{
 			//CurrentPlayer.NumCardsToDraw = 1;
 			// HsServer (TIME_TRAVEL): "You no longer draw a card at the start of your turn" (Chronochiller; live player tag 4316)
-			if (CurrentPlayer[(GameTag)4316] > 0) return;
+			if (CurrentPlayer[(GameTag)4316] > 0 || CurrentPlayer.Hero?.Card.Power?.SkipsTurnDraw == true) return; // (+ a deckless boss: Power.SkipsTurnDraw)
 			// HsServer (2026-10-09): a trigger cancelled this draw (Bob's Tavern: Actions/DalaranHeistGroup5.cs CancelTurnDraw)
 			if (Actions.Generic.TurnDrawCancelled(CurrentPlayer)) return;
 			// HsServer (CATACLYSM): Commander Geddon — "Instead of drawing each turn, Discover a card from your deck"
@@ -1227,7 +1240,8 @@ namespace SabberStoneCore.Model
 				Generic.DiscoverInsteadOfDraw(CurrentPlayer);
 				return;
 			}
-			Generic.Draw(CurrentPlayer);
+			// HsServer (2026-11-20): Discs of Norgannon's "draw from the bottom" picked this turn
+			Generic.Draw(CurrentPlayer, CurrentPlayer[HsTag.DRAW_BOTTOM_TURN] == Turn && CurrentPlayer.DeckZone.Count > 0 ? CurrentPlayer.DeckZone[0] : null);
 
 			//// set next step
 			//NextStep = Step.MAIN_START;
@@ -1284,6 +1298,7 @@ namespace SabberStoneCore.Model
 			ProcessTasks();
 			TaskQueue.EndEvent();
 			DeathProcessingAndAuraUpdate();
+			Actions.Generic.RunEndOfThisTurn(this); // HsServer (2026-11-20): "at the end of this turn" effects
 
 
 			CurrentPlayer.CardsPlayedThisTurn.Clear();
@@ -1579,6 +1594,15 @@ namespace SabberStoneCore.Model
 				}
 			}
 
+			// HsServer (2026-11-16): rule 4a — the Death Creation Step "Looks for all mortally wounded (0 or less Health)/pending destroy
+			// Entities and kills them": a minion brought to 0 Health without damage (a Health loss: Bloated Leech's steal on a damaged
+			// minion) is mortally wounded too, not only one a damage / destroy effect marked (live: the Leech's victims die)
+			foreach (Controller p in _players)
+				if (p != null)
+					foreach (Minion m in p.BoardZone.GetAll())
+						if (!m.ToBeDestroyed && m.Health <= 0 && m[GameTag.DORMANT] == 0)
+							m.ToBeDestroyed = true;
+
 			// HsServer (2026-10-08): the Death Creation Step fixes a hero's death — "If/when Hearthstone runs the Death Creation Step, your
 			// current Hero is mortally wounded or pending destroy, the next time Hearthstone checks for win/loss/death you will lose the
 			// game … even if your Hero is later replaced" (Advanced_rulebook.txt:713; a hero replaced in the same Phase lives: :715-717)
@@ -1615,6 +1639,10 @@ namespace SabberStoneCore.Model
 
 				// HsServer: rules A5 — the dead minions' auras stop now (non-stat ones via the Aura Update (Other)), before
 				// any of their deaths is resolved: Baron Rivendare dying with the board doesn't double their Deathrattles.
+				// (but the Corpses those deaths leave are counted with the doubling the players had as they died: live 20261109-174017 17828,
+				// a dying Falric still doubles them)
+				foreach (Controller cp in new[] { Player1, Player2 })
+					cp.CorpseDoublingInDeaths = cp.ControllerAuraEffects[HsTag.CORPSE_GAINS_DOUBLED];
 				foreach (Minion dead in DeadMinions)
 					dead.OngoingEffect?.Remove();
 				AuraUpdateOther();
@@ -1699,6 +1727,8 @@ namespace SabberStoneCore.Model
 
 					// should remove tags of dead cards for faster cloning
 				}
+				foreach (Controller cp in new[] { Player1, Player2 })
+					cp.CorpseDoublingInDeaths = null;
 				BreakWeaponsBefore(int.MaxValue);
 
 				// HsServer: Reborn — after every Deathrattle of this Death Phase (rules D2, user rule 2026-09-30: Sylvanas
@@ -2223,8 +2253,9 @@ namespace SabberStoneCore.Model
 					       // (2026-10-08: an AREA effect wraps the Silences too — live Smothering Starfish's AE_Shockwave; a buff IMPACT doesn't: live
 					       // Focused Will silences before its BuffImpact)
 					       recorded && prefab != null && prefab.Contains("_AE_", StringComparison.Ordinal) && e is PowerHistoryTagChange { Tag: GameTag.SILENCED, Value: 1 } ||
-					       // (a Silence's own impact wraps the whole Silence: its 1066 pulse, the keywords going, SILENCED — live Royal Librarian)
-					       recorded && prefab != null && prefab.Contains("Silence", StringComparison.OrdinalIgnoreCase) &&
+					       // (a Silence's own impact wraps the whole Silence: its 1066 pulse, the keywords going, SILENCED — live Royal Librarian; a
+					       // Debuff impact too — live Servant of Zuramat BE_228's Impact_Debuff_Humility)
+					       recorded && prefab != null && (prefab.Contains("Silence", StringComparison.OrdinalIgnoreCase) || prefab.Contains("_Debuff_", StringComparison.Ordinal)) &&
 					       e is PowerHistoryTagChange { Tag: GameTag.SILENCED or (GameTag)1066, Value: 1 };
 				case Loader.SubSpells.Role.Heal:
 					return e is PowerHistoryTagChange { Tag: GameTag.PREHEALING, Value: > 0 } || e is PowerHistoryMetaData { Type: MetaDataType.HEALING };

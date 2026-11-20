@@ -834,10 +834,10 @@ namespace SabberStoneCore.CardSets.HsServer
 				Trigger = new Trigger(TriggerType.TURN_START)
 				{
 					EitherTurn = true,
-					TriggerSource = TriggerSource.ENEMY,
+					TriggerSource = TriggerSource.FRIENDLY, // (the burned player's own turn: the player it is on — Trigger.Side)
 					SingleTask = ComplexTask.Create(
 						new CustomTask((g, c, s, t, stack) =>
-							c.Opponent.UsedMana = System.Math.Min(c.Opponent.BaseMana, c.Opponent.UsedMana + V("BT_753", "crystals", 2))),
+							c.UsedMana = System.Math.Min(c.BaseMana, c.UsedMana + V("BT_753", "crystals", 2))),
 						RemoveEnchantmentTask.Task)
 				}
 			}));

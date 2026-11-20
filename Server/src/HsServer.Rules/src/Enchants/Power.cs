@@ -131,6 +131,17 @@ namespace SabberStoneCore.Enchants
 		/// 1-3 — titans-vfx 190857).</summary>
 		public int TitanAbilityEffectIndexBase { get; set; }
 
+		/// <summary>HsServer (2026-11-19): each ability's "after this uses an ability" TRIGGER index when they don't follow base + N (an Old
+		/// God: live C'Thun 3,2,1,0; N'Zoth 1,3,0,2 — in ability order, its RelatedCards order). Null: base + N.</summary>
+		public int[] TitanAbilityEffectIndexes { get; set; }
+
+		/// <summary>HsServer (2026-11-19): an Old God's TRIGGER index for the extra action its first ability of a turn gives it
+		/// (Generic.FinishTitanAbility; live C'Thun 6, N'Zoth 5, Yogg-Saron 11, Y'Shaarj 11).</summary>
+		public int OldGodExtraActionIndex { get; set; }
+
+		/// <summary>HsServer (2026-11-19): the slot an Old God marks its extra action in, when not TAG_SCRIPT_DATA_NUM_2 (Generic.OldGodMark).</summary>
+		public GameTag? OldGodMarkTag { get; set; }
+
 		/// <summary>HsServer (2026-10-08): a deck card that makes its owner start the game as another class (Maestra of the Masquerade): the
 		/// hero is built disguised (Game setup: Generic.DisguiseHero) and this enchantment card (on the player) reveals it.</summary>
 		public string StartsDisguisedWith { get; set; }
@@ -229,6 +240,22 @@ namespace SabberStoneCore.Enchants
 		/// Al'Akir: TAG_SCRIPT_DATA_NUM_1, Herald-upgraded): each neighbour carries this enchantment with that number (live vfx 73135:
 		/// one CATA_153e each, its TAG_SCRIPT_DATA_NUM_1 = the source's) — Generic.SyncAdjacentOnBoard.</summary>
 		public string AdjacentOnBoard { get; set; }
+		/// <summary>HsServer (2026-11-16): a player enchantment that is a charge "your next spell of this school casts twice" (its
+		/// TAG_SCRIPT_DATA_NUM_1 = the school; Therazane's BE_337e2) — Generic.SchoolSpellCastsTwice.</summary>
+		public bool SchoolCastsTwice { get; set; }
+		/// <summary>HsServer (2026-11-19): a player enchantment that is a charge "your next spell casts twice" (Brain of Yogg-Saron's
+		/// BE_009t1e, "this turn": a one-turn enchantment) — spent by the next spell the player plays (Generic.NextSpellCastsTwice).</summary>
+		public bool NextSpellCastsTwice { get; set; }
+		/// <summary>HsServer (2026-11-20): a hero card whose player never draws at the start of their turn, silently (a boss without a deck:
+		/// Commander Bolan — live session-20261007-113244, wiki "Deck: None"; no block, unlike Generic.CancelTurnDraw). Game.MainDraw.</summary>
+		public bool SkipsTurnDraw { get; set; }
+		/// <summary>HsServer (2026-11-16): Assemble's halves for a card that can't be split automatically (Generic.AssembleHalves): its
+		/// first half (makes the Power running a task at its moment) and its second (the effect).</summary>
+		public System.Func<SabberStoneCore.Tasks.ISimpleTask, Power> AssembleWhen { get; set; }
+		public SabberStoneCore.Tasks.ISimpleTask AssembleWhat { get; set; }
+		/// <summary>HsServer (2026-11-19): the first half is the one that aims ("Battlecry: Deal 6 damage to a minion. If it survives,&amp;"
+		/// — Stone Trogg): an Assembled minion takes its target requirements from this card, not from the second half's.</summary>
+		public bool AssembleWhenAims { get; set; }
 
 		/// <summary>HsServer (CATACLYSM): "Whenever you Shatter a card" (Misplaced Pyromancer), in play — run after each split of its owner's
 		/// Shatter card (Generic.ShatterHands).</summary>

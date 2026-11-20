@@ -254,7 +254,7 @@ namespace SabberStoneCore.CardSets.HsServer
 					int slot = c.PlayedFromSlot;
 					if (slot < 0) return;
 					foreach (int i in new[] { slot - 1, slot }.Distinct())
-						if (i >= 0 && i < c.HandZone.Count) Give(g, s, c.HandZone[i], GenericCostLess(V("DINO_137", "less", 1)));
+						if (i >= 0 && i < c.HandZone.Count) GiveCostLess(g, s, c.HandZone[i], V("DINO_137", "less", 1));
 				})
 			}));
 			// [DINO_138] Diabolus Rex (6) — Kindred: Deal 6 damage to your opponent's left and right-most minions.
@@ -538,7 +538,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			// [TLC_100] Elise the Navigator (4) — Battlecry: If your deck started with 10 cards of different Costs, craft a custom location.
 			cards.Add("TLC_100", new CardDef(new Power
 			{
-				PowerTask = ComplexTask.If((g, c, s) => c.DeckCards.Select(x => x.Cost).Distinct().Count() >= V("TLC_100", "costs", 10),
+				PowerTask = ComplexTask.If((g, c, s) => Generic.DeckStartedDistinctCosts(c) >= V("TLC_100", "costs", 10), // ("started with")
 					new CustomTask((g, c, s, t, stack) => CraftLocation(c, (IPlayable)s)))
 			}));
 			foreach (string loc in new[] { "TLC_100t1", "TLC_100t2", "TLC_100t3" }) cards.Add(loc, new CardDef(new Power { NoScript = true }));
@@ -661,7 +661,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				DeathrattleTask = new CustomTask((g, c, s, t, stack) =>
 				{
 					var minions = c.Opponent.HandZone.GetAll().Where(p => Generic.IsMinionCard(p)).ToList();
-					if (minions.Count > 0) Give(g, s, minions[g.Random.Next(minions.Count)], GenericCostLess(V("TLC_244", "less", 2)));
+					if (minions.Count > 0) GiveCostLess(g, s, minions[g.Random.Next(minions.Count)], V("TLC_244", "less", 2));
 				})
 			}));
 			// [TLC_247] Primal Sabretooth (4) — Stealth. After this attacks and kills a minion, get a copy of it.

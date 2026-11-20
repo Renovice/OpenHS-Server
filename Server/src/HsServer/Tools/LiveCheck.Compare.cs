@@ -77,7 +77,7 @@ internal static partial class LiveCheck
         if (p is Hero hero && hero == hero.Controller?.Hero && (hero.Health <= 0 || hero.ToBeDestroyed)) zone = (int)Zone.GRAVEYARD;
         int Safe(GameTag t) { try { return p[t]; } catch (Exception) { return 0; } }
         return new ESnap(p.Card.Id, p.Controller?.PlayerId ?? 0, NormZone(zone), (int)p.Card.Type, Safe(GameTag.ATK), Safe(GameTag.HEALTH),
-            Safe(GameTag.DAMAGE), Safe(GameTag.ARMOR), Safe(GameTag.DURABILITY), p.Cost, KwMask(Safe), true);
+            Safe(GameTag.DAMAGE), p is Character armored ? armored.Armor : Safe(GameTag.ARMOR), Safe(GameTag.DURABILITY), p.Cost, KwMask(Safe), true); // (Armor: the hero's own, not a hero card's printed one)
     }
 
     /// <summary>The attributes that changed between two snapshots of one entity.</summary>
@@ -158,7 +158,9 @@ internal static partial class LiveCheck
     {
         var s = new Dictionary<int, ESnap>();
         foreach (var (liveId, ourId) in r.LiveToOurs)
-            if (r.G.IdEntityDic.TryGetValue(ourId, out IPlayable p) && p is not SabberStoneCore.Model.Entities.Enchantment) s[liveId] = OurSnap(p);
+            if (r.G.IdEntityDic.TryGetValue(ourId, out IPlayable p) && p is not SabberStoneCore.Model.Entities.Enchantment)
+                // (an untouchable permanent's stats are hidden live — 0 — and given 1 Health here only so it survives the death check)
+                s[liveId] = r.NoHealth.Contains(ourId) ? OurSnap(p) with { Atk = 0, Health = 0, Damage = 0 } : OurSnap(p);
         return s;
     }
 
@@ -172,7 +174,7 @@ internal static partial class LiveCheck
             if (!r.G.IdEntityDic.TryGetValue(r.LiveToOurs[liveId], out IPlayable p)) continue;
             var c = Changed(b, OurSnap(p));
             if (r.Placeholders.Contains(p.Id)) c.Remove("card");
-            if (r.NoHealth.Contains(p.Id))
+            if (r.NoHealth.Contains(p.Id) && p is Minion still && still.Untouchable) // (2026-11-20: until it becomes a real minion — a Violet Prison)
                 foreach (string stat in new[] { "ATK", "HEALTH", "DAMAGE" }) c.Remove(stat);
             if (c.Count > 0) o.Changes[liveId] = c;
         }
@@ -246,8 +248,10 @@ internal static partial class LiveCheck
         var liveLeft = new List<Outcome.NewCard>();
         foreach (var n in live.New.OrderBy(n => n.Card.Length == 0 ? 1 : 0))
         {
+            // (2026-11-16: ours copying a hidden card the rebuild filled with its placeholder — Psychic Conjurer copying the opponent's
+            // deck — can't know the card: any live card in that place)
             int i = oursLeft.FindIndex(x => x.Side == n.Side && x.Zone == n.Zone &&
-                                            (n.Card.Length == 0 || x.Stats == n.Stats && Equivalent(x.Card, n.Card)));
+                                            (n.Card.Length == 0 || x.Card == Placeholder || x.Stats == n.Stats && Equivalent(x.Card, n.Card)));
             if (i >= 0) oursLeft.RemoveAt(i); else liveLeft.Add(n);
         }
         if (liveLeft.Count > 0 || oursLeft.Count > 0)
@@ -316,7 +320,7 @@ internal static partial class LiveCheck
             if (l.Zone == (int)Zone.PLAY)
             {
                 bool character = l.Type is (int)CardType.MINION or (int)CardType.HERO or (int)CardType.LOCATION;
-                if (r.NoHealth.Contains(r.LiveToOurs[liveId])) continue; // (an untouchable permanent's hidden stats)
+                if (r.NoHealth.Contains(r.LiveToOurs[liveId]) && r.G.IdEntityDic.TryGetValue(r.LiveToOurs[liveId], out IPlayable hidden) && hidden is Minion { Untouchable: true }) continue; // (an untouchable permanent's hidden stats)
                 if ((character || l.Type == (int)CardType.WEAPON) && l.Atk != o.Atk) m.Add($"{who} ATK live {l.Atk} ours {o.Atk}{Modifiers(r, liveId)}");
                 if (character && l.Health - l.Damage != o.Health - o.Damage) m.Add($"{who} health live {l.Health - l.Damage} ours {o.Health - o.Damage}");
                 if (l.Type == (int)CardType.HERO && l.Armor != o.Armor) m.Add($"{who} ARMOR live {l.Armor} ours {o.Armor}");

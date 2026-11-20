@@ -93,7 +93,7 @@ internal static partial class LiveCheck
     }
 
     /// <summary>The live position just before <paramref name="a"/>, built in a new engine game.</summary>
-    private static Rebuilt Rebuild(LiveAction a, long seed)
+    private static Rebuilt Rebuild(LiveAction a, long seed, bool leftDeckAtBottom = false)
     {
         var live = a.Before;
         LiveEntity sourceView = null;
@@ -237,6 +237,15 @@ internal static partial class LiveCheck
         StartingDecks(a, g, live, placeholder);
         foreach (var (e, card, ph) in made.Where(m => m.E.Id >= a.FirstGenerated).OrderBy(m => m.E.Id))
             entityOf[e.Id] = SabberStoneCore.Model.Entities.Entity.FromCard(Ours(PlayerOf(e)), card);
+        // (2026-11-16) an Assembled minion: live's half tags name the card whose half it took (Generic.AssembledCard)
+        foreach (var (e, card, ph) in made)
+            if (e[SabberStoneCore.Actions.Generic.ASSEMBLED_MINION] > 0 && entityOf.TryGetValue(e.Id, out IPlayable asm))
+            {
+                Card first = Cards.FromAssetId(e[SabberStoneCore.Actions.Generic.CRAFTABLE_FIRST_HALF_DBID]);
+                Card second = Cards.FromAssetId(e[SabberStoneCore.Actions.Generic.CRAFTABLE_SECOND_HALF_DBID]);
+                if (first != null || second != null)
+                    asm.Card = SabberStoneCore.Actions.Generic.AssembledCard(card, first ?? card, second ?? card);
+            }
 
         var deck = new Dictionary<int, List<(LiveEntity, IPlayable)>> { [1] = new(), [2] = new() };
         // (a graveyard in the order things went there — the last played / died last: "the last minions that died this turn" read it
@@ -257,6 +266,8 @@ internal static partial class LiveCheck
                 case (int)Zone.HAND:
                     if (c.HandZone.IsFull) throw new NotRebuilt("hand over its limit");
                     c.HandZone.Add(p);
+                    // (2026-11-16) an Echo copy (GHOSTLY): the engine discards it at the end of the turn (Game.GhostlyCards)
+                    if (e[GameTag.GHOSTLY] > 0) { p[GameTag.GHOSTLY] = 1; g.GhostlyCards.Add(p.Id); }
                     break;
                 case (int)Zone.DECK:
                     deck[PlayerOf(e)].Add((e, p));
@@ -293,12 +304,17 @@ internal static partial class LiveCheck
             }
         }
         // the decks: what live took from the deck during the action on top, in that order (DeckZone's top is its last card)
+        // (or, the bottom variant: at the bottom, in the order they left — an effect taking from the bottom)
         foreach (int pid in new[] { 1, 2 })
         {
+            if (leftDeckAtBottom)
+                foreach (int leftId in a.LeftDeck)
+                    if (deck[pid].FirstOrDefault(x => x.Item1.Id == leftId) is { Item2: { } bp }) Ours(pid).DeckZone.Add(bp);
             foreach (var (_, p) in deck[pid].Where(x => !a.LeftDeck.Contains(x.Item1.Id)))
                 Ours(pid).DeckZone.Add(p);
-            foreach (int leftId in Enumerable.Reverse(a.LeftDeck))
-                if (deck[pid].FirstOrDefault(x => x.Item1.Id == leftId) is { Item2: { } p }) Ours(pid).DeckZone.Add(p);
+            if (!leftDeckAtBottom)
+                foreach (int leftId in Enumerable.Reverse(a.LeftDeck))
+                    if (deck[pid].FirstOrDefault(x => x.Item1.Id == leftId) is { Item2: { } p }) Ours(pid).DeckZone.Add(p);
         }
 
         // what the engine remembers of the game so far: cards played (and this turn's), minions died / summoned, cards added to hand
@@ -318,6 +334,9 @@ internal static partial class LiveCheck
                     object entry = new PlayHistoryEntry(p, target);
                     SetField(entry, "Cost", h.Cost);
                     SetField(entry, "SourceController", h.Player);
+                    // (2026-11-16) the card as it was played, not as it is now (a Hunting Mastiff Hexed later is not a "played Hexfrog":
+                    // Joymancer Jepetto, "minions you've played this game")
+                    if (CardFor(h.Card) is Card playedCard) entry.GetType().GetField("SourceCard").SetValue(entry, playedCard);
                     c.PlayHistory.Add((PlayHistoryEntry)entry);
                     if (h.Turn == turnNow) c.CardsPlayedThisTurn.Add(p.Card);
                     break;
@@ -335,6 +354,23 @@ internal static partial class LiveCheck
         g.Turn = turnNow;
         FillHandCounters(a, r, live);
         FillHeroDamage(a, r);
+        // (2026-11-16) "If you've Forged a card this game" (Ignis): each player's forged cards — live tags them FORGED (3011), in any zone
+        foreach (int pid in new[] { 1, 2 })
+            Ours(pid)[HsTag.FORGES_THIS_GAME] = live.Values.Count(e => e[(GameTag)3011] > 0 && e[GameTag.CONTROLLER] == pid);
+        // (2026-11-20) Agamaggan's pending "next card costs your opponent's Health (up to 10)": live marks it AGAMAGGAN_CURSE on the
+        // opponent's hero; ours keeps the cap on the player (HsTag.NEXT_CARD_COSTS_OPPONENT_HEALTH)
+        foreach (int pid in new[] { 1, 2 })
+            if (Ours(pid == 1 ? 2 : 1).Hero is Hero cursed && live.Values.Any(e => e[SabberStoneCore.Actions.Generic.AGAMAGGAN_CURSE] > 0 && e[GameTag.CONTROLLER] != pid &&
+                                                                                    e[GameTag.CARDTYPE] == (int)CardType.HERO && e[GameTag.ZONE] == (int)Zone.PLAY))
+            {
+                Ours(pid)[HsTag.NEXT_CARD_COSTS_OPPONENT_HEALTH] = SabberStoneCore.Loader.CardValues.Get("EDR_489", "up to", 10);
+                cursed[SabberStoneCore.Actions.Generic.AGAMAGGAN_CURSE] = 1;
+            }
+        // (2026-11-20) Husk's hero Deathrattle "Spend up to N Corpses to resurrect": live points the hero's PLAYER_DEATHRATTLE at the
+        // TIME_618e enchantment (session-20261106-001808 167771); ours keeps the cap on the player (HsTag.HERO_RESURRECT_CORPSES)
+        foreach (LiveEntity h in live.Values.Where(e => e[GameTag.CARDTYPE] == (int)CardType.HERO && e[GameTag.ZONE] == (int)Zone.PLAY && e[(GameTag)4398] > 0)) // (client PLAYER_DEATHRATTLE)
+            if (a.CardOf(h[(GameTag)4398]).StartsWith("TIME_618", StringComparison.Ordinal) && PlayerOf(h) is 1 or 2)
+                Ours(PlayerOf(h))[HsTag.HERO_RESURRECT_CORPSES] = SabberStoneCore.Loader.CardValues.Get("TIME_618", "corpses", 20);
         FillElementals(a, r, players);
         // (a minion that died stays marked in the graveyard — the engine's "died this game / this turn": Resurrect's requirement, "a
         // friendly X died this turn" walk the graveyard for it; a discarded one isn't)
@@ -417,8 +453,10 @@ internal static partial class LiveCheck
                     }
                     return v;
                 }
+                // (2026-11-16) its controller is live's (Wild Magic: each player's DALA_856e is that player's, though one card made both)
                 SabberStoneCore.Actions.Generic.AddEnchantmentBlock(g, card, creator, target,
-                    captured == null ? ScriptData(GameTag.TAG_SCRIPT_DATA_NUM_1) : -1, ScriptData(GameTag.TAG_SCRIPT_DATA_NUM_2));
+                    captured == null ? ScriptData(GameTag.TAG_SCRIPT_DATA_NUM_1) : -1, ScriptData(GameTag.TAG_SCRIPT_DATA_NUM_2),
+                    owner: en[GameTag.CONTROLLER] is 1 or 2 ? Ours(en[GameTag.CONTROLLER]) : null);
                 // (the new enchantment is live's: its triggers act as live's did)
                 if (target.AppliedEnchantments?.LastOrDefault(x => x.Card.Id == card.Id && x.Id > mark) is { } added)
                 {
@@ -466,6 +504,20 @@ internal static partial class LiveCheck
         var fitting = r.LiveToOurs.Select(kv => (E: live.GetValueOrDefault(kv.Key), P: g.IdEntityDic.TryGetValue(kv.Value, out IPlayable fp) ? fp : null,
                                                  Visible: !r.Placeholders.Contains(kv.Value)))
             .Where(x => x.E != null && x.P != null && x.E.Visible && x.Visible).ToList();
+        // (2026-11-20) a Spellburst live shows spent — the keyword on the card, SPELLBURST 0 on the entity — is gone: its one-shot
+        // trigger off (Spellburst triggers once, Trigger.RemoveAfterTriggered); else Shooting Star's 3 Asteroids came again
+        foreach (var (e, p, _) in fitting)
+            if (p.Zone?.Type == Zone.PLAY && p.Card[HsTag.SPELLBURST] > 0 && e[HsTag.SPELLBURST] == 0 &&
+                p.ActivatedTrigger is { RemoveAfterTriggered: true, Type: TriggerType.AFTER_CAST } burst)
+            {
+                burst.Remove();
+                p[HsTag.SPELLBURST] = 0;
+            }
+        // (2026-11-20) a whole Shatter card already in hand has split and recombined, or a full hand kept it whole (it splits as it
+        // enters the hand; wiki Shatter): it doesn't split again. Hidden ones too (a recombined card the viewer never saw).
+        foreach (int ours in r.LiveToOurs.Values)
+            if (g.IdEntityDic.TryGetValue(ours, out IPlayable sp) && sp.Zone?.Type == Zone.HAND && sp[SabberStoneCore.Actions.Generic.SHATTER] > 0)
+                sp[SabberStoneCore.Actions.Generic.SHATTER] = 0;
         foreach (var (e, p, _) in fitting)
             if (p is Weapon w)
             {
@@ -495,6 +547,15 @@ internal static partial class LiveCheck
             if (!off) break;
             g.AuraUpdate();
         }
+        // (2026-11-16) fitting sets Damage before Health: on the way a minion can read as lethal and get marked to die (the attack then
+        // ends in preparation — ours "nothing happened"). A character alive on live, above 0 Health in ours, isn't dying.
+        foreach (var (e, p, _) in fitting)
+            if (p is Character ch && ch.Zone?.Type == Zone.PLAY && ch.Health > 0 && e[GameTag.TO_BE_DESTROYED] == 0 && ch.ToBeDestroyed)
+            {
+                ToBeDestroyedField?.SetValue(ch, false);
+                MortallyWoundedField?.SetValue(ch, false);
+                if (ch is Minion dm) g.DeadMinions.Remove(dm);
+            }
         // (a live permanent — UNTOUCHABLE, or no Health at all: a Tombs of Terror tomb — that our card makes a plain minion: it would die)
         foreach (var (e, p, _) in fitting)
             if (p is Minion m && !(p is Location) && p.Zone?.Type == Zone.PLAY)
@@ -633,6 +694,9 @@ internal static partial class LiveCheck
     private static readonly System.Reflection.FieldInfo ToBeDestroyedField =
         typeof(SabberStoneCore.Model.Entities.Entity).GetField("_toBeDestroyed", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
+    private static readonly System.Reflection.FieldInfo MortallyWoundedField =
+        typeof(Playable).GetField("MortallyWounded", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
+
     private static readonly System.Reflection.FieldInfo CostManagerField =
         typeof(Playable).GetField("_costManager", System.Reflection.BindingFlags.NonPublic | System.Reflection.BindingFlags.Instance);
 
@@ -742,6 +806,9 @@ internal static partial class LiveCheck
             var t = (GameTag)tag;
             try
             {
+                // (2026-11-16) Armor: the hero's own (Character.Armor), not the indexer's — that falls back to a hero card's printed
+                // ARMOR (Shadowcrafter Scabbs 5), so "already 5" left ours at 0 and damage skipped the Armor
+                if (t == GameTag.ARMOR && ours is Character armored) { if (armored.Armor != value) armored.Armor = value; continue; }
                 if (ours[t] != value) ours[t] = value;
             }
             catch (Exception) { /* a tag the engine can't take on this kind of entity */ }
@@ -780,6 +847,9 @@ internal static partial class LiveCheck
         foreach (GameTag k in Keywords)
         {
             if (k is GameTag.SILENCED or GameTag.DORMANT) continue;
+            // (2026-11-16) a card in hand keeps what is printed on it: live tags a hand card's CANT_ATTACK only when it is played
+            // (Ancient Watcher, Ragnaros: 15 DIFFERS "kw live =CANT_ATTACK, ours unchanged" were the rebuild clearing it)
+            if (ours.Zone?.Type == Zone.HAND && ours.Card[k] > 0) continue;
             if (!e.Tags.ContainsKey((int)k))
                 try { if (ours[k] != 0) ours[k] = 0; } catch (Exception) { }
         }
@@ -889,6 +959,7 @@ internal static partial class LiveCheck
             int pick = choice.Choices[0];
             LiveChoice lc = liveChoice < a.Choices.Count ? a.Choices[liveChoice++] : null;
             string want = null;
+            int livePicked = 0;
             if (lc != null)
             {
                 int picked = lc.Picked?.FirstOrDefault() ?? 0;
@@ -896,8 +967,12 @@ internal static partial class LiveCheck
                     // the opponent's pick: the offered entity that went somewhere (not to the graveyard)
                     picked = lc.Entities.FirstOrDefault(id => a.After.TryGetValue(id, out var x) && x[GameTag.ZONE] is (int)Zone.HAND or (int)Zone.PLAY or (int)Zone.DECK or (int)Zone.SECRET);
                 if (picked != 0) want = Canon(a.CardOf(picked, after: true));
+                livePicked = picked;
             }
-            int match = want == null ? 0 : choice.Choices.FirstOrDefault(id => g.IdEntityDic.TryGetValue(id, out IPlayable o) && o.Card.Id == want);
+            // (2026-11-20) a pick of something already in the game (a TARGET choice: Flame Shock's second enemy) is that very entity — two
+            // copies of a card on the board are two choices (20261021-194927 203917: BE_550 #163, not the other BE_550)
+            int match = livePicked != 0 && r.LiveToOurs.TryGetValue(livePicked, out int same) && choice.Choices.Contains(same) ? same : 0;
+            if (match == 0 && want != null) match = choice.Choices.FirstOrDefault(id => g.IdEntityDic.TryGetValue(id, out IPlayable o) && o.Card.Id == want);
             if (match != 0) pick = match;
             else
             {

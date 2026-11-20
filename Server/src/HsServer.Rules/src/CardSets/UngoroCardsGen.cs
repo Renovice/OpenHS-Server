@@ -683,7 +683,8 @@ namespace SabberStoneCore.CardSets
 			// --------------------------------------------------------
 			cards.Add("UNG_846", new CardDef(new Power
 			{
-				DeathrattleTask = ComplexTask.Create(
+				// (HsServer 2026-11-16: the card is now a Battlecry; the 2021 script was a Deathrattle — StaleTriggerAuditTests)
+				PowerTask = ComplexTask.Create(
 					new RandomCardTask(CardType.SPELL, CardClass.MAGE),
 					new AddStackTo(EntityType.HAND))
 			}));
@@ -1628,7 +1629,7 @@ namespace SabberStoneCore.CardSets
 			// --------------------------------------------------------
 			cards.Add("UNG_057t1", new CardDef(new Dictionary<PlayReq, int>() {{PlayReq.REQ_TARGET_TO_PLAY,0}}, new Power
 			{
-				PowerTask = new DamageTask(1, EntityType.TARGET, true)
+				PowerTask = new DamageTask(SabberStoneCore.Loader.CardValues.Get("UNG_057t1", "damage", 2), EntityType.TARGET, true) // (HsServer 2026-11-16: the card now says $2; live deals 2)
 			}));
 
 			// ------------------------------------------ SPELL - ROGUE

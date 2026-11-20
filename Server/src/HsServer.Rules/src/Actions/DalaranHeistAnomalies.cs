@@ -49,7 +49,7 @@ namespace SabberStoneCore.Actions
 		{
 			if (enchantment == null || creator == null) return;
 			foreach (Controller p in new[] { creator.Controller, creator.Controller.Opponent })
-				AddEnchantmentBlock(g, enchantment, creator, p, 0, 0, 0, owner: p);
+				AddEnchantmentBlock(g, enchantment, creator, p, 0, 0, 0); // (live: CONTROLLER = the anomaly's player on both; whose = Trigger.Side)
 		}
 
 		/// <summary>

@@ -49,9 +49,9 @@ namespace SabberStoneCore.Model
 
 		/// <summary>HsServer: each target requirement with its check, in the card's order: a target must pass all of them, and
 		/// the first it fails is the error the client shows (a multicast predicate only returned its last check's result).</summary>
-		public List<(PlayReq Req, TargetingPredicate Check)> TargetChecks { get; } = new List<(PlayReq, TargetingPredicate)>();
+		public List<(PlayReq Req, TargetingPredicate Check)> TargetChecks { get; private set; } = new List<(PlayReq, TargetingPredicate)>();
 		/// <summary>HsServer: each play requirement with its check (the first failing one is the option's error).</summary>
-		public List<(PlayReq Req, AvailabilityPredicate Check)> PlayChecks { get; } = new List<(PlayReq, AvailabilityPredicate)>();
+		public List<(PlayReq Req, AvailabilityPredicate Check)> PlayChecks { get; private set; } = new List<(PlayReq, AvailabilityPredicate)>();
 
 		private void AddTargetCheck(PlayReq req, TargetingPredicate check)
 		{
@@ -444,6 +444,9 @@ namespace SabberStoneCore.Model
 					case PlayReq.REQ_LEGENDARY_TARGET:
 						AddTargetCheck(requirement.Key, TargetingPredicates.ReqLegendaryTarget);
 						break;
+					case PlayErrors.REQ_NOT_LEGENDARY_TARGET:
+						AddTargetCheck(requirement.Key, TargetingPredicates.ReqNotLegendaryTarget);
+						break;
 					case PlayReq.REQ_TARGET_FOR_COMBO:
 						needsTarget = true;
 						TargetingAvailabilityPredicate += TargetingPredicates.ReqTargetForCombo;
@@ -595,6 +598,10 @@ namespace SabberStoneCore.Model
 
 		internal void SetPlayRequirements(Dictionary<PlayReq, int> playReqs)
 		{
+			// (2026-11-19) from nothing: a Clone (Assembled, crafted, sized cards) shares its base's lists and keeps its flags — without this it
+			// kept the base's target (an Assembled Stone Trogg with an end-of-turn first half still asked for one) and added to its base's checks
+			TargetChecks = new List<(PlayReq, TargetingPredicate)>(); PlayChecks = new List<(PlayReq, AvailabilityPredicate)>();
+			TargetingPredicate = null; TargetingAvailabilityPredicate = null; PlayAvailabilityPredicate = null; MustHaveTargetToPlay = false; TargetingType = TargetingType.None;
 			PlayRequirements = playReqs;
 			bool needsTarget = false;
 			TargetingType type = TargetingType.All;
@@ -661,6 +668,9 @@ namespace SabberStoneCore.Model
 					break;
 				case PlayReq.REQ_LEGENDARY_TARGET:
 					AddTargetCheck(requirement.Key, TargetingPredicates.ReqLegendaryTarget);
+					break;
+				case PlayErrors.REQ_NOT_LEGENDARY_TARGET:
+					AddTargetCheck(requirement.Key, TargetingPredicates.ReqNotLegendaryTarget);
 					break;
 				case PlayReq.REQ_TARGET_FOR_COMBO:
 					needsTarget = true;
@@ -880,7 +890,7 @@ namespace SabberStoneCore.Model
 
 		/// <summary>HsServer (TITANS): a Titan — a minion with its own TITAN keyword (2772; the loader drops it where it is only
 		/// mentioned) and its ability spells (Model.Cards.TitanAbilities). Wiki Titan: "Each Titan has 3 activated abilities."</summary>
-		public bool IsTitan => Type == CardType.MINION && this[(GameTag)2772] > 0 && Cards.TitanAbilities(this).Length > 0;
+		public bool IsTitan => Type == CardType.MINION && (this[(GameTag)2772] > 0 || this[(GameTag)4754] > 0) && Cards.TitanAbilities(this).Length > 0; // (and an Old God, OLD_GOD 4754: the same activatable minion, four abilities)
 
 		public bool HasClass(CardClass cls)
 		{
@@ -1083,6 +1093,10 @@ namespace SabberStoneCore.Model
 				return target is Location location && !location.ToBeDestroyed && FailedTargetCheck(target) == 0;
 
 			if (target.Card.Untouchable || target is Minion { Untouchable: true }) // HsServer: Dormant
+				return false;
+			// HsServer (2026-11-17): a Location is no character — Advanced_rulebook.txt:1025 "Locations, Permanents, and Dormant minions can only
+			// be the targets of effects if that is specified" (live Stone Trogg BE_994: an enemy Location alone, no target offered)
+			if (target is Location)
 				return false;
 
 			if ((target.HasStealth || target.IsImmune) && target.Controller != c)

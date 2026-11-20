@@ -344,8 +344,7 @@ namespace SabberStoneCore.CardSets.HsServer
 		}
 
 		/// <summary>"If you've Excavated twice, …": the check on the card itself and the branch (the hand glow finds it).</summary>
-		private static ISimpleTask IfExcavatedTwice(ISimpleTask then) =>
-			ComplexTask.Create(new ConditionTask(EntityType.SOURCE, SelfCondition.ExcavatedTwice), new FlagTask(true, then));
+		private static ISimpleTask IfExcavatedTwice(ISimpleTask then) => ComplexTask.If((g, c, s) => SelfCondition.ExcavatedTwice.Eval(s), then);
 
 		// The 8 Bonus Effects (wiki Bonus effect: "Taunt, Windfury, Divine Shield, Poisonous, Elusive, Rush, Lifesteal, or Reborn").
 		// (the Bonus Effects: Generic.BonusEffectKeywords, Actions/WildWest.cs)

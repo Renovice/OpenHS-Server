@@ -1,4 +1,4 @@
-// HsServer addition (not upstream SabberStone).
+﻿// HsServer addition (not upstream SabberStone).
 namespace SabberStoneCore.Enums
 {
 	/// <summary>
@@ -420,7 +420,15 @@ namespace SabberStoneCore.Enums
 		/// <summary>Minion: the player (PlayerId) whose Controller.SummonedThisGame counted it when it was summoned (Astral
 		/// Automaton's "each other … you've summoned": it is one of them only when it was counted for its controller).</summary>
 		public const GameTag SUMMON_COUNTED_FOR = (GameTag)990238;
-		// (990239-990249: free for the TITANS card writers; add them here)
+		/// <summary>(2026-11-19) Old Gods (BE): the 4th ability entity (Old Gods have four: Generic.TitanAbility).</summary>
+		public const GameTag TITAN_ABILITY_ENTITY_4 = (GameTag)990239;
+		/// <summary>(2026-11-19) Player: the turn Mastermind Yogg-Saron takes for them (its "Once per game": set once, never cleared).</summary>
+		public const GameTag YOGG_TURN = (GameTag)990240;
+		/// <summary>(2026-11-20) Player: the turn whose start-of-turn draw comes from the bottom of the deck (Discs of Norgannon's "Shift the Discs").</summary>
+		public const GameTag DRAW_BOTTOM_TURN = (GameTag)990241;
+		/// <summary>(2026-11-20) A boss quest's growth count — Commander Bolan's quests (internal: live sends no such tag).</summary>
+		public const GameTag QUEST_GROWN = (GameTag)990242;
+		// (990243-990249: free for the TITANS card writers; add them here)
 
 		// ---------------------------------------------------------------- WILD_WEST (Showdown in the Badlands, set 1892): 990250-990299
 		// (Actions/WildWest.cs)
@@ -449,6 +457,12 @@ namespace SabberStoneCore.Enums
 		// ---------------------------------------------------------------- WHIZBANG (990300-990349)
 		/// <summary>Player: the runes of its starting deck (bit 1 Blood, 2 Frost, 4 Unholy; Generic.RecordStartingDecks) + 8 = recorded.</summary>
 		public const GameTag DECK_STARTED_RUNES = (GameTag)990300;
+		/// <summary>(2026-11-16) the starting deck's number of different Costs / of spells, +1 (0 = not recorded): "If your deck started
+		/// with 10 cards of different Costs" (Elise the Navigator), "If your deck started with no spells" (Hexmarshal).</summary>
+		public const GameTag DECK_STARTED_DISTINCT_COSTS = (GameTag)995506, DECK_STARTED_SPELLS = (GameTag)995507;
+		/// <summary>(2026-11-16) Minion: its stats beyond the printed ones while Dormant (Attack / Health, + 1 000 000; 0 = none): a Dormant minion
+		/// shows its printed stats and gets its buffs back when it awakens (Generic.SleepStats).</summary>
+		public const GameTag DORMANT_SLEPT_ATK = (GameTag)995508, DORMANT_SLEPT_HEALTH = (GameTag)995509;
 		/// <summary>Minion: Pro Gamer's pick (1 Rock, 2 Paper, 3 Scissors).</summary>
 		public const GameTag RPS_PICK = (GameTag)990301;
 		/// <summary>Minion: Dr. Stitchensew's stitched minions (dbf ids, the next one first).</summary>
@@ -738,5 +752,9 @@ namespace SabberStoneCore.Enums
 		/// "start of your turn" effect offers before the turn's draw (Sphere of Sapience, live-20261002 session-20261002-204752:
 		/// the choice in MAIN_START_TRIGGERS, NEXT_STEP MAIN_START and the draw after the pick). Game.MainStartTriggers / Process.</summary>
 		public const GameTag STEP_AFTER_CHOICE = (GameTag)990900;
+		/// <summary>Player (BE_771 Tentacle Lash, user 2026-11-20): how many times its hero has attacked since Tentacle Lash was
+		/// cast — the player-wide Cost discount on C'Thun, applied to every copy wherever it enters hand or deck, not just the ones
+		/// held when it was cast. No client tag known for this; not recorded live.</summary>
+		public const GameTag TENTACLE_LASH_CTHUN_DISCOUNT = (GameTag)990901;
 	}
 }

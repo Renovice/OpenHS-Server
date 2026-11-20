@@ -60,6 +60,7 @@ namespace SabberStoneCore.Actions
 		public static int AttacksPerTurn(ICharacter c)
 		{
 			int extra = c is Minion m && m[HsTag.EXTRA_ATTACKS_TURN] == m.Game.Turn ? m[HsTag.EXTRA_ATTACKS] : 0; // (SPACE: Exarch Akama)
+			if (c is Minion og && og[OLD_GOD] > 0 && og[GameTag.EXTRA_ATTACKS_THIS_TURN] > 0) extra += og[GameTag.EXTRA_ATTACKS_THIS_TURN]; // (2026-11-19: an Old God's first ability — FinishTitanAbility)
 			if (c[GameTag.MEGA_WINDFURY] > 0) return 4 + extra;
 			if (!c.HasWindfury) return 1 + extra;
 			return 2 + extra;

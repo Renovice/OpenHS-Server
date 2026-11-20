@@ -185,9 +185,12 @@ namespace SabberStoneCore.Actions
 				    // cast triggers, history and counters run once, in PlaySpell (wiki Cast spell: a spell cast by an effect "is not
 				    // considered to have been cast by the player for the purposes of triggers or game history").
 				    // (HsServer EMERALD_DREAM: Tyrande's "The next 3 spells you play cast twice" — a charge per played spell)
+				    // (2026-11-16 Therazane: the next spell of each school — its charge spent whatever else doubles it)
+				    bool schoolTwice = !castByEffect && SchoolSpellCastsTwice(c, spell);
+				    bool nextTwice = !castByEffect && NextSpellCastsTwice(c); // (2026-11-19 Brain of Yogg-Saron)
 				    bool playedTwice = !castByEffect && c[HsTag.PLAYED_SPELLS_CAST_TWICE] > 0;
 				    if (playedTwice) c[HsTag.PLAYED_SPELLS_CAST_TWICE] = c[HsTag.PLAYED_SPELLS_CAST_TWICE] - 1;
-				    bool twiceByOthers = playedTwice || c[HsTag.SPELLS_CAST_TWICE] > 0 || spell[(GameTag)1635] == 1 && c.ControllerAuraEffects[HsTag.ARCANE_SPELLS_CAST_TWICE] > 0 ||
+				    bool twiceByOthers = playedTwice || schoolTwice || nextTwice || c[HsTag.SPELLS_CAST_TWICE] > 0 || spell[(GameTag)1635] == 1 && c.ControllerAuraEffects[HsTag.ARCANE_SPELLS_CAST_TWICE] > 0 ||
 				        CastsTwiceNow(spell) || CheapSpellCastsTwice(c, spell) || ExactCostSpellCastsTwice(c, spell) || spell[HsTag.SPELL_CASTS_TWICE] > 0;
 				    // (HsServer CATACLYSM: Sinestra — "Your spells from other classes cast twice"; live vfx 98999-99078: no pause between)
 				    bool twiceOtherClass = c.ControllerAuraEffects[HsTag.OTHER_CLASS_SPELLS_CAST_TWICE] > 0 && !spell.Card.HasClass(c.HeroClass) &&
@@ -198,8 +201,10 @@ namespace SabberStoneCore.Actions
 				    bool stormswell = spell.Card.HasOverload && c.ControllerAuraEffects[OVERLOAD_SPELLS_EXTRA_CASTS] > repeats;
 				    if (stormswell) repeats = c.ControllerAuraEffects[OVERLOAD_SPELLS_EXTRA_CASTS];
 				    for (int cast = 0; cast < repeats; cast++)
+				    // (2026-11-16: not stopped by a hero at 0 Health — rulebook: "death is not checked during resolution", and win/loss only
+				    // "at the end of the Sequence"; live Bru'kan Lightning Bolt cast again on a boss the first cast left at 0: Overload 2)
 				    if (!castByEffect && (twiceByOthers || twiceOtherClass || stormswell) && !(castByEffect && target == null && (spell.Card.RequiresTarget || spell.Card.MustHaveTargetToPlay))
-				        && !c.Hero.IsDead && !c.Opponent.Hero.IsDead)
+				        && game.State != State.COMPLETE)
 				    {
 					    if (game.History && (twiceByOthers || stormswell))
 						    game.PowerHistory.Add(new PowerHistoryMetaData { Type = MetaDataType.SLUSH_TIME, Data = 3000, Info = new List<int> { spell.Id } });

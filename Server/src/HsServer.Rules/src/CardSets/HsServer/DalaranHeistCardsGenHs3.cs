@@ -286,6 +286,183 @@ namespace SabberStoneCore.CardSets.HsServer
 				}
 			}));
 
+			// ================================================================ 75 Commander Bolan
+			// Live (session-20261007-113244 136833-142106; wiki Commander_Bolan): Immune from the start, no deck; "A Quest!" (DALA_BOSS_75p)
+			// gives the player one of five quests — an enchantment on his hero (NUM_2 the goal, NUM_1 the progress) whose card also marks each
+			// quest target. At the start of his turns each quest grows (its TRIGGER block on the hero); a marked target dying counts. Any quest
+			// completed ends the battle (wiki: "Upon completion of any event, the reward choice is given and the battle ends": his hero
+			// dies — the run's treasure pick follows). Recorded: Bear Liver (start 2, kill 3, turn 4, goal 3), Turtle Escort (start 8, turn 9,
+			// goal 5 turns; fails if the turtle dies), Herbalist (start 12, kill 13, turn 14, goal 6), Hogger (start 15, Hogger 17, goal 1).
+			// The Murloc quest (kill Megafin) isn't recorded: its spawns and indexes are DOUBT (RESEARCH/live-checks.md).
+			const string BolanBear = "DALA_BOSS_75e1", BolanMurloc = "DALA_BOSS_75e2", BolanTurtle = "DALA_BOSS_75e3", BolanHerb = "DALA_BOSS_75e4", BolanHogger = "DALA_BOSS_75e5";
+			Enchantment BolanQuest(Controller bolan, string id) => bolan.Hero.AppliedEnchantments?.FirstOrDefault(e => e.Card.Id == id);
+			bool Marked(IPlayable p, string id) => p.AppliedEnchantments?.Any(e => e.Card.Id == id) == true;
+			Minion BolanSpawn(Game g, Controller c, IEntity s, string cardId, string mark)
+			{
+				if (c.BoardZone.IsFull || Cards.TryFromId(cardId) is not Card card) return null;
+				var m = (Minion)Entity.FromCard(c, card, new EntityData { [GameTag.CREATOR] = s.Id });
+				Generic.SummonBlock.Invoke(g, m, -1, s);
+				if (mark != null && m.Zone?.Type == Zone.PLAY) Give(g, s, m, mark);
+				return m;
+			}
+			void BolanDefeated(Game g, Controller bolan)
+			{
+				bolan.Hero[GameTag.IMMUNE] = 0;
+				bolan.Hero.ToBeDestroyed = true;
+				g.DeathProcessingAndAuraUpdate();
+			}
+			// (each quest's goal from here, not from its NUM_2: a rebuilt position may not carry it — livecheck 20260929-122856 47703)
+			int BolanGoal(string id) => id == BolanBear ? 3 : id == BolanTurtle ? 5 : id == BolanHerb ? 6 : 1;
+			void BolanProgress(Game g, Controller bolan, string id)
+			{
+				if (!(BolanQuest(bolan, id) is Enchantment q)) return;
+				q[GameTag.TAG_SCRIPT_DATA_NUM_1] = q[GameTag.TAG_SCRIPT_DATA_NUM_1] + 1;
+				if (q[GameTag.TAG_SCRIPT_DATA_NUM_1] >= BolanGoal(id)) BolanDefeated(g, bolan);
+			}
+			string[] herbs = { "UNG_058", "UNG_844", "UNG_843" };
+			string[][] turtleHunters = { new[] { "KAR_300", "UNG_807" }, new[] { "ICC_419", "CS2_172" }, new[] { "UNG_086", "EX1_534t" } };
+			var bolanStarts = new (string Quest, int Goal, System.Action<Game, Controller, IEntity> Start)[]
+			{
+				(BolanBear, BolanGoal(BolanBear), (g, c, s) => BolanSpawn(g, c, s, "CS2_125", BolanBear)),
+				(BolanMurloc, BolanGoal(BolanMurloc), (g, c, s) =>
+				{
+					for (int i = 0; i < 2; i++)
+						if (RandomCard(g, x => x.Type == CardType.MINION && x.IsRace(Race.MURLOC) && x.Cost <= 2) is Card mur) BolanSpawn(g, c, s, mur.Id, BolanMurloc);
+				}),
+				(BolanTurtle, BolanGoal(BolanTurtle), (g, c, s) =>
+				{
+					BolanSpawn(g, c.Opponent, s, "CS2_119", BolanTurtle); // (the player's turtle to escort)
+					foreach (string h in turtleHunters[0]) BolanSpawn(g, c, s, h, null);
+				}),
+				(BolanHerb, BolanGoal(BolanHerb), (g, c, s) => BolanSpawn(g, c, s, herbs[0], BolanHerb)),
+				(BolanHogger, BolanGoal(BolanHogger), (g, c, s) => BolanSpawn(g, c, s, "NEW1_040t", null)),
+			};
+			cards.Add("DALA_BOSS_75p", new CardDef(new Power
+			{
+				PowerTask = new CustomTask((g, c, s, t, stack) =>
+				{
+					// (any of the five, one already given included: live 20260929-122856 turn 6 gave Bear Liver again, its progress back to 0,
+					// and turn 10 of 20261007-113244 gave Hogger again — its Gnoll)
+					var pick = bolanStarts[g.Random.Next(bolanStarts.Length)];
+					if (BolanQuest(c, pick.Quest) is Enchantment again) again[GameTag.TAG_SCRIPT_DATA_NUM_1] = 0;
+					else Generic.AddEnchantmentBlock(g, Cards.FromId(pick.Quest), c.Hero, c.Hero);
+					if (BolanQuest(c, pick.Quest) is Enchantment quest) quest[GameTag.TAG_SCRIPT_DATA_NUM_2] = pick.Goal; // (live: the goal set right after, 137595)
+					pick.Start(g, c, c.Hero);
+				})
+			}));
+			foreach (string q in new[] { BolanBear, BolanMurloc, BolanTurtle, BolanHerb, BolanHogger })
+				cards.Add(q, new CardDef(new Power { NoScript = true })); // (a quest on his hero / its mark on a target: his hero's triggers read them)
+			Trigger BolanTurn(string quest, int index, System.Action<Game, Controller, IEntity, Enchantment> grow) => new Trigger(TriggerType.TURN_START)
+			{
+				EffectIndex = index, InHistory = true,
+				Condition = new SelfCondition(p => BolanQuest(p.Controller, quest) != null),
+				SingleTask = new CustomTask((g, c, s, t, stack) => { if (BolanQuest(c, quest) is Enchantment q) grow(g, c, s, q); })
+			};
+			Trigger BolanKill(string mark, int index, System.Action<Game, Controller, IPlayable> killed) => new Trigger(TriggerType.DEATH)
+			{
+				TriggerSource = TriggerSource.ALL_MINIONS, EffectIndex = index, InHistory = true,
+				Condition = new SelfCondition(p => Marked(p, mark)),
+				SingleTask = new CustomTask((g, c, s, t, stack) =>
+				{
+					IPlayable dead = t ?? g.CurrentEventData?.EventSource as IPlayable;
+					if (dead != null) killed(g, c, dead);
+				})
+			};
+			cards.Add("DALA_BOSS_75h", new CardDef(new Power
+			{
+				SkipsTurnDraw = true, // (no deck: he never draws — live)
+				Trigger = new MultiTrigger(
+					new Trigger(TriggerType.GAME_START) { SingleTask = new CustomTask((g, c, s, t, stack) => c.Hero[GameTag.IMMUNE] = 1) },
+					// Bear Liver: kill the bears — a new bear (Bearshark or Amani War Bear) when none of its bears is left (live: 20260929-122856
+					// turns 4 / 6 after a kill, 20261007-113244 turns 10 / 12; turn 8's block empty with his board full)
+					BolanKill(BolanBear, 3, (g, c, dead) => BolanProgress(g, c, BolanBear)),
+					BolanTurn(BolanBear, 4, (g, c, s, q) =>
+					{
+						if (c.BoardZone.GetAll().Any(m => Marked(m, BolanBear))) return;
+						BolanSpawn(g, c, s, g.Random.Next(2) == 0 ? "ICC_419" : "TRL_550", BolanBear);
+					}),
+					// Murloc Infestation (DOUBT): a murloc each turn, Megafin on the quest's second turn; Megafin dead: done
+					BolanKill(BolanMurloc, 6, (g, c, dead) => { if (dead.Card.Id == "UNG_942t") BolanDefeated(g, c); }),
+					BolanTurn(BolanMurloc, 7, (g, c, s, q) =>
+					{
+						q[HsTag.QUEST_GROWN] = q[HsTag.QUEST_GROWN] + 1;
+						if (q[HsTag.QUEST_GROWN] == 2) BolanSpawn(g, c, s, "UNG_942t", BolanMurloc);
+						else if (RandomCard(g, x => x.Type == CardType.MINION && x.IsRace(Race.MURLOC) && x.Cost <= 3) is Card mur) BolanSpawn(g, c, s, mur.Id, BolanMurloc);
+					}),
+					// Turtle Escort: each of his turns it lasts counts; hunters come on its first two (live: none on the 3rd and 4th); the turtle
+					// dead: the player loses the battle (user 2026-11-20: "if the turtle dies u lose the fight and the run ends")
+					BolanTurn(BolanTurtle, 9, (g, c, s, q) =>
+					{
+						int n = q[GameTag.TAG_SCRIPT_DATA_NUM_1] + 1;
+						q[GameTag.TAG_SCRIPT_DATA_NUM_1] = n;
+						if (n >= BolanGoal(BolanTurtle)) { BolanDefeated(g, c); return; }
+						if (n < turtleHunters.Length) foreach (string h in turtleHunters[n]) BolanSpawn(g, c, s, h, null);
+					}),
+					BolanKill(BolanTurtle, 10, (g, c, dead) =>
+					{
+						BolanQuest(c, BolanTurtle)?.Remove();
+						c.Opponent.Hero[GameTag.IMMUNE] = 0;
+						c.Opponent.Hero.ToBeDestroyed = true;
+						g.DeathProcessingAndAuraUpdate();
+					}),
+					// Herbalist: pick the flowers (another each turn: Razorpetal Lasher, Humongous Razorleaf, The Voraxx)
+					BolanKill(BolanHerb, 13, (g, c, dead) => BolanProgress(g, c, BolanHerb)),
+					BolanTurn(BolanHerb, 14, (g, c, s, q) =>
+					{
+						q[HsTag.QUEST_GROWN] = q[HsTag.QUEST_GROWN] + 1;
+						BolanSpawn(g, c, s, herbs[System.Math.Min(q[HsTag.QUEST_GROWN] - 1, herbs.Length - 1)], BolanHerb);
+					}),
+					// Hogger: his Gnoll when given, Hogger himself on the quest's next turn (index 17, once); Hogger dead: done. (Live's Hogger was
+					// 4/10 — DOUBT, RESEARCH/live-checks.md)
+					BolanKill(BolanHogger, 16, (g, c, dead) => BolanDefeated(g, c)),
+					BolanTurn(BolanHogger, 17, (g, c, s, q) =>
+					{
+						if (q[HsTag.QUEST_GROWN] > 0) return;
+						q[HsTag.QUEST_GROWN] = 1;
+						BolanSpawn(g, c, s, "NEW1_040", BolanHogger);
+					}))
+			}));
+
+			// [DALA_BOSS_58t] The Wire / [DALA_BOSS_58t2] The Other Wire (Boommaster Flark) — While wires are touching, take 5 damage at the
+			// start of your turn. ("touching": next to each other on the board. Both carry the text; the pair hurts once — The Wire's
+			// trigger — DOUBT, not recorded)
+			cards.Add("DALA_BOSS_58t", new CardDef(new Power
+			{
+				Trigger = new Trigger(TriggerType.TURN_START)
+				{
+					SingleTask = new CustomTask((g, c, s, t, stack) =>
+					{
+						if (s is Minion wire && wire.GetAdjacentMinions().Any(m => m.Card.Id == "DALA_BOSS_58t2"))
+							Generic.DamageCharFunc(wire, c.Hero, V("DALA_BOSS_58t", "damage", 5), false);
+					})
+				}
+			}));
+			cards.Add("DALA_BOSS_58t2", new CardDef(new Power { NoScript = true })); // (its partner's trigger does the damage)
+
+			// [DALA_BOSS_61t] Phase Spider (Sael'orn) — Immune. Can't Attack while a minion is opposite of this. ("opposite": an enemy
+			// minion in the same board slot; Immune from its card data)
+			cards.Add("DALA_BOSS_61t", new CardDef(new Power
+			{
+				Aura = new AdaptiveEffect(GameTag.CANT_ATTACK, EffectOperator.SET, p =>
+					p is Minion me && me.Zone?.Type == Zone.PLAY && me.ZonePosition < p.Controller.Opponent.BoardZone.Count &&
+					!(p.Controller.Opponent.BoardZone[me.ZonePosition] is Location) ? 1 : 0)
+			}));
+
+			// [DALA_501] Cheerful Spirit — Whenever you draw a spell, add a copy of it to your deck. (shuffled in)
+			cards.Add("DALA_501", new CardDef(new Power
+			{
+				Trigger = new Trigger(TriggerType.DRAW)
+				{
+					TriggerSource = TriggerSource.FRIENDLY,
+					Condition = SelfCondition.IsSpell,
+					SingleTask = new CustomTask((g, c, s, t, stack) =>
+					{
+						if (t is IPlayable drawn && !c.DeckZone.IsFull)
+							Generic.ShuffleIntoDeck.Invoke(c, s, Entity.FromCard(c, drawn.Card, new EntityData { [GameTag.CREATOR] = s.Id }));
+					})
+				}
+			}));
+
 			// ================================================================ 61 Sael'orn
 			// [DALA_BOSS_61p] Web Grab (2) — Your opponent summons a minion from their hand. (a random one: the opponent's hidden zone;
 			// the same entity, Generic.SummonFromHand)
@@ -320,10 +497,18 @@ namespace SabberStoneCore.CardSets.HsServer
 			}));
 			// [DALA_BOSS_62px] Darken — Passive: Your opponent's minions have -1 Attack. (live: DALA_BOSS_62ex on each enemy minion,
 			// CREATOR the Hero Power)
+			// (2026-11-16) an enchantment given to each enemy minion as it is summoned, not an aura: live, Confuse on a Darkened 1/4 with 2
+			// damage made it 2/1 — a "set" wipes an earlier enchantment, while an aura (rulebook: processed after) would leave 1/1
+			// (livecheck session-20261008-012951 :141368)
 			cards.Add("DALA_BOSS_62px", new CardDef(new Power
 			{
-				Aura = new Aura(AuraType.OP_BOARD, Effects.Attack_N(-V("DALA_BOSS_62px", "attack", 1))) { ShowAs = "DALA_BOSS_62ex" }
+				Trigger = new Trigger(TriggerType.SUMMON)
+				{
+					TriggerSource = TriggerSource.OP_MINIONS,
+					SingleTask = new AddEnchantmentTask("DALA_BOSS_62ex", EntityType.TARGET)
+				}
 			}));
+			cards.Add("DALA_BOSS_62ex", new CardDef(new Power { Enchant = new Enchant(Effects.Attack_N(-V("DALA_BOSS_62px", "attack", 1))) }));
 
 			// ================================================================ 63 Dagg Cruelmight
 			// [DALA_BOSS_63p] / [DALA_BOSS_63px] Bully (2) — Deal $2 ($4) damage to a damaged minion. (live-20261004-224614 117746)

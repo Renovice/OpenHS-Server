@@ -156,6 +156,33 @@ namespace SabberStoneCore.Actions
 			return true;
 		}
 
+		/// <summary>The run enchantments <paramref name="card"/>'s slot has: those the save data brought (368 / 369) and those this game
+		/// added (AddRunEnchantment), in order.</summary>
+		public static List<Card> RunEnchantmentsOf(Controller c, IPlayable card)
+		{
+			int slot = RunSlot(card);
+			var list = new List<Card>();
+			if (slot <= 0) return list;
+			if (c == c.Game.Player1 && c.Game.RunSetup?.Player1RunDeck is RunDeck run)
+				list.AddRange(run.Enchantments.Where(e => e.Slot == slot && e.Enchantment != null).Select(e => e.Enchantment));
+			list.AddRange(c.Game.RunDeckEditList.Where(e => e.Kind == RunDeckEditKind.AddEnchantment && e.Slot == slot)
+				.Select(e => Cards.TryFromId(e.CardId)).Where(x => x != null));
+			return list;
+		}
+
+		/// <summary>
+		/// New copies of <paramref name="original"/> for the run deck keep its run enchantments (user 2026-11-20: The Gang's All Here!'s
+		/// copies keep the buffs): each copy gets them in this game and in the save data (its own slot).
+		/// </summary>
+		public static void CopyRunEnchantments(Controller c, IPlayable original, IPlayable copy)
+		{
+			foreach (Card enchantment in RunEnchantmentsOf(c, original))
+			{
+				AddEnchantmentBlock(c.Game, enchantment, copy, copy, 0, 0, 0);
+				AddRunEnchantment(c, copy, enchantment.Id);
+			}
+		}
+
 		/// <summary>The run's starting Health goes up by <paramref name="amount"/> (Good Food).</summary>
 		public static void AddRunStartingHealth(Controller c, int amount)
 		{

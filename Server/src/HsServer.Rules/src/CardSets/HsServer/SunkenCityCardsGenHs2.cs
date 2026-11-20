@@ -287,7 +287,10 @@ namespace SabberStoneCore.CardSets.HsServer
 			// [TSC_937] Crabatoa (6) — Colossal +2. Your Crabatoa Claws have +2 Attack.
 			cards.Add("TSC_937", new CardDef(new Power
 			{
-				Aura = new Aura(AuraType.WEAPON, Effects.Attack_N(V("TSC_937", "attack", 2))) { Condition = new SelfCondition(p => p.Card.Id == "TSC_937t2"), ShowAs = "TSC_937e" }
+				// ("Your Crabatoa Claws": the weapon AND the two minion Claws it brings — live session-20261120-132514 36255: the Claws 4/1)
+				Aura = new MultiAura(
+					new Aura(AuraType.WEAPON, Effects.Attack_N(V("TSC_937", "attack", 2))) { Condition = new SelfCondition(p => p.Card.Id == "TSC_937t2"), ShowAs = "TSC_937e" },
+					new Aura(AuraType.BOARD_EXCEPT_SOURCE, Effects.Attack_N(V("TSC_937", "attack", 2))) { Condition = new SelfCondition(p => p.Card.Id is "TSC_937t" or "TSC_937t3"), ShowAs = "TSC_937e" })
 			}));
 			// [TSC_937t] Crabatoa's Claw — Rush. Deathrattle: Equip a 2/1 Claw.
 			foreach (string claw in new[] { "TSC_937t", "TSC_937t3" })

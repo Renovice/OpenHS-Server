@@ -421,7 +421,7 @@ public class LiveCheckEngineFixTests
         Cast(game, me, "DS1_233"); // Mind Blast: a Shadow spell
         Assert.Equal(0, holy.QuestProgress);
         Assert.Equal(1, shadow.QuestProgress);
-        for (int i = 0; i < 4; i++) Cast(game, me, "CS1_112"); // Holy Nova x4
+        for (int i = 0; i < 6; i++) Cast(game, me, "CS1_112"); // Holy Nova x6 (2026-11-20 patch 37.0.0.256589: "Cast 6 Holy spells", was 4)
         Assert.False(me.SecretZone.IsActiveQuest(holy)); // done: its reward
         Assert.True(me.SecretZone.IsActiveQuest(shadow));
         Assert.Equal(1, shadow.QuestProgress);

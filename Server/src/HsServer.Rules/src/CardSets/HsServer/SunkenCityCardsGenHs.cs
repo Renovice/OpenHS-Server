@@ -57,7 +57,10 @@ namespace SabberStoneCore.CardSets.HsServer
 		{
 			Trigger = WhileHolding(TriggerType.CAST_SPELL, spell),
 			ThresholdValue = 1,
-			PowerTask = new CustomTask((g, c, s, t, stack) => { if (Generic.ThresholdMet((IPlayable)s)) effect.Process(g, c, s, t, stack); })
+			PowerTask = new CustomTask((g, c, s, t, stack) => { if (Generic.ThresholdMet((IPlayable)s)) effect.Process(g, c, s, t, stack); }),
+			// (Assemble: "Battlecry: If you've cast a … while holding this," is the first half, the effect the second)
+			AssembleWhen = task => HeldSpell(spell, task),
+			AssembleWhat = effect
 		};
 
 		/// <summary>"If you played a Naga while holding this" (a spell's condition: counted in hand like the Naga's).</summary>

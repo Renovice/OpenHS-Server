@@ -105,6 +105,13 @@ namespace SabberStoneCore.Model.Entities
 			if (weapon.IsWindfury && IsExhausted && NumAttacksThisTurn == 1)
 				IsExhausted = false;
 
+			// HsServer (2026-11-20): a weapon aura already in play reaches a weapon equipped later ("Your Crabatoa Claws have +2 Attack":
+			// the Claw a dying Claw equips — live session-20261120-132514 36655), like a board aura reaches a minion summoned later
+			foreach (IAura a in Game.Auras)
+				foreach (IAura part in a is MultiAura multi ? (IEnumerable<IAura>)multi : new[] { a })
+					if (part is Aura weaponAura && weaponAura.Type == AuraType.WEAPON && weaponAura.Owner?.Controller == Controller)
+						weaponAura.EntityAdded(weapon);
+
 			Game.RaiseEvent(() => Game.TriggerManager.OnEquipWeaponTrigger(weapon));
 		}
 

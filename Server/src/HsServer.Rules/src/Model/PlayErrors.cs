@@ -14,7 +14,7 @@ namespace SabberStoneCore.Model
 	public static class PlayErrors
 	{
 		/// <summary>Client PlayError codes the engine's 2021 enum doesn't name.</summary>
-		public const PlayReq REQ_NOT_EXHAUSTED_LOCATION = (PlayReq)130, REQ_LOCATION_TARGET = (PlayReq)131;
+		public const PlayReq REQ_NOT_EXHAUSTED_LOCATION = (PlayReq)130, REQ_LOCATION_TARGET = (PlayReq)131, REQ_NOT_LEGENDARY_TARGET = (PlayReq)123;
 
 		/// <summary>Adds what live adds to the options: the play keyword, the unusable entities with their error, and the
 		/// invalid targets of targeted options with theirs.</summary>
@@ -135,6 +135,7 @@ namespace SabberStoneCore.Model
 					return CardError(me, p);
 				case Location location:
 					if (location.OnCooldown) return REQ_NOT_EXHAUSTED_LOCATION;
+					if (location.RuneLocked) return PlayReq.REQ_LITERALLY_UNPLAYABLE; // (2026-11-19 Uldir Quarantine; not recorded live)
 					return 0;
 				// HsServer (TITANS): a Titan with abilities left that can't use one now (live 159657: it already acted —
 				// REQ_SUBCARD_IS_PLAYABLE; also when no ability has a valid target)

@@ -124,7 +124,7 @@ namespace SabberStoneCore.CardSets.HsServer
 					SingleTask = new CustomTask((g, c, s, t, stack) =>
 					{
 						if (!(s is IPlayable scythe) || !Generic.StartOfGameHolds(scythe)) return;
-						var kinds = c.DeckZone.Where(p => Generic.IsMinionCard(p)).GroupBy(p => p.Card.Id).Select(x => x.First()).ToList();
+						var kinds = c.DeckZone.Where(p => Generic.IsMinionCard(p)).GroupBy(Generic.UniqueCardKey).Select(x => x.First()).ToList();
 						var eaten = new List<IPlayable>();
 						for (int i = 0; i < V("RLK_214", "consumed", 3) && kinds.Count > 0; i++)
 						{

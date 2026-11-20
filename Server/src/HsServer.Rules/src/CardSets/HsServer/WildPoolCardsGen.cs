@@ -789,7 +789,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					foreach (var group in c.DeckZone.Where(p => p is Spell sp && sp.IsSecret).GroupBy(p => p.Card.Id).ToList())
+					foreach (var group in c.DeckZone.Where(p => p is Spell sp && sp.IsSecret).GroupBy(Generic.UniqueCardKey).ToList())
 					{
 						var secret = (Spell)group.First();
 						if (c.SecretZone.IsFull) break;

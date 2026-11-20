@@ -691,7 +691,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					var distinct = c.DeckZone.GroupBy(p => p.Card.Id).Select(x => x.First()).ToList();
+					var distinct = c.DeckZone.GroupBy(Generic.UniqueCardKey).Select(x => x.First()).ToList();
 					Generic.DiscoverFromDeck(c, s, Generic.PickFrom(distinct, g, _ => true), (g2, c2, s2, picked) =>
 					{
 						foreach (IPlayable copy in c2.DeckZone.Where(p => p.Card.Id == picked.Card.Id).ToList()) Generic.Draw(c2, copy);

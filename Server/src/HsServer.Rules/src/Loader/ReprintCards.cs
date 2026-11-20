@@ -146,6 +146,10 @@ namespace SabberStoneCore.Loader
 		/// <summary>The client's card text (null if the client has no such card).</summary>
 		public static string ClientText(string cardId) => _clientText.TryGetValue(cardId, out string t) ? t : null;
 
+		/// <summary>HsServer (2026-11-20): <see cref="ClientText"/> with the client DB loaded first (card scripts ask while the cards load:
+		/// CardValues reads their numbers from it).</summary>
+		public static string CurrentClientText(string cardId) => LoadClient() ? ClientText(cardId) : null;
+
 		/// <summary>Both cards exist in the client DB with the same text (markup and value placeholders aside).</summary>
 		public static bool SameClientText(string a, string b) =>
 			ClientText(a) is string ta && ClientText(b) is string tb && Normalize(ta) == Normalize(tb);

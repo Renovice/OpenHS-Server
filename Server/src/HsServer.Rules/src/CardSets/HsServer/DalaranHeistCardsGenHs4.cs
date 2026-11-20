@@ -401,6 +401,12 @@ namespace SabberStoneCore.CardSets.HsServer
 			// almost every turn" late in a run); only these two are recorded — the rest and the chances are unknown (doubtful).
 			cards.Add("DALA_740", new CardDef(new Power { PowerTask = new AddEnchantmentTask("DALA_740e", EntityType.CONTROLLER) }));
 			bool WisdomChance(Game g) => g.Random.Next(100) < V("DALA_740", "chance_percent", 15);
+			ISimpleTask WisdomTaunts() => new CustomTask((g, c, s, t, stack) =>
+				Generic.PlayDummyEffect(c, s, "DALA_740ts5", c.Hero, () =>
+				{
+					for (int i = 0; i < V("DALA_740ts5", "minions", 3) && !c.BoardZone.IsFull; i++)
+						if (RandomCard(g, x => x.Type == CardType.MINION && x.Taunt) is Card taunt) Summon(g, c, taunt, s);
+				}));
 			cards.Add("DALA_740e", new CardDef(new Power
 			{
 				Trigger = new MultiTrigger(
@@ -425,6 +431,51 @@ namespace SabberStoneCore.CardSets.HsServer
 							Generic.AddEnchantmentBlock(g, Cards.FromId("DALA_740e3"), (IPlayable)s, c, 0, 0, 0);
 							c[HsTag.PLAYED_SPELLS_CAST_TWICE] = c[HsTag.PLAYED_SPELLS_CAST_TWICE] + 1;
 						})
+					},
+					// (2026-11-20) the rest of the advice, at the wiki's moments (wiki Wondrous_Wisdomball), each its client Tokenspell's
+					// amounts; not recorded: their effect indexes and chances (the recorded two's chance) are DOUBT
+					// "Drawing a minion or spell: Add 2-4 extra copies of it to your hand" — DALA_740ts: "2 - 5 extra copies"
+					new Trigger(TriggerType.DRAW)
+					{
+						TriggerSource = TriggerSource.FRIENDLY,
+						Condition = new SelfCondition(p => (p is Minion || p is Spell) && WisdomChance(p.Game)),
+						SingleTask = new CustomTask((g, c, s, t, stack) =>
+						{
+							if (!(t is IPlayable drawn)) return;
+							int n = g.Random.Next(V("DALA_740ts", "min", 2), V("DALA_740ts", "max", 5) + 1);
+							Generic.PlayDummyEffect(c, s, "DALA_740ts", drawn, () =>
+							{
+								for (int i = 0; i < n && !c.HandZone.IsFull; i++) GetCard(c, drawn.Card, s);
+							});
+						})
+					},
+					// "Start of turn and only having a few cards in hand: Add 3 random minions" (DALA_740ts3); an empty hand: 5 random cards
+					// (DALA_740ts2 "Empty Hand")
+					new Trigger(TriggerType.TURN_START)
+					{
+						Condition = new SelfCondition(p => p.Controller.HandZone.Count <= V("DALA_740ts3", "few", 2) && WisdomChance(p.Game)),
+						SingleTask = new CustomTask((g, c, s, t, stack) =>
+						{
+							bool empty = c.HandZone.Count == 0;
+							Generic.PlayDummyEffect(c, s, empty ? "DALA_740ts2" : "DALA_740ts3", c.Hero, () =>
+							{
+								for (int i = 0; i < (empty ? V("DALA_740ts2", "cards", 5) : V("DALA_740ts3", "minions", 3)) && !c.HandZone.IsFull; i++)
+									if (RandomCard(g, x => empty || x.Type == CardType.MINION) is Card card) GetCard(c, card, s);
+							});
+						})
+					},
+					// "Enemy summons a minion" / "Enemy minions attack your hero: Summon multiple minions with Taunt" (DALA_740ts5: 3)
+					new Trigger(TriggerType.SUMMON)
+					{
+						TriggerSource = TriggerSource.OP_MINIONS,
+						Condition = new SelfCondition(p => WisdomChance(p.Game)),
+						SingleTask = WisdomTaunts()
+					},
+					new Trigger(TriggerType.ATTACK)
+					{
+						TriggerSource = TriggerSource.OP_MINIONS,
+						Condition = new SelfCondition(p => p.Game.CurrentEventData?.EventTarget is Hero h && h.Controller != p.Controller && WisdomChance(p.Game)),
+						SingleTask = WisdomTaunts()
 					})
 			}));
 			cards.Add("DALA_740e3", new CardDef(new Power
@@ -939,9 +990,11 @@ namespace SabberStoneCore.CardSets.HsServer
 			// [DALA_832] Twist - The Prisons — Both players start the game with a 'Violet Prison.' wiki The_Dalaran_Heist (Chapter 2): "The
 			// prisons are dormant, and they each contain a random minion. The prison will be replaced with the aforementioned minion after
 			// a number of turns equal to the minion's mana cost. The minion cannot attack on the turn it is summoned unless it has Rush or
-			// Charge." [DALA_832t] Violet Prison: TAG_SCRIPT_DATA_NUM_1 = the minion inside (dbf; the client's mouse-over card), NUM_2 =
-			// the turns left (card data: 3). Ours: at each of its owner's turn starts −1; at 0 it leaves (Generic.RemoveFromGame) and the
-			// minion is summoned in its place. (Unrecorded: the counting moment — live-checks.)
+			// Charge." Live (session-20261120-132514 496-531, 920-927, 1976): the prison's TRIGGER block (index 2) right after it is made
+			// names the minion inside (ALTERNATE_MOUSE_OVER_CARD = its dbf) and the turns left (ENCHANTMENT_BANNER_TEXT = its Cost); at each of
+			// its owner's turn starts a TRIGGER_VISUAL block (index 0): the banner −1, TAG_SCRIPT_DATA_NUM_1 / SCORE_VALUE_2 = the turns gone;
+			// the banner starts at the Cost + 3 (the card's NUM_2; Flamewaker 3 → 6, 4-Cost minions 7); once the turns gone reach the Cost
+			// (wiki: "a number of turns equal to the minion's mana cost"; live 4 of 4) another TRIGGER block (index 1) CHANGE_ENTITYs the prison into the minion — the same entity, not a new summon.
 			cards.Add("DALA_832", new CardDef(new Power
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
@@ -951,11 +1004,13 @@ namespace SabberStoneCore.CardSets.HsServer
 						if (player.BoardZone.IsFull) continue;
 						Card inside = RandomBoardMinion(g, x => x.Cost >= 0);
 						if (inside == null) continue;
-						var prison = (Minion)Entity.FromCard(player, Cards.FromId("DALA_832t"), new EntityData
-						{
-							[GameTag.TAG_SCRIPT_DATA_NUM_1] = inside.AssetId, [GameTag.TAG_SCRIPT_DATA_NUM_2] = System.Math.Max(1, inside.Cost),
-						});
+						var prison = (Minion)Entity.FromCard(player, Cards.FromId("DALA_832t"), new EntityData { [GameTag.CREATOR] = s.Id });
 						Generic.SummonBlock.Invoke(g, prison, -1, s);
+						if (prison.Zone?.Type != Zone.PLAY) continue;
+						if (g.History) g.PowerHistory.Add(Kettle.PowerHistoryBuilder.BlockStart(BlockType.TRIGGER, prison.Id, "", 2, 0));
+						prison[GameTag.ALTERNATE_MOUSE_OVER_CARD] = inside.AssetId;
+						prison[GameTag.ENCHANTMENT_BANNER_TEXT] = System.Math.Max(1, inside.Cost) + prison.Card[GameTag.TAG_SCRIPT_DATA_NUM_2]; // (live: Cost + 3)
+						if (g.History) g.PowerHistory.Add(Kettle.PowerHistoryBuilder.BlockEnd());
 					}
 				})
 			}));
@@ -966,14 +1021,21 @@ namespace SabberStoneCore.CardSets.HsServer
 					SingleTask = new CustomTask((g, c, s, t, stack) =>
 					{
 						if (!(s is Minion prison) || prison.Zone?.Type != Zone.PLAY) return;
-						int left = prison[GameTag.TAG_SCRIPT_DATA_NUM_2] - 1;
-						prison[GameTag.TAG_SCRIPT_DATA_NUM_2] = System.Math.Max(0, left);
-						if (left > 0) return;
-						Card inside = Cards.FromAssetId(prison[GameTag.TAG_SCRIPT_DATA_NUM_1]);
-						int slot = prison.ZonePosition;
-						Generic.RemoveFromGame(prison, prison);
-						if (inside != null && !c.BoardZone.IsFull)
-							Generic.SummonBlock.Invoke(g, (Minion)Entity.FromCard(c, inside, new EntityData { [GameTag.CREATOR] = prison.Id }), slot, null);
+						int left = System.Math.Max(0, prison[GameTag.ENCHANTMENT_BANNER_TEXT] - 1);
+						prison[GameTag.ENCHANTMENT_BANNER_TEXT] = left;
+						prison[GameTag.TAG_SCRIPT_DATA_NUM_1] = prison[GameTag.TAG_SCRIPT_DATA_NUM_1] + 1;
+						prison[GameTag.SCORE_VALUE_2] = prison[GameTag.TAG_SCRIPT_DATA_NUM_1];
+						if (!(Cards.FromAssetId(prison[GameTag.ALTERNATE_MOUSE_OVER_CARD]) is Card inside) || prison[GameTag.TAG_SCRIPT_DATA_NUM_1] < System.Math.Max(1, inside.Cost)) return;
+						if (g.History) g.PowerHistory.Add(Kettle.PowerHistoryBuilder.BlockStart(BlockType.TRIGGER, prison.Id, "", 1, 0));
+						// ("cannot attack on the turn it is summoned unless it has Rush or Charge")
+						if (Generic.ChangeEntityBlock.Invoke(c, prison, inside, true) is Minion freed)
+						{
+							// (the minion's own stats, not the prison's hidden 0/1)
+							if (freed.AttackDamage != inside.ATK) freed[GameTag.ATK] = inside.ATK;
+							if (freed.BaseHealth != inside.Health) freed.BaseHealth = inside.Health;
+							freed.IsExhausted = !freed.HasCharge;
+						}
+						if (g.History) g.PowerHistory.Add(Kettle.PowerHistoryBuilder.BlockEnd());
 					})
 				}
 			}));

@@ -49,7 +49,10 @@ namespace SabberStoneCore.Tasks.SimpleTasks
 			var playable = source as IPlayable;
 			if (playable == null || controller == null) return TaskState.STOP;
 
-			playable.Controller.SetasideZone.Add(playable.Zone.Remove(playable));
+			// HsServer (2026-11-16): only a card that becomes the hero is set aside; a Deathrattle's source (Majordomo Executus) is
+			// dead and stays in the graveyard (live: BRM_027 to GRAVEYARD)
+			if (playable.Zone?.Type is SabberStoneCore.Enums.Zone.PLAY or SabberStoneCore.Enums.Zone.HAND)
+				playable.Controller.SetasideZone.Add(playable.Zone.Remove(playable));
 			controller.AddHeroAndPower(_heroCard, _powerCard);
 			if (_weaponCard != null)
 				controller.Hero.AddWeapon(Entity.FromCard(in controller, in _weaponCard) as Weapon);

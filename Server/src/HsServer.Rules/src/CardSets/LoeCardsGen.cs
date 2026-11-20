@@ -40,7 +40,8 @@ namespace SabberStoneCore.CardSets
 			// --------------------------------------------------------
 			cards.Add("LOE_050", new CardDef(new Power
 			{
-				PowerTask = ComplexTask.SummonRandomMinion(GameTag.COST, 1)
+				// (HsServer 2026-11-16: the card's text is a Deathrattle; the 2021 script ran it on play — StaleTriggerAuditTests)
+				DeathrattleTask = ComplexTask.SummonRandomMinion(GameTag.COST, 1)
 			}));
 
 			// ----------------------------------------- MINION - DRUID
@@ -954,7 +955,8 @@ namespace SabberStoneCore.CardSets
 			// --------------------------------------------------------
 			cards.Add("LOE_089", new CardDef(new Power
 			{
-				PowerTask = ComplexTask.Create(
+				// (HsServer 2026-11-16: the card's text is a Deathrattle; the 2021 script ran it on play — StaleTriggerAuditTests)
+				DeathrattleTask = ComplexTask.Create(
 							new SummonTask("LOE_089t", SummonSide.DEATHRATTLE),
 							new SummonTask("LOE_089t2", SummonSide.DEATHRATTLE),
 							new SummonTask("LOE_089t3", SummonSide.DEATHRATTLE))

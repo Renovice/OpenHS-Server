@@ -213,7 +213,7 @@ namespace SabberStoneCore.CardSets.HsServer
 					new FlagTask(true, new CustomTask((g, c, s, t, stack) =>
 					{
 						for (int i = 0; i < V("GDB_474", "cards", 2); i++)
-							if (Generic.Draw(c) is IPlayable drawn && drawn.Zone?.Type == Zone.HAND) Give(g, s, drawn, GenericCostLess(V("GDB_474", "discount", 2)));
+							if (Generic.Draw(c) is IPlayable drawn && drawn.Zone?.Type == Zone.HAND) GiveCostLess(g, s, drawn, V("GDB_474", "discount", 2));
 					})),
 					new FlagTask(false, ComplexTask.Repeat(new DrawTask(), V("GDB_474", "cards", 2))))
 			}));
@@ -362,7 +362,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				{
 					for (int i = 0; i < V("GDB_862", "spells", 2); i++)
 						if (IslandToHand(c, s, RandomCard(g, x => x.Type == CardType.SPELL && x[SPELL_SCHOOL] == HOLY)) is IPlayable p)
-							Give(g, s, p, GenericCostLess(V("GDB_862", "discount", 3)));
+							GiveCostLess(g, s, p, V("GDB_862", "discount", 3));
 				})
 			}));
 			// [GDB_863] Lunar Trailblazer (5) — Battlecry: Set the Cost of a random spell in your hand to this minion's Cost.
@@ -765,7 +765,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
 					for (int i = 0; i < V("SC_015", "cards", 2); i++)
-						if (DrawOne(g, c, IsZerg) is IPlayable drawn && drawn.Zone?.Type == Zone.HAND) Give(g, s, drawn, GenericCostLess(V("SC_015", "discount", 1)));
+						if (DrawOne(g, c, IsZerg) is IPlayable drawn && drawn.Zone?.Type == Zone.HAND) GiveCostLess(g, s, drawn, V("SC_015", "discount", 1));
 				})
 			}));
 			// [SC_750] Chrono Boost (4) — Draw 2 Protoss cards. Summon a 3/4 Zealot with Charge.

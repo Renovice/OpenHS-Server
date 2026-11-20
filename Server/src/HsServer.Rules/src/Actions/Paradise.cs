@@ -178,6 +178,52 @@ namespace SabberStoneCore.Actions
 			return cost <= CheapSpellsMaxCost;
 		}
 
+		/// <summary>The client's spell schools (SPELL_SCHOOL 1-7: Arcane, Fire, Frost, Nature, Holy, Shadow, Fel).</summary>
+		public const int SpellSchools = 7;
+
+		/// <summary>
+		/// (2026-11-16) "Your next spell of each school casts twice" (Therazane the Earthmother): one charge per school, a player
+		/// enchantment whose Power.SchoolCastsTwice is set (its TAG_SCRIPT_DATA_NUM_1 = the school), spent by the first spell of that
+		/// school the player plays. Live (session-20261023-152211, BE_337): one BE_337e2 on the player per school, a BE_337e "Casts
+		/// Twice" on each spell of that school in hand; the spell cast, its school's mark goes to the graveyard.
+		/// </summary>
+		public static void GiveSchoolsCastTwice(Controller c, IPlayable source, Card playerMark, Card cardMark)
+		{
+			Game g = c.Game;
+			for (int school = 1; school <= SpellSchools; school++)
+			{
+				AddEnchantmentBlock(g, playerMark, source, c, school, -1);
+				Enchantment e = c.AppliedEnchantments?.LastOrDefault(x => x.Card == playerMark);
+				if (e == null || cardMark == null) continue;
+				foreach (IPlayable card in c.HandZone.GetAll().Where(x => x is Spell && x[(GameTag)1635] == school))
+					AddEnchantmentBlock(g, cardMark, e, card);
+			}
+		}
+
+		/// <summary>Is <paramref name="spell"/> the next of its school: spends that school's charge and the marks it put on cards.</summary>
+		public static bool SchoolSpellCastsTwice(Controller c, Spell spell)
+		{
+			int school = spell[(GameTag)1635];
+			if (school <= 0) return false;
+			Enchantment charge = c.AppliedEnchantments?.FirstOrDefault(e => e.Card.Power?.SchoolCastsTwice == true && e.ScriptTag1 == school);
+			if (charge == null) return false;
+			foreach (IPlayable card in c.HandZone.GetAll().Concat(new IPlayable[] { spell }))
+				foreach (Enchantment on in card.AppliedEnchantments?.Where(x => x.Creator == charge).ToList() ?? new List<Enchantment>())
+					on.Remove();
+			charge.Remove();
+			return true;
+		}
+
+		/// <summary>(2026-11-19) "Your next spell this turn casts twice" (Brain of Yogg-Saron): spends the player's oldest such charge
+		/// (Power.NextSpellCastsTwice).</summary>
+		public static bool NextSpellCastsTwice(Controller c)
+		{
+			Enchantment charge = c.AppliedEnchantments?.FirstOrDefault(e => e.Card.Power?.NextSpellCastsTwice == true);
+			if (charge == null) return false;
+			charge.Remove();
+			return true;
+		}
+
 		/// <summary>Niri of the Crater's "1-Cost" (set by its script from CardValues).</summary>
 		public static int ExactCostSpellsCost { get; set; } = 1;
 

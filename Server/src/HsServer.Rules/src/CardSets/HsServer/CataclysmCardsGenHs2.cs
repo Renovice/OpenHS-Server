@@ -250,7 +250,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			{
 				DeathrattleTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					if (GetCard(c, RandomCard(g, x => x.Type == CardType.MINION && x.IsRace(Race.DRAGON)), s) is IPlayable got) Give(g, s, got, GenericCostLess(V("MEND_045", "less", 2)));
+					if (GetCard(c, RandomCard(g, x => x.Type == CardType.MINION && x.IsRace(Race.DRAGON)), s) is IPlayable got) GiveCostLess(g, s, got, V("MEND_045", "less", 2));
 				})
 			}));
 			// [MEND_046] Bashana Runetotem (7) — Battlecry: Get three 2/2 Treants. Carve 12 Mana worth of Nature spells into them. (live
@@ -357,7 +357,7 @@ namespace SabberStoneCore.CardSets.HsServer
 						SingleTask = new CustomTask((g, c, s, t, stack) =>
 						{
 							if (GetCard(c, RandomCard(g, x => x.Type == CardType.SPELL && x[SPELL_SCHOOL] == FIRE_SCHOOL), s) is IPlayable fire)
-								Give(g, s, fire, GenericCostLess(V("CATA_488t", "less", 3)));
+								GiveCostLess(g, s, fire, V("CATA_488t", "less", 3));
 						})
 					}
 				}));

@@ -73,7 +73,9 @@ namespace SabberStoneCore.CardSets.HsServer
 		/// <summary>
 		/// 4 random minions for the tavern's host (<paramref name="host"/>): any set and class (live AT_009, RLK_593, ONY_004, TOY_960…),
 		/// only Mechs for Bartendotron (its hero's TAVERN_MINION_RACE). Live: FULL_ENTITY in PLAY, CREATOR = the source, 1254; no pause
-		/// (Brood's: a TARGET and 1000 ms each).
+		/// (Brood's: a TARGET and 1000 ms each). The player's generation rules (user 2026-11-20): Bob offers only what random generation could give
+		/// the PLAYER (Cards.DeckAllows: no Imbue / Herald / Invoke cards unless their starting deck — this tavern's — has one), whoever's
+		/// effect summons them.
 		/// </summary>
 		private static void TavernHostMinions(Game g, Controller host, IPlayable source, bool brood)
 		{
@@ -81,7 +83,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			int n = V("DALA_BOSS_99h", "host_minions", 4);
 			for (int i = 0; i < n && !host.BoardZone.IsFull; i++)
 			{
-				Card card = RandomBoardMinion(g, x => race == 0 || x.IsRace((Race)race));
+				Card card = RandomBoardMinion(g, x => (race == 0 || x.IsRace((Race)race)) && Cards.DeckAllows(host.Opponent, x));
 				if (card == null) break;
 				var m = (Minion)Entity.FromCard(host, card, new EntityData
 				{
@@ -171,13 +173,15 @@ namespace SabberStoneCore.CardSets.HsServer
 		}
 
 		/// <summary>New copies of <paramref name="card"/> shuffled into the deck, each joining the run deck (Recruit a Veteran, The Gang's
-		/// All Here!; live: a new hidden DECK entity, 4103/4307, SHUFFLE_DECK). The copies don't keep its run enchantments (unrecorded).</summary>
-		private static void TavernNewDeckCards(Controller c, IEntity source, Card card, int copies)
+		/// All Here!; live: a new hidden DECK entity, 4103/4307, SHUFFLE_DECK). Copies of a deck card (<paramref name="original"/>) keep its run
+		/// enchantments (user 2026-11-20).</summary>
+		private static void TavernNewDeckCards(Controller c, IEntity source, Card card, int copies, IPlayable original = null)
 		{
 			for (int i = 0; i < copies && card != null && !c.DeckZone.IsFull; i++)
 			{
 				IPlayable copy = Entity.FromCard(c, card);
 				Generic.AddToRunDeck(c, copy);
+				if (original != null) Generic.CopyRunEnchantments(c, original, copy);
 				Generic.ShuffleIntoDeck.Invoke(c, source, copy);
 			}
 		}
@@ -302,7 +306,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					if (TavernTarget(c, t) is Minion m) TavernNewDeckCards(c, s, m.Card, V("DALA_910", "copies", 3));
+					if (TavernTarget(c, t) is Minion m) TavernNewDeckCards(c, s, m.Card, V("DALA_910", "copies", 3), m);
 				})
 			}));
 

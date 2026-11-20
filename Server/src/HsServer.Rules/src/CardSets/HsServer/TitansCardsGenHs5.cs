@@ -535,7 +535,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				Trigger = new Trigger(TriggerType.TURN_END)
 				{
 					EitherTurn = true,
-					SingleTask = new CustomTask((g, c, s, t, stack) => { if (s is Enchantment e && g.CurrentPlayer != c) e.Remove(); })
+					SingleTask = new CustomTask((g, c, s, t, stack) => { if (s is Enchantment e && g.CurrentPlayer == c) e.Remove(); }) // (c: the player it is on — Trigger.Side)
 				}
 			}));
 

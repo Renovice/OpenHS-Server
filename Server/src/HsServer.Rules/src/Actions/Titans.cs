@@ -31,12 +31,33 @@ namespace SabberStoneCore.Actions
 		/// <summary>Client tag 3129 (unnamed): 1 once a Titan used an ability, 0 again after it attacks (live Aman'Thul 47388).</summary>
 		public const GameTag TITAN_HAS_USED_ABILITY = (GameTag)3129;
 
-		private static readonly GameTag[] TitanUsedTags = { TITAN_ABILITY_USED_1, TITAN_ABILITY_USED_2, TITAN_ABILITY_USED_3 };
-		private static readonly GameTag[] TitanEntityTags = { HsTag.TITAN_ABILITY_ENTITY_1, HsTag.TITAN_ABILITY_ENTITY_2, HsTag.TITAN_ABILITY_ENTITY_3 };
+		/// <summary>(2026-11-19) Client OLD_GOD (4754): an Old God (BE) is a Titan with four abilities — the same activatable minion
+		/// (ACTIVATABLE_MINION 4786; live session-20261106-001808 160292: its abilities set aside with PARENT_CARD, TITAN_ABILITY_USED_n
+		/// in its RelatedCards order); the 4th pip is ACTIVATABLE_MINION_ABILITY_USED_4 (4790).</summary>
+		public const GameTag OLD_GOD = (GameTag)4754, ACTIVATABLE_MINION_ABILITY_USED_4 = (GameTag)4790;
+
+		private static readonly GameTag[] TitanUsedTags = { TITAN_ABILITY_USED_1, TITAN_ABILITY_USED_2, TITAN_ABILITY_USED_3, ACTIVATABLE_MINION_ABILITY_USED_4 };
+		private static readonly GameTag[] TitanEntityTags = { HsTag.TITAN_ABILITY_ENTITY_1, HsTag.TITAN_ABILITY_ENTITY_2, HsTag.TITAN_ABILITY_ENTITY_3, HsTag.TITAN_ABILITY_ENTITY_4 };
 
 		/// <summary>Is <paramref name="p"/> a Titan now: a Titan card's minion that isn't Silenced (wiki Titan: "Silenced Titans
 		/// can't use abilities but can perform attacks like a regular minion").</summary>
-		public static bool IsTitan(IPlayable p) => p is Minion m && !m.IsSilenced && p[TITAN] > 0 && p.Card.IsTitan;
+		public static bool IsTitan(IPlayable p) => p is Minion m && !m.IsSilenced && (p[TITAN] > 0 || p[OLD_GOD] > 0) && p.Card.IsTitan;
+
+		/// <summary>Is <paramref name="p"/> an Old God now (a Titan with the OLD_GOD keyword).</summary>
+		public static bool IsOldGod(IPlayable p) => IsTitan(p) && p[OLD_GOD] > 0;
+
+		/// <summary>The script-data slot where an Old God marks "got its extra action this turn" (live: TAG_SCRIPT_DATA_NUM_2; Y'Shaarj,
+		/// whose NUM_1 is its 30-Mana count, NUM_4 — Power.OldGodMarkTag).</summary>
+		public static GameTag OldGodMark(Card card) => card.Power?.OldGodMarkTag ?? GameTag.TAG_SCRIPT_DATA_NUM_2;
+
+		/// <summary>An Old God's end of its owner's turn: its extra-action mark goes back to 0 in its own TRIGGER block at
+		/// <paramref name="effectIndex"/> (live: C'Thun 7, N'Zoth 6, Yogg-Saron 10, Y'Shaarj 10 — only when the mark was set).</summary>
+		public static Trigger OldGodTurnEnd(int effectIndex) => new Trigger(TriggerType.TURN_END)
+		{
+			EffectIndex = effectIndex,
+			Condition = new Conditions.SelfCondition(p => p[OldGodMark(p.Card)] > 0),
+			SingleTask = new CustomTask((g, c, s, t, stack) => { if (s is IPlayable p) p[OldGodMark(p.Card)] = 0; })
+		};
 
 		/// <summary>How many abilities the Titan's card has (3).</summary>
 		public static int TitanAbilityCount(IPlayable titan) => titan == null ? 0 : Math.Min(TitanUsedTags.Length, Cards.TitanAbilities(titan.Card).Length);
@@ -237,12 +258,32 @@ namespace SabberStoneCore.Actions
 			titan[HsTag.TITAN_LAST_ABILITY_TARGET] = target?.Id ?? 0;
 			g.DeathProcessingAndAuraUpdate();
 
+			// (2026-11-19) an Old God's first ability of a turn gives it one more action this turn (wiki Old God: "Old Gods can naturally
+			// act twice per turn while they have abilities remaining, but can only act once if all of their abilities have been used. If
+			// only one ability remains, the creature can use it and then immediately attack"). Live (session-20261106-001808 160666,
+			// every Old God in 14 recordings): its TRIGGER block at the card's own index (Power.OldGodExtraActionIndex: C'Thun 6,
+			// N'Zoth 5, Yogg-Saron / Y'Shaarj 11) — EXTRA_ATTACKS_THIS_TURN 1, EXHAUSTED 0, TAG_SCRIPT_DATA_NUM_2 1 — before the
+			// after-ability block. The client tag is the state (AttacksPerTurn reads it; Game resets it at its owner's next turn start).
+			if (IsOldGod(titan) && titan[GameTag.EXTRA_ATTACKS_THIS_TURN] == 0)
+			{
+				if (history)
+				{
+					PowerHistoryBlockStart extraBlock = PowerHistoryBuilder.BlockStart(BlockType.TRIGGER, titan.Id, "", titan.Card.Power?.OldGodExtraActionIndex ?? 0, 0);
+					g.PowerHistory.Add(extraBlock);
+				}
+				titan[GameTag.EXTRA_ATTACKS_THIS_TURN] = 1;
+				if (titan.NumAttacksThisTurn < AttacksPerTurn(titan)) titan.IsExhausted = false;
+				titan[OldGodMark(titan.Card)] = 1;
+				if (history) g.PowerHistory.Add(PowerHistoryBuilder.BlockEnd());
+			}
+
 			// "After this uses an ability" (always the block: the client plays the ability's voice line from it)
 			ISimpleTask after = titan.Card.Power?.TitanAbilityTask;
 			if (history)
 			{
+				int[] indexes = titan.Card.Power?.TitanAbilityEffectIndexes;
 				PowerHistoryBlockStart trigger = PowerHistoryBuilder.BlockStart(BlockType.TRIGGER, titan.Id, "",
-					index + (titan.Card.Power?.TitanAbilityEffectIndexBase ?? 0), 0);
+					indexes != null && index < indexes.Length ? indexes[index] : index + (titan.Card.Power?.TitanAbilityEffectIndexBase ?? 0), 0);
 				trigger.ShowInHistory = after != null;
 				g.PowerHistory.Add(trigger);
 			}
@@ -777,6 +818,44 @@ namespace SabberStoneCore.Actions
 			m.Controller.SetasideZone.Add(m);
 			if (g.History)
 				g.PowerHistory.Add(new PowerHistoryMetaData { Type = MetaDataType.HISTORY_TARGET, Data = 0, Info = new List<int> { m.Id } });
+			return true;
+		}
+
+		/// <summary>
+		/// (2026-11-16) A card that expires without dying — Nythendric Beetles combining, Shadow Reflection's copy at the end of the turn:
+		/// it leaves (play: no Death Event, no Deathrattle; its triggers and aura stop) and ends in the graveyard. Live (session-20261003-110225
+		/// 38647-38748, session-20261008-012951 6564-6572): 1068 = 6 pulse, ZONE_POSITION 0, ZONE SETASIDE, then the affected counter
+		/// (4741 / LAST_AFFECTED_BY = <paramref name="source"/>), 1068 = 4 pulse, ZONE GRAVEYARD. Unlike <see cref="RemoveFromGame"/>
+		/// (Strike from History: stays set aside, hidden).
+		/// </summary>
+		public static bool ExpireToGraveyard(IPlayable p, IEntity source)
+		{
+			if (p?.Zone == null || p.Zone.Type is Zone.GRAVEYARD or Zone.SETASIDE or Zone.REMOVEDFROMGAME) return false;
+			Game g = p.Game;
+			if (g.History)
+			{
+				g.PowerHistory.Add(PowerHistoryBuilder.TagChange(p.Id, (GameTag)1068, 6));
+				g.PowerHistory.Add(PowerHistoryBuilder.TagChange(p.Id, (GameTag)1068, 0));
+			}
+			if (p is Minion m && m.Zone.Type == Zone.PLAY)
+			{
+				ExitCombat(m);
+				if (m.IsExhausted) m.IsExhausted = false;
+				m.Zone.Remove(m);
+				RetireFromPlay(m);
+				RemoveEnchantmentsOnBackwardMove(m);
+			}
+			else
+				p.Zone.Remove(p);
+			p.Controller.SetasideZone.Add(p);
+			if (source != null) NoteAffected(p, source);
+			if (g.History)
+			{
+				g.PowerHistory.Add(PowerHistoryBuilder.TagChange(p.Id, (GameTag)1068, 4));
+				g.PowerHistory.Add(PowerHistoryBuilder.TagChange(p.Id, (GameTag)1068, 0));
+			}
+			p.Zone.Remove(p);
+			p.Controller.GraveyardZone.Add(p);
 			return true;
 		}
 

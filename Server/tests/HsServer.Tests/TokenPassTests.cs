@@ -100,8 +100,9 @@ public class TokenPassTests
         _ = Db.Value;
         var broken = FormerlyMissing.Where(id => Cards.TryFromId(id) is not Card c || !c.Implemented).ToList();
         Assert.Empty(broken);
-        // still open (reasons in the pass report): C'Thun's Old God abilities, the Dark Gift spells, Whizbang's Experimental Decks
-        Assert.False(Cards.FromId("BE_013t1").Implemented);
+        // still open (reasons in the pass report): the Dark Gift spells, Whizbang's Experimental Decks (the Old Gods' abilities: done 2026-11-19)
+        Assert.True(Cards.FromId("BE_013t1").Implemented);
+        Assert.True(Cards.FromId("BE_009t2").Implemented);
     }
 
     // ------------------------------------------------------------------------------------------------ rules from tags

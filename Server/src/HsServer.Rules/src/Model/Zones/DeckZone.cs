@@ -90,6 +90,15 @@ namespace SabberStoneCore.Model.Zones
 		public void Fill(IReadOnlyCollection<string> excludeIds = null)
 		{
 			IReadOnlyList<Card> cards = Game.FormatType == FormatType.FT_STANDARD ? Controller.Standard : Controller.Wild;
+			// HsServer (2026-11-20): a predictable fill in the tests (GameConfig.PlainPredictableFill) uses plain minions only — no text, so nothing in the
+			// filler acts (cost auras, "while in hand", start-of-game, spells). Random cards from the whole pool made ~35 tests fail now
+			// and then, more with every set (EvilCableRat, Venture Co., Summoning Stone...).
+			bool plain = excludeIds != null && Config.GameConfig.PlainPredictableFill;
+			if (plain)
+			{
+				var vanilla = cards.Where(c => c.Type == CardType.MINION && string.IsNullOrWhiteSpace(c.Text) && !excludeIds.Contains(c.Id)).ToList();
+				if (vanilla.Count > 0) cards = vanilla;
+			}
 			int cardsToAdd = StartingCards - _count;
 
 			Game.Log(LogLevel.INFO, BlockType.PLAY, "Deck", !Game.Logging ? "" :
@@ -105,7 +114,8 @@ namespace SabberStoneCore.Model.Zones
 					continue;
 
 				// don't add cards that have already reached max occurence in deck.
-				if (this.Count(c => c.Card == card) >= card.MaxAllowedInDeck)
+				// (a predictable fill has few plain minions to pick from: copies past the deck limit are fine there, or it never fills)
+				if (!plain && this.Count(c => c.Card == card) >= card.MaxAllowedInDeck)
 					continue;
 
 				Controller.DeckCards.Add(card);

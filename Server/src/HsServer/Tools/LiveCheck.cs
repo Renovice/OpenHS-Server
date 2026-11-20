@@ -124,7 +124,10 @@ internal static partial class LiveCheck
 
     /// <summary>Live sessions: the live install's recorder folder, RESEARCH/captures and extra roots (never our own server's).</summary>
     private static List<string> FindSessions(string root, List<string> extra) =>
-        Recording.FindSessions(new[] { LiveRecorder, Path.Combine(root, "RESEARCH", "captures") }.Concat(extra).ToArray())
+        // (2026-11-16) + RESEARCH/live-recordings-backup: the live install's folder changes (a reinstall renamed it, 157 sessions out of
+        // sight); the backup keeps every live session
+        Recording.FindSessions(new[] { LiveRecorder, Path.Combine(root, "RESEARCH", "captures"), Path.Combine(root, "RESEARCH", "live-recordings-backup") }
+            .Concat(extra).ToArray())
             .Where(f => !f.Replace('\\', '/').Contains("/local-test", StringComparison.OrdinalIgnoreCase))
             .ToList();
 
@@ -155,6 +158,10 @@ internal static partial class LiveCheck
         // a deterministic difference where a card that acted reads a hand or deck the viewer never saw (rebuilt with placeholder minions)
         else if (res != null && res.Status == "DIFFERS" && HiddenCardsRead(a) is string hidden)
             res = res with { Status = "UNSURE", Detail = $"reads {hidden} — {res.Detail}" };
+        // (2026-11-20) a difference where a card that acted was changed by a patch after the recording (Server/data/dbf-*-<date>/changes.txt):
+        // the recording shows the old card (the C'Thun numbers before 2026-11-20); kept apart, not a rule to fix
+        else if (res != null && res.Status is "DIFFERS" or "DIFFERS-RANDOM" or "UNSURE" or "REFUSED" && PatchedSince(a) is { Count: > 0 } patched)
+            res = res with { Status = "OUTDATED", Detail = $"changed by a patch after this recording: {string.Join(", ", patched.Take(4))} — {res.Status}: {res.Detail}" };
         // a deterministic difference where a card that acted reads an engine counter the rebuild couldn't fill (LiveCheck.Counters)
         else if (res != null && res.Status == "DIFFERS" && UnfilledCountersActing(a) is { Count: > 0 } counters)
             res = res with { Status = "UNSURE", Detail = $"reads engine counters the rebuild can't fill: {string.Join(", ", counters.Take(4))} — {res.Detail}" };
@@ -169,6 +176,65 @@ internal static partial class LiveCheck
 
     /// <summary>The cards that acted in the action (its source, every block's source, an aura in play) that have text but no script in
     /// ours.</summary>
+    /// <summary>Per card id, the dates of the card-data snapshots (Server/data/dbf-*-<date>) that changed its rules (<see cref="RulesChanged"/>).</summary>
+    private static Dictionary<string, List<string>> _patchDates;
+
+    private static Dictionary<string, List<string>> PatchDates()
+    {
+        if (_patchDates != null) return _patchDates;
+        var map = new Dictionary<string, List<string>>(StringComparer.Ordinal);
+        string data = Path.Combine(Program.ProjectRoot(), "Server", "data");
+        var dirs = Directory.Exists(data) ? Directory.EnumerateDirectories(data, "dbf-*").OrderBy(d => d, StringComparer.Ordinal).ToList() : new List<string>();
+        Dictionary<string, UpdateClient.CardInfo> before = null;
+        foreach (string dir in dirs)
+        {
+            Dictionary<string, UpdateClient.CardInfo> now;
+            try { now = UpdateClient.Load(dir); } catch { continue; }
+            var date = System.Text.RegularExpressions.Regex.Match(Path.GetFileName(dir), @"-(\d{8})$");
+            if (before != null && date.Success)
+                foreach (var (id, card) in now)
+                    if (before.TryGetValue(id, out var old) && RulesChanged(old, card))
+                        (map.TryGetValue(id, out var l) ? l : map[id] = new List<string>()).Add(date.Groups[1].Value);
+            before = now;
+        }
+        return _patchDates = map;
+    }
+
+    /// <summary>The tags that change how a card plays: cost, stats, type, class, race, school, the script numbers and the keywords.</summary>
+    private static readonly HashSet<int> RuleTags = new()
+    {
+        48, 47, 45, 187, 292, 202, 199, 200, 1635, 2, 3, 2889, // COST ATK HEALTH DURABILITY ARMOR CARDTYPE CLASS CARDRACE SPELL_SCHOOL SCRIPT_DATA_NUM_1..3
+        190, 194, 197, 791, 189, 191, 363, 685, 1085, 192, 215, 217, 218, 212, 220, 338, 1427, 1637, 2185, // keywords
+    };
+
+    /// <summary>A patch that changes the rules: the text (markup, spacing and case aside) or a rule tag. Not a capital letter or the art.</summary>
+    private static bool RulesChanged(UpdateClient.CardInfo old, UpdateClient.CardInfo now)
+    {
+        static string Norm(string t) => System.Text.RegularExpressions.Regex.Replace(System.Text.RegularExpressions.Regex.Replace(t ?? "", @"<[^>]*>|\[x\]|&|_", " "), @"\s+", " ").Trim().ToLowerInvariant();
+        static Dictionary<int, string> Rules(string tags) => tags.Split(',', StringSplitOptions.RemoveEmptyEntries).Select(x => x.Split('='))
+            .Where(x => x.Length == 2 && int.TryParse(x[0], out int t) && RuleTags.Contains(t)).GroupBy(x => int.Parse(x[0])).ToDictionary(g => g.Key, g => g.First()[1]);
+        if (Norm(old.Text) != Norm(now.Text)) return true;
+        var a = Rules(old.Tags);
+        var b = Rules(now.Tags);
+        return a.Count != b.Count || a.Any(kv => !b.TryGetValue(kv.Key, out string v) || v != kv.Value);
+    }
+
+    /// <summary>The cards that acted (as <see cref="UnscriptedActing"/> counts them) changed by a patch dated after the recording.</summary>
+    private static List<string> PatchedSince(LiveAction a)
+    {
+        var day = System.Text.RegularExpressions.Regex.Match(a.Session ?? "", @"session-(\d{8})-");
+        if (!day.Success) return new List<string>();
+        var ids = new List<int>();
+        if (!a.EndTurn) ids.Add(a.Source);
+        ids.AddRange(a.BlockSources);
+        var list = new List<string>();
+        foreach (int id in ids.Distinct())
+            if (a.CardOf(id) is { Length: > 0 } card && PatchDates().TryGetValue(card, out var dates) &&
+                dates.Any(d => string.CompareOrdinal(d, day.Groups[1].Value) > 0) && !list.Contains(card))
+                list.Add(card);
+        return list;
+    }
+
     private static List<string> UnscriptedActing(LiveAction a)
     {
         var ids = new List<int>();
@@ -206,6 +272,12 @@ internal static partial class LiveCheck
             LiveEntity e = a.Before.GetValueOrDefault(id) ?? a.After.GetValueOrDefault(id);
             if (e == null || CardFor(a.CardOf(id)) is not Card c) continue;
             int own = e[GameTag.CONTROLLER], opp = own == 1 ? 2 : 1;
+            // (2026-11-19) "If C'Thun started in your deck" (Spawn of C'Thun) names a card of the starting deck: unknown while one of
+            // its cards was never seen (the rebuild's starting deck holds placeholders for them)
+            string raw = System.Text.RegularExpressions.Regex.Replace(System.Text.RegularExpressions.Regex.Replace(c.Text ?? "", "<[^>]*>", ""), @"\s+", " ").ToLowerInvariant();
+            if (System.Text.RegularExpressions.Regex.IsMatch(raw, @"if [a-z'’ ,.-]+ started in your deck") &&
+                a.Before.Values.Any(x => x.Id > 3 && x.Id < a.FirstGenerated && x[GameTag.CONTROLLER] == own && Hidden(x)))
+                return $"a starting deck with hidden cards ({c.Id})";
             // ("didn't start in your deck" is where a card came from — the rebuild keeps it — not what the deck holds)
             string text = System.Text.RegularExpressions.Regex.Replace(c.Text ?? "", "<[^>]*>", "").ToLowerInvariant()
                 .Replace("start in your deck", "").Replace("started in your deck", "");
@@ -214,6 +286,11 @@ internal static partial class LiveCheck
                          text.Contains("opponent's hand") || text.Contains("their hand") || text.Contains("enemy hand");
             if (reads && (HiddenIn((int)SabberStoneCore.Enums.Zone.HAND, own) || theirs && HiddenIn((int)SabberStoneCore.Enums.Zone.HAND, opp)))
                 return $"a hand with hidden cards ({c.Id})";
+            // (2026-11-20) what a drawn card is ("Draw a card. If it's not a minion…", "Draw two cards. For each that isn't a minion…"):
+            // unknown while the deck holds cards the viewer never saw (a drawn Shatter card splits at once and is never shown)
+            if (text.Contains("draw") && System.Text.RegularExpressions.Regex.IsMatch(text, @"if it'?s|if it is|each that is|that isn'?t|if they'?re") &&
+                HiddenIn((int)SabberStoneCore.Enums.Zone.DECK, own))
+                return $"a drawn card the viewer never saw ({c.Id})";
             // (what a deck holds, not what goes into it: "draw a spell", "summon a minion from your deck", "if your deck has no ...", Dredge)
             bool readsDeck = text.Contains("from your deck") || text.Contains("in your deck") || text.Contains("your deck has") || text.Contains("deck has no") ||
                              text.Contains("from their deck") || text.Contains("in their deck") || text.Contains("from your opponent's deck") ||
@@ -260,12 +337,12 @@ internal static partial class LiveCheck
         bool random = false, variantsTried = false, firstForced = false;
         var signatures = new HashSet<string>();
         int chooseOne = 0;
-        var variants = new List<(long Seed, int ChooseOne, int Pick)> { (1, int.MinValue, 0) };
+        var variants = new List<(long Seed, int ChooseOne, int Pick, bool Bottom)> { (1, int.MinValue, 0, false) };
         for (int v = 0; v < variants.Count; v++)
         {
-            var (seed, co, pickVariant) = variants[v];
+            var (seed, co, pickVariant, bottom) = variants[v];
             Rebuilt r;
-            try { r = Rebuild(a, seed); }
+            try { r = Rebuild(a, seed, bottom); }
             catch (NotRebuilt nr) { return R("NOT-REBUILT", nr.Message); }
             catch (Exception ex) { return R("NOT-REBUILT", $"rebuild error {ex.GetType().Name}: {ex.Message}", Where(ex)); }
             Dictionary<int, ESnap> before = OurBefore(r);
@@ -286,16 +363,20 @@ internal static partial class LiveCheck
                 {
                     Card[] options = Cards.ChooseOneOptions(CardFor(card));
                     int n = options?.Length ?? 0;
-                    variants[0] = (1, 1, 0);
-                    for (int k = 2; k <= n + 1; k++) variants.Add((1, k, 0));
+                    variants[0] = (1, 1, 0, false);
+                    for (int k = 2; k <= n + 1; k++) variants.Add((1, k, 0, false));
                     co = 1;
                 }
                 else co = chooseOne;
-                variants[0] = (seed, co, pickVariant);
+                variants[0] = (seed, co, pickVariant, false);
             }
             var counters = OurCounters(r);
             var randomPicks = new List<string>();
             int historyMark = r.G.PowerHistory.Full.Count;
+            // (2026-11-16) a random roll in ours (RandomTask and the like) makes the outcome random, even when our seeds happen to agree
+            // (Arcane Missiles into a 1-Health minion: 7 of 8 rolls end the same — live had the 8th)
+            bool rolled = false;
+            r.G.RandomHappenedEvent += (_, happened) => { if (happened) rolled = true; };
             string failed = Perform(a, r, co, pickVariant, randomPicks);
             if (failed != null)
             {
@@ -318,7 +399,7 @@ internal static partial class LiveCheck
             List<string> diffs = Differences(a, live, ours, r, out bool forcedOnly);
             if (o?.Line > 0 || o?.Detail == true)
             {
-                log.WriteLine($"== variant {v} (seed {seed}, choose one {co}, pick {pickVariant}); random picks: {string.Join(",", randomPicks)}; notes: {string.Join("; ", r.Notes)}");
+                log.WriteLine($"== variant {v} (seed {seed}, choose one {co}, pick {pickVariant}{(bottom ? ", deck bottom" : "")}); random picks: {string.Join(",", randomPicks)}; notes: {string.Join("; ", r.Notes)}");
                 log.WriteLine("fitted: " + string.Join(",", r.Fitted.Select(f => f.Item1 + ":" + f.Item2)));
                 if (v == 0)
                     foreach (var (side, bc) in new[] { ("own", r.Actor), ("opp", r.Actor.Opponent) })
@@ -337,7 +418,9 @@ internal static partial class LiveCheck
             }
             if (diffs.Count == 0)
                 return R(v == 0 && randomPicks.Count == 0 ? "MATCH" : "MATCH-RANDOM", v == 0 ? "" : $"variant {v}", notes);
-            if (randomPicks.Count > 0) random = true;
+            // (the deck-bottom variant is another guess at live's hidden deck order, not randomness: it counts only when it matches)
+            if (bottom) continue;
+            if (randomPicks.Count > 0 || rolled) random = true;
             signatures.Add(ours.Signature());
             if (v == 0)
             {
@@ -350,9 +433,12 @@ internal static partial class LiveCheck
             if (!variantsTried)
             {
                 variantsTried = true;
-                for (long s = 2; s <= Seeds; s++) variants.Add((s, co, 0));
+                for (long s = 2; s <= Seeds; s++) variants.Add((s, co, 0, false));
                 if (randomPicks.Count > 0)
-                    for (int p = 1; p < 3; p++) variants.Add((1, co, p));
+                    for (int p = 1; p < 3; p++) variants.Add((1, co, p, false));
+                // (2026-11-16) the cards that left the deck at its bottom: live's deck order is hidden, and an effect may take from the
+                // bottom (Sir Finley, Sea Guide: "Swap your hand with the bottom of your deck")
+                if (a.LeftDeck.Count > 0) variants.Add((1, co, 0, true));
             }
         }
         if (signatures.Count > 1) random = true;
@@ -394,7 +480,7 @@ internal static partial class LiveCheck
         return string.Join("; ", parts);
     }
 
-    private static readonly string[] StatusOrder ={ "MATCH", "MATCH-RANDOM", "DIFFERS", "DIFFERS-RANDOM", "UNSURE", "REFUSED", "ERROR", "UNSCRIPTED", "NOT-REBUILT" };
+    private static readonly string[] StatusOrder ={ "MATCH", "MATCH-RANDOM", "DIFFERS", "DIFFERS-RANDOM", "UNSURE", "REFUSED", "ERROR", "UNSCRIPTED", "OUTDATED", "NOT-REBUILT" };
 
     private static void Report(List<Result> results, string dir, Options o)
     {
@@ -423,7 +509,8 @@ internal static partial class LiveCheck
         md.AppendLine("  to force (a modifier it couldn't reproduce), a card that acted reads an engine counter it can't fill (LiveCheck.Counters,");
         md.AppendLine("  named), or reads a hand / deck with cards the viewer never saw (rebuilt as placeholder minions). REFUSED / ERROR: ours");
         md.AppendLine("  refused the action live did / threw. UNSCRIPTED: a difference where a card that acted (or an aura in play) has text but no");
-        md.AppendLine("  script in ours — a card to script, listed per card below. NOT-REBUILT: why in the next section.");
+        md.AppendLine("  script in ours — a card to script, listed per card below. OUTDATED: a difference where a card that acted");
+        md.AppendLine("  was changed by a patch after the recording (Server/data/dbf-*-<date>/changes.txt): the recording shows the old card. NOT-REBUILT: why in the next section.");
         md.AppendLine("- `HsServer livecheck --session S --line N` prints one action (our board, live's and our outcome, our history); `--detail`");
         md.AppendLine("  prints that for every action that isn't a match.");
         md.AppendLine();

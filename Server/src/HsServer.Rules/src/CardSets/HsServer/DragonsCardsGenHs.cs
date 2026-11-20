@@ -75,9 +75,7 @@ namespace SabberStoneCore.CardSets.HsServer
 		private static bool HoldingDragon(Controller c, IEntity except = null) =>
 			c.HandZone.Any(p => p.Id != except?.Id && p is Minion m && m.IsRace(Race.DRAGON));
 
-		private static ISimpleTask IfHoldingDragon(ISimpleTask then) => ComplexTask.Create(
-			new CustomTask((g, c, s, t, stack) => stack.Flag = HoldingDragon(c, s)),
-			new FlagTask(true, then));
+		private static ISimpleTask IfHoldingDragon(ISimpleTask then) => ComplexTask.If((g, c, s) => HoldingDragon(c, s), then);
 
 		private static bool Overloaded(Controller c) => c.OverloadLocked > 0 || c.OverloadOwed > 0;
 

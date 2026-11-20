@@ -585,7 +585,7 @@ namespace SabberStoneCore.CardSets.HsServer
 						var beetles = c.BoardZone.GetAll().Where(m => m.Card == me.Card && !m.IsDead).OrderBy(m => m.ZonePosition).ToList();
 						if (beetles.Count == 0) return;
 						int slot = beetles[0].ZonePosition, n = beetles.Count;
-						foreach (Minion b in beetles) Generic.RemoveFromGame(b, s);
+						foreach (Minion b in beetles) Generic.ExpireToGraveyard(b, b); // (live: each its own LAST_AFFECTED_BY)
 						if (!(Cards.TryFromId(me.Card.Id.Substring(0, me.Card.Id.Length - 1)) is Card nythendra)) return;
 						var reformed = (Minion)Entity.FromCard(c, nythendra, new EntityData { [GameTag.ATK] = n, [GameTag.HEALTH] = n, [GameTag.COST] = n });
 						Generic.SummonBlock.Invoke(g, reformed, Math.Min(slot, c.BoardZone.Count), s);

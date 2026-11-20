@@ -80,7 +80,9 @@ namespace SabberStoneCore.CardSets.HsServer
 				// "Dummy effect" holders the client only shows: Generic.PlayDummyEffect plays the Heist ones (DALA_*d, Wisdomball's
 				// Legendary transform DALA_740ts4); Grizzled Wizard's DRG_401d and Val'anyr's re-equip LOOT_500d are never played by our
 				// scripts (visual DOUBT, no recording of either)
-				"DALA_724d", "DALA_728d", "DALA_744d", "DALA_746d", "DALA_740ts4", "DRG_401d", "LOOT_500d",
+				// (Dalaran Heist's "Random <class> Deck" options: the run builds the deck — Lobby/HeistRuns.RandomDeck)
+				"DALA_800", "DALA_801", "DALA_802", "DALA_803", "DALA_804", "DALA_805", "DALA_806", "DALA_807", "DALA_808",
+				"DALA_724d", "DALA_728d", "DALA_744d", "DALA_746d", "DALA_740ts4", "DALA_740ts", "DALA_740ts2", "DALA_740ts3", "DALA_740ts5", "DRG_401d", "LOOT_500d",
 				// the looks of crafted cards: Kazakus' potions (Generic.CraftPotion), Mixologist's Special, Deathstalker Rexxar's Zombeast
 				// (Card.CreateZombeastCard: the first Beast's card with both Beasts' stats and text)
 				"CFM_621t", "CFM_621t14", "CFM_621t15", "VAC_523t", "ICC_828t",

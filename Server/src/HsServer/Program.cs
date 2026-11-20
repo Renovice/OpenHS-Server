@@ -29,6 +29,8 @@ internal static class Program
             "deck" => Tools.DeckTool.Run(rest),
             "tagdiff" => Tools.TagDiff.Run(rest),
             "hsjson" => Tools.HsJsonCheck.Run(rest),
+            "patchreview" => Tools.PatchReview.Run(rest),
+            "cardvalues" => Tools.CardValuesTool.Run(rest),
             "wirecheck" => Tools.WireCheck.Run(rest),
             "viewcheck" => Tools.ViewCheck.Run(rest),
             "vfxcheck" => Tools.VfxCheck.Run(rest),

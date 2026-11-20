@@ -76,6 +76,22 @@ namespace SabberStoneCore.Actions
 			return (Minion)Entity.FromCard(c, card, data);
 		}
 
+		/// <summary>(2026-11-20) A fresh copy of <paramref name="made"/> keeps its Herald upgrade: the scale it was made with (its NUM_1 over the
+		/// card's; enchantments never change it) on the copy's base stats. Live session-20261110-200615 87964: Ascendance's original Soldier
+		/// of Al'Akir, made 2/4 at 2-3 Heralds, came back 2/4 with the count at 4. Adds to <paramref name="data"/> and returns it.</summary>
+		internal static EntityData KeepHeraldUpgrade(IPlayable made, EntityData data)
+		{
+			Card card = made?.Card;
+			int num = card?[GameTag.TAG_SCRIPT_DATA_NUM_1] ?? 0;
+			if (!HeraldUpgraded(card) || num <= 0 || made[GameTag.TAG_SCRIPT_DATA_NUM_1] <= num) return data;
+			int scale = made[GameTag.TAG_SCRIPT_DATA_NUM_1] / num;
+			data[GameTag.ATK] = card.ATK * scale;
+			data[GameTag.HEALTH] = card.Health * scale;
+			data[GameTag.COST] = card.Cost * scale;
+			data[GameTag.TAG_SCRIPT_DATA_NUM_1] = num * scale;
+			return data;
+		}
+
 		private static string _heraldSpawnFx, _heraldBuffFx;
 
 		/// <summary>The Herald keyword's effects (every Herald card's recorded CATAFX_Herald_OverrideSpawn_Super / CATAFX_Herald_Buff).</summary>

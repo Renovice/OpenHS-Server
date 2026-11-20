@@ -223,15 +223,11 @@ namespace SabberStoneCore.Actions
 		/// </summary>
 		public static int SummonPosition(Game g, IEntity summoner, Controller side, bool forcePlay = false)
 		{
-			// A Deathrattle granted by an enchantment (Soul of the Forest, Grave Rune) summons on the far right
-			// (Advanced rulebook, "Where do Minions summoned by Deathrattles spawn?").
-			if (summoner is Enchantment) return -1;
-			// (HsServer 2026-10-08: such a Deathrattle runs with the dead minion as its source and its enchantment as the task's target —
-			// Enchantment.Remove — so a summon from the dead minion while it runs goes far right too: rulebook :1687 "These deathrattles also
-			// summon minions at the right side: … Soul of the Forest")
-			if (summoner is Minion granted && granted.Zone?.Type != Zone.PLAY && g.TaskQueue.CurrentTarget is Enchantment ench &&
-			    ench.Card.Power?.DeathrattleTask != null && ench.Target == granted)
-				return -1;
+			// (2026-11-20) A Deathrattle granted by an enchantment summons in the dead minion's slot, like its own: live Ascendance's
+			// CATA_567e (session-20261110-200615 87964: the Soldier between its two neighbours) and Wildwood Circle's CATA_134t3. The
+			// rulebook's far-right list (:1687 "…Soul of the Forest, Meat Wagon…") names those cards only; it was widened here to every
+			// enchantment before (FINDINGS 2026-11-20). Soul of the Forest itself: live-checks.md.
+			if (summoner is Enchantment granter) summoner = granter.Target as Minion;
 			if (!(summoner is Minion source) || source.Controller != side) return -1;
 			int position;
 			if (source.Zone?.Type == Zone.PLAY)

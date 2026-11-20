@@ -244,7 +244,9 @@ namespace SabberStoneCore.Enchants
 			{
 				switch (t)
 				{
-					case GameTag.ATK when Type != CardType.MINION:
+					// HsServer (2026-11-20): a weapon has its ATK slot too (index 3, WeaponLength) — "Your weapon has +2 Attack" (Vulpera Toxinblade,
+					// Crabatoa's Claw) was written there but read as 0, so no weapon Attack aura ever showed
+					case GameTag.ATK when Type != CardType.MINION && Type != CardType.WEAPON:
 						return 0;
 					case GameTag.ATK:
 						return ATK;

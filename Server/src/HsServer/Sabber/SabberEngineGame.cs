@@ -61,6 +61,8 @@ internal sealed class SabberEngineGame : IEngineGame
         {
             if (cardsReady) return;
             ReprintCards.DbfDirectory ??= dbfDirectory;
+            // (2026-11-20) the card numbers follow the current texts: the baseline next to the snapshots (CardValues)
+            SabberStoneCore.Loader.CardValues.BaselineFile ??= Path.Combine(Path.GetDirectoryName(Path.GetFullPath(ReprintCards.DbfDirectory)) ?? "", "card-values-baseline.tsv");
             // Current Core cards under their own ids (CS3_, RLK_...) are added from the client DB too.
             var clientCards = CardDb.Load(ReprintCards.DbfDirectory);
             var sets = ClientCardSets.Load(ReprintCards.DbfDirectory, isActive);
@@ -86,7 +88,11 @@ internal sealed class SabberEngineGame : IEngineGame
     /// <summary>(2026-10-09, Dalaran Heist) what the game did to the human's adventure-run deck (Bob's Tavern), in order.</summary>
     public IReadOnlyList<SabberStoneCore.Model.RunDeckEdit> RunDeckEdits => setup.Human.RunDeck == null ? null : game?.RunDeckEdits;
     public bool HumanWon => game.Player1.PlayState == PlayState.WON;
-    public bool AiToAct => !Over && humanChoice == null && (game.Player2.Choice != null || game.CurrentPlayer == game.Player2);
+    public bool AiToAct => !Over && humanChoice == null && (game.Player2.Choice != null || game.CurrentPlayer == game.Player2 || HumanControlledByAi);
+
+    /// <summary>(2026-11-19) Mastermind Yogg-Saron plays the human's extra turn (Generic.AiControls: AI_MAKES_DECISIONS_FOR_PLAYER): the AI
+    /// makes their moves and choices, the client gets no options.</summary>
+    private bool HumanControlledByAi => SabberStoneCore.Actions.Generic.AiControls(game.Player1) && (game.Player1.Choice != null || game.CurrentPlayer == game.Player1);
     public string Describe => $"{game.Player1.Hero.Card.Id} vs {game.Player2.Hero.Card.Id} (rules engine)";
 
     public void Start()
@@ -345,25 +351,27 @@ internal sealed class SabberEngineGame : IEngineGame
 
     public void AiStep()
     {
-        if (game.Player2.Choice is { } choice)
+        // (the Innkeeper, or the human while Mastermind Yogg-Saron plays their turn)
+        Controller actor = HumanControlledByAi ? game.Player1 : game.Player2;
+        if (actor.Choice is { } choice)
         {
-            Run(ai.Choose(game, game.Player2, choice), "AI choice");
+            Run(ai.Choose(game, actor, choice), "AI choice");
             Flush();
             return;
         }
         PlayerTask move;
-        try { move = ai.Step(game, game.Player2); }
+        try { move = ai.Step(game, actor); }
         catch (Exception e)
         {
             Log.Error("rules", $"AI error: {e.GetType().Name}: {e.Message} at {e.StackTrace?.Split('\n').FirstOrDefault()?.Trim()}");
             EngineErrors++;
-            move = EndTurnTask.Any(game.Player2);
+            move = EndTurnTask.Any(actor);
         }
         Run(move, $"AI {move.PlayerTaskType} {move.Source?.Card.Id} → {move.TargetEntity?.Card.Id}");
         // A move that failed without effect would repeat forever; end the turn instead.
-        if (game.CurrentPlayer == game.Player2 && move.PlayerTaskType != PlayerTaskType.END_TURN && ++aiMovesThisTurn > 40)
-            Run(EndTurnTask.Any(game.Player2), "AI forced end turn");
-        if (game.CurrentPlayer != game.Player2) aiMovesThisTurn = 0;
+        if (game.CurrentPlayer == actor && move.PlayerTaskType != PlayerTaskType.END_TURN && ++aiMovesThisTurn > 40)
+            Run(EndTurnTask.Any(actor), "AI forced end turn");
+        if (game.CurrentPlayer != actor) aiMovesThisTurn = 0;
         Flush();
     }
 
@@ -492,7 +500,7 @@ internal sealed class SabberEngineGame : IEngineGame
         if (Over) return;
 
         // Open choices: the human's (answered by the client) and the AI's (shown to the client like live).
-        if (game.Player1.Choice is { } mine && humanChoice?.Choice != mine)
+        if (game.Player1.Choice is { } mine && humanChoice?.Choice != mine && !SabberStoneCore.Actions.Generic.AiControls(game.Player1))
         {
             humanChoice = (nextChoiceId++, mine);
             Queue(Choices(humanChoice.Value.Id, mine));
@@ -504,7 +512,7 @@ internal sealed class SabberEngineGame : IEngineGame
             if (theirs.ChoiceType == ChoiceType.MULLIGAN) Queue(Choices(aiChoiceId, theirs));
         }
 
-        bool humanToAct = humanChoice == null && game.CurrentPlayer == game.Player1 && game.Step == Step.MAIN_ACTION;
+        bool humanToAct = humanChoice == null && game.CurrentPlayer == game.Player1 && game.Step == Step.MAIN_ACTION && !SabberStoneCore.Actions.Generic.AiControls(game.Player1);
         if (humanToAct && (sentOptions == null || forceOptions))
         {
             // the player's attacks run their whole pre-attack phase (CARD_TARGET, the validity check) and their end (the options

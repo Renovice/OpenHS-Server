@@ -338,26 +338,26 @@ namespace SabberStoneCore.CardSets.HsServer
 					if (enemies.Count > 0 && !c.BoardZone.IsFull) new ControlTask(EntityType.TARGET).Process(g, c, s, enemies[g.Random.Next(enemies.Count)]);
 				})
 			}));
-			cards.Add("CAP_405t3", new CardDef(new Power // Sentenced for Smuggling — Steal 2 cards from your opponent's hand.
+			cards.Add("CAP_405t3", new CardDef(new Power // Sentenced for Smuggling — Steal a card from your opponent's hand. (2 before the 2026-11-20 patch)
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					foreach (IPlayable card in c.Opponent.HandZone.GetAll().OrderBy(_ => g.Random.Next()).Take(V("CAP_405t3", "cards", 2)).ToList())
+					foreach (IPlayable card in c.Opponent.HandZone.GetAll().OrderBy(_ => g.Random.Next()).Take(V("CAP_405t3", "cards", 1)).ToList())
 						Generic.TakeIntoHand(c, card);
 				})
 			}));
 			cards.Add("CAP_405t4", new CardDef(new Power { PowerTask = ComplexTask.Repeat(new DrawTask(), V("CAP_405t4", "cards", 3)) })); // Crate of Contraband
-			cards.Add("CAP_405t5", new CardDef(new Power // Spurious Shiv — Give minions in your hand and battlefield +3/+3.
+			cards.Add("CAP_405t5", new CardDef(new Power // Spurious Shiv — Give minions in your hand and battlefield +2/+2. (+3/+3 before the 2026-11-20 patch)
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
 					foreach (IPlayable p in c.HandZone.GetAll().Where(p => p is Minion).Concat(c.BoardZone.GetAll().Where(m => !(m is Location))).ToList()) Give(g, s, p, "CAP_405t5e");
 				})
 			}));
-			cards.Add("CAP_405t5e", new CardDef(new Power { Enchant = new Enchant(Effects.AttackHealth_N(V("CAP_405t5", "stats", 3))) }));
-			cards.Add("CAP_405t6", new CardDef(new Power // Criminal Contract — Summon three random 3-Cost minions.
+			cards.Add("CAP_405t5e", new CardDef(new Power { Enchant = new Enchant(Effects.AttackHealth_N(V("CAP_405t5", "stats", 2))) }));
+			cards.Add("CAP_405t6", new CardDef(new Power // Criminal Contract — Summon three random 2-Cost minions. (3-Cost before the 2026-11-20 patch)
 			{
-				PowerTask = new CustomTask((g, c, s, t, stack) => { for (int i = 0; i < V("CAP_405t6", "minions", 3); i++) Summon(g, c, RandomMinionOfCost(g, V("CAP_405t6", "cost", 3)), s); })
+				PowerTask = new CustomTask((g, c, s, t, stack) => { for (int i = 0; i < V("CAP_405t6", "minions", 3); i++) Summon(g, c, RandomMinionOfCost(g, V("CAP_405t6", "cost", 2)), s); })
 			}));
 			cards.Add("CAP_405t7", new CardDef(new Power // Potion of Perjury — Reduce the Cost of minions in your hand by (2).
 			{
@@ -670,7 +670,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			cards.Add("JAIL_458t4", TinyPalAmmo("JAIL_458t4", (g, c, w) => // Air: a random Battlecry minion, (2) less
 			{
 				if (GetCard(c, RandomCard(g, x => x.Type == CardType.MINION && x[GameTag.BATTLECRY] > 0), w) is IPlayable got)
-					Give(g, w, got, GenericCostLess(V("JAIL_458t4", "less", 2)));
+					GiveCostLess(g, w, got, V("JAIL_458t4", "less", 2));
 			}));
 			// [JAIL_800] Mug'Zee (6) — Start of Game: If your deck has no other minions, get Mug's Hero Power. If it has no spells, get Zee's! (the
 			// starting deck and hand: patch 2026-07-16; both: Mug's replaces, Zee's is a second Hero Power — wiki)
@@ -784,7 +784,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					if (GetCard(c, RandomCard(g, x => x.Type == CardType.SPELL && x.Cost >= V("JAIL_806", "cost", 5)), s) is IPlayable got && !c.DeckCards.Any(x => x.Type == CardType.SPELL))
+					if (GetCard(c, RandomCard(g, x => x.Type == CardType.SPELL && x.Cost >= V("JAIL_806", "cost", 5)), s) is IPlayable got && Generic.DeckStartedSpells(c) == 0) // ("started with": the starting deck)
 						GiveCostLess(g, s, got, V("JAIL_806", "less", 5));
 				})
 			}));

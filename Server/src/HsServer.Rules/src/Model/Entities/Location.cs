@@ -56,6 +56,11 @@ namespace SabberStoneCore.Model.Entities
 		/// option errors).</summary>
 		public Card Absorbed => this[GameTag.ADDITIONAL_PLAY_REQS_1] > 0 ? Cards.FromAssetId(this[GameTag.ADDITIONAL_PLAY_REQS_1]) : null;
 
+		/// <summary>HsServer (2026-11-19): client ULDIR_QUARANTINE_TRACKER (4947) on the card — "Locked until you play a card from each Rune"
+		/// (Uldir Quarantine): locked until its pips ULDIR_QUARANTINE_PIP_BLOOD / FROST / UNHOLY (4948-4950) are all set (wiki: "opens once
+		/// the condition is met", for good; a card's runes set their pips — Generic.NoteQuarantineRunes).</summary>
+		public bool RuneLocked => Card[(GameTag)4947] > 0 && !(this[(GameTag)4948] > 0 && this[(GameTag)4949] > 0 && this[(GameTag)4950] > 0);
+
 		/// <summary>Can its owner activate it now (its turn, not on cooldown or exhausted, and a target when it needs one)?</summary>
 		public bool CanActivate
 		{
@@ -65,7 +70,7 @@ namespace SabberStoneCore.Model.Entities
 					return false;
 				// HsServer (SPACE): LITERALLY_UNPLAYABLE — nothing to do yet (The Galaxy's Lens before a spell; live options
 				// REQ_LITERALLY_UNPLAYABLE)
-				if (this[HsTag.LITERALLY_UNPLAYABLE] > 0)
+				if (this[HsTag.LITERALLY_UNPLAYABLE] > 0 || RuneLocked)
 					return false;
 				List<IPlayable> targets = ActivationTargets();
 				return targets == null || targets.Count > 0 || !(Absorbed ?? Card).MustHaveTargetToPlay && !TargetsCardsInHand;

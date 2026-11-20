@@ -231,7 +231,9 @@ namespace SabberStoneCore.CardSets.HsServer
 				}
 			}));
 			// [DALA_BOSS_07e] Flying! — Belnaara is Immune for now.
-			cards.Add("DALA_BOSS_07e", new CardDef(new Power { Enchant = new Enchant(Effects.Immune) }));
+			// (live session-20261120-132514 37054: CANT_ATTACK, IMMUNE, HERO_FLYING on her hero while flying; all back at landing, 39096)
+			cards.Add("DALA_BOSS_07e", new CardDef(new Power { Enchant = new Enchant(new Effect(GameTag.CANT_ATTACK, EffectOperator.SET, 1), Effects.Immune,
+				new Effect(GameTag.HERO_FLYING, EffectOperator.SET, 1)) }));
 
 			// ---------------------------------------------------------------- 08 Applebough
 			// [DALA_BOSS_08p] Apple Toss (2) — Deal $1 damage to the lowest Health enemy. If it dies, repeat this. [08px] (3): $2.

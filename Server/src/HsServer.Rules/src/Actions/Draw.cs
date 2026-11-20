@@ -18,6 +18,7 @@ using SabberStoneCore.Enums;
 using SabberStoneCore.Kettle;
 using SabberStoneCore.Model.Entities;
 using SabberStoneCore.Tasks;
+using SabberStoneCore.Tasks.SimpleTasks;
 
 namespace SabberStoneCore.Actions
 {
@@ -47,12 +48,22 @@ namespace SabberStoneCore.Actions
 		private static void OnDrawn(Controller c, IPlayable playable)
 		{
 			ISimpleTask task = playable.Power?.TopdeckTask;
+			// HsServer (2026-11-17): "Cast When Drawn" given by an enchantment (Amitut's BE_143t2e: CASTS_WHEN_DRAWN on a spell's copy) — the
+			// spell casts itself, random targets, and is replaced like a printed one
+			bool granted = task == null && playable is Spell && playable[CASTS_WHEN_DRAWN] > 0 && playable.Card[CASTS_WHEN_DRAWN] == 0;
+			// (2026-11-19, soak 700107: out of the set-aside zone first — the cast puts it in the Secret zone / graveyard, and a card in two
+			// zones broke later moves)
+			if (granted) task = new CustomTask((g, cc, s, t, stack) =>
+			{
+				if (s is IPlayable p && p.Zone?.Type == Zone.SETASIDE) p.Zone.Remove(p);
+				new CastRandomSpellTask().Process(g, cc, s, (IPlayable)s);
+			});
 			if (task == null) return;
 			Game game = c.Game;
 			// HsServer (2026-10-08): not in the opening hand or the mulligan's replacements — wiki Casts_When_Drawn.txt:8 "It is not triggered
 			// if the card is chosen during the mulligan" (adventure / Brawl decks)
 			if ((Step)game[GameTag.STEP] is Step.BEGIN_DRAW or Step.BEGIN_MULLIGAN or Step.BEGIN_FIRST or Step.BEGIN_SHUFFLE) return;
-			bool replaced = playable.Card.ReplacedWhenDrawn;
+			bool replaced = playable.Card.ReplacedWhenDrawn || granted;
 			if (game.History)
 				game.PowerHistory.Add(TopdeckBlock(playable)); // live TriggerKeyword CASTS_WHEN_DRAWN / SUMMONED_WHEN_DRAWN
 			if (replaced)
@@ -61,7 +72,7 @@ namespace SabberStoneCore.Actions
 			task.Process(game, c, playable, null);
 			// live (Burrowing Mine, Scroll of Wonder, JAIL_881t: live-20261004-night): the replacement draw is inside the card's
 			// own block — a Casts When Drawn card drawn as the replacement nests its block in it — then the block ends
-			if (replaced && !playable.Power.ReplacementDrawnElsewhere)
+			if (replaced && playable.Power?.ReplacementDrawnElsewhere != true)
 			{
 				Draw(c);
 				if (playable.Power?.AfterReplacementDrawTask is ISimpleTask after)
@@ -82,7 +93,7 @@ namespace SabberStoneCore.Actions
 			// HsServer (TITANS): a minion with both keywords is summoned (Frost Tyrant TTN_083t carries both tags; live EDR_260t:
 			// SUMMONED_WHEN_DRAWN)
 			if (playable is Minion && playable.Card[SUMMONED_WHEN_DRAWN] > 0) start.TriggerKeyword = (int)SUMMONED_WHEN_DRAWN;
-			else if (playable.Card[CASTS_WHEN_DRAWN] > 0) start.TriggerKeyword = (int)CASTS_WHEN_DRAWN;
+			else if (playable[CASTS_WHEN_DRAWN] > 0) start.TriggerKeyword = (int)CASTS_WHEN_DRAWN;
 			else if (playable.Card[SUMMONED_WHEN_DRAWN] > 0) start.TriggerKeyword = (int)SUMMONED_WHEN_DRAWN;
 			// HsServer (ISLAND_VACATION): every on-draw block shows in the history (live Line Cook VAC_337, 6 of 6, no keyword; Sea
 			// Reaver with its keyword too)

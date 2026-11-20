@@ -23,6 +23,7 @@ internal static partial class LiveCheck
         (int)HsTag.ADDED_TO_HAND_TURN, (int)HsTag.HELD_SINCE_PLAY, // (from live's history: FillHandCounters)
         (int)HsTag.QUICKDRAW_PLAY, // (set at the play from ADDED_TO_HAND_TURN)
         (int)HsTag.HERO_DAMAGE_THIS_TURN, // (FillHeroDamage)
+        (int)HsTag.FORGES_THIS_GAME, // (live's FORGED cards)
     };
 
     private static HashSet<int> effectSetTags;

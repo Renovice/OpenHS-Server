@@ -4023,8 +4023,9 @@ namespace SabberStoneCoreTest.CardSets.Standard
 			game.Player2.BaseMana = 10;
 			Minion testCard = game.ProcessCard<Minion>("EVIL Cable Rat");
 
-			List<string> lackeyList = new List<string>() {
-				"Ethereal Lackey", "Faceless Lackey", "Goblin Lackey","Kobold Lackey","Witchy Lackey",};
+			// HsServer (2026-11-20): the Lackeys are the cards with MARK_OF_EVIL (AddLackeyTask) — later sets added more than these five,
+			// so a fixed list failed whenever a newer one came up
+			List<string> lackeyList = Cards.All.Where(c => c[GameTag.MARK_OF_EVIL] == 1).Select(c => c.Name).ToList();
 			Assert.Single(game.Player1.HandZone);
 			Assert.Contains(game.Player1.HandZone[0].Card.Name, lackeyList);
 		}

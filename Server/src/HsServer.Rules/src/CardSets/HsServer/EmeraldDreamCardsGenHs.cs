@@ -99,7 +99,7 @@ namespace SabberStoneCore.CardSets.HsServer
 		private static void DiscoverWithDarkGift(Game g, Controller c, IEntity source, IEnumerable<Card> pool, Action<IPlayable> afterPick = null,
 			IList<IPlayable> fromDeck = null, bool shuffleOthers = false, IList<Card> options = null)
 		{
-			var deckCards = fromDeck?.GroupBy(p => p.Card.Id).Select(x => x.First()).OrderBy(_ => g.Random.Next()).Take(3).ToList();
+			var deckCards = fromDeck?.GroupBy(Generic.UniqueCardKey).Select(x => x.First()).OrderBy(_ => g.Random.Next()).Take(3).ToList();
 			List<Card> cards = options != null ? options.ToList() : deckCards != null ? deckCards.Select(p => p.Card).ToList() : Pick(g, pool, 3);
 			if (cards.Count == 0) return;
 			var used = new HashSet<string>();

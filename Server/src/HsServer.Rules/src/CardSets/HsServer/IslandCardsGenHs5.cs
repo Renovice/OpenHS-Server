@@ -122,7 +122,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
 					foreach (Card got in new[] { RandomCard(g, x => x.Type == CardType.MINION && x.IsRace(NAGA)), RandomCard(g, x => x.Type == CardType.SPELL) })
-						if (IslandToHand(c, s, got) is IPlayable p) Give(g, s, p, GenericCostLess(V("VAC_329", "discount", 2)));
+						if (IslandToHand(c, s, got) is IPlayable p) GiveCostLess(g, s, p, V("VAC_329", "discount", 2));
 				})
 			}));
 			// [VAC_449] Carress, Cabaret Star (3) — While in your hand, play two different spell schools to transform. (Firestone: the
@@ -334,7 +334,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				if (minions.Count == 0) return;
 				IPlayable m = minions[g.Random.Next(minions.Count)];
 				Give(g, s, m, "WORK_021e");
-				if (alone) Give(g, s, m, GenericCostLess(V("WORK_021", "discount", 2)));
+				if (alone) GiveCostLess(g, s, m, V("WORK_021", "discount", 2));
 			});
 			cards.Add("WORK_021", new CardDef(new Power
 			{

@@ -591,7 +591,8 @@ namespace SabberStoneCore.CardSets
 			// --------------------------------------------------------
 			cards.Add("BRM_027", new CardDef(new Power
 			{
-				PowerTask = new ReplaceHeroTask("BRM_027h", "BRM_027p"),
+				// (HsServer 2026-11-16: the card's text is a Deathrattle; the 2021 script ran it on play — StaleTriggerAuditTests)
+				DeathrattleTask = new ReplaceHeroTask("BRM_027h", "BRM_027p"),
 			}));
 
 			// --------------------------------------- MINION - NEUTRAL

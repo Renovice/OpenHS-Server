@@ -329,8 +329,9 @@ namespace SabberStoneCore.CardSets.HsServer
 					})
 				}
 			}));
-			// [DINO_402] Bat Mask (8) — Set a friendly minion's stats to 1/1. Fill your board with copies of it. (copies keep its enchantments)
-			cards.Add("DINO_402", new CardDef(TargetFriendlyMinionToPlay, new Power
+			// [DINO_402] Bat Mask (8) — Set a friendly non-Legendary minion's stats to 1/1. Fill your board with copies of it. (copies keep its
+			// enchantments; "non-Legendary" since the 2026-11-20 patch: client REQ_NOT_LEGENDARY_TARGET)
+			cards.Add("DINO_402", new CardDef(new Dictionary<PlayReq, int>(TargetFriendlyMinionToPlay) { { PlayErrors.REQ_NOT_LEGENDARY_TARGET, 0 } }, new Power
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{

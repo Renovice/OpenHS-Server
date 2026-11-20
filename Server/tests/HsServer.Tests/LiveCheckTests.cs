@@ -319,6 +319,50 @@ public class LiveCheckTests
         finally { File.Delete(file); }
     }
 
+    private const int NerubianEgg = 17, NZoth = 18;
+
+    [Fact]
+    public void A_reconnect_s_resend_of_an_already_summoned_minion_is_not_counted_twice()
+    {
+        // N'Zoth, Dream's End (BE_017): Cost (1) less per Deathrattle minion summoned this game (Controller.SummonedThisGame).
+        // User (2026-11-20): a reconnect's dump resends every entity's current state — that's not a second summon of what's already
+        // on the board. Before this fix, LiveCheck.Recording's FullEntity handling (ZoneMoved(0, zone)) counted any mid-game
+        // FullEntity whose zone was PLAY as a fresh summon, even when the entity was already known (session-20261022-020357 44912:
+        // live cost 2, ours 0 — two extra phantom Deathrattle summons from a reconnect).
+        _ = Cards.Value;
+        string file = Write(
+            Position(
+                Full(NZoth, "BE_017", T(GameTag.CONTROLLER, 1), T(GameTag.CARDTYPE, 4), T(GameTag.ZONE, Z(SabberStoneCore.Enums.Zone.HAND)),
+                    T(GameTag.ZONE_POSITION, 1), T(GameTag.ATK, 5), T(GameTag.HEALTH, 7))),
+            // a minion appears directly in PLAY mid-game (e.g. Battlecry-generated) — its first FullEntity: a genuine summon
+            new List<PowerHistoryData>
+            {
+                Full(NerubianEgg, "CS2_168", T(GameTag.CONTROLLER, 1), T(GameTag.CARDTYPE, 4), T(GameTag.ZONE, Z(SabberStoneCore.Enums.Zone.PLAY)),
+                    T(GameTag.ZONE_POSITION, 1), T(GameTag.ATK, 2), T(GameTag.HEALTH, 2)),
+            },
+            // a reconnect's resend: the same Egg's current state, sent again (not at creation, no GAME_RESET) — not a second summon
+            new List<PowerHistoryData>
+            {
+                Full(NerubianEgg, "CS2_168", T(GameTag.CONTROLLER, 1), T(GameTag.CARDTYPE, 4), T(GameTag.ZONE, Z(SabberStoneCore.Enums.Zone.PLAY)),
+                    T(GameTag.ZONE_POSITION, 1), T(GameTag.ATK, 2), T(GameTag.HEALTH, 2)),
+            },
+            new List<PowerHistoryData>
+            {
+                Start(HistoryBlock.Type.PLAY, NZoth, 0),
+                Change(NZoth, GameTag.ZONE, Z(SabberStoneCore.Enums.Zone.PLAY)),
+                Change(NZoth, GameTag.ZONE_POSITION, 2),
+                End(),
+                Change(Game, GameTag.STEP, 11),
+            });
+        try
+        {
+            List<LiveCheck.LiveAction> actions = Actions(file);
+            LiveCheck.LiveAction a = Assert.Single(actions);
+            Assert.Equal(1, a.History.Count(h => h.Kind == LiveCheck.HistoryKind.Summoned && h.Entity == NerubianEgg));
+        }
+        finally { File.Delete(file); }
+    }
+
     [Fact]
     public void Cards_with_no_script_and_engine_counters_are_told_apart()
     {

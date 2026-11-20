@@ -52,10 +52,21 @@ namespace SabberStoneCore.Tasks
 		public static ISimpleTask If(Func<Game, Controller, IPlayable, bool> condition, ISimpleTask then, ISimpleTask otherwise = null)
 		{
 			var check = new CustomTask((g, c, s, t, stack) => stack.Flag = condition(g, c, s as IPlayable));
-			return otherwise == null
+			ISimpleTask made = otherwise == null
 				? Create(check, new FlagTask(true, then))
 				: Create(check, new FlagTask(true, then), new FlagTask(false, otherwise));
+			if (otherwise == null) _ifParts.AddOrUpdate(made, new IfParts(condition, then));
+			return made;
 		}
+
+		/// <summary>HsServer: a condition and its effect, as <see cref="If"/> joined them ("If you're holding a Dragon,& gain Taunt"):
+		/// Assemble splits them when the condition is the card's first half (Generic.AssembleHalves).</summary>
+		public sealed record IfParts(Func<Game, Controller, IPlayable, bool> Condition, ISimpleTask Then);
+
+		private static readonly System.Runtime.CompilerServices.ConditionalWeakTable<ISimpleTask, IfParts> _ifParts = new();
+
+		/// <summary>HsServer: the condition and effect of a task made by <see cref="If"/> (no otherwise), or null.</summary>
+		public static IfParts PartsOf(ISimpleTask task) => task != null && _ifParts.TryGetValue(task, out IfParts p) ? p : null;
 
 		internal static ISimpleTask GetRandomEntourageCardToHand(bool opponent = false)
 			=> Create(

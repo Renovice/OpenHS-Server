@@ -296,13 +296,14 @@ namespace SabberStoneCore.CardSets.HsServer
 			}));
 
 			// [DALA_867] Anomaly - Infused — After a minion is summoned, it gains Taunt, Divine Shield, Rush, or Windfury at random.
-			// (Unrecorded; the client has no enchantment for the keyword: the keyword itself, as Torghast Custodian's random keywords.)
-			cards.Add("DALA_867", AnomalyEachPlayer("DALA_867e"));
+			// (Live session-20261013-233341 86588-87180: one DALA_867e, on player 1, its TRIGGER block after any minion's summon on either
+			// side — the keyword itself, no enchantment for it.)
+			cards.Add("DALA_867", AnomalyOnePlayer("DALA_867e"));
 			cards.Add("DALA_867e", new CardDef(new Power
 			{
 				Trigger = new Trigger(TriggerType.AFTER_SUMMON)
 				{
-					TriggerSource = TriggerSource.MINIONS, EitherTurn = true,
+					TriggerSource = TriggerSource.ALL_MINIONS, EitherTurn = true,
 					SingleTask = new CustomTask((g, c, s, t, stack) =>
 					{
 						if (!(t is Minion m) || m.Zone?.Type != Zone.PLAY) return;

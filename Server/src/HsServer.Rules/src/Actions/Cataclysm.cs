@@ -403,13 +403,16 @@ namespace SabberStoneCore.Actions
 			if (g.State != State.RUNNING) return;
 			foreach (Controller c in new[] { g.Player1, g.Player2 })
 			{
-				var board = c.BoardZone.GetAll().ToList();
+				// (2026-11-16) every slot in order, Locations and Dormant minions too: they stand between minions (live: a Location between a
+				// Soldier of Al'Akir and a minion — no +Attack; GetAll() and the enumerator leave them out and made the two "adjacent")
+				var board = c.BoardZone.GetSpan().ToArray().OrderBy(m => m.ZonePosition).ToList();
 				bool any = board.Any(m => m.Card.Power?.AdjacentOnBoard != null) ||
 				           board.Any(m => m.AppliedEnchantments?.Any(e => e.Creator?.Card.Power?.AdjacentOnBoard == e.Card.Id) == true);
 				if (!any) continue;
 				for (int i = 0; i < board.Count; i++)
 				{
 					Minion m = board[i];
+					if (m is Location || m.Untouchable) continue; // (a slot, not a minion to buff)
 					var wanted = new List<Minion>();
 					foreach (int j in new[] { i - 1, i + 1 })
 						if (j >= 0 && j < board.Count && board[j].Card.Power?.AdjacentOnBoard != null && !board[j].IsSilenced && !board[j].IsDead)

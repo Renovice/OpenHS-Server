@@ -31,11 +31,12 @@ public class DalaranHeistAnomalyTests
     };
 
     /// <summary>A rules game with <paramref name="anomaly"/> for player 1 (the run's player): decks in order, no mulligan.</summary>
-    private static SGame Game(string? anomaly, IEnumerable<string>? deck1 = null, int mana = 10, bool history = true)
+    private static SGame Game(string? anomaly, IEnumerable<string>? deck1 = null, int mana = 10, bool history = true, long? seed = null)
     {
         _ = Db.Value;
         var game = new SGame(new SabberStoneCore.Config.GameConfig
         {
+            RandomSeed = seed,
             StartPlayer = 1, Player1HeroClass = CardClass.MAGE, Player2HeroClass = CardClass.WARRIOR,
             Player1Deck = (deck1 ?? Filler).Select(Cards.FromId).ToList(),
             Player2Deck = Filler.Select(Cards.FromId).ToList(),
@@ -341,7 +342,7 @@ public class DalaranHeistAnomalyTests
         int wrong = 0, tries = 0;
         for (int seed = 0; seed < 30; seed++)
         {
-            var game = Game("DALA_861", mana: 0);
+            var game = Game("DALA_861", mana: 0, seed: seed);
             var me = game.Player1;
             var attacker = OnBoard(game, me, "CS2_124"); // Wolfrider 3/1 at a War Golem: 3 damage when it hits
             var target = OnBoard(game, me.Opponent, "CS2_186");

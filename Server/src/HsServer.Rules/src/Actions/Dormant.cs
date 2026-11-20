@@ -100,6 +100,7 @@ namespace SabberStoneCore.Actions
 				}
 			m[GameTag.DORMANT] = 1;
 			m[GameTag.UNTOUCHABLE] = 1;
+			SleepStats(m);
 			if (history)
 				g.PowerHistory.Add(PowerHistoryBuilder.BlockEnd());
 			m.Controller.BoardZone.RecountUntouchables();
@@ -206,6 +207,7 @@ namespace SabberStoneCore.Actions
 			m[GameTag.DORMANT] = 0;
 			m[HAS_AWAKENED] = 1;
 			m[DORMANT_AWAKENED_THIS_TURN] = 1;
+			WakeStats(m);
 			counter?.Remove();
 			foreach (GameTag k in SleepingKeywords)
 			{
@@ -257,11 +259,65 @@ namespace SabberStoneCore.Actions
 			}
 		}
 
+		/// <summary>
+		/// HsServer (2026-11-16): a Dormant minion shows its printed Attack and Health; its buffs stay and come back when it awakens.
+		/// Live (session-20261022-020357 96500, Warden Maiev): +3/+3 makes Wailing Vapor 4/6, then right after DORMANT / UNTOUCHABLE
+		/// ATK 1 / HEALTH 3; on awakening, after DORMANT 0, ATK 4 / HEALTH 6 again. Wiki Dormant: "do not reset nor effect
+		/// enchantments when awakened"; patch note: "Fixed a visual bug where transforming a Dormant minion could make it appear to
+		/// retain buffs while Dormant".
+		/// </summary>
+		private const int SleptStatBase = 1_000_000; // (stored + this: a lowered stat stays above 0)
+		private static void SleepStats(Minion m)
+		{
+			// (only what enchantments add: a Starship's stats from its pieces stay — live session-20261006-235106 247688, a Dormant
+			// Battlecruiser copy shows 6/5)
+			EnchantmentStatAdds(m, out int atk, out int health);
+			if (atk == 0 && health == 0) return;
+			m[HsTag.DORMANT_SLEPT_ATK] = atk + SleptStatBase;
+			m[HsTag.DORMANT_SLEPT_HEALTH] = health + SleptStatBase;
+			m.BaseHealth = m.Card.Health;
+			m.AttackDamage = m.Card.ATK;
+		}
+
+		/// <summary>The Attack and Health the minion's enchantments add (ADD effects; their script-tag numbers too).</summary>
+		private static void EnchantmentStatAdds(Minion m, out int atk, out int health)
+		{
+			atk = 0; health = 0;
+			foreach (Enchantment e in m.AppliedEnchantments ?? new List<Enchantment>())
+			{
+				Enchants.Enchant en = e.Card.Power?.Enchant;
+				if (en?.Effects == null) continue;
+				for (int i = 0; i < en.Effects.Length; i++)
+				{
+					Enchants.IEffect x = en.Effects[i];
+					GameTag? tag; Enchants.EffectOperator op; int value;
+					if (x is Enchants.Effect fx) { tag = fx.Tag; op = fx.Operator; value = fx.Value; }
+					else if (x is Enchants.IStatEffect st) { tag = st.StatTag; op = st.Operator; value = st.StatValue; }
+					else continue;
+					if (op != Enchants.EffectOperator.ADD) continue;
+					if (en.UseScriptTag) value = i == 0 || e.ScriptTag2 < 0 ? e.ScriptTag1 : e.ScriptTag2;
+					if (tag == GameTag.ATK) atk += value;
+					else if (tag == GameTag.HEALTH) health += value;
+				}
+			}
+		}
+
+		private static void WakeStats(Minion m)
+		{
+			if (m[HsTag.DORMANT_SLEPT_ATK] == 0 && m[HsTag.DORMANT_SLEPT_HEALTH] == 0) return;
+			int atk = m[HsTag.DORMANT_SLEPT_ATK] - SleptStatBase, health = m[HsTag.DORMANT_SLEPT_HEALTH] - SleptStatBase;
+			m[HsTag.DORMANT_SLEPT_ATK] = 0;
+			m[HsTag.DORMANT_SLEPT_HEALTH] = 0;
+			m.BaseHealth = (m._modifiedHealth ?? m.Card.Health) + health;
+			m.AttackDamage = (m._modifiedATK ?? m.Card.ATK) + atk;
+		}
+
 		/// <summary>HsServer: the Dormant state a minion leaving play loses (BoardZone.Remove: played again, it sleeps again).</summary>
 		internal static void ClearDormant(Minion m)
 		{
 			m[GameTag.DORMANT] = 0;
 			m[GameTag.UNTOUCHABLE] = 0;
+			WakeStats(m);
 			foreach (GameTag k in SleepingKeywords)
 			{
 				var slept = (GameTag)(SleptKeywordBase + (int)k);

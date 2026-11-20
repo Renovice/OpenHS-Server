@@ -227,7 +227,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			{
 				if (c.HandZone.IsFull || !(RandomCard(g, x => x.Type == CardType.MINION && x[GameTag.DEATHRATTLE] > 0) is Card m)) return;
 				IPlayable got = Entity.FromCard(c, m, new EntityData { [GameTag.CREATOR] = s.Id });
-				if (Generic.AddHandPhase.Invoke(c, got)) Give(g, s, got, GenericCostLess(V("END_015", "less", 2)));
+				if (Generic.AddHandPhase.Invoke(c, got)) GiveCostLess(g, s, got, V("END_015", "less", 2));
 			};
 			cards.Add("END_015", new CardDef(KindredPower(rex, power: new Power { DeathrattleTask = new CustomTask((g, c, s, t, stack) => rex(g, c, s, t)) })));
 			// [TIME_042] King Maluk (4) — Battlecry: Discard your hand. Get an Infinite Banana.
@@ -383,7 +383,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				{
 					if (c.HandZone.IsFull || !(RandomCard(g, x => x.Type == CardType.MINION) is Card m)) return;
 					IPlayable got = Entity.FromCard(c, m, new EntityData { [GameTag.CREATOR] = s.Id });
-					if (Generic.AddHandPhase.Invoke(c, got)) Give(g, s, got, GenericCostLess(V("TIME_000", "less", 3)));
+					if (Generic.AddHandPhase.Invoke(c, got)) GiveCostLess(g, s, got, V("TIME_000", "less", 3));
 				})
 			}));
 			// [TIME_006] Mirror Dimension (1) — Summon a 0/4 minion with Taunt. If you are holding a Dragon, summon another.

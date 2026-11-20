@@ -57,7 +57,9 @@ namespace SabberStoneCore.Tasks.SimpleTasks
 			in IPlayable target,
 			in TaskStack stack = null)
 		{
-			Controller c = source.Controller;
+			// HsServer (2026-11-16): a given spell is cast by its own controller (Wild Magic: the copy is the attached player's, the
+			// enchantment player 1's — Trigger.Side); otherwise the source's
+			Controller c = target is Spell castThis && castThis.Controller != null ? castThis.Controller : source.Controller;
 			Util.DeepCloneableRandom rnd = game.Random;
 
 			// HsServer: engine rule — random casting (Yogg-Saron, Prison of Yogg-Saron, Fyrakk...) stops as soon as a hero

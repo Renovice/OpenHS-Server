@@ -67,7 +67,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			Aura = new Aura(opponent ? AuraType.OP_HAND : AuraType.HAND, cost) { Condition = which, ShowAs = shownOnCards },
 			Trigger = new Trigger(TriggerType.PLAY_CARD)
 			{
-				TriggerSource = opponent ? TriggerSource.ENEMY : TriggerSource.FRIENDLY,
+				TriggerSource = TriggerSource.FRIENDLY, // (the player it is on, whoever gave it — Trigger.Side)
 				Condition = which,
 				SingleTask = RemoveEnchantmentTask.Task
 			}
@@ -979,7 +979,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
 					if (c.HandZone.Any(p => !p.Card.HasClass(c.HeroClass) && !p.Card.HasClass(CardClass.NEUTRAL)) && s is Minion me)
-						Summon(g, c, me.Card, s);
+						{ if (!c.BoardZone.IsFull) Generic.Copy(c, s, me, Zone.PLAY); } // (a copy keeps its buffs — BE_550 live)
 				})
 			}));
 			// [ONY_030] SI:7 Smuggler (3) — Battlecry: Summon a random @-Cost minion. (Upgraded for each other SI:7 card you have

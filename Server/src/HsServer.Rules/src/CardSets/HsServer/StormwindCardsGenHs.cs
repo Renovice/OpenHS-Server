@@ -104,7 +104,8 @@ namespace SabberStoneCore.CardSets.HsServer
 			// [DED_006] Mr. Smite (7) — Your Pirates have Charge.
 			cards.Add("DED_006", new CardDef(new Power
 			{
-				Aura = new Aura(AuraType.BOARD_EXCEPT_SOURCE, new Effect(GameTag.CHARGE, EffectOperator.SET, 1)) { Condition = new SelfCondition(p => IsPirate(p)) }
+				// ("Your Pirates" — no "other": Mr. Smite, a Pirate, has Charge himself; live: DED_006 enters play with CHARGE)
+				Aura = new Aura(AuraType.BOARD, new Effect(GameTag.CHARGE, EffectOperator.SET, 1)) { Condition = new SelfCondition(p => IsPirate(p)) }
 			}));
 			// [DED_521] Maddest Bomber (8) — Battlecry: Deal 12 damage randomly split among all other characters.
 			cards.Add("DED_521", new CardDef(new Power

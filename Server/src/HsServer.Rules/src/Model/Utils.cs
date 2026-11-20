@@ -740,8 +740,13 @@ namespace SabberStoneCore.Model
 		    /// </summary>
 		    /// <param name="bound">Exclusive bound; can be negative</param>
 		    /// <returns>Random Integer between 0(inclusive) and bound(exclusive)</returns>
+		    /// <summary>HsServer: called on every pick between two or more (Next(bound)), so a random outcome is known as random
+		    /// (Game.RandomHappenedEvent; livecheck rates it MATCH-RANDOM / DIFFERS-RANDOM) without each script raising it.</summary>
+		    public Action Rolled;
+
 		    public int Next(int bound)
 		    {
+		        if (bound > 1) Rolled?.Invoke(); // HsServer: a pick between two or more
 		        return (int)((bound * UnsignedRightShift(NextLong(), 33)) >> 31);
 		    }
 

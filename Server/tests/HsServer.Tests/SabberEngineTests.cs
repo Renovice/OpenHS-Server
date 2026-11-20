@@ -7214,10 +7214,11 @@ public class SabberEngineTests(ITestOutputHelper output)
     public void Questline_final_showdown_counts_draws_in_one_turn()
     {
         var (game, me) = QuestlineGame("SW_039");
-        Play(game, me, "CS2_023"); Play(game, me, "CS2_023"); // Arcane Intellect x2: 4 draws
+        // (2026-11-20 patch 37.0.0.256589: "Draw 5 cards in one turn", was 4)
+        Play(game, me, "CS2_023"); Play(game, me, "CS2_023"); SabberStoneCore.Actions.Generic.Draw(me); // Arcane Intellect x2 + a draw: 5 draws
         Assert.Equal("SW_039t", me.SecretZone.Quest.Card.Id);
-        // the 4 cards it counted get "Fast Moves: Costs (1) less" (a 0-Cost card can't show it in its cost)
-        Assert.Equal(4, me.HandZone.GetAll().Count(p => p.AppliedEnchantments?.Any(e => e.Card.Id == "SW_039te") == true));
+        // the 5 cards it counted get "Fast Moves: Costs (1) less" (a 0-Cost card can't show it in its cost)
+        Assert.Equal(5, me.HandZone.GetAll().Count(p => p.AppliedEnchantments?.Any(e => e.Card.Id == "SW_039te") == true));
     }
 
     [Fact]
@@ -10667,14 +10668,14 @@ public class SabberEngineTests(ITestOutputHelper output)
         Assert.Equal(board + 1, me.BoardZone.Count);
         Clear();
 
-        // Divergence: a minion in hand becomes two halves (9-Cost 9/7 → Costs 5+4, Attacks 5+4, Health 4+3)
+        // Divergence: a minion in hand becomes two halves, splitting its Cost, Attack and Health (M.O.T.H.E.R.: 10 Mana since the 2026-11-20 patch)
         foreach (var p in me.HandZone.GetAll().ToList()) SabberStoneCore.Actions.Generic.RemoveFromHand(me, p);
         var big = Give(me, "BE_036");
         Assert.True(game.Process(SabberStoneCore.Tasks.PlayerTasks.PlayCardTask.Spell(me, Hand("TIME_030"))));
         var halves = me.HandZone.GetAll().Where(p => p.Card.Id == "BE_036").Cast<SabberStoneCore.Model.Entities.Minion>().ToList();
         Assert.Equal(2, halves.Count);
         Assert.Equal(SabberStoneCore.Enums.Zone.SETASIDE, big.Zone.Type);
-        Assert.Equal(9, halves.Sum(h => h.Cost));
+        Assert.Equal(big.Card.Cost, halves.Sum(h => h.Cost));
         Assert.Equal(big.Card.ATK, halves.Sum(h => h.AttackDamage));
         Assert.Equal(big.Card.Health, halves.Sum(h => h.Health));
 

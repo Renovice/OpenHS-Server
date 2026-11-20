@@ -96,9 +96,10 @@ public class DalaranHeistGroup3Tests
         var me = game.CurrentPlayer;
         SetPower(game, me, "DALA_BOSS_64px");
         var yeti = OnBoard(game, me, "CS2_182"); // Chillwind Yeti 4/5
+        var before = me.HandZone.GetAll().Select(p => p.Id).ToHashSet(); // (the filler can hold Yetis too: only the new ones)
         int mark = game.PowerHistory.Full.Count;
         UsePower(game, me, yeti);
-        var inHand = me.HandZone.GetAll().Where(p => p.Card.Id == "CS2_182").ToList();
+        var inHand = me.HandZone.GetAll().Where(p => p.Card.Id == "CS2_182" && !before.Contains(p.Id)).ToList();
         Assert.Equal(2, inHand.Count);
         Assert.All(inHand, p => Assert.Equal(8, ((Minion)p).AttackDamage));
         var powerBlocks = game.PowerHistory.Full.Skip(mark).OfType<PowerHistoryBlockStart>()

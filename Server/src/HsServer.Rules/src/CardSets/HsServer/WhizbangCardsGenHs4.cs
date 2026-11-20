@@ -178,7 +178,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			cards.Add("TOY_915", new CardDef(new Dictionary<PlayReq, int>
 				{ { PlayReq.REQ_TARGET_IF_AVAILABLE, 0 }, { PlayReq.REQ_FRIENDLY_TARGET, 0 }, { PlayReq.REQ_MINION_TARGET, 0 }, { PlayReq.REQ_TARGET_WITH_RACE, (int)Race.DEMON } },
 				new Power { PowerTask = new AddEnchantmentTask("TOY_915e", EntityType.TARGET) }));
-			cards.Add("TOY_915e", OneTurn(Effects.Attack_N(V("TOY_915", "attack", 2)), new Effect(GameTag.IMMUNE, EffectOperator.ADD, 1)));
+			cards.Add("TOY_915e", OneTurn(Effects.Attack_N(V("TOY_915", "attack", 2)), new Effect(GameTag.IMMUNE, EffectOperator.SET, 1))); // (SET, as every Immune: an ADD missed the IsImmune setter — livecheck)
 			// [TOY_916] Sketch Artist (3) — Battlecry: Draw a Shadow spell. Get a Temporary copy of it.
 			cards.Add("TOY_916", new CardDef(new Power
 			{
@@ -393,7 +393,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				{
 					var dead = c.DiedThisGame.Select(id => g.IdEntityDic.TryGetValue(id, out IPlayable p) ? p : null)
 						.Where(p => p is Minion && p.Card.IsRace(Race.MECHANICAL) && p.Card.Cost >= V("TOY_607", "cost", 5))
-						.GroupBy(p => p.Card.Id).Select(x => x.First()).OrderBy(_ => g.Random.Next()).Take(V("TOY_607", "mechs", 2)).ToList();
+						.GroupBy(Generic.UniqueCardKey).Select(x => x.First()).OrderBy(_ => g.Random.Next()).Take(V("TOY_607", "mechs", 2)).ToList();
 					var back = new List<Minion>();
 					foreach (IPlayable d in dead)
 					{

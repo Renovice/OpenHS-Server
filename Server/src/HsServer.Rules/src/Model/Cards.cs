@@ -488,7 +488,7 @@ namespace SabberStoneCore.Model
 		/// </summary>
 		public static Card[] TitanAbilities(Card card)
 		{
-			if (card == null || card[(GameTag)2772] <= 0 || card.Type != CardType.MINION) return System.Array.Empty<Card>();
+			if (card == null || card[(GameTag)2772] <= 0 && card[(GameTag)4754] <= 0 || card.Type != CardType.MINION) return System.Array.Empty<Card>(); // (TITAN or OLD_GOD)
 			return _titanAbilities.GetOrAdd(card.Id, _ =>
 				Loader.ReprintCards.RelatedCardIds(card.Id)?.Select(TryFromId).Where(c => c != null && c.Type == CardType.SPELL).ToArray()
 				?? System.Array.Empty<Card>());

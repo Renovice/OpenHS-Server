@@ -1625,14 +1625,18 @@ namespace SabberStoneCore.CardSets
 			// GameTag:
 			// - DEATHRATTLE = 1
 			// --------------------------------------------------------
+			// HsServer (2026-11-20 patch): "Deathrattle: Summon a minion from your hand. Set its stats to 1/1." — the minion itself now,
+			// not a 1/1 copy (a random one: a Deathrattle doesn't let the player pick)
 			cards.Add("LOOT_412", new CardDef(new Power
 			{
-				DeathrattleTask = ComplexTask.Create(
-					new IncludeTask(EntityType.HAND),
-					new FilterStackTask(SelfCondition.IsMinion),
-					new RandomTask(1, EntityType.STACK),
-					new CopyTask(EntityType.STACK, Zone.PLAY, addToStack: true),
-					new AddEnchantmentTask("LOOT_412e", EntityType.STACK))
+				DeathrattleTask = new SabberStoneCore.Tasks.SimpleTasks.CustomTask((g, c, s, t, stack) =>
+				{
+					var minions = c.HandZone.GetAll().OfType<Minion>().Where(Generic.IsMinionCard).ToList();
+					if (minions.Count == 0 || c.BoardZone.IsFull) return;
+					Minion pick = minions[g.Random.Next(minions.Count)];
+					if (Generic.SummonFromHand(c, pick, s) && pick.Zone?.Type == Zone.PLAY)
+						Generic.AddEnchantmentBlock(g, Cards.FromId("LOOT_412e"), (IPlayable)s, pick);
+				})
 			}));
 
 			// ------------------------------------------ SPELL - ROGUE

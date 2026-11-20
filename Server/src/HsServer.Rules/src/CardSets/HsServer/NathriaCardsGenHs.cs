@@ -564,13 +564,13 @@ namespace SabberStoneCore.CardSets.HsServer
 						}));
 				})
 			}));
-			// [REV_246] Mysterious Visitor (2) — Battlecry: Reduce the Cost of cards copied from your opponent by (3).
+			// [REV_246] Mysterious Visitor (2) — Battlecry: Reduce the Cost of cards copied from your opponent by (2). ((3) before the 2026-11-20 patch)
 			cards.Add("CORE_REV_246", new CardDef(new Power
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 					GiveAll(g, s, c.HandZone.Concat(c.DeckZone).Where(p => p[COPIED_FROM_OPPONENT] > 0), "REV_246e2"))
 			}));
-			cards.Add("REV_246e2", new CardDef(new Power { Enchant = new Enchant(Effects.ReduceCost(V("REV_246", "discount", 3))) }));
+			cards.Add("REV_246e2", new CardDef(new Power { Enchant = new Enchant(Effects.ReduceCost(V("REV_246", "discount", 2))) }));
 			// [REV_247] Partner in Crime (3) — Battlecry: Summon a copy of this minion at the end of your turn.
 			cards.Add("CORE_REV_247", new CardDef(new Power { PowerTask = new AddEnchantmentTask("REV_247e", EntityType.SOURCE) }));
 			cards.Add("REV_247e", new CardDef(new Power

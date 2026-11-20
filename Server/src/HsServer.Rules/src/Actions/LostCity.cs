@@ -79,10 +79,13 @@ namespace SabberStoneCore.Actions
 			hero.ToBeDestroyed = false;
 			hero.MortallyWounded = false;
 			p[HsTag.HERO_DEATH_LATCHED] = 0; // (its own Deathrattle brought it back: it lives on)
-			hero.Damage = Math.Max(0, hero.BaseHealth - Math.Min(spent, hero.BaseHealth));
+			// (live session-20261106-001808 169206-169234: DAMAGE 0, HEALTH = the Corpses spent, TIME_618e2 with TAG_SCRIPT_DATA_NUM_1 = them:
+			// "resurrect with that much Health" is its Health, maximum included)
+			hero.Damage = 0;
+			hero.BaseHealth = Math.Min(spent, hero.BaseHealth);
 			foreach (Enchantment e in p.AppliedEnchantments?.Where(x => x.Card[GameTag.DEATHRATTLE] > 0 && x.Card[(GameTag)3051] > 0 || x.Card.Id.StartsWith("TIME_618")).ToList() ?? new List<Enchantment>())
 				e.Remove();
-			if (Cards.TryFromId("TIME_618e2") is Card mark) AddEnchantmentBlock(p.Game, mark, hero, hero, 0, 0, 0);
+			if (Cards.TryFromId("TIME_618e2") is Card mark) AddEnchantmentBlock(p.Game, mark, hero, hero, spent, 0, 0);
 		}
 
 		/// <summary>

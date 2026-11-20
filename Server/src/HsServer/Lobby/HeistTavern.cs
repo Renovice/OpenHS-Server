@@ -28,7 +28,7 @@ internal sealed partial class HeistRuns
     private static readonly int[] TavernAfter = { 3, 5 };
 
     /// <summary>Bartendotron's odds of hosting instead of Bob — wiki Bartender Bob: "On rare occasions, players can find themselves
-    /// encountering Bartendotron instead" (no rate known; 0 of 27 live visits).</summary>
+    /// encountering Bartendotron instead" (no rate known; 0 of 27 live visits); only with 4+ Mechs in the deck (wiki Bartendotron).</summary>
     private const double BartendotronChance = 0.05;
     private const string BobId = "DALA_BOSS_99h", BartendotronId = "DALA_BOSS_98h";
 
@@ -108,7 +108,10 @@ internal sealed partial class HeistRuns
             StartHealth = null, // (live: the hero card's own Health in the tavern — 15 — not the run's)
         };
         SetRunDeck(sd, key, human);
-        string hostId = rng.NextDouble() < BartendotronChance && cards.TryGet(BartendotronId, out _) ? BartendotronId
+        // (Bartendotron only for a deck with at least 4 Mechs — Hearthstone Wiki Bartendotron: "a small chance of appearing if your deck
+        // has at least four Mechs"; race 17 Mech, 26 All)
+        int mechs = human.Deck.Count(id => cards.TryGet(id, out CardDef? d) && d.Tag(GAME_TAG.CARDRACE) is 17 or 26);
+        string hostId = mechs >= 4 && rng.NextDouble() < BartendotronChance && cards.TryGet(BartendotronId, out _) ? BartendotronId
             : cards.ByDbf(TavernHost((int)scenario))?.CardId ?? BobId;
         // the host's deck: none known (live: 30 hidden cards; he never draws, Brood puts his minions back into it) — left empty, the caller
         // gives him a plain deck of his class (Program: Core + Classic; a random collectible card could be a deck-start effect such as
@@ -156,9 +159,9 @@ internal sealed partial class HeistRuns
         sd.SetInts(key, BossesFought, fought);
         if (!won)
         {
-            // (no concede was recorded: the tavern stays the next encounter — live save data once showed the host in BOSSES_FOUGHT while
-            // the override was still on, then a second time after the tavern: spec open question 3)
-            Log.Info("heist", "tavern left unfinished: it stays the next encounter");
+            // (user 2026-11-20: conceding the tavern ends the run, like losing to a boss — no concede was recorded)
+            Log.Info("heist", "tavern conceded: the run ends");
+            EndRun(sd, key, host > 0 ? host : TavernHost((int)scenario), retired: false);
             return;
         }
 

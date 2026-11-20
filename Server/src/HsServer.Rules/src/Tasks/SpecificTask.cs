@@ -62,7 +62,9 @@ namespace SabberStoneCore.Tasks
 					ReadOnlySpan<Minion> minions = p.Controller.BoardZone.GetSpan();
 					Span<int> notContained = stackalloc int[4];
 					int k = 0;
-					var entourage = p.Card.Entourage;
+					// HsServer (2026-11-19, soak 730037): a card that runs this Hero Power's effect (Blue Larva's Combo) has no totem list
+					// of its own: the basic Totemic Call's
+					var entourage = p.Card.Entourage is { Length: > 0 } own ? own : Cards.FromId("HERO_02bp").Entourage ?? Array.Empty<string>();
 					for (int i = 0; i < entourage.Length; i++)
 					{
 						string id = entourage[i];
@@ -79,6 +81,8 @@ namespace SabberStoneCore.Tasks
 						if (!flag)
 							notContained[k++] = i;
 					}
+					// (the Hero Power's requirements keep it from a full board or all four totems out; another card running it doesn't)
+					if (k == 0 || p.Controller.BoardZone.IsFull) return 0;
 					Entity.FromCard(p.Controller, Cards.FromId(entourage[notContained[
 							p.Game.Random.Next(k)]]),
 						null, p.Controller.BoardZone);

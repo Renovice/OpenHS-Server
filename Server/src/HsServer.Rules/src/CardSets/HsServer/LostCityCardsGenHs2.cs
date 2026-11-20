@@ -150,7 +150,7 @@ namespace SabberStoneCore.CardSets.HsServer
 					for (int cost = 1; cost <= 4; cost++)
 					{
 						int n = cost;
-						if (DrawOne(g, c, p => p is Minion && p.Cost == n) is IPlayable drawn && kindred) Give(g, s, drawn, GenericCostLess(V("TLC_236", "less", 1)));
+						if (DrawOne(g, c, p => p is Minion && p.Cost == n) is IPlayable drawn && kindred) GiveCostLess(g, s, drawn, V("TLC_236", "less", 1));
 					}
 				}),
 				SecondPowerTask = new CustomTask((g, c, s, t, stack) => { })

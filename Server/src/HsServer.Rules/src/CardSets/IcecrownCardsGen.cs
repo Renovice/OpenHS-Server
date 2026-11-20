@@ -2033,9 +2033,15 @@ namespace SabberStoneCore.CardSets
 					},
 					new Trigger(TriggerType.TURN_END)
 					{
-						SingleTask = ComplexTask.Create(
-							RemoveEnchantmentTask.Task,
-							new MoveToSetaside(EntityType.TARGET))
+						// HsServer (2026-11-16): the copy expires to the graveyard (live: SETASIDE then GRAVEYARD, Generic.ExpireToGraveyard)
+						SingleTask = new CustomTask((g, c, s, t, stack) =>
+						{
+							if (s is Enchantment e && e.Target is IPlayable copy)
+							{
+								Generic.ExpireToGraveyard(copy, e); // (live: the copy, then the enchantment)
+								if (e.Zone?.Type != Zone.REMOVEDFROMGAME) e.Remove();
+							}
+						})
 					})
 
 				// Trigger 1 : PlayCard => ChangeEntity

@@ -23,7 +23,7 @@ namespace SabberStoneCore.CardSets.HsServer
 		// ------------------------------------------------------------------ shared rules
 
 		/// <summary>"If your deck has no duplicates" (Highlander).</summary>
-		private static bool NoDuplicatesInDeck(Controller c) => c.DeckZone.GroupBy(p => p.Card.Id).All(x => x.Count() == 1);
+		private static bool NoDuplicatesInDeck(Controller c) => c.DeckZone.GroupBy(Generic.UniqueCardKey).All(x => x.Count() == 1);
 
 		private static List<Card> Pick(Game g, IEnumerable<Card> pool, int n)
 		{

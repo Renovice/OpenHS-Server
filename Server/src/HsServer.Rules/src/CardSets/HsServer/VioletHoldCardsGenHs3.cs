@@ -46,8 +46,8 @@ namespace SabberStoneCore.CardSets.HsServer
 		/// <summary>The Jade Coin's Golems (JAIL_504tt01/04/07/20: the 1, 4, 7 and 20 art; live p130515 5701).</summary>
 		private static readonly string[] LotusJadeGolems = { "JAIL_504tt01", "JAIL_504tt04", "JAIL_504tt07", "JAIL_504tt20" };
 
-		/// <summary>"Get a random 1-Cost Kazakus Potion" (Kabal Coin): JAIL_504t3p with two different random 1-Cost ingredients (Kazakus's);
-		/// its "{0} {1}" are the ingredients (TAG_SCRIPT_DATA_NUM_1 / _2: their dbf ids — doubt, unrecorded).</summary>
+		/// <summary>"Get a random 1-Cost Kazakus Potion" (Kabal Coin): JAIL_504t3p with two different random 1-Cost ingredients (Kazakus's),
+		/// crafted like every potion (Generic.CraftPotion: live's ingredient tags).</summary>
 		private static void GetKazakusPotion(Controller c, IEntity source)
 		{
 			Game g = c.Game;
@@ -56,12 +56,9 @@ namespace SabberStoneCore.CardSets.HsServer
 			Card a = pool[g.Random.Next(pool.Count)];
 			pool.Remove(a);
 			Card b = pool[g.Random.Next(pool.Count)];
-			if (a[GameTag.TAG_SCRIPT_DATA_NUM_1] > b[GameTag.TAG_SCRIPT_DATA_NUM_1]) (a, b) = (b, a);
-			Card made = Card.CreateKazakusPotion(potion, a, b, g.History);
-			IPlayable p = Entity.FromCard(c, made, new EntityData
+			IPlayable p = Entity.FromCard(c, Generic.CraftPotion(potion, a, b), new EntityData
 			{
 				{ GameTag.CREATOR, source.Id }, { GameTag.DISPLAYED_CREATOR, source.Id },
-				{ GameTag.TAG_SCRIPT_DATA_NUM_1, a.AssetId }, { GameTag.TAG_SCRIPT_DATA_NUM_2, b.AssetId },
 			});
 			Generic.AddHandPhase.Invoke(c, p);
 		}
@@ -262,12 +259,13 @@ namespace SabberStoneCore.CardSets.HsServer
 			cards.Add("JAIL_504t3", LotusCoin(new CustomTask((g, c, s, t, stack) => GetKazakusPotion(c, s))));
 			// [JAIL_504t5] Kazakus Potion Generator — Get a random 1-Cost Potion.
 			cards.Add("JAIL_504t5", new CardDef(new Power { PowerTask = new CustomTask((g, c, s, t, stack) => GetKazakusPotion(c, s)) }));
-			// [JAIL_504t3p] Kazakus Potion — {0} {1}: both ingredients' effects (TAG_SCRIPT_DATA_NUM_1 / _2).
+			// [JAIL_504t3p] Kazakus Potion — {0} {1}: both ingredients' effects. A crafted one (Generic.CraftPotion) carries them in its own
+			// Power; this reads the parts (MODULAR_ENTITY_PART_1 / _2, live) for a potion that isn't crafted here.
 			cards.Add("JAIL_504t3p", new CardDef(new Power
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					foreach (GameTag k in new[] { GameTag.TAG_SCRIPT_DATA_NUM_1, GameTag.TAG_SCRIPT_DATA_NUM_2 })
+					foreach (GameTag k in new[] { GameTag.MODULAR_ENTITY_PART_1, GameTag.MODULAR_ENTITY_PART_2 })
 						if (Cards.FromAssetId(s[k])?.Power?.PowerTask is ISimpleTask part)
 						{
 							g.TaskQueue.StartEvent();
@@ -284,7 +282,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				{
 					for (int i = 0; i < V("JAIL_706", "spells", 2); i++)
 						if (GetCard(c, RandomCard(g, x => x.Type == CardType.SPELL && x.Cost == V("JAIL_706", "cost", 4)), s) is IPlayable got)
-							Give(g, s, got, GenericCostLess(V("JAIL_706", "less", 2)));
+							GiveCostLess(g, s, got, V("JAIL_706", "less", 2));
 				})
 			}));
 			// [JAIL_720] Lotus Bookie (2) — Deathrattle: Get a Coin. (Aya's counterfeit when picked: AddHandPhase)
@@ -444,7 +442,7 @@ namespace SabberStoneCore.CardSets.HsServer
 			{
 				DeathrattleTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					foreach (IPlayable p in c.HandZone.GetAll().Where(Generic.CopiedFromOpponent).ToList()) Give(g, s, p, GenericCostLess(V("JAIL_434", "less", 1)));
+					foreach (IPlayable p in c.HandZone.GetAll().Where(Generic.CopiedFromOpponent).ToList()) GiveCostLess(g, s, p, V("JAIL_434", "less", 1));
 				})
 			}));
 			// [JAIL_448] Karov the Broken (6) — Taunt. Deathrattle: Get three 1/1 copies of random Legendary minions. They cost (1).
@@ -536,7 +534,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				DeathrattleTask = new CustomTask((g, c, s, t, stack) =>
 				{
 					if (Generic.NoNeutralInDeck(c) && GetCard(c, RandomCard(g, x => x.HasClass(CardClass.PALADIN)), s) is IPlayable got)
-						Give(g, s, got, GenericCostLess(V("JAIL_328", "less", 2)));
+						GiveCostLess(g, s, got, V("JAIL_328", "less", 2));
 				})
 			}));
 			// [JAIL_329] Truth Seeker (7, weapon) — After your hero attacks, give your Paladin minions +2/+2.

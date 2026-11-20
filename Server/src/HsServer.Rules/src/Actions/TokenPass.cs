@@ -23,7 +23,17 @@ namespace SabberStoneCore.Actions
 		{
 			if (ingredient2[GameTag.TAG_SCRIPT_DATA_NUM_1] < ingredient1[GameTag.TAG_SCRIPT_DATA_NUM_1])
 				(ingredient1, ingredient2) = (ingredient2, ingredient1);
-			return CraftedCard(look, ingredient1, ingredient2);
+			Card potion = CraftedCard(look, ingredient1, ingredient2);
+			// (2026-11-16) live's potion tags (Kazakus CFM_621t14 session-20261002-204752; Kabal Coin JAIL_504t3p session-20261110-153646):
+			// TAG_SCRIPT_DATA_NUM_1 / _2 = the ingredients' own NUM_1 (the text builder's index), MODULAR_ENTITY_PART_1 / _2 = their dbf ids,
+			// ADDITIONAL_PLAY_REQS_1 / _2 = the parts the other way round
+			potion.Tags[GameTag.TAG_SCRIPT_DATA_NUM_1] = ingredient1[GameTag.TAG_SCRIPT_DATA_NUM_1];
+			potion.Tags[GameTag.TAG_SCRIPT_DATA_NUM_2] = ingredient2[GameTag.TAG_SCRIPT_DATA_NUM_1];
+			potion.Tags[GameTag.MODULAR_ENTITY_PART_1] = ingredient1.AssetId;
+			potion.Tags[GameTag.MODULAR_ENTITY_PART_2] = ingredient2.AssetId;
+			potion.Tags[GameTag.ADDITIONAL_PLAY_REQS_1] = ingredient2.AssetId;
+			potion.Tags[GameTag.ADDITIONAL_PLAY_REQS_2] = ingredient1.AssetId;
+			return potion;
 		}
 
 		/// <summary>

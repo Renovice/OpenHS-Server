@@ -241,6 +241,15 @@ namespace SabberStoneCore.Config
 		/// </summary>
 		public long? RandomSeed { get; set; }
 
+		/// <summary>HsServer (2026-11-20): the seed of a game whose config gives none — null (the real server: a fresh random game each
+		/// time). The test projects set it (a module initializer), so a random-deck or random-effect test plays the same way every run:
+		/// a failure is a real one, reproducible, instead of a flake.</summary>
+		public static long? DefaultRandomSeed { get; set; }
+
+		/// <summary>HsServer (2026-11-20): FillDecksPredictably fills with plain minions only (no text: nothing in the filler acts). The test
+		/// projects turn it on; the tools (golden, vfxcheck, tagdiff) keep the varied filler, so "draw a spell" still finds one.</summary>
+		public static bool PlainPredictableFill { get; set; }
+
 		/// <summary>
 		/// Instead of shuffling deck and drawing the top card,
 		/// players draw a card using random access to the deck.

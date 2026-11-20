@@ -434,7 +434,7 @@ namespace SabberStoneCore.CardSets.HsServer
 				{
 					if (!(RandomMask(g, c, s) is Card mask) || c.HandZone.IsFull) return;
 					IPlayable got = Entity.FromCard(c, mask, new EntityData { [GameTag.CREATOR] = s.Id });
-					if (Generic.AddHandPhase.Invoke(c, got)) Give(g, s, got, GenericCostLess(V("DINO_427", "less", 2)));
+					if (Generic.AddHandPhase.Invoke(c, got)) GiveCostLess(g, s, got, V("DINO_427", "less", 2));
 				})
 			}));
 			// [TLC_513] Lie in Wait (1) — Quest: Shuffle cards into your deck, 5 times. Reward: Master Dusk. (an instance each — client 4307)

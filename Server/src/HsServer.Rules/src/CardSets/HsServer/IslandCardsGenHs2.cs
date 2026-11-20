@@ -384,7 +384,7 @@ namespace SabberStoneCore.CardSets.HsServer
 					foreach (IPlayable p in c.HandZone.GetAll().ToList())
 						if (RandomCard(g, x => x.Type == CardType.MINION && x.Rarity == Rarity.LEGENDARY) is Card legend &&
 						    Generic.ChangeEntityBlock.Invoke(c, p, legend, true) is IPlayable changed)
-							Give(g, s, changed, GenericCostLess(V("LOOT_998k", "discount", 1)));
+							GiveCostLess(g, s, changed, V("LOOT_998k", "discount", 1));
 				})
 			}));
 			// [VAC_924] Weapons Attendant (6) — Battlecry: If you control another Pirate, equip a random weapon from your deck.
@@ -598,14 +598,14 @@ namespace SabberStoneCore.CardSets.HsServer
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					foreach (IPlayable p in c.HandZone.GetAll().ToList()) Give(g, s, p, GenericCostLess(V("VAC_959t10t", "discount", 1)));
+					foreach (IPlayable p in c.HandZone.GetAll().ToList()) GiveCostLess(g, s, p, V("VAC_959t10t", "discount", 1));
 				})
 			}));
 			cards.Add("VAC_959t10", new CardDef(new Power
 			{
 				PowerTask = new CustomTask((g, c, s, t, stack) =>
 				{
-					foreach (IPlayable p in c.HandZone.GetAll().Where(p => !(p is Spell)).ToList()) Give(g, s, p, GenericCostLess(V("VAC_959t10", "discount", 1)));
+					foreach (IPlayable p in c.HandZone.GetAll().Where(p => !(p is Spell)).ToList()) GiveCostLess(g, s, p, V("VAC_959t10", "discount", 1));
 				})
 			}));
 			// [WORK_027] Dreamplanner Zephrys (3) — Battlecry: Choose a Travel Tour to get two potentially perfect cards from it. (Wiki:

@@ -33,6 +33,11 @@ namespace SabberStoneCore.Triggers
 
 		protected readonly IPlayable _owner;
 
+		/// <summary>HsServer (2026-11-16): whose trigger it is — "you", "friendly", "your turn". An enchantment attached to a player is that
+		/// player's, whoever created it (live Wild Magic, heist-run-20260929 session-122856: both DALA_856e have CONTROLLER 1, one ATTACHED
+		/// to each player, each fires for the spells of the player it is on); everything else: its owner's controller.</summary>
+		protected Controller Side => _owner is Enchantment e && e.Target is Controller attached ? attached : _owner.Controller;
+
 	    internal bool IsAncillaryTrigger;
 
 		public readonly Game Game;
@@ -48,6 +53,15 @@ namespace SabberStoneCore.Triggers
 		/// Task to do when this effect is triggered.
 		/// </summary>
 		public ISimpleTask SingleTask;
+
+		/// <summary>HsServer (2026-11-16): a copy of this trigger (type, source, condition, activation…) doing <paramref name="task"/> —
+		/// Assemble's first half (the when) with another card's second half (the what).</summary>
+		public Trigger WithTask(ISimpleTask task)
+		{
+			var copy = (Trigger)MemberwiseClone();
+			copy.SingleTask = task;
+			return copy;
+		}
 
 	    /// <summary> Additional condition for trigger sources </summary>
 	    public SelfCondition Condition;
@@ -421,13 +435,13 @@ namespace SabberStoneCore.Triggers
 			// Target: The source of this trigger or
 			//			if the owner is Enchantment, the target of the enchantment.
 			if (FastExecution)
-			    Game.TaskQueue.Execute(SingleTask, _owner.Controller, _owner,
+			    Game.TaskQueue.Execute(SingleTask, Side, _owner,
 				    source is IPlayable playable ? playable
 										: _owner is Enchantment ew && ew.Target is IPlayable p ? p
 										: null, 0, Keyword(), EffectIndex, InHistory, notInHistory: NotInHistory);
 		    else
 		    {
-			    Game.TaskQueue.Enqueue(SingleTask, _owner.Controller,
+			    Game.TaskQueue.Enqueue(SingleTask, Side,
 				    /*_owner is Enchantment ec ? ec : */_owner,
 				    source is IPlayable pSource?
 					    pSource :
@@ -690,9 +704,9 @@ namespace SabberStoneCore.Triggers
 				case TriggerSource.ALL:
 					break;
 				case TriggerSource.FRIENDLY:
-				    if (source.Controller != _owner.Controller) return;
+				    if (source.Controller != Side) return;
 				    break;
-			    case TriggerSource.ENEMY when source.Controller == _owner.Controller: return;
+			    case TriggerSource.ENEMY when source.Controller == Side: return;
 			    case TriggerSource.SELF:
 				    if (source.Id != _sourceId) return;
 				    break;
@@ -700,20 +714,20 @@ namespace SabberStoneCore.Triggers
 				    if (!(source is Minion)) return;
 				    break;
 			    case TriggerSource.MINIONS:
-				    if (!(source is Minion) || source.Controller != _owner.Controller) return;
+				    if (!(source is Minion) || source.Controller != Side) return;
 				    break;
 			    case TriggerSource.MINIONS_EXCEPT_SELF:
-				    if (!(source is Minion) || source.Controller != _owner.Controller || source.Id == _sourceId ||
+				    if (!(source is Minion) || source.Controller != Side || source.Id == _sourceId ||
 				        source.Zone?.Type != Zone.PLAY) return; // (HsServer: a minion being played has no zone yet)
 					break;
 				case TriggerSource.ALL_MINIONS_EXCEPT_SELF:
 					if (!(source is Minion) || source == _owner) return;
 				    break;
 				case TriggerSource.OP_MINIONS:
-					if (!(source is Minion) || source.Controller == _owner.Controller) return;
+					if (!(source is Minion) || source.Controller == Side) return;
 					break;
 			    case TriggerSource.HERO:
-				    if (!(source is Hero) || source.Controller != _owner.Controller) return;
+				    if (!(source is Hero) || source.Controller != Side) return;
 				    break;
 			    case TriggerSource.ENCHANTMENT_TARGET:
 				    if (!(_owner is Enchantment e) || e.Target.Id != source.Id) return;
@@ -726,20 +740,20 @@ namespace SabberStoneCore.Triggers
 				// (HsTag.REPLACED_BY_WEAPON) doesn't fire DEATH triggers on "your weapon" (Instrument Smasher, Grave Shambler).
 				// Its own Deathrattle still runs (Hero.RemoveWeapon).
 				case TriggerSource.WEAPON:
-					if (!(source is Weapon w) || w.Controller != _owner.Controller) return;
+					if (!(source is Weapon w) || w.Controller != Side) return;
 					if (_triggerType == TriggerType.DEATH && w[HsTag.REPLACED_BY_WEAPON] != 0) return;
 					break;
 				case TriggerSource.HERO_POWER:
-					if (!(source is HeroPower hp) || hp.Controller != _owner.Controller) return;
+					if (!(source is HeroPower hp) || hp.Controller != Side) return;
 					break;
 				case TriggerSource.FRIENDLY_SPELL_CASTED_ON_THE_OWNER:
-					if (!(source is Spell) || source.Controller != _owner.Controller || Game.CurrentEventData?.EventTarget != _owner) return;
+					if (!(source is Spell) || source.Controller != Side || Game.CurrentEventData?.EventTarget != _owner) return;
 					break;
 				case TriggerSource.FRIENDLY_SPELL_CASTED_ON_OWN_MINIONS:
-					if (!(source is Spell) || source.Controller != _owner.Controller || Game.CurrentEventData?.EventTarget?.Controller != _owner.Controller) return;
+					if (!(source is Spell) || source.Controller != Side || Game.CurrentEventData?.EventTarget?.Controller != Side) return;
 					break;
 				case TriggerSource.FRIENDLY_EVENT_SOURCE:
-					if (Game.CurrentEventData?.EventSource.Controller != _owner.Controller) return;
+					if (Game.CurrentEventData?.EventSource.Controller != Side) return;
 					break;
 				case TriggerSource.ATTACKED_SELF: // HsServer: the attack's defender is this trigger's owner, any attacker
 					if (Game.CurrentEventData?.EventTarget?.Id != _sourceId) return;
@@ -753,9 +767,9 @@ namespace SabberStoneCore.Triggers
 			    case TriggerType.PLAY_CARD when source.Id == _owner.Id:
 				case TriggerType.SUMMON when source == _owner:
 			    case TriggerType.AFTER_SUMMON when source.Id == _owner.Id:
-			    case TriggerType.TURN_START when !EitherTurn && source != _owner.Controller:
+			    case TriggerType.TURN_START when !EitherTurn && source != Side:
 			    case TriggerType.DEATH when _owner.ToBeDestroyed:
-			    case TriggerType.INSPIRE when !EitherTurn && Game.CurrentPlayer != _owner.Controller:
+			    case TriggerType.INSPIRE when !EitherTurn && Game.CurrentPlayer != Side:
 				// HsServer: a shuffle that a shuffle trigger itself caused (Augmented Elekk's extra copy) doesn't trigger shuffle
 				// triggers again (was: Augmented Elekk's AssetId)
 				case TriggerType.SHUFFLE_INTO_DECK when Game.CurrentEventData?.EventSource is IPlayable shuffler
@@ -763,7 +777,7 @@ namespace SabberStoneCore.Triggers
 					return;
 				case TriggerType.TURN_END:
 			    case TriggerType.WORGEN_TRANSFORM:
-					if (!EitherTurn && source != _owner.Controller) return;
+					if (!EitherTurn && source != Side) return;
 				    //if (!(SingleTask is RemoveEnchantmentTask) && Owner.Controller.ExtraEndTurnEffect)
 					   // extra = true;
 				    break;

@@ -380,7 +380,7 @@ namespace SabberStoneCore.CardSets.HsServer
 					foreach (Minion m in c.BoardZone.GetAll().Where(m => !(m is Location) && !m.Untouchable).ToList())
 					{
 						if (!(CostShifted(g, m, V("CATA_567", "more", 1)) is Card into)) continue;
-						IPlayable snapshot = Entity.FromCard(c, m.Card, new EntityData { { GameTag.CREATOR, s.Id }, { HsTag.COPIED_FROM_ENTITY_ID, m.Id } }, c.SetasideZone);
+						IPlayable snapshot = Entity.FromCard(c, m.Card, Generic.KeepHeraldUpgrade(m, new EntityData { { GameTag.CREATOR, s.Id }, { HsTag.COPIED_FROM_ENTITY_ID, m.Id } }), c.SetasideZone);
 						int slot = m.ZonePosition;
 						Generic.TransformBlock.Invoke(c, into, m);
 						if (slot < c.BoardZone.Count && c.BoardZone[slot] is Minion now && now.Card == into)
@@ -393,7 +393,8 @@ namespace SabberStoneCore.CardSets.HsServer
 				DeathrattleTask = new CustomTask((g, c, s, t, stack) =>
 				{
 					int id = (t as Enchantment)?.ScriptTag1 ?? 0;
-					if (g.IdEntityDic.TryGetValue(id, out IPlayable original)) Summon(g, c, original.Card, s);
+					if (g.IdEntityDic.TryGetValue(id, out IPlayable original)) // (fresh, with the upgrade it was made with: Generic.KeepHeraldUpgrade)
+						if (!c.BoardZone.IsFull) Generic.SummonBlock.Invoke(g, (Minion)Entity.FromCard(c, original.Card, Generic.KeepHeraldUpgrade(original, new EntityData())), -1, s);
 				})
 			}));
 			// [CATA_568] Muradin's Last Stand (9) — Draw 2 cards. Costs (1) less for each time a friendly character attacked this game.

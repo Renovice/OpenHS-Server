@@ -37,7 +37,7 @@ internal static class AdminTool
 
         if (args.Length == 0 || args[0] is "help" or "-h" or "--help" or "?")
         {
-            Console.WriteLine(AdminCommands.Help);
+            Console.WriteLine(AdminCommands.FullHelp);
             return 0;
         }
         if (Connect(1119) is { } lobby)

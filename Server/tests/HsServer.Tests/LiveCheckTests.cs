@@ -10,6 +10,8 @@ namespace HsServer.Tests;
 
 /// <summary>`HsServer livecheck` (2026-10-09): a recorded live action is read with the position before and after it, rebuilt in our
 /// engine, done again, and the outcomes compared. A small recording made here: Jaina casts Fireball at the opponent's Chillwind Yeti.</summary>
+// (a test reads the console output of `power` through Console.SetOut — a global: no other test may write to the console meanwhile)
+[Collection(ConsoleCapture.Name)]
 public class LiveCheckTests
 {
     private static readonly Lazy<bool> Cards = new(() =>

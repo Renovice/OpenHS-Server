@@ -28,6 +28,10 @@ If the repo is *not* inside a Hearthstone folder, `setup.bat` makes the copy its
 A new account starts with every mode and adventure open. Server commands (cards, currencies, events, resets) are in
 [Server/ADMIN.md](Server/ADMIN.md) — type them in the server window or run `Server\admin.bat`.
 
+**Accounts:** the first start makes the account `default`. Double-click `Server\account.bat` to pick the account to play, or to
+make, rename, delete (restorable for 24 hours) or restore one. Or type `account` commands in the server window (`account new Bob`,
+`account login Bob`, `account list`). `run-local.bat player Bob` starts straight as Bob.
+
 After a Hearthstone patch: close the game and run `Server\update.bat` (updates the card database; a copy made by setup also gets the new game files).
 
 ## Contributing

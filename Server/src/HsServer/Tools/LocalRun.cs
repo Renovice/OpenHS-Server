@@ -46,6 +46,7 @@ internal static class LocalRun
         File.WriteAllText(stateFile, JsonSerializer.Serialize(state));
 
         var serveArgs = new List<string> { "--verbose" };
+        if (!string.IsNullOrEmpty(player)) { serveArgs.Add("--player"); serveArgs.Add(player); } // (2026-11-21: it becomes the active account)
         if (!args.Contains("--replay")) serveArgs.Add("--engine");
         if (args.Contains("--no-recording")) serveArgs.Add("--no-recording");
         int rules = Array.IndexOf(args, "--rules");

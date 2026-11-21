@@ -61,9 +61,9 @@ internal sealed class AdminCommands(ServerData data)
     {
         try
         {
-            return args.Length == 0 ? new Result(true, Help) : args[0].ToLowerInvariant() switch
+            return args.Length == 0 ? new Result(true, FullHelp) : args[0].ToLowerInvariant() switch
             {
-                "help" or "-h" or "--help" or "?" => new Result(true, Help),
+                "help" or "-h" or "--help" or "?" => new Result(true, FullHelp),
                 "players" => Players(),
                 "show" when args.Length == 2 => Show(args[1]),
                 "give" when args.Length >= 3 => await GiveAsync(args[1], args[2..], +1),
@@ -82,6 +82,7 @@ internal sealed class AdminCommands(ServerData data)
                 "ladder" when args.Length <= 2 => RankedLadderList(args.Length == 2 ? args[1] : "standard"),
                 "quest" when args.Length >= 2 => await QuestAsync(args[1].ToLowerInvariant(), args[2..]),
                 "practice" => Practice(args[1..]),
+                "account" or "accounts" => await AccountAsync(args[1..]),
                 _ => Error($"unknown or incomplete command: {string.Join(' ', args)}\n\n{Help}"),
             };
         }
@@ -92,6 +93,104 @@ internal sealed class AdminCommands(ServerData data)
     }
 
     private static Result Error(string text) => new(false, "error: " + text);
+
+    // ---------- accounts (2026-11-21) ----------
+
+    /// <summary>Every command: the main list and the account commands.</summary>
+    public static string FullHelp => Help + "\n  accounts:\n" + string.Join("\n", AccountHelp.Split('\n').Select(l => "  " + l));
+
+    public const string AccountHelp = """
+        account / account list                   every account: the active one (*), who is online, gold / dust, last played;
+                                                 deleted ones still restorable
+        account new <name> [from <other>]        a new account (every mode open), or a copy of another's cards, decks, progress
+        account login <name>                     play as <name>: the active account (a plain run-local.bat logs in as it);
+                                                 a running game logs in again as it
+        account relog                            the running game logs in again (same account)
+        account logout                           disconnect the running game from the server
+        account rename <old> <new>               rename (not "default", not while logged in)
+        account delete <name> [now]              delete (not "default", not while logged in): restorable for 24 hours, then
+                                                 gone for good; "now" = gone at once
+        account restore <name>                   bring back a deleted account within its 24 hours
+        account info <name>                      = show <name>
+        (run-local.bat player <name> starts as <name> and makes it the active account; names: letters, digits, - and _)
+        """;
+
+    private async Task<Result> AccountAsync(string[] rest)
+    {
+        AccountStore store = data.Accounts;
+        if (store == null) return Error("this server runs without accounts");
+        store.PurgeExpired();
+        string verb = rest.Length == 0 ? "list" : rest[0].ToLowerInvariant();
+        string Arg(int i) => rest.Length > i ? rest[i] : null;
+        switch (verb)
+        {
+            case "list":
+            {
+                var sb = new StringBuilder();
+                string active = store.ActiveName;
+                foreach (string name in store.Names())
+                {
+                    PlayerAccount p = store.Get(name);
+                    bool isActive = p.Name.Equals(active, StringComparison.OrdinalIgnoreCase);
+                    DateTime? last = store.LastPlayed(name);
+                    sb.AppendLine($"{(isActive ? "*" : " ")} {p.Name,-20} {Summary(p)}" +
+                                  (last is DateTime t ? $"  last played {t.ToLocalTime():yyyy-MM-dd HH:mm}" : ""));
+                }
+                foreach (var (name, _, gone) in store.Deleted())
+                    sb.AppendLine($"  {name,-20} deleted — restorable until {gone.ToLocalTime():yyyy-MM-dd HH:mm} (account restore {name})");
+                sb.Append($"(* = the active account: {active})");
+                return new Result(true, sb.ToString());
+            }
+            case "new" when Arg(1) != null:
+            {
+                string from = Arg(2)?.Equals("from", StringComparison.OrdinalIgnoreCase) == true ? Arg(3) : null;
+                if (Arg(2) != null && from == null) return Error("usage: account new <name> [from <other>]");
+                PlayerAccount made = store.Create(Arg(1), from);
+                return new Result(true, $"account {made.Name} made{(from != null ? $" as a copy of {from}" : "")}; play it with: account login {made.Name}");
+            }
+            case "login" when Arg(1) != null:
+            {
+                string name = Arg(1);
+                if (!AccountStore.ValidName(name)) return Error($"not a valid account name: {name}");
+                bool isNew = !store.Exists(name);
+                string before = store.ActiveName;
+                store.SetActive(name);
+                PlayerAccount target = store.Get(name);
+                int dropped = 0;
+                if (!before.Equals(name, StringComparison.OrdinalIgnoreCase) && store.Exists(before)) dropped = await store.Get(before).DisconnectAsync();
+                return new Result(true, $"{(isNew ? $"account {target.Name} made; " : "")}active account: {target.Name}" +
+                                        (dropped > 0 ? $" — the running game was logged out of {before} and logs in as {target.Name}" : " (the next start logs in as it)"));
+            }
+            case "relog":
+            {
+                int dropped = await store.Get(store.ActiveName).DisconnectAsync();
+                return dropped > 0 ? new Result(true, $"{store.ActiveName}: the running game logs in again") : Error($"{store.ActiveName} isn't logged in");
+            }
+            case "logout":
+            {
+                int dropped = 0;
+                foreach (string name in store.Names()) if (store.IsOnline(name)) dropped += await store.Get(name).DisconnectAsync();
+                return dropped > 0 ? new Result(true, "the running game was disconnected from the server") : Error("no game is logged in");
+            }
+            case "rename" when Arg(2) != null:
+                store.Rename(Arg(1), Arg(2));
+                return new Result(true, $"account {Arg(1)} is now {Arg(2)}");
+            case "delete" when Arg(1) != null:
+            {
+                bool now = Arg(2)?.Equals("now", StringComparison.OrdinalIgnoreCase) == true;
+                store.Delete(Arg(1), now);
+                return new Result(true, now ? $"account {Arg(1)} deleted for good"
+                    : $"account {Arg(1)} deleted: restorable for {AccountStore.RestoreWindow.TotalHours:0} hours with \"account restore {Arg(1)}\", then gone for good");
+            }
+            case "restore" when Arg(1) != null:
+                store.Restore(Arg(1));
+                return new Result(true, $"account {Arg(1)} restored");
+            case "info" when Arg(1) != null:
+                return Show(Arg(1));
+            default:
+                return Error("unknown or incomplete account command\n\n" + AccountHelp);
+        }
+    }
 
     // ---------- practice ----------
 

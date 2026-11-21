@@ -28,7 +28,40 @@ admin.bat <command>
 - **An older server without the admin port is running:** nothing is changed (stop it with `stop-local.bat` first), because
   that server would save over the change.
 
-Players are the names from `run-local.bat player <name>`; the normal login is `default`.
+Players are accounts: `default` is made at the first login; make, pick and remove others with the `account` commands below
+(or double-click `account.bat`). `run-local.bat player <name>` starts as `<name>` and makes it the active account.
+
+---
+
+## Accounts
+
+| Command | What it does |
+|---|---|
+| `account` / `account list` | Every account: the active one (`*`), dust, gold, cards, online or offline, last played; deleted ones still restorable |
+| `account new <name>` | A new account (every mode open, like a first login) |
+| `account new <name> from <other>` | A new account with a copy of another's cards, decks and progress (its own ids) |
+| `account login <name>` | Play as `<name>`: it becomes the active account (a plain `run-local.bat` logs in as it). A running game is logged out and logs in again as it. A new name is made on the spot |
+| `account relog` | The running game logs in again (same account) |
+| `account logout` | Disconnect the running game from the server |
+| `account rename <old> <new>` | Rename (keeps its cards and progress). Not `default`, not while logged in |
+| `account delete <name>` | Delete. It can be brought back for **24 hours**, then it is removed for good (at the next server start or account command). Not `default`, not while logged in |
+| `account delete <name> now` | Delete for good at once |
+| `account restore <name>` | Bring back a deleted account within its 24 hours |
+| `account info <name>` | = `show <name>` |
+
+Names: letters, digits, `-` and `_`, up to 24. The active account is in `Server/state/accounts/active.txt`; deleted ones wait in
+`Server/state/accounts-deleted/`.
+
+`account.bat`: a menu (P play, N new, R rename, D delete, U undo a delete) that lists the accounts and starts the game as the
+one you pick.
+
+```
+admin.bat account
+admin.bat account new Bob
+admin.bat account login Bob
+admin.bat account delete Bob
+admin.bat account restore Bob
+```
 
 ---
 

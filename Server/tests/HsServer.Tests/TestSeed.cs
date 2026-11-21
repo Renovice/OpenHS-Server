@@ -11,3 +11,11 @@ internal static class TestSeed
         SabberStoneCore.Config.GameConfig.PlainPredictableFill = true; // (plain filler: nothing in it acts)
     }
 }
+
+/// <summary>(2026-11-21) Tests that capture the console (Console.SetOut is process-wide) run alone: another test's console output
+/// would land in their capture (LiveCheckTests' power-dump line check failed now and then in a full run).</summary>
+[CollectionDefinition(Name, DisableParallelization = true)]
+public sealed class ConsoleCapture
+{
+    public const string Name = "ConsoleCapture";
+}

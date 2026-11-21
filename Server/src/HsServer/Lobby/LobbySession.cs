@@ -45,6 +45,22 @@ internal sealed class LobbySession
         this.id = id;
     }
 
+    /// <summary>Close this connection from the server side (admin "account logout" / "relog" / "login"): the client loses
+    /// the server and logs in again — a login without a name then gets the active account.</summary>
+    public async Task CloseAsync()
+    {
+        player?.Detach(this);
+        try
+        {
+            if (socket.State == WebSocketState.Open)
+                await socket.CloseAsync(WebSocketCloseStatus.NormalClosure, "account change", CancellationToken.None);
+        }
+        catch (Exception e) when (e is WebSocketException or ObjectDisposedException or InvalidOperationException)
+        {
+            socket.Abort();
+        }
+    }
+
     public async Task RunAsync(CancellationToken ct)
     {
         var buffer = new byte[64 * 1024];
@@ -167,6 +183,8 @@ internal sealed class LobbySession
     {
         string token = request.LogonOptions?.AuthToken?.ToStringUtf8();
         string name = context.Accounts != null ? AccountStore.NameFromToken(token) : token == LocalAuthToken ? AccountStore.DefaultName : null;
+        // (2026-11-21) a login without a name (the plain run-local.bat) is the active account ("account login <name>")
+        if (token == LocalAuthToken && context.Accounts != null) name = context.Accounts.ActiveName;
         if (name == null)
         {
             Log.Warn(id, "logon with an unexpected token rejected (the local bootstrap token, or LOCAL:<name>)");

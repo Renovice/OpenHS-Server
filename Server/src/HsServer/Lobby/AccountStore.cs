@@ -31,6 +31,15 @@ internal sealed class PlayerAccount
         foreach (LobbySession s in now) await s.NotifyUtilAsync(message);
         return now.Length;
     }
+
+    /// <summary>Close every connection logged in as this player (account logout / relog / login); returns how many.</summary>
+    public async Task<int> DisconnectAsync()
+    {
+        LobbySession[] now;
+        lock (sessions) now = sessions.ToArray();
+        foreach (LobbySession s in now) await s.CloseAsync();
+        return now.Length;
+    }
 }
 
 /// <summary>
@@ -92,6 +101,170 @@ internal sealed class AccountStore
     public bool Exists(string name)
     {
         lock (gate) return loaded.ContainsKey(name) || Directory.Exists(Path.Combine(root, name.ToLowerInvariant()));
+    }
+
+    // ---------- account management (2026-11-21, user: the "account" admin commands) ----------
+
+    /// <summary>How long a deleted account can be restored (user 2026-11-21: 24 hours); after that it is gone for good.</summary>
+    public static readonly TimeSpan RestoreWindow = TimeSpan.FromHours(24);
+
+    /// <summary>The players' folder (Server/state/accounts or accounts-norecording).</summary>
+    public string Root => root;
+
+    private string ActiveFile => Path.Combine(root, "active.txt");
+    private string DeletedRoot => root + "-deleted";
+
+    /// <summary>A name the server accepts: letters, digits, '-' and '_', up to 24 (the same rule as a LOCAL: login).</summary>
+    public static bool ValidName(string name) =>
+        !string.IsNullOrEmpty(name) && name.Length <= 24 && name.All(c => char.IsLetterOrDigit(c) || c is '-' or '_');
+
+    /// <summary>The account a login without a name uses (the plain run-local.bat): set by "account login", default first.</summary>
+    public string ActiveName
+    {
+        get
+        {
+            try
+            {
+                string name = File.Exists(ActiveFile) ? File.ReadAllText(ActiveFile).Trim() : null;
+                return ValidName(name) ? name : DefaultName;
+            }
+            catch (IOException) { return DefaultName; }
+        }
+    }
+
+    public void SetActive(string name)
+    {
+        if (!ValidName(name)) throw new ArgumentException($"not a valid account name: {name} (letters, digits, - and _, up to 24)");
+        StateFiles.WriteAtomic(ActiveFile, System.Text.Encoding.UTF8.GetBytes(name));
+    }
+
+    /// <summary>Is the player logged in right now?</summary>
+    public bool IsOnline(string name)
+    {
+        lock (gate) return loaded.TryGetValue(name, out PlayerAccount p) && p.IsOnline;
+    }
+
+    /// <summary>When the player last changed anything (their save files' newest write), or null.</summary>
+    public DateTime? LastPlayed(string name)
+    {
+        string dir = Path.Combine(root, name.ToLowerInvariant());
+        if (!Directory.Exists(dir)) return null;
+        var files = Directory.GetFiles(dir);
+        return files.Length == 0 ? null : files.Max(File.GetLastWriteTimeUtc);
+    }
+
+    /// <summary>A new account: empty (every mode open, like a first login), or a copy of <paramref name="from"/>'s cards,
+    /// decks and save data with its own identity.</summary>
+    public PlayerAccount Create(string name, string from = null)
+    {
+        if (!ValidName(name)) throw new ArgumentException($"not a valid account name: {name} (letters, digits, - and _, up to 24)");
+        if (Exists(name)) throw new ArgumentException($"account {name} already exists");
+        if (from != null)
+        {
+            if (!Exists(from)) throw new ArgumentException($"no account named {from}");
+            Get(from); // (loaded: its files are current — every change is written at once)
+            string source = Path.Combine(root, from.ToLowerInvariant()), target = Path.Combine(root, name.ToLowerInvariant());
+            Directory.CreateDirectory(target);
+            foreach (string file in new[] { "savedata.bin", "decks.bin", "collection.json" })
+                if (File.Exists(Path.Combine(source, file))) File.Copy(Path.Combine(source, file), Path.Combine(target, file));
+        }
+        return Get(name);
+    }
+
+    /// <summary>Rename an account (not default, not while it is logged in). It keeps its ids, cards and progress.</summary>
+    public void Rename(string oldName, string newName)
+    {
+        if (!ValidName(newName)) throw new ArgumentException($"not a valid account name: {newName} (letters, digits, - and _, up to 24)");
+        if (oldName.Equals(DefaultName, StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("the default account can't be renamed");
+        if (!Exists(oldName)) throw new ArgumentException($"no account named {oldName}");
+        if (Exists(newName)) throw new ArgumentException($"account {newName} already exists");
+        if (IsOnline(oldName)) throw new ArgumentException($"{oldName} is logged in: log out first (account logout)");
+        lock (gate)
+        {
+            loaded.Remove(oldName);
+            string from = Path.Combine(root, oldName.ToLowerInvariant()), to = Path.Combine(root, newName.ToLowerInvariant());
+            Directory.Move(from, to);
+            string file = Path.Combine(to, "account.json");
+            if (File.Exists(file))
+            {
+                Identity id = JsonSerializer.Deserialize<Identity>(File.ReadAllText(file));
+                string number = id.BattleTag.Contains('#') ? id.BattleTag[id.BattleTag.IndexOf('#')..] : "#1000";
+                StateFiles.WriteAtomic(file, JsonSerializer.SerializeToUtf8Bytes(id with { Name = newName, BattleTag = newName + number },
+                    new JsonSerializerOptions { WriteIndented = true }));
+            }
+        }
+        if (ActiveName.Equals(oldName, StringComparison.OrdinalIgnoreCase)) SetActive(newName);
+    }
+
+    /// <summary>Delete an account (not default, not while logged in): it waits <see cref="RestoreWindow"/> in the deleted
+    /// folder (<see cref="Restore"/>), then <see cref="PurgeExpired"/> removes it for good; <paramref name="now"/> removes it at once.</summary>
+    public void Delete(string name, bool now)
+    {
+        if (name.Equals(DefaultName, StringComparison.OrdinalIgnoreCase)) throw new ArgumentException("the default account can't be deleted");
+        if (!Exists(name)) throw new ArgumentException($"no account named {name}");
+        if (IsOnline(name)) throw new ArgumentException($"{name} is logged in: log out first (account logout)");
+        lock (gate)
+        {
+            loaded.Remove(name);
+            string dir = Path.Combine(root, name.ToLowerInvariant());
+            if (now) Directory.Delete(dir, recursive: true);
+            else
+            {
+                Directory.CreateDirectory(DeletedRoot);
+                Directory.Move(dir, Path.Combine(DeletedRoot, $"{name.ToLowerInvariant()}__{DateTime.UtcNow:yyyyMMddTHHmmssZ}"));
+            }
+        }
+        if (ActiveName.Equals(name, StringComparison.OrdinalIgnoreCase)) SetActive(DefaultName);
+    }
+
+    /// <summary>The deleted accounts still in their restore window: name, when deleted (UTC), when they are gone.</summary>
+    public IReadOnlyList<(string Name, DateTime Deleted, DateTime GoneAt)> Deleted()
+    {
+        var list = new List<(string, DateTime, DateTime)>();
+        if (!Directory.Exists(DeletedRoot)) return list;
+        foreach (string dir in Directory.GetDirectories(DeletedRoot))
+            if (ParseDeleted(dir) is (string name, DateTime when) && when + RestoreWindow > DateTime.UtcNow)
+                list.Add((name, when, when + RestoreWindow));
+        return list.OrderBy(d => d.Item1, StringComparer.OrdinalIgnoreCase).ToList();
+    }
+
+    /// <summary>Bring back a deleted account while its restore window is open (the newest delete of that name).</summary>
+    public void Restore(string name)
+    {
+        PurgeExpired();
+        if (Exists(name)) throw new ArgumentException($"an account named {name} exists again: rename it first");
+        string dir = Directory.Exists(DeletedRoot)
+            ? Directory.GetDirectories(DeletedRoot).Where(d => ParseDeleted(d) is (string n, _) && n.Equals(name, StringComparison.OrdinalIgnoreCase))
+                .OrderByDescending(d => d, StringComparer.Ordinal).FirstOrDefault()
+            : null;
+        if (dir == null) throw new ArgumentException($"no deleted account named {name} to restore (they are kept {RestoreWindow.TotalHours:0} hours)");
+        lock (gate) Directory.Move(dir, Path.Combine(root, name.ToLowerInvariant()));
+    }
+
+    /// <summary>Remove for good the deleted accounts whose restore window is over (at the server start and with every account
+    /// command). Returns how many.</summary>
+    public int PurgeExpired()
+    {
+        if (!Directory.Exists(DeletedRoot)) return 0;
+        int n = 0;
+        foreach (string dir in Directory.GetDirectories(DeletedRoot))
+            if (ParseDeleted(dir) is (_, DateTime when) && when + RestoreWindow <= DateTime.UtcNow)
+            {
+                Directory.Delete(dir, recursive: true);
+                n++;
+            }
+        return n;
+    }
+
+    private static (string Name, DateTime When)? ParseDeleted(string dir)
+    {
+        string leaf = Path.GetFileName(dir);
+        int cut = leaf.LastIndexOf("__", StringComparison.Ordinal);
+        if (cut <= 0) return null;
+        return DateTime.TryParseExact(leaf[(cut + 2)..], "yyyyMMddTHHmmssZ", System.Globalization.CultureInfo.InvariantCulture,
+            System.Globalization.DateTimeStyles.AdjustToUniversal | System.Globalization.DateTimeStyles.AssumeUniversal, out DateTime when)
+            ? (leaf[..cut], when)
+            : null;
     }
 
     /// <summary>Admin: start a part of a player's state over from the recordings: "collection" (cards, dust, favorites),

@@ -62,6 +62,10 @@ internal static class Program
         var crafting = data.Crafting;
         var accounts = data.Accounts;
         Log.Info("server", $"event calendar: {calendar.Count} events from {Path.GetFileName(reference)}");
+        // (2026-11-21) accounts deleted more than a day ago go for good; "--player <name>" (run-local.bat player <name>) is the active account
+        if (accounts.PurgeExpired() is int purged and > 0) Log.Info("accounts", $"{purged} deleted account(s) past their {AccountStore.RestoreWindow.TotalHours:0}-hour restore window removed");
+        if (Option(args, "--player") is string startAs && AccountStore.ValidName(startAs)) accounts.SetActive(startAs);
+        Log.Info("accounts", $"active account: {accounts.ActiveName}");
         PlayerAccount defaultPlayer = accounts.Get(AccountStore.DefaultName);
         Log.Info("server", $"account state from {Path.GetFileName(reference)}: {account.Util.Count} util request types, " +
                            $"{account.Util.Values.Sum(l => l.Count)} exchanges, {defaultPlayer.SaveData.KeyCount} save keys (default player)");

@@ -61,6 +61,11 @@ internal sealed class CommerceServer(ServerData data, ShopCatalog catalog, int p
     }
 
     /// <summary>One request → the response JSON (never throws: errors come back as {"error": ...}).</summary>
+    /// <summary>The shop's player: the plugin sends "default" (or nothing) when the game was started without a name — the active
+    /// account then, the same one the login got (AccountStore.ActiveName).</summary>
+    private string ShopPlayer(string name) =>
+        string.IsNullOrEmpty(name) || name.Equals(AccountStore.DefaultName, StringComparison.OrdinalIgnoreCase) ? data.Accounts.ActiveName : name;
+
     internal string Handle(string line)
     {
         try
@@ -79,7 +84,7 @@ internal sealed class CommerceServer(ServerData data, ShopCatalog catalog, int p
                     return catalog.Products(request, now);
                 case "balance":
                 {
-                    PlayerAccount player = data.Accounts.Get(string.IsNullOrEmpty(name) ? AccountStore.DefaultName : name);
+                    PlayerAccount player = data.Accounts.Get(ShopPlayer(name));
                     string code = JsonDocument.Parse(request ?? "{}").RootElement.TryGetProperty("currencyCode", out var c) ? c.GetString() : "";
                     long amount = player.Collection?.ShopBalance(code, catalog.RecordedBalances.GetValueOrDefault(code)) ?? 0;
                     Log.Info("shop", $"balance {code} for {player.Name}: {amount}");
@@ -87,7 +92,7 @@ internal sealed class CommerceServer(ServerData data, ShopCatalog catalog, int p
                 }
                 case "order":
                 {
-                    PlayerAccount player = data.Accounts.Get(string.IsNullOrEmpty(name) ? AccountStore.DefaultName : name);
+                    PlayerAccount player = data.Accounts.Get(ShopPlayer(name));
                     if (data.Orders == null) return JsonSerializer.Serialize(new { error = new { code = "NO_SHOP_DATA" }, status = "FAILED" });
                     ShopOrders.Result result = data.Orders.Place(player, request);
                     Log.Info("shop", $"{player.Name}: {result.Log}");

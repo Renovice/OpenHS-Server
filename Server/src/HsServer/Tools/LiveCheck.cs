@@ -177,11 +177,12 @@ internal static partial class LiveCheck
     /// <summary>The cards that acted in the action (its source, every block's source, an aura in play) that have text but no script in
     /// ours.</summary>
     /// <summary>Per card id, the dates of the card-data snapshots (Server/data/dbf-*-<date>) that changed its rules (<see cref="RulesChanged"/>).</summary>
-    private static Dictionary<string, List<string>> _patchDates;
+    private static readonly Lazy<Dictionary<string, List<string>>> _patchDates = new(BuildPatchDates); // (built once: tests run in parallel)
 
-    private static Dictionary<string, List<string>> PatchDates()
+    private static Dictionary<string, List<string>> PatchDates() => _patchDates.Value;
+
+    private static Dictionary<string, List<string>> BuildPatchDates()
     {
-        if (_patchDates != null) return _patchDates;
         var map = new Dictionary<string, List<string>>(StringComparer.Ordinal);
         string data = Path.Combine(Program.ProjectRoot(), "Server", "data");
         var dirs = Directory.Exists(data) ? Directory.EnumerateDirectories(data, "dbf-*").OrderBy(d => d, StringComparer.Ordinal).ToList() : new List<string>();
@@ -197,7 +198,7 @@ internal static partial class LiveCheck
                         (map.TryGetValue(id, out var l) ? l : map[id] = new List<string>()).Add(date.Groups[1].Value);
             before = now;
         }
-        return _patchDates = map;
+        return map;
     }
 
     /// <summary>The tags that change how a card plays: cost, stats, type, class, race, school, the script numbers and the keywords.</summary>
